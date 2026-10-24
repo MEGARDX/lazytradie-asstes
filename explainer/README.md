@@ -10,14 +10,21 @@ launch video (`../snapgram.io_2kbkuhwskbf5.mp4`).
 
 ## The finished film (`final/`)
 
+Every export has **voice + sound effects only, no background music**, so your own music track can
+go underneath. All four videos share the same timeline, so the captions and any music edit work
+on all of them.
+
 | File | What it is |
 |---|---|
-| `lazytradie-explainer-onboarding.mp4` | **Main cut.** 60 s, 1920×1080, 30 fps, H.264 + AAC. Ends on "Let's get you set up." with a `Get started →` button, ready to hand off to onboarding setup. |
+| `lazytradie-explainer-onboarding.mp4` | **Main cut, 16:9.** 60 s, 1920×1080, 30 fps, H.264 + AAC. Ends on "Let's get you set up." with a `Get started →` button, ready to hand off to onboarding setup. |
 | `lazytradie-explainer-onboarding.webm` | The same cut as VP9 + Opus, for web `<video>` tags. |
-| `lazytradie-explainer-brand.mp4` | Brand cut: identical, but ends on the logo (no VO_14, no button). For the website or socials. |
-| `lazytradie-explainer.vtt` | Captions for the onboarding cut, timed to the voiceover. Onboarding videos usually autoplay muted, so turn these on. |
-| `lazytradie-explainer-brand.vtt` | Captions for the brand cut (no "Let's get you set up."). |
-| `lazytradie-explainer-poster.png` | Poster frame for the `<video>` tag (the logo reveal). |
+| `lazytradie-explainer-brand.mp4` | Brand cut, 16:9: identical, but ends on the logo (no VO_14, no button). For the website or socials. |
+| `lazytradie-explainer-onboarding-9x16.mp4` | **Main cut, 9:16.** 1080×1920 vertical, for mobile onboarding. Every scene recomposed for portrait; same timing, sound and effects. |
+| `lazytradie-explainer-onboarding-9x16.webm` | The 9:16 cut as VP9 + Opus. |
+| `lazytradie-explainer-brand-9x16.mp4` | Brand cut, 9:16 (ends on the logo). For Reels, TikTok and Shorts. |
+| `lazytradie-explainer.vtt` | Captions for the onboarding cuts (both shapes), timed to the voiceover. Onboarding videos usually autoplay muted, so turn these on. |
+| `lazytradie-explainer-brand.vtt` | Captions for the brand cuts (no "Let's get you set up."). |
+| `lazytradie-explainer-poster.png`, `…-poster-9x16.png` | Poster frames for the `<video>` tag (the logo reveal). |
 
 **What's real in it.** The dashboard screens are the real LazyTradie dashboard in light mode with
 the amber palette, rendered from the backend's own `dashboard.html` with a fictional demo
@@ -27,15 +34,20 @@ reacts to the actual voiceover audio. The talk window, thinking line, quote card
 chips use the dashboard's own CSS. The receptionist is the real "Ruby" persona. Integrations
 shown are only the live ones: Xero, ServiceM8, Fergus and Stripe.
 
-**Sound.** Original 90 BPM music bed (`assets/music/`) and 22 designed SFX (`assets/sfx/`), all
-synthesised for this film, so there are no licensing strings. The music dips 7.5 dB under the voice
-and comes back up between lines. Master: −14 LUFS, −1 dBTP (matches the reference). The tradie's
-line (VO_08) is treated as a phone voice note.
+**Sound.** Voice plus 22 designed SFX (`assets/sfx/`), all synthesised for this film, so there are
+no licensing strings. The voice and effects sit at exactly the levels of the original mix
+(−14.9 LUFS without music, −1 dBTP). The tradie's line (VO_08) is treated as a phone voice note.
 
-**Usage in onboarding**
+**Adding your music.** To match the balance the film was mixed with: keep the music about 9 dB
+below the voice, and dip it about 7 dB while someone is speaking (sidechain or keyframes), letting
+it come back up between lines. Then bring the finished mix to −14 LUFS with true peak at −1 dBTP.
+The original 90 BPM bed is still in `assets/music/` if you ever want it, but no export uses it.
+
+**Usage in onboarding** (vertical file on phones, landscape everywhere else)
 ```html
-<video src="lazytradie-explainer-onboarding.mp4" poster="lazytradie-explainer-poster.png"
-       autoplay muted playsinline controls>
+<video poster="lazytradie-explainer-poster.png" autoplay muted playsinline controls>
+  <source src="lazytradie-explainer-onboarding-9x16.mp4" type="video/mp4" media="(max-aspect-ratio: 3/4)">
+  <source src="lazytradie-explainer-onboarding.mp4" type="video/mp4">
   <track kind="captions" src="lazytradie-explainer.vtt" srclang="en" label="English" default>
 </video>
 ```
