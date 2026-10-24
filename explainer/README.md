@@ -15,7 +15,8 @@ launch video (`../snapgram.io_2kbkuhwskbf5.mp4`).
 | `lazytradie-explainer-onboarding.mp4` | **Main cut.** 60 s, 1920×1080, 30 fps, H.264 + AAC. Ends on "Let's get you set up." with a `Get started →` button, ready to hand off to onboarding setup. |
 | `lazytradie-explainer-onboarding.webm` | The same cut as VP9 + Opus, for web `<video>` tags. |
 | `lazytradie-explainer-brand.mp4` | Brand cut: identical, but ends on the logo (no VO_14, no button). For the website or socials. |
-| `lazytradie-explainer.vtt` | Captions, timed to the voiceover. Onboarding videos usually autoplay muted, so turn these on. |
+| `lazytradie-explainer.vtt` | Captions for the onboarding cut, timed to the voiceover. Onboarding videos usually autoplay muted, so turn these on. |
+| `lazytradie-explainer-brand.vtt` | Captions for the brand cut (no "Let's get you set up."). |
 | `lazytradie-explainer-poster.png` | Poster frame for the `<video>` tag (the logo reveal). |
 
 **What's real in it.** The dashboard screens are the real LazyTradie dashboard in light mode with
