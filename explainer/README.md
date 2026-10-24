@@ -8,6 +8,37 @@ launch video (`../snapgram.io_2kbkuhwskbf5.mp4`).
 - **Drop finished assets into:** `assets/vo`, `assets/photos`, `assets/sfx`, `assets/music`,
   `assets/brand`, `assets/ui`
 
+## The finished film (`final/`)
+
+| File | What it is |
+|---|---|
+| `lazytradie-explainer-onboarding.mp4` | **Main cut.** 60 s, 1920×1080, 30 fps, H.264 + AAC. Ends on "Let's get you set up." with a `Get started →` button, ready to hand off to onboarding setup. |
+| `lazytradie-explainer-onboarding.webm` | The same cut as VP9 + Opus, for web `<video>` tags. |
+| `lazytradie-explainer-brand.mp4` | Brand cut: identical, but ends on the logo (no VO_14, no button). For the website or socials. |
+| `lazytradie-explainer.vtt` | Captions, timed to the voiceover. Onboarding videos usually autoplay muted, so turn these on. |
+| `lazytradie-explainer-poster.png` | Poster frame for the `<video>` tag (the logo reveal). |
+
+**What's real in it.** The dashboard screens are the real LazyTradie dashboard in light mode with
+the amber palette, rendered from the backend's own `dashboard.html` with a fictional demo
+account (Turner Electrical, Melbourne). Nothing is a real customer. The Copilot is the real
+AI Orb (`public/js/orb.js`, morning/amber personality) running in its recording mode, and it
+reacts to the actual voiceover audio. The talk window, thinking line, quote cards and status
+chips use the dashboard's own CSS. The receptionist is the real "Ruby" persona. Integrations
+shown are only the live ones: Xero, ServiceM8, Fergus and Stripe.
+
+**Sound.** Original 90 BPM music bed (`assets/music/`) and 22 designed SFX (`assets/sfx/`), all
+synthesised for this film, so there are no licensing strings. The music dips 7.5 dB under the voice
+and comes back up between lines. Master: −14 LUFS, −1 dBTP (matches the reference). The tradie's
+line (VO_08) is treated as a phone voice note.
+
+**Usage in onboarding**
+```html
+<video src="lazytradie-explainer-onboarding.mp4" poster="lazytradie-explainer-poster.png"
+       autoplay muted playsinline controls>
+  <track kind="captions" src="lazytradie-explainer.vtt" srclang="en" label="English" default>
+</video>
+```
+
 ---
 
 ## 1. What the reference actually does
