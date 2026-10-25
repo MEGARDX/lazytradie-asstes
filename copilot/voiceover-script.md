@@ -56,7 +56,7 @@ character or a full stop. Three typed dots ("...") come out erratic with Sharon.
 | `CV_07` | Drafting Sarah's quote… $2,450 for the switchboard upgrade. Tap confirm to send. |
 | `CV_08` | Checking Liam's job… Invoice drafted, $380. Tap confirm to send. |
 
-**Already have (real product recordings, nothing to make):**
+**Greetings (planned from the product's recorded clips; in the end generated in Sharon with the rest):**
 - `CV_00` "Morning! What can I sort out for you?" opens the conversation.
 - `CV_09` "Afternoon, mate. What's next on the list?" plays over the end card.
 

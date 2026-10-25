@@ -133,7 +133,7 @@ film never claims it chases payments.
 | Narrator lines N_01, N_02 | ElevenLabs, the explainer's narrator voice | **You make** |
 | Jack's lines TR_01–TR_08 | ElevenLabs, a relaxed Australian male (see the voice brief) | **You make** |
 | Copilot lines CV_01–CV_08 | Deepgram TTS, **Sharon** (`flux-sharon-en`), the real product voice | **You make** |
-| Copilot greetings CV_00, CV_09 | The recorded product clips in the backend | Have them |
+| Copilot greetings CV_00, CV_09 | Planned from the backend's recorded clips; in the end you generated these in Sharon too | Made |
 | The orb, the dashboard cards, the wordmark | Real product code and brand files | Have them |
 | SFX | Designed for this film (the explainer library plus new UI sounds) | I make |
 
