@@ -15,8 +15,8 @@ convert the voice with **Voice Changer** using the same narrator voice as the ex
 
 | Clip | Line | Est. |
 |---|---|---|
-| `LF_01` | You know the feeling. You're up a ladder, the phone's ringing, and that quote still isn't done. | 6.5 s |
-| `LF_02` | The tools got better. The admin didn't. … Until now. | 3.8 s |
+| `LF_01` ✓ made | You know the feeling. You're up a ladder, the phone's ringing, and that quote still isn't done. | 6.5 s |
+| `LF_02` ✓ made | The tools got better. The admin didn't. … Until now. | 3.8 s |
 
 ## 2. Narrator, off camera: text to speech (same narrator voice)
 
@@ -49,15 +49,13 @@ These are spoken inside the Veo clips. Each prompt already asks for the accent a
 
 | Clip | Who | Line |
 |---|---|---|
-| `LF_03` | Old tradie at his ute | About bloody time. *(clean option: "About time, mate.")* |
-| `LF_05` | His partner, backyard at golden hour | You're home early? |
-| `LF_06` | Sparky chasing a car | Oi! You forgot to pay me! |
-| `LF_07` | Partner at dinner (3D animated) | Wow. A whole dinner… and you haven't checked your phone once. |
-| `LF_08` | Electrician (woman) at a switchboard | Try LazyTradie. |
-| `LF_09` | Plumber under a sink | Try LazyTradie. |
-| `LF_10` | Apprentice carpenter | Try LazyTradie. |
-| `LF_11` | Landscaper (woman) at golden hour | Try LazyTradie. |
-| `LF_12` | Builder on site, points at the lens | Try LazyTradie. … Stress about work, not bookings. |
+| `LF_03` ✓ made | Old tradie at his ute | About bloody time. |
+| `LF_04` | His partner, backyard at golden hour | You're home early? |
+| `LF_05` | Sparky chasing a car | Oi! You forgot to pay me! |
+| `LF_06` | Partner at dinner (3D animated) | Wow. A whole dinner… and you haven't checked your phone once. |
+| `LF_07` | Electrician (woman) at a switchboard | Try LazyTradie. |
+| `LF_08` | Plumber under a sink | Try LazyTradie. |
+| `LF_09` | Builder on site, points at the lens | Try LazyTradie. … Stress about work, not bookings. |
 
 If a character comes out with the wrong accent or a flat read, regenerate it first. If the picture
 is perfect but the voice isn't, run that clip through Voice Changer with a voice that suits the face.

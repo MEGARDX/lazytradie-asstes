@@ -1,9 +1,10 @@
-# LazyTradie Launch Film: Plan & Asset List (≈50 s)
+# LazyTradie Launch Film: Plan & Asset List (≈49 s)
 
 A live-action launch film modelled beat for beat on ElevenCreative's **Chimera** launch video
 (`../What if your character could finally say it themselves With Chimera they can.Chimera pairs two o.mp4`).
 A presenter on a white studio background, real-looking characters who each deliver one line, clean
-white product graphics in between, a fast "Try LazyTradie" montage and a white end card.
+white product graphics in between, a fast "Try LazyTradie" montage and a white end card. Nine Veo
+clips in total.
 
 - **Every line to record or generate:** [`voiceover-script.md`](voiceover-script.md)
 - **Prompts for every clip (Gemini / Veo):** [`footage-prompts.md`](footage-prompts.md)
@@ -38,23 +39,25 @@ minimal black on white, so the two alternate like breaths. The sound is mixed lo
 
 ---
 
-## 2. The LazyTradie version: beat sheet (≈50 s)
+## 2. The LazyTradie version: beat sheet (≈49 s, 9 clips)
+
+Nine Veo clips in total. **LF_01–LF_03 are made**; LF_04–LF_09 are left to make, numbered in film order.
 
 | Time | Shot | Source | Line |
 |---|---|---|---|
-| 0.0–7.0 | **Presenter A**: our host on a white cyc, black quarter-zip | `LF_01` (Veo), voice = **our narrator** | "You know the feeling. You're up a ladder, the phone's ringing, and that quote still isn't done." |
-| 7.0–11.0 | **Presenter B**: same take, I punch in on the cut | `LF_02` (Veo), voice = **our narrator** | "The tools got better. The admin didn't. Until now." |
-| 11.0–13.5 | **Character 1**: a weathered old tradie against his burnt-orange ute, eyes closed, then a slow grin | `LF_03` (Veo, own voice) | "About bloody time." |
+| 0.0–7.0 | **Presenter A**: our host on a white cyc, black quarter-zip | `LF_01` ✓ made, voice = **our narrator** | "You know the feeling. You're up a ladder, the phone's ringing, and that quote still isn't done." |
+| 7.0–11.0 | **Presenter B**: same take, I punch in on the cut | `LF_02` ✓ made, voice = **our narrator** | "The tools got better. The admin didn't. Until now." |
+| 11.0–13.5 | **Character 1**: a weathered old tradie against his burnt-orange ute, eyes closed, then a slow grin | `LF_03` ✓ made (own voice) | "About bloody time." |
 | 13.2–15.0 | **Title**: the LazyTradie icon, then "LazyTradie" types on | I build it | V_01 "Introducing LazyTradie." |
-| 15.0–21.0 | **Two circles**: a phone lighting up on a workbench (AI Receptionist) and the real amber Copilot orb (AI Copilot), joined by a thin line, then merged | I build it, with `LF_04` in the left circle | V_02 "An AI receptionist that never misses a call, and a Copilot that handles the admin. So you can knock off on time." |
-| 21.0–24.0 | **Character 2**: golden hour, backyard. The tradie walks up and his partner turns, delighted; he spins her into a dance. | `LF_05` (Veo, own voice) | "You're home early?" |
+| 15.0–21.0 | **Two circles**: a caller on the phone (AI Receptionist, the Tiers caller photo) and the real amber Copilot orb (AI Copilot), joined by a thin line, then merged | I build it (no clip needed) | V_02 "An AI receptionist that never misses a call, and a Copilot that handles the admin. So you can knock off on time." |
+| 21.0–24.0 | **Character 2**: golden hour, backyard. The tradie walks up and his partner turns, delighted; he spins her into a dance. | `LF_04` (own voice) | "You're home early?" |
 | 24.0–25.0 | Amber orb play button (transition) | I build it | |
 | 25.0–29.0 | **Dark UI**: the real orb, huge and half off-frame. Tags `[ Answers every call ]` `[ Quotes the job ]` `[ Books it in ]` `[ Chases invoices ]` each recolour the orb, with waveform bars and console text. | I build it | V_03 "It answers every call, quotes the job, books it in… and chases what you're owed." |
-| 29.0–32.5 | **Character 3** (action gag): a sparky sprinting after a departing car waving an invoice, then a low-angle shout against the sky | `LF_06a` + `LF_06` (Veo, own voice) | "Oi! You forgot to pay me!" |
-| 32.5–36.5 | **Control UI** on white: the real light-mode dashboard. A quote gets one-tap approved and a booking drops in, then the next clip resolves inside the preview frame. | I build it | V_04 "And you stay in control of every quote, every booking, and every dollar." |
-| 36.5–40.5 | **Character 4**, stylised 3D animation: candlelit dinner; his partner, one eyebrow up | `LF_07` (Veo, own voice) | "Wow. A whole dinner… and you haven't checked your phone once." |
-| 40.5–47.0 | **Montage**: sparky (f), plumber under a sink, apprentice carpenter, landscaper (f), builder. The builder points at the lens. | `LF_08`–`LF_12` (Veo, own voices) | "Try LazyTradie." ×5, then "Stress about work, not bookings." |
-| 47.0–50.0 | **End card**: "Available now / LazyTradie wordmark / Stress about work, not bookings" | I build it | |
+| 29.0–32.0 | **Character 3** (action gag): a sparky sprints at the camera waving an invoice, skids to a stop and shouts after a departing car (one clip: the run and the shout) | `LF_05` (own voice) | "Oi! You forgot to pay me!" |
+| 32.0–36.0 | **Control UI** on white: the real light-mode dashboard. A quote gets one-tap approved and a booking drops in, then the next clip resolves inside the preview frame. | I build it | V_04 "And you stay in control of every quote, every booking, and every dollar." |
+| 36.0–40.0 | **Character 4**, stylised 3D animation: candlelit dinner; his partner, one eyebrow up | `LF_06` (own voice) | "Wow. A whole dinner… and you haven't checked your phone once." |
+| 40.0–46.5 | **Montage**: electrician (woman), plumber under a sink, then the builder, who points at the lens | `LF_07`, `LF_08`, `LF_09` (own voices) | "Try LazyTradie." ×3, then "Stress about work, not bookings." |
+| 46.0–49.0 | **End card**: "Available now / LazyTradie wordmark / Stress about work, not bookings" | I build it | |
 
 The graphics use the same real pieces as the explainer: the live amber Copilot orb, the light-mode
 dashboard and the brand wordmark, styled to match the reference's minimal black-on-white look.
