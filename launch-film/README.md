@@ -1,5 +1,7 @@
 # LazyTradie Launch Film: Plan & Asset List (≈49 s)
 
+> **Status: parked.** On hold; nothing here is in production. Kept for reference only.
+
 A live-action launch film modelled beat for beat on ElevenCreative's **Chimera** launch video
 (`../What if your character could finally say it themselves With Chimera they can.Chimera pairs two o.mp4`).
 A presenter on a white studio background, real-looking characters who each deliver one line, clean
