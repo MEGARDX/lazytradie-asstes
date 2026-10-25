@@ -18,6 +18,22 @@ convert the voice with **Voice Changer** using the same narrator voice as the ex
 | `LF_01` ✓ made | You know the feeling. You're up a ladder, the phone's ringing, and that quote still isn't done. | 6.5 s |
 | `LF_02` ✓ made | The tools got better. The admin didn't. … Until now. | 3.8 s |
 
+### Presenter via Synthesia (one continuous take, replaces LF_01 + LF_02)
+
+Synthesia has no 8-second limit, so the presenter can do the whole opening in one take, like the
+reference. Paste this as a single scene (no extra scenes, titles, captions or music). ⏸ marks a
+short pause; add it with Synthesia's pause marker, or just leave the punctuation to do it.
+
+```
+You know the feeling. You're up a ladder, the phone's ringing, and that quote you promised last week… still isn't done.
+Every year, the tools get better. But the admin? It never did. ⏸
+Until now.
+```
+About 13 s. Avatar: a man in a plain dark top on a plain white background, centred, 16:9, 1080p.
+Voice: the narrator voice if your plan can import ElevenLabs voices (Enterprise). Otherwise pick a
+deep, calm male English voice and I'll swap it to the narrator with Voice Changer; the lips stay in
+sync because the timing doesn't change.
+
 ## 2. Narrator, off camera: text to speech (same narrator voice)
 
 Same voice and settings as the explainer, so it carries straight on from the presenter.
