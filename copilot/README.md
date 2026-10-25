@@ -1,17 +1,68 @@
-# LazyTradie Admin Copilot: Plan & Resource List (60 s)
+# LazyTradie Admin Copilot (1 min 43 s)
 
-A premium 60-second film showing the Admin Copilot running a tradie's day **by voice**. It's
-modelled on the first minute of the ElevenLabs "Introducing Eleven v4" film. The picture
-alternates between **white and navy** many times, using the real amber Copilot orb and the real
-Copilot cards from the dashboard.
+A premium film showing the Admin Copilot running a tradie's day **by voice**. It's modelled on the
+first minute of the ElevenLabs "Introducing Eleven v4" film. The picture switches between **white
+and navy** ten times, using the real amber Copilot orb and the dashboard's own Copilot cards.
 
-**There are no photos or generated video in this one.** Everything on screen is built from real
-product UI and motion graphics, so there is nothing to keep consistent. The only external resources
-are voice lines: [`voiceover-script.md`](voiceover-script.md) → `assets/vo/`.
+**There are no photos or generated video in it.** Everything on screen is real product UI and
+motion graphics. The only external resources were the 20 voice lines (`assests/`,
+[`voiceover-script.md`](voiceover-script.md)).
 
 ---
 
-## 1. What the reference does (first 60 s of a 156 s vertical film)
+## The finished film (`final/`)
+
+| File | What it is |
+|---|---|
+| `lazytradie-admin-copilot.mp4` | **The film.** 1:43, 1920×1080, 30 fps, H.264 + AAC. Voice + SFX, **no music**. |
+| `lazytradie-admin-copilot.webm` | The same film as VP9 + Opus, for web `<video>` tags. |
+| `lazytradie-admin-copilot.vtt` | Captions, one cue per sentence, with the speaker on each (`Narrator`, `Jack`, `Copilot`). |
+| `lazytradie-admin-copilot-poster.png` | Poster frame: Schedule, with the orb, the transcript and today's jobs. |
+
+The voice lines ran to 82 s of pure speech (the Copilot's real voice is unhurried), so the film is
+1:43 rather than 60 s. Nothing is sped up. The only edit to the voices is tightening the Copilot's
+longest thinking pauses to a natural length.
+
+**As cut:**
+
+| Time | Theme · wipe in | Scene |
+|---|---|---|
+| 0:00 | White | Intro: "Everything you're about to see gets done by voice…" blurs in word by word, ending on a `Copilot` chip. |
+| 0:08 | White → **navy** (burst) | The real orb pops in, becomes five waveform bars, then three thinking dots, then bursts. Navy floods out and the two speakers form: **Jack** (a particle sphere that ripples with his voice) and the **Copilot** orb. "Good morning! What can I sort out for you?" |
+| 0:13 | Navy | **01 Schedule:** "What's on today?" Today's four jobs build in and the first one is ringed. |
+| 0:21 | **White** · pixel mosaic | **02 Find jobs:** the query types into search and Sarah's job card resolves (`T2 · In review`). |
+| 0:32 | **Navy** · circle out of the orb | **03 Manage jobs:** "Approve it, and move it to Friday at two." The pill flips to `Confirmed` and her booking lifts off Thursday 9 AM and lands on Friday 2 PM. |
+| 0:41 | **White** · rising bars | **04 Book a job:** the booking card fills in as Jack talks. The Copilot asks to confirm, "Yep.", and it turns green and drops into Wednesday's calendar. |
+| 0:58 | **Navy** · dot matrix | **05 Notes & reminders:** "bring the long ladder" types onto Mike's job and saves. |
+| 1:06 | **White** · iris into the orb | **06 Quotes:** the real quote card builds to $2,450, then the confirm card. The cursor taps **Confirm** and the quote is sent. |
+| 1:19 | **Navy** · sliding pills | **07 Invoices:** the invoice builds to $380 and is confirmed and sent, with a card pay link (Stripe). |
+| 1:29 | **White** · diagonal mosaic | Recap: "Schedule." "Jobs." "Quotes & invoices." "Sorted." The feature icons orbit and get pulled into the full stop. |
+| 1:36 | **Navy** · out of the full stop | Sign-off: the orb takes centre stage and Jack's sphere orbits it. "Afternoon, mate. What's next on the list?" |
+| 1:40 | **White** · circle out of the orb | End card: LazyTradie wordmark, `Admin Copilot`, "Just ask." |
+
+**Sound.** Three voice chains:
+- **Narrator:** the explainer's exact chain.
+- **Copilot:** clean and close, since it's the product's own voice.
+- **Jack:** a light phone-mic feel.
+
+On top of that, 133 designed SFX cues, every one on a picture event. The mic "blip" opens and closes
+around each of Jack's lines, like the real Talk mode. Mastered with the series' limiter: −14.8 LUFS,
+true peak −1.2 dBTP. Every line was checked for intelligibility with speech recognition on the
+final mix.
+
+**What's real:**
+- Every request and reply is something the Copilot actually does today, per the backend's tool
+  registry and voice rules.
+- The cards are the dashboard's own Copilot components in its light and dark tokens, on the
+  fictional demo account (Turner Electrical, Melbourne).
+- Payment reminders aren't live yet, so "Notes & reminders" shows a job note, which is.
+
+**Adding your music.** Same rule as the other films: keep it about 9 dB under the voice, dip it
+about 7 dB under speech, then master to −14 LUFS with true peak at −1 dBTP.
+
+---
+
+## What the reference does (first 60 s of a 156 s vertical film)
 
 | Time | What you see | What you hear |
 |---|---|---|
@@ -29,7 +80,9 @@ are voice lines: [`voiceover-script.md`](voiceover-script.md) → `assets/vo/`.
 
 ---
 
-## 2. The LazyTradie version: beat sheet (≈60 s, locks to the voice once it arrives)
+## The plan (as written before the voice arrived)
+
+### Beat sheet (planned at ≈60 s; see "As cut" above for the real timing)
 
 Three voices:
 - **Narrator:** the explainer's voice.
@@ -73,7 +126,7 @@ film never claims it chases payments.
 
 ---
 
-## 3. Resources
+### Resources
 
 | What | Where it comes from | Status |
 |---|---|---|
