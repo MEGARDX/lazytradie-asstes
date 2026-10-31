@@ -11,6 +11,29 @@ A motion-graphics launch reel for the **AI Receptionist**, modelled beat for bea
 **Exports:** `1:1` 1080×1080 (main, same shape as the reference, for the IG/FB feed) and
 `9:16` 1080×1920 (Reels, TikTok, Stories), recomposed per scene. 30 fps, H.264 + AAC, plus VTT captions.
 
+
+## The finished reel (`final/`)
+
+| File | What it is |
+|---|---|
+| `lazytradie-receptionist-reel-1x1.mp4` | **Main cut, 1:1.** 50 s, 1080×1080, 30 fps, H.264 + AAC. For the IG/FB feed. |
+| `lazytradie-receptionist-reel-9x16.mp4` | **9:16** 1080×1920 for Reels, TikTok and Stories. Same timeline; the montage runs full-frame, one photo at a time. |
+| `../lazytradie-receptionist-reel.vtt` | Captions for both, one cue per line. |
+
+**As built:** pure black with cyan, magenta and amber gradients, like the reference's teal. Liquid glass is on
+the setup button and cards, the receptionist chip, the live-call card, the booking card over the grainy
+gradient, the sidebar and Jobs panel, the tier pill, the emergency alert over the montage, and the end-card
+frame and price pill. R_12 ("in just $49 a month") is shown as a glass price pill on the end card.
+
+**Sound:** voice plus synthesised deep SFX (sub booms on the logo, the orb and the gradient flood, whooshes,
+glass pings, a soft ring, a booking chime, shutter hits on the montage, typing ticks), with **no music**.
+Mixed to −14.1 LUFS, peak −1.5 dBTP, matching the reference. Every line was checked for intelligibility
+with speech recognition on the final mix.
+
+**Rebuild:** `src/` holds everything. `timeline.json` is the single source of timing for both picture and
+sound. `node render.js 1x1 <dir>` renders the frames, `python3 audio.py <dir>` writes `vo.wav` and `sfx.wav`,
+and the ffmpeg mix chain is in the commit that added this section.
+
 ---
 
 ## 1. What the reference does (42.0 s, 720×720, 30 fps)

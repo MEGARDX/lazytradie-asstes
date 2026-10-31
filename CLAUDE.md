@@ -63,7 +63,7 @@ or put soft brand-colour auras behind. Headless Playwright Chromium renders the 
 - `Tiers/`: 41 s Job Tiers tutorial.
 - `copilot/`: 1:43 Admin Copilot film (white/navy, voice + SFX).
 - `launch-film/`: parked.
-- `receptionist-reel/`: plan for the AI Receptionist motion reel (ElevenLabs "Vocals" reference). Waiting on VO + 12 candid flash photos (m01–m12).
+- `receptionist-reel/`: 50 s AI Receptionist motion reel (ElevenLabs "Vocals" reference), 1:1 + 9:16, black + cyan/magenta/amber, heavy liquid glass, deep SFX, no music. Source in `src/` (timeline.json drives picture + sound).
 - `campaign/26-oct/`: 18 Instagram posts.
 - `campaign/29-oct/`: Admin Copilot carousel (cover + 4 slides) and a LinkedIn PDF.
 - `campaign/31-oct/`: "A Tradie's Guide to Never Missing a Job" (cover, Receptionist, Job Tiers, Calendar, CTA),
