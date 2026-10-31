@@ -32,7 +32,19 @@ Reference photo: `26 oct/Cover hero.jpg`. Attach it as the reference image and p
 > light freckles, glossy voluminous curly brown hair in a loose high bun with face-framing curls,
 > natural dewy makeup, glossy lips, gold hoop earrings
 
-(The 29 Oct cover used a one-off Asian model. The owner wants the Aussie girl.)
+(The 29 Oct cover used a one-off Asian model. The owner wants Aussie girls.)
+
+**Second face (from 31 Oct):** a blonde Aussie influencer. Reference: `31 oct/non edited/cover.png`.
+> 23-year-old Australian model and influencer, sun-kissed glowing skin, a few soft freckles across her nose,
+> sleek straight honey-blonde hair worn long and glossy, natural dewy makeup, glossy nude lips, fine gold hoop earrings
+
+Avoid poses that read as a phone ad (holding the phone up to camera). Show trade gear or real actions instead.
+
+## Liquid glass
+The owner's `liquid-glass-web` skill is installed at `.claude/skills/liquid-glass-web/` (source copy in `liquid-glass-web/`).
+Use it on pills, chips, tile labels and UI cards. It needs content behind it to show, so overlap the photo edges
+or put soft brand-colour auras behind. Headless Playwright Chromium renders the real refraction.
+`campaign/31-oct/src/slides.html` is the working example.
 
 ## Workflow
 1. Owner sends reference images, and I study the layout system.
@@ -46,12 +58,14 @@ Reference photo: `26 oct/Cover hero.jpg`. Attach it as the reference image and p
 5. Write captions on request: Instagram, Facebook and LinkedIn versions, hashtags as one comma-separated string,
    and alt text. LinkedIn carousels are posted as a PDF document.
 
-## Done so far (24–29 Oct)
+## Done so far (24–31 Oct)
 - `explainer/`: 60 s onboarding explainer (16:9 + 9:16, onboarding and brand cuts, VTT).
 - `Tiers/`: 41 s Job Tiers tutorial.
 - `copilot/`: 1:43 Admin Copilot film (white/navy, voice + SFX).
 - `launch-film/`: parked.
 - `campaign/26-oct/`: 18 Instagram posts.
 - `campaign/29-oct/`: Admin Copilot carousel (cover + 4 slides) and a LinkedIn PDF.
+- `campaign/31-oct/`: "A Tradie's Guide to Never Missing a Job" (cover, Receptionist, Job Tiers, Calendar, CTA),
+  ElevenCreative "Marketer's Guide" layout with liquid glass. Source in `src/`: `node shoot.js` renders it.
 - All films are voice + SFX only, with no music. The music rule is in each README.
 - Earlier work is in PR MEGARDX/lazytradie-asstes#1 (branch `claude/peaceful-newton-lf4aj0`).

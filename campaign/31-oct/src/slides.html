@@ -1,0 +1,344 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- LazyTradie 31 Oct carousel, 1080×1350. slides.html?s=cover|s1|s2|s3|cta renders one slide. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{
+  --navy:#0D1B2A; --amber:#F5A623; --paper:#F1F0EC; --ink:#0D1B2A; --grey:#6d859c;
+  --green:#2FA57F; --green-soft:rgba(93,202,165,.16); --green-line:rgba(47,165,127,.35);
+  --amb-ink:#B87400; --amb-soft:rgba(245,166,35,.16); --amb-line:rgba(245,166,35,.45);
+  --red:#E5483B; --red-soft:rgba(255,107,94,.13); --red-line:rgba(229,72,59,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000}
+body{font-family:'Inter Tight',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--paper);display:none}
+.slide.on{display:block}
+.abs{position:absolute}
+.ph,.ph-fill{line-height:1}
+
+/* type */
+.wm{position:absolute;left:40px;top:42px;width:252px}
+.hl{position:absolute;left:34px;top:104px;font-size:116px;line-height:.9;letter-spacing:-.045em;color:var(--ink)}
+.hl .l1{font-weight:300;display:block}
+.hl .l2{font-weight:500;display:block;letter-spacing:-.05em}
+.body{position:absolute;left:40px;bottom:48px;width:700px;font-size:33px;line-height:1.12;letter-spacing:-.025em;font-weight:400}
+
+/* glass dressing (the optics come from liquid-glass.js) */
+.glass{position:absolute;isolation:isolate}
+.glass.light{
+  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.42));
+  box-shadow:0 28px 60px rgba(13,27,42,.16),0 2px 6px rgba(13,27,42,.06),
+    inset 0 1px 1px rgba(255,255,255,.95),inset 0 -10px 24px rgba(255,255,255,.28),
+    inset 0 0 0 1px rgba(255,255,255,.7);
+}
+.glass.clear{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.06));
+  box-shadow:0 14px 34px rgba(13,27,42,.22),
+    inset 0 1px 1px rgba(255,255,255,.85),inset 0 -6px 16px rgba(255,255,255,.14),
+    inset 0 0 0 1px rgba(255,255,255,.45);
+}
+.glass.dark{
+  background:linear-gradient(180deg,rgba(13,27,42,.20),rgba(13,27,42,.38));
+  box-shadow:0 22px 50px rgba(0,0,0,.40),
+    inset 0 1px 1px rgba(255,255,255,.55),inset 0 -8px 20px rgba(255,255,255,.07),
+    inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+/* swipe pill */
+.swipe{right:38px;bottom:44px;height:68px;padding:0 34px;border-radius:999px;display:flex;align-items:center;
+  font-size:40px;letter-spacing:-.03em;font-weight:400;color:var(--ink)}
+.swipe i{font-size:30px;margin-left:12px}
+.aura{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+
+.tile{position:absolute;overflow:hidden;background-size:cover;background-position:center}
+
+/* shared UI bits, taken from the dashboard */
+.tp{font-family:'JetBrains Mono',monospace;font-weight:600;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center}
+.tp.g{background:var(--green-soft);color:var(--green);border:1.5px solid var(--green-line)}
+.tp.a{background:var(--amb-soft);color:var(--amb-ink);border:1.5px solid var(--amb-line)}
+.tp.r{background:var(--red-soft);color:var(--red);border:1.5px solid var(--red-line)}
+.muted{color:var(--grey)}
+
+/* ---------- cover ---------- */
+#cover{background:#0D1B2A}
+#cover .photo{position:absolute;inset:0;background:url(img/cover.jpg) center 30%/cover}
+#cover .shade{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(13,27,42,0) 50%,rgba(13,27,42,.45) 66%,rgba(13,27,42,.86) 100%)}
+#cover .cwm{position:absolute;left:50%;top:884px;width:300px;transform:translateX(-50%)}
+#cover .ct{position:absolute;left:0;right:0;top:968px;text-align:center;color:#fff;line-height:.92;letter-spacing:-.045em}
+#cover .ct .l1{font-size:92px;font-weight:300;display:block}
+#cover .ct .l2{font-size:112px;font-weight:500;display:block;letter-spacing:-.05em}
+#cover .cp{left:50%;top:1196px;transform:translateX(-50%);height:76px;padding:0 44px;border-radius:999px;display:flex;align-items:center;
+  font-size:36px;color:#fff;letter-spacing:-.025em;white-space:nowrap}
+
+/* ---------- slide 1 ---------- */
+#s1 .card{left:40px;top:330px;width:1000px;height:262px;border-radius:26px;padding:26px 30px}
+#s1 .row{display:flex;align-items:center;justify-content:space-between}
+#s1 .pill{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:500;padding:8px 16px;border-radius:999px;
+  background:rgba(245,166,35,.13);border:1.5px solid rgba(245,166,35,.4);color:#8a5a00}
+#s1 .pill .dot{width:9px;height:9px;border-radius:50%;background:var(--amber)}
+#s1 .prog{display:flex;gap:10px;align-items:flex-end}
+#s1 .prog div{width:74px;font-size:15px;font-weight:500;color:var(--grey)}
+#s1 .prog div:before{content:'';display:block;height:5px;border-radius:9px;background:rgba(13,27,42,.12);margin-bottom:7px}
+#s1 .prog .done:before{background:var(--green)} #s1 .prog .act{color:var(--ink)} #s1 .prog .act:before{background:var(--amber)}
+#s1 .lab{margin-top:18px;font-size:19px;font-weight:500;color:#3a5169}
+#s1 .lab b{color:var(--red);font-weight:500}
+#s1 .inp{margin-top:9px;height:62px;border-radius:14px;background:rgba(255,255,255,.85);border:1.5px solid rgba(245,166,35,.65);
+  box-shadow:0 0 0 4px rgba(245,166,35,.13);display:flex;align-items:center;padding:0 20px;font-size:27px;font-weight:500;letter-spacing:-.02em}
+#s1 .inp .caret{width:2.5px;height:32px;background:var(--amber);margin-left:3px}
+#s1 .foot{margin-top:16px}
+#s1 .foot > span:first-child{font-size:19px;color:var(--grey)}
+#s1 .btn{background:var(--amber);color:#1a1206;font-weight:600;font-size:21px;border-radius:999px;padding:12px 24px;display:flex;align-items:center;gap:10px}
+#s1 .p1{left:40px;top:560px;width:600px;height:600px;border-radius:30px;background-image:url(img/1.jpg);background-position:center 30%}
+#s1 .menu{left:600px;top:628px;width:410px;height:530px;border-radius:34px;padding:22px 14px}
+#s1 .menu h4{font-size:24px;font-weight:400;color:var(--grey);padding:4px 16px 12px}
+#s1 .mi{display:flex;align-items:center;gap:16px;height:50px;padding:0 16px;font-size:25px;letter-spacing:-.02em;border-radius:14px}
+#s1 .mi i{font-size:26px;width:28px;color:#3a5169}
+#s1 .mi.act{background:rgba(245,166,35,.16);box-shadow:inset 0 0 0 1.5px rgba(245,166,35,.4)}
+#s1 .mi.act i{color:#B87400}
+#s1 .mi .chk{margin-left:auto;color:#B87400;font-size:24px}
+#s1 .mi .chev{margin-left:auto;font-size:22px}
+
+/* ---------- slide 2 ---------- */
+#s2 .tiers{left:40px;top:336px;width:532px;height:318px;border-radius:24px;padding:20px 22px}
+#s2 .tiers h4{font-size:22px;font-weight:400;color:var(--grey);margin-bottom:6px}
+#s2 .opt{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid rgba(13,27,42,.08)}
+#s2 .opt:first-of-type{border-top:0}
+#s2 .opt .tx{flex:1}
+#s2 .opt .t{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:500;letter-spacing:-.02em}
+#s2 .opt .d{font-size:18.5px;line-height:1.25;color:var(--grey);margin-top:4px}
+#s2 .opt .tp{font-size:15px;padding:3px 10px}
+#s2 .opt .ck{font-size:24px;color:var(--ink);margin-top:4px}
+#s2 .arrow{left:590px;top:372px;width:120px;height:80px}
+#s2 .pick{left:586px;top:470px;width:458px;height:676px;border-radius:24px;overflow:hidden}
+#s2 .pick .hd{padding:18px 18px 16px}
+#s2 .pick .chip{display:inline-flex;align-items:center;gap:12px;background:rgba(13,27,42,.07);border-radius:14px;padding:12px 18px;font-size:26px;font-weight:500;letter-spacing:-.02em}
+#s2 .pick .chip .tp{font-size:15px;padding:3px 9px}
+#s2 .pick .srch{border-top:1px solid rgba(13,27,42,.08);border-bottom:1px solid rgba(13,27,42,.08);padding:20px 24px;font-size:25px;color:#8ea2b5;display:flex;gap:12px;align-items:center}
+#s2 .pick .li{display:flex;align-items:center;gap:16px;height:66px;margin:0 8px;padding:0 16px;font-size:24.5px;letter-spacing:-.02em;border-radius:14px}
+#s2 .pick .li .cb{width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:18px;flex:none}
+#s2 .pick .li.first{background:rgba(13,27,42,.05);margin-top:8px}
+#s2 .pick .li.add .cb{background:none;border:2px dashed rgba(13,27,42,.3);color:var(--grey)}
+#s2 .t1{left:40px;top:672px;width:280px;height:280px;border-radius:24px;background-image:url(img/2a.jpg);background-position:center 20%}
+#s2 .t2{left:300px;top:908px;width:268px;height:268px;border-radius:24px;background-image:url(img/2v.jpg)}
+#s2 .tag{height:40px;padding:0 13px;border-radius:999px;display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:16px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+#s2 .tag i{width:10px;height:10px;border-radius:50%}
+
+/* ---------- slide 3 ---------- */
+#s3 .tbl{left:36px;top:336px;width:1008px;height:820px;border-radius:26px;overflow:hidden}
+#s3 .tbl .hd{padding:24px 26px 18px}
+#s3 .tbl .hd h3{font-size:30px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+#s3 .tbl .hd h3 i{font-size:26px;color:#8ea2b5}
+#s3 .tbl .hd p{font-size:21px;color:#3a5169;margin-top:6px;letter-spacing:-.01em}
+#s3 .sec{margin:0 10px;border-radius:14px 14px 0 0;background:rgba(127,178,224,.18)}
+#s3 .sec .sh{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-size:24px;font-weight:600}
+#s3 .rows{background:rgba(255,255,255,.72);margin:0 8px 0;border-radius:12px}
+#s3 .r{display:grid;grid-template-columns:62px 1fr 182px 70px 152px;align-items:center;gap:14px;height:96px;padding:0 20px;border-top:1px solid rgba(13,27,42,.07)}
+#s3 .r:first-child{border-top:0}
+#s3 .r .av{width:56px;height:56px;border-radius:15px;background:rgba(245,166,35,.16);display:grid;place-items:center;font-size:26px;color:#B87400}
+#s3 .r .nm{font-size:25px;font-weight:600;letter-spacing:-.02em}
+#s3 .r .sv{font-size:19.5px;color:var(--grey);margin-top:3px}
+#s3 .r .dt{font-size:20px;color:#3a5169;line-height:1.25}
+#s3 .r .tp{font-size:15px;padding:4px 10px;justify-self:start}
+#s3 .st{justify-self:end;font-size:18px;font-weight:600;border-radius:999px;padding:7px 14px;display:inline-flex;align-items:center;gap:7px}
+#s3 .st.ok{background:rgba(47,165,127,.12);color:var(--green)}
+#s3 .st.warn{background:rgba(245,166,35,.15);color:#B87400}
+#s3 .r.new{background:linear-gradient(90deg,rgba(245,166,35,.12),rgba(245,166,35,0) 70%)}
+#s3 .fb{position:absolute;left:18px;right:18px;bottom:20px;display:flex;gap:12px}
+#s3 .fb div{height:62px;border:1.5px solid rgba(13,27,42,.22);border-radius:12px;display:flex;align-items:center;gap:12px;padding:0 20px;font-size:23px;font-weight:500;background:rgba(255,255,255,.7)}
+#s3 .fb .grow{flex:1;color:#8ea2b5;font-weight:400}
+
+/* ---------- cta ---------- */
+#cta{background:#0D1B2A}
+#cta .cwm{position:absolute;left:50%;top:46px;width:250px;transform:translateX(-50%)}
+#cta .ct{position:absolute;left:0;right:0;top:118px;text-align:center;color:#F4F2EC;line-height:.92;letter-spacing:-.045em}
+#cta .ct .l1{font-size:122px;font-weight:300;display:block}
+#cta .ct .l2{font-size:122px;font-weight:400;display:block}
+#cta .site{left:120px;top:362px;width:840px;height:500px;border-radius:30px;background:#FAFAF8;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+#cta .site .h{position:absolute;left:28px;top:30px;width:420px;font-size:34px;line-height:1.08;letter-spacing:-.03em;color:var(--ink)}
+#cta .site .p{position:absolute;left:478px;top:32px;width:330px;font-size:15.5px;line-height:1.4;color:#24384c}
+#cta .site .b{position:absolute;left:28px;top:150px;background:var(--navy);color:#fff;border-radius:999px;padding:11px 20px;font-size:17px;font-weight:500;display:flex;gap:8px;align-items:center}
+#cta .site .s{position:absolute;left:32px;top:200px;font-size:13px;font-style:italic;color:#7a8a99}
+#cta .site .tl{position:absolute;top:236px;width:254px;height:246px;border-radius:20px;background-size:cover}
+#cta .site .lbl{left:50%;bottom:12px;transform:translateX(-50%);height:40px;padding:0 16px;border-radius:999px;display:flex;align-items:center;font-size:17.5px;font-weight:500;color:#fff;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+#cta .site .ic{right:10px;top:10px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:19px}
+#cta .line{position:absolute;left:539px;top:900px;width:2.5px;height:200px;background:#F4F2EC}
+#cta .cp{left:50%;top:1136px;transform:translateX(-50%);height:92px;padding:0 46px;border-radius:999px;display:flex;align-items:center;
+  font-size:47px;font-weight:600;color:#F4F2EC;letter-spacing:-.035em;white-space:nowrap}
+#cta .with{position:absolute;left:0;right:0;top:1250px;text-align:center;font-size:47px;font-weight:300;color:#F4F2EC;letter-spacing:-.035em}
+</style></head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="slide" id="cover">
+  <div class="photo"></div><div class="shade"></div>
+  <img class="cwm" src="img/wm_white.png" alt="">
+  <div class="ct"><span class="l1">A Tradie's Guide to</span><span class="l2">Never Missing a Job</span></div>
+  <div class="glass dark cp" data-lg='{"scale":-90,"chroma":5,"blur":2}'>Swipe for the workflow</div>
+</div>
+
+<!-- ============ 1 · RECEPTIONIST ============ -->
+<div class="slide" id="s1">
+  <div class="aura" style="right:-120px;bottom:-140px;width:520px;height:420px;background:rgba(245,166,35,.45)"></div>
+  <div class="aura" style="right:220px;bottom:-200px;width:420px;height:360px;background:rgba(127,178,224,.45)"></div>
+  <img class="wm" src="img/wm_navy.png" alt="">
+  <div class="hl"><span class="l1">Switch on your</span><span class="l2">AI Receptionist.</span></div>
+
+  <div class="tile p1"></div>
+
+  <div class="glass light card" data-lg='{"scale":-110,"blur":6}'>
+    <div class="row">
+      <span class="pill"><span class="dot"></span>Let's set up your AI receptionist</span>
+      <div class="prog"><div class="done">You</div><div class="act">Business</div><div>Trade</div><div>Contact</div></div>
+    </div>
+    <div class="lab">Business / trading name <b>*</b></div>
+    <div class="inp">Turner Electrical<span class="caret"></span></div>
+    <div class="row foot"><span>This is the name customers will hear from your AI receptionist.</span>
+      <span class="btn">Continue<i class="ph-fill ph-arrow-right"></i></span></div>
+  </div>
+
+  <div class="glass light menu" data-lg='{"scale":-120,"blur":7}'>
+    <h4>What's your trade?</h4>
+    <div class="mi act"><i class="ph-fill ph-lightning"></i>Electrician<i class="ph-fill ph-check-circle chk"></i></div>
+    <div class="mi"><i class="ph-fill ph-wrench"></i>Plumber</div>
+    <div class="mi"><i class="ph-fill ph-hammer"></i>Carpenter</div>
+    <div class="mi"><i class="ph-fill ph-wind"></i>HVAC</div>
+    <div class="mi"><i class="ph-fill ph-buildings"></i>Builder</div>
+    <div class="mi"><i class="ph-fill ph-paint-roller"></i>Painter</div>
+    <div class="mi"><i class="ph-fill ph-house-line"></i>Roofer</div>
+    <div class="mi"><i class="ph-fill ph-tree"></i>Landscaper</div>
+    <div class="mi"><i class="ph ph-dots-three"></i>More trades<i class="ph ph-caret-right chev"></i></div>
+  </div>
+
+  <div class="body">To get started, set up your AI receptionist. A few quick details and it's ready to start answering. Takes about two minutes.</div>
+  <div class="glass clear swipe" data-lg='{"scale":-70,"chroma":4}'>Swipe</div>
+</div>
+
+<!-- ============ 2 · TIERS ============ -->
+<div class="slide" id="s2">
+  <div class="aura" style="right:-120px;bottom:-140px;width:520px;height:420px;background:rgba(245,166,35,.45)"></div>
+  <div class="aura" style="right:220px;bottom:-200px;width:420px;height:360px;background:rgba(127,178,224,.45)"></div>
+  <img class="wm" src="img/wm_navy.png" alt="">
+  <div class="hl"><span class="l1">Choose your</span><span class="l2">Job Tiers.</span></div>
+
+  <div class="glass light tiers" data-lg='{"scale":-100,"blur":6}'>
+    <h4>Job tiers</h4>
+    <div class="opt"><div class="tx"><div class="t"><span class="tp g">T1</span>Auto-book</div>
+      <div class="d">Everyday jobs book straight into your calendar.</div></div><i class="ph ph-check ck"></i></div>
+    <div class="opt"><div class="tx"><div class="t"><span class="tp a">T2</span>Confirm first</div>
+      <div class="d">Bigger jobs, $1,000+ or unsure, wait for your OK.</div></div></div>
+    <div class="opt"><div class="tx"><div class="t"><span class="tp r">T3</span>Emergency</div>
+      <div class="d">Sparking or flooding? You're alerted straight away.</div></div></div>
+  </div>
+
+  <svg class="abs arrow" viewBox="0 0 120 80" fill="none" stroke="#0D1B2A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 34 C 30 8, 78 4, 98 40"/><path d="M84 34 L98 42 L104 26"/>
+  </svg>
+
+  <div class="tile t1"></div>
+  <div class="tile t2"></div>
+  <div class="glass clear tag" style="left:202px;top:694px" data-lg='{"scale":-50,"chroma":4,"blur":2}'><i style="background:#5DCAA5"></i>T1</div>
+  <div class="glass clear tag" style="left:58px;top:790px" data-lg='{"scale":-50,"chroma":4,"blur":2}'><i style="background:#F5A623"></i>T2</div>
+  <div class="glass clear tag" style="left:236px;top:872px" data-lg='{"scale":-50,"chroma":4,"blur":2}'><i style="background:#FF6B5E"></i>T3</div>
+
+  <div class="glass light pick" data-lg='{"scale":-120,"blur":7}'>
+    <div class="hd"><span class="chip"><span class="tp g">T1</span>Choose job types</span></div>
+    <div class="srch"><i class="ph ph-magnifying-glass"></i>Search job types…</div>
+    <div class="li first"><span class="cb"><i class="ph-fill ph-check"></i></span>Power point install/replace</div>
+    <div class="li"><span class="cb"><i class="ph-fill ph-check"></i></span>Light fitting swap</div>
+    <div class="li"><span class="cb"><i class="ph-fill ph-check"></i></span>Smoke alarm replacement</div>
+    <div class="li"><span class="cb"><i class="ph-fill ph-check"></i></span>Ceiling fan install</div>
+    <div class="li"><span class="cb"><i class="ph-fill ph-check"></i></span>USB powerpoint upgrade</div>
+    <div class="li"><span class="cb"><i class="ph-fill ph-check"></i></span>Single safety switch replacement</div>
+    <div class="li add"><span class="cb"><i class="ph ph-plus"></i></span>Add your own job</div>
+  </div>
+
+  <div class="body" style="width:560px">Pick which jobs book straight in, which wait for your OK, and what counts as an emergency.</div>
+  <div class="glass clear swipe" data-lg='{"scale":-70,"chroma":4}'>Swipe</div>
+</div>
+
+<!-- ============ 3 · CALENDAR ============ -->
+<div class="slide" id="s3">
+  <div class="aura" style="left:-160px;top:300px;width:620px;height:520px;background:rgba(245,166,35,.42)"></div>
+  <div class="aura" style="right:-160px;top:620px;width:600px;height:560px;background:rgba(127,178,224,.5)"></div>
+  <div class="aura" style="right:-120px;bottom:-140px;width:520px;height:420px;background:rgba(245,166,35,.4)"></div>
+  <img class="wm" src="img/wm_navy.png" alt="">
+  <div class="hl"><span class="l1">Fill your</span><span class="l2">Calendar.</span></div>
+
+  <div class="glass light tbl" data-lg='{"scale":-130,"blur":10,"border":0.05}'>
+    <div class="hd"><h3>Jobs <i class="ph-fill ph-info"></i></h3>
+      <p>Every booking your AI receptionist has taken, with the full detail on each.</p></div>
+    <div class="sec"><div class="sh"><span>This week</span><i class="ph ph-caret-up"></i></div></div>
+    <div class="rows">
+      <div class="r new"><span class="av"><i class="ph-fill ph-lightning"></i></span>
+        <div><div class="nm">Sarah Mitchell</div><div class="sv">Power point install/replace</div></div>
+        <div class="dt">Mon 2 Nov<br>9:00 AM</div><span class="tp g">T1</span><span class="st ok"><i class="ph-fill ph-check-circle"></i>Confirmed</span></div>
+      <div class="r"><span class="av"><i class="ph-fill ph-fan"></i></span>
+        <div><div class="nm">Mike Chen</div><div class="sv">Ceiling fan install</div></div>
+        <div class="dt">Mon 2 Nov<br>1:30 PM</div><span class="tp g">T1</span><span class="st ok"><i class="ph-fill ph-check-circle"></i>Confirmed</span></div>
+      <div class="r"><span class="av"><i class="ph-fill ph-circuitry"></i></span>
+        <div><div class="nm">Liam Walker</div><div class="sv">Full switchboard upgrade</div></div>
+        <div class="dt">Tue 3 Nov<br>8:00 AM</div><span class="tp a">T2</span><span class="st warn"><i class="ph-fill ph-clock"></i>In-Review</span></div>
+      <div class="r"><span class="av"><i class="ph-fill ph-bell-ringing"></i></span>
+        <div><div class="nm">Emma Davis</div><div class="sv">Smoke alarm replacement</div></div>
+        <div class="dt">Wed 4 Nov<br>10:00 AM</div><span class="tp g">T1</span><span class="st ok"><i class="ph-fill ph-check-circle"></i>Confirmed</span></div>
+      <div class="r"><span class="av"><i class="ph-fill ph-lightbulb"></i></span>
+        <div><div class="nm">Josh Nguyen</div><div class="sv">Light fitting swap</div></div>
+        <div class="dt">Wed 4 Nov<br>2:30 PM</div><span class="tp g">T1</span><span class="st ok"><i class="ph-fill ph-check-circle"></i>Confirmed</span></div>
+    </div>
+    <div class="fb"><div>All tiers <i class="ph-fill ph-caret-down"></i></div>
+      <div class="grow"><i class="ph ph-magnifying-glass" style="color:var(--ink)"></i>Search jobs</div>
+      <div>This week <i class="ph-fill ph-caret-down"></i></div></div>
+  </div>
+
+  <div class="body" style="width:640px">It checks your live free slots and books the job straight into your calendar. No callbacks, no customers lost.</div>
+  <div class="glass clear swipe" data-lg='{"scale":-70,"chroma":4}'>Swipe</div>
+</div>
+
+<!-- ============ CTA ============ -->
+<div class="slide" id="cta">
+  <div class="aura" style="left:200px;top:1060px;width:680px;height:300px;background:rgba(245,166,35,.55);filter:blur(80px)"></div>
+  <img class="cwm" src="img/wm_white.png" alt="">
+  <div class="ct"><span class="l1">Ready to stop</span><span class="l2">missing jobs?</span></div>
+  <div class="abs site">
+    <div class="h">The AI admin team for Australian tradies</div>
+    <div class="p">LazyTradie answers every call, SMS and web enquiry, books jobs straight into your calendar, and runs your quotes and invoices by voice.</div>
+    <div class="b">Get started free<i class="ph-fill ph-arrow-right"></i></div>
+    <div class="s">Free to start • No hidden charges</div>
+    <div class="tl" style="left:28px;background-image:url(img/recept.jpg);background-size:235%;background-position:38% 32%">
+      <div class="glass clear abs ic" data-lg='{"scale":-40,"chroma":3,"blur":2}'><i class="ph-fill ph-phone"></i></div>
+      <div class="glass dark abs lbl" data-lg='{"scale":-50,"chroma":4,"blur":3}'>AI Receptionist</div></div>
+    <div class="tl" style="left:293px;background-image:url(img/copilot.jpg);background-position:55% 40%">
+      <div class="glass clear abs ic" data-lg='{"scale":-40,"chroma":3,"blur":2}'><i class="ph-fill ph-microphone"></i></div>
+      <div class="glass dark abs lbl" data-lg='{"scale":-50,"chroma":4,"blur":3}'>Admin Copilot</div></div>
+    <div class="tl" style="left:558px;background-image:url(img/cta.jpg);background-position:70% 35%">
+      <div class="glass clear abs ic" data-lg='{"scale":-40,"chroma":3,"blur":2}'><i class="ph-fill ph-eye"></i></div>
+      <div class="glass dark abs lbl" data-lg='{"scale":-50,"chroma":4,"blur":3}'>Customer Portal</div></div>
+  </div>
+  <div class="line"></div>
+  <div class="glass dark cp" data-lg='{"scale":-100,"chroma":6,"blur":3}'>Get set up free</div>
+  <div class="with">with LazyTradie.</div>
+</div>
+
+<script src="liquid-glass.js"></script>
+<script>
+(async function () {
+  var id = new URLSearchParams(location.search).get('s') || 'cover';
+  var el = document.getElementById(id);
+  el.classList.add('on');
+  await document.fonts.ready;
+  await Promise.all([].slice.call(el.querySelectorAll('img')).map(function (i) {
+    return i.complete ? 0 : new Promise(function (r) { i.onload = i.onerror = r; });
+  }));
+  var results = [];
+  el.querySelectorAll('.glass').forEach(function (g) {
+    results.push(liquidGlass(g, JSON.parse(g.dataset.lg || '{}')).supported);
+  });
+  document.body.dataset.glass = results.join(',');
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
