@@ -5,7 +5,7 @@ A motion-graphics launch reel for the **AI Receptionist**, modelled beat for bea
 (`../SaveClip.App_AQNHIk458UOcVM-8WIgdltAADdKlL_09EDfgsWGiODGkIJNO0Rr-T7Zjds_sb0rc-OluXBtQV3Vol_l1DHnKknEf82sMHVP4TQGfoaM.mp4`).
 
 - **Voiceover lines:** [`voiceover-script.md`](voiceover-script.md) → `assets/vo/`
-- **Photos:** the six trade photos below → `assets/photos/`
+- **Photos:** the 12 candid flash photos below → `assets/photos/`
 - Everything else (orb, UI, cards, type, transitions, SFX) I build in code from the real product.
 
 **Exports:** `1:1` 1080×1080 (main, same shape as the reference, for the IG/FB feed) and
@@ -67,67 +67,107 @@ and dip it ~7 dB under speech.
 
 ## 3. Photos
 
-### Montage: 12 photos, paired left/right
+### Montage: 12 new photos, candid flash style
+
+The reference montage is candid direct-flash 35mm: real moments, not ads. So this set is different
+from the campaign photos. Six pairs, swapping every ~0.4 s, each photo shown as a tall half-frame
+strip, which is why they're 9:16 with the subject centred. The same photos feed the job cards in the
+3D carousel. Save them to `assets/photos/` as `m01` … `m12`.
 
 | Pair | Left | Right |
 |---|---|---|
-| 1 | `electrician` (new) | `29 oct/non edited/1 A.jpg` (her on the ladder) |
-| 2 | `plumber` (new) | `29 oct/non edited/2 A.jpg` (the guy in the ute) |
-| 3 | `carpenter` (new) | `26 oct/alternate of paint pour.jpg` (the paint roller) |
-| 4 | `hvac` (new) | `29 oct/non edited/4 B.jpg` (her fist pump) |
-| 5 | `landscaper` (new) | `26 oct/ute tray hammock , alternate of Pool float.jpg` |
-| 6 | `roofer` (new) | `31 oct` weekend tailgate shot |
-
-The same photos feed the job cards in the 3D carousel. Only the **six new trade photos** need
-generating. The prompts are below, all 4:5. Save them to `assets/photos/` as `electrician`,
-`plumber`, `carpenter`, `hvac`, `landscaper`, `roofer`.
+| 1 | `m01` sparky | `m02` plumber |
+| 2 | `m03` crew | `m04` chippy |
+| 3 | `m05` welder | `m06` tiler |
+| 4 | `m07` sparky-board | `m08` high-five |
+| 5 | `m09` painter | `m10` landscaper |
+| 6 | `m11` roofer | `m12` knock-off |
 
 **Style block** (already in each prompt):
-> Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly
-> deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful,
-> premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled
-> like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
+> Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
 
-**plumber**
+**m01 · sparky**
 ```
-A handsome 25-year-old male model plumber, tousled sun-bleached hair, light stubble, crouched low in front of an open under-sink cabinet in a bright modern kitchen with deep navy cabinetry. He wears a fitted navy work shirt with the sleeves rolled to the elbows and a small amber "LazyTradie" logo on the chest. One hand grips a glossy marigold-amber pipe wrench on the chrome trap under the sink, and he glances back over his shoulder at the camera with a confident half-smile. An open amber toolbox sits beside him on the warm off-white tiled floor. Hard sun streams through a side window, throwing crisp graphic shadows across the cabinets. Framed from a low side angle, full body, with clean space above him. 4:5.
+A young female electrician up a stepladder in a dark ceiling cavity at night, head torch on, wire strippers in her teeth, pulling a bundle of cables through a hole in the plasterboard, caught mid-laugh. The flash lights her and a cloud of dust.
 
-Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful, premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
 ```
 
-**electrician**
+**m02 · plumber**
 ```
-A striking 24-year-old female model electrician with a sleek dark ponytail and gold hoop earrings stands at an open residential switchboard mounted on a deep navy painted brick wall. She wears clear safety glasses pushed up slightly, marigold-amber insulated electrical gloves, and a fitted white work tee under an open amber hi-vis vest with a small "LazyTradie" patch. One gloved hand rests on the switchboard door while she checks the breakers with calm, focused confidence, a slight knowing smile. A digital multimeter hangs from her tool belt. Hard side sun throws a crisp diagonal shadow of her and the open panel door across the navy wall. Framed from the waist up, three-quarter angle, with negative space on one side for a headline. 4:5.
+A young plumber lying on his back half inside a cramped under-sink cabinet, only his torso and legs out, wrench raised, water spraying from a pipe and catching the flash like glitter, his mate crouched beside him cracking up.
 
-Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful, premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
-```
-
-**carpenter**
-```
-A rugged, handsome 26-year-old male model carpenter with wavy hair and a carpenter's pencil tucked behind one ear, leaning over a length of pale fresh-cut timber laid across two navy-painted sawhorses. He pulls a marigold-amber tape measure along the board, marking it with a small tick, eyes on the cut, a relaxed satisfied smile. He wears a crisp white tee, navy work pants and a tan leather tool belt with "LazyTradie" stamped on the pouch. Fine sawdust drifts and glows in the sun, with curls of wood shavings on the ground. The backdrop is a clean warm off-white rendered wall. Hard late-afternoon sun from the side, crisp shadows of the sawhorses. Framed from the thighs up. 4:5.
-
-Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful, premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
 ```
 
-**hvac**
+**m03 · crew**
 ```
-A fit 25-year-old male model HVAC technician with a short fade and light stubble kneels beside a clean white outdoor air-conditioning unit mounted against a deep navy weatherboard wall. He tightens a fitting on the copper refrigerant lines with a marigold-amber spanner, gauges hanging from the unit, and looks up at the camera with an easy, confident grin. He wears a navy work polo with a small amber "LazyTradie" logo, navy work shorts and dusty boots. A sky-blue sky shows at the top edge of the frame. Hard midday sun throws crisp shadows of the unit's fan grille across the wall. Shot from a slightly low angle, full body, graphic and clean. 4:5.
+Five young tradies piled into the tray of a dusty ute at knock-off time on a building site at dusk, hi-vis vests open, one standing and pointing straight at the camera, the rest mid-laugh. Flash freezes the moment against a deep blue sky.
 
-Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful, premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
-```
-
-**landscaper**
-```
-A stunning 23-year-old female model landscaper with sun-kissed skin, light freckles and a messy honey-blonde ponytail pushes a glossy marigold-amber wheelbarrow full of rolled turf across a freshly laid, vivid green lawn. She wears a fitted white tank, navy work overalls tied at the waist and sturdy boots, with "LazyTradie" printed on the side of the wheelbarrow. She's mid-stride and laughing, looking off to the side, totally in her element. Behind her is a clean, cloudless sky-blue sky and the edge of a navy timber fence. Hard bright sun, crisp shadows on the grass. Shot from a low angle so she stands tall against the sky. Full body. 4:5.
-
-Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful, premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
 ```
 
-**roofer**
+**m04 · chippy**
 ```
-A confident 26-year-old male model roofer with tousled sun-bleached hair and light stubble sits back on his heels on a pitched terracotta-tiled roof against a clean sky-blue sky. He wears a navy safety harness clipped to a roof anchor, an amber hi-vis vest with "LazyTradie" across the back, a white tee and navy work pants. One hand rests on a fresh row of tiles and he looks out over the suburb with a relaxed, satisfied smile, like the job's nearly done. The rope from his harness curves graphically across the tiles. Hard direct sun, crisp shadows of the tiles. Shot from a slightly higher angle on the roof, full body, with plenty of open sky above him. 4:5.
+A young carpenter in a navy tee ripping a sheet of plywood with a circular saw on a half-built timber frame at night. A fan of sawdust explodes off the blade and glows in the flash. Safety glasses, focused grin.
 
-Shot on 35mm film, hard direct sun, crisp shadows, saturated colour, fine grain. Palette strictly deep navy (#0D1B2A), marigold amber (#F5A623), warm off-white and a touch of sky blue. Bold, playful, premium lifestyle advertising for an Australian trades brand. Models are young, radiant, styled like a fashion shoot. No food or drinks. No text except "LazyTradie" exactly as written.
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m05 · welder**
+```
+A young welder flipping his welding mask up mid-job in a dark steel workshop, face streaked with grime, a fountain of orange sparks still falling around him, caught in the flash.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m06 · tiler**
+```
+A young female tiler on her knees in a bare bathroom, grout on her hands and cheek, looking up at the camera over her shoulder with a cheeky grin, sleeves rolled up. Rows of fresh white tiles and spacers around her.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m07 · sparky-board**
+```
+A young electrician lit by his head torch and the flash at an open switchboard in a pitch-dark garage, multimeter probes in hand, sleeves rolled, deep concentration, his breath just visible in the cold.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m08 · high-five**
+```
+A young apprentice and her older boss in hi-vis high-fiving across a muddy job site at night under a single work light, both mid-shout, rain streaks frozen in the flash.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m09 · painter**
+```
+A young painter in paint-splattered white overalls on scaffolding outside a weatherboard house at dusk, roller raised overhead, amber paint drips flicking off it in the flash, looking down at the camera with a wide grin.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m10 · landscaper**
+```
+A young landscaper standing knee-deep in a muddy trench in the rain, shovel over one shoulder, soaked hi-vis, laughing up at the camera. The flash catches every raindrop.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m11 · roofer**
+```
+A young roofer crouched on a tin roof at blue hour, harness on, one hand raised in a fist to the sky in celebration of a finished job, flash lighting him against the dark suburb.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
+```
+
+**m12 · knock-off**
+```
+A young tradie crew dancing and celebrating in the shell of a nearly finished house at night under bare work lights, hard hats tossed in the air, hi-vis flying, pure joy, blurred motion in the flash.
+
+Candid documentary photo, shot on 35mm film with a direct on-camera flash: harsh flash highlights, deep falling-off shadows, warm grainy colour, a touch of motion blur, a real unposed moment, gritty and alive, like a behind-the-scenes photo from a gig. Young Australian tradies full of character, natural, not models posing. Tall vertical frame, subject centred in the middle third. 9:16. No food or drinks. No text, no logos.
 ```
 
 ---
