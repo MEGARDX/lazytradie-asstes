@@ -1,0 +1,49 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- The Smoko Room FB group cover, 1640×856. A$49-carousel system: sky blue, white, amber, glass chips. Key content kept inside the mobile-safe centre. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--ink:#0A6FB0;--am:#F29A00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1640px;height:856px;overflow:hidden;color:#fff;
+  background:radial-gradient(70% 80% at 10% 0%,rgba(127,211,255,.75) 0%,rgba(127,211,255,0) 60%),linear-gradient(160deg,#2AA8EE 0%,#1690DA 55%,#0F80C8 100%)}
+.abs{position:absolute}
+.sph{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFE3A3 0%,#FFC24D 22%,#F5A623 55%,#D98200 100%);box-shadow:inset -20px -30px 60px rgba(160,80,0,.35),0 40px 80px rgba(10,60,110,.25)}
+.wsp{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#EAF8FF 40%,#B9E6FF 100%);box-shadow:inset -14px -22px 40px rgba(30,155,224,.25),0 30px 60px rgba(10,60,110,.2)}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.35)}
+.amp{position:absolute;display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;white-space:nowrap;background:linear-gradient(180deg,#FFB52E,#F29A00);box-shadow:0 14px 30px rgba(160,80,0,.35),inset 0 2px 1px rgba(255,255,255,.6);text-shadow:0 1px 3px rgba(150,70,0,.35)}
+.card{position:absolute;background:#fff;color:var(--ink);box-shadow:0 26px 60px rgba(6,60,110,.28)}
+.g{position:relative;isolation:isolate;height:78px;padding:0 28px 0 11px;border-radius:39px;display:flex;align-items:center;gap:13px;font-size:27px;font-weight:700;letter-spacing:-.02em;color:#fff;white-space:nowrap;
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(10,90,160,.30));
+  box-shadow:0 20px 46px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.95),inset 0 -10px 22px rgba(255,255,255,.14),inset 0 0 0 1.5px rgba(255,255,255,.6);text-shadow:0 2px 8px rgba(6,60,110,.35)}
+.g .ic{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:28px;text-shadow:none;background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(160,80,0,.35)}
+</style></head><body>
+<div id="p">
+  <div class="sph" style="right:40px;top:350px;width:380px;height:380px"></div>
+  <div class="ring" style="right:-20px;top:290px;width:500px;height:500px"></div>
+  <div class="wsp" style="right:520px;top:70px;width:120px;height:120px"></div>
+  <div class="wsp" style="right:470px;bottom:70px;width:110px;height:110px"></div>
+  <div class="sph" style="left:-90px;bottom:-110px;width:240px;height:240px"></div>
+
+  <div class="amp" style="left:200px;top:110px;height:58px;padding:0 24px;border-radius:29px;font-size:23px"><i class="ph-fill ph-map-pin"></i>Aussie Tradies Business Group</div>
+  <div class="abs" style="left:194px;top:190px;letter-spacing:-.055em;line-height:.9;text-shadow:0 4px 30px rgba(6,60,110,.2)">
+    <span style="font-size:150px;font-weight:300">The </span><span style="font-size:150px;font-weight:800">Smoko Room</span></div>
+  <div class="card" style="left:200px;top:370px;height:104px;border-radius:52px;display:flex;align-items:center;padding:0 40px;font-size:42px;font-weight:700;letter-spacing:-.03em">
+    Talk shop. Share wins. <span style="color:var(--am);margin-left:12px">Grow your trade.</span></div>
+  <div class="abs" style="left:200px;top:514px;display:flex;gap:16px">
+    <div class="g" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-lightbulb"></i></span>Business tips</div>
+    <div class="g" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-trophy"></i></span>Wins</div>
+    <div class="g" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-wrench"></i></span>Tools &amp; tech</div>
+    <div class="g" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-chats-circle"></i></span>Ask a tradie</div>
+  </div>
+  <div class="abs" style="left:204px;top:660px;display:flex;align-items:center;gap:14px;font-size:22px;font-weight:600;opacity:.95">by <img src="img/wm_white.png" style="width:190px;filter:drop-shadow(0 3px 10px rgba(6,60,110,.3))"></div>
+</div>
+<script src="liquid-glass.js"></script>
+<script>
+(async () => { await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  document.querySelectorAll('.g').forEach(el => liquidGlass(el, JSON.parse(el.dataset.lg)));
+  document.body.dataset.ready = '1'; })();
+</script></body></html>
