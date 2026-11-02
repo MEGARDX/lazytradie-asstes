@@ -1,62 +1,86 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
-<!-- "AI Admin Tool for Tradies" poster, 1080×1350, pistachio / navy / white / amber. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&display=block" rel="stylesheet">
+<!-- "AI Admin Tool for Tradies" poster, 1080×1350. Campaign look: deep green → navy, amber orb, liquid glass. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@600&display=block" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
 <style>
-:root{--navy:#0D1B2A;--pis:#CFE8B8;--pis2:#E4F3D6;--pisd:#9FCB7E;--am:#F5A623}
+:root{--am:#F5A623;--pis:#C9EBB0;--deep:#173A2A}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
-#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:var(--navy);
-  background:radial-gradient(90% 60% at 85% 0%,#F1FAE9 0%,rgba(241,250,233,0) 60%),linear-gradient(170deg,#DCEFCB 0%,#CFE8B8 60%,#C2E0A8 100%)}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;
+  background:
+    radial-gradient(70% 45% at 90% 8%,rgba(201,235,176,.30),rgba(201,235,176,0) 70%),
+    radial-gradient(60% 40% at 0% 100%,rgba(245,166,35,.20),rgba(245,166,35,0) 70%),
+    linear-gradient(165deg,#2C5E43 0%,#1E4733 38%,#14342A 70%,#0F2324 88%,#0D1B2A 100%)}
 .abs{position:absolute}
-.blob{position:absolute;border-radius:50%}
-#free{right:56px;top:214px;width:224px;height:224px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFD27A,#F5A623 60%,#DD8A00);
-  display:grid;place-items:center;transform:rotate(-12deg);box-shadow:0 24px 50px rgba(160,90,0,.3),inset 0 3px 2px rgba(255,255,255,.6);color:#fff;text-align:center}
-#free b{display:block;font-size:76px;font-weight:800;letter-spacing:-.04em;line-height:.9;text-shadow:0 2px 6px rgba(150,70,0,.35)}
-#free span{display:block;font-size:22px;font-weight:700;letter-spacing:.14em;margin-top:6px;text-shadow:0 1px 4px rgba(150,70,0,.35)}
-.hl{left:64px;top:96px;letter-spacing:-.055em;line-height:.9}
-.hl .a{display:block;font-size:124px;font-weight:800}
-.hl .b{display:block;font-size:124px;font-weight:300}
-.sub{left:68px;top:352px;font-size:38px;font-weight:500;letter-spacing:-.02em}
-.sub b{font-weight:800;background:linear-gradient(transparent 62%,rgba(245,166,35,.55) 62%)}
-#voice{left:56px;right:56px;top:446px;height:150px;border-radius:40px;background:var(--navy);color:#fff;display:flex;align-items:center;gap:26px;padding:0 34px;
-  box-shadow:0 26px 50px rgba(13,27,42,.25)}
-#voice .mic{width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFD27A,#F5A623 60%,#DD8A00);display:grid;place-items:center;font-size:46px;flex:none;
-  box-shadow:0 0 0 10px rgba(245,166,35,.18)}
-#voice .q{font-size:34px;font-style:italic;font-weight:500;letter-spacing:-.02em;line-height:1.2}
-#voice .q small{display:block;font-style:normal;font-size:19px;font-weight:600;letter-spacing:.14em;color:var(--pis);margin-bottom:6px}
-#wave{display:flex;align-items:center;gap:5px;margin-left:auto;height:60px}
-#wave i{width:6px;border-radius:3px;background:var(--pis)}
-#grid{left:56px;right:56px;top:640px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.t{height:208px;border-radius:32px;background:#fff;padding:26px 26px;box-shadow:0 18px 40px rgba(60,100,40,.16)}
-.t .ic{width:72px;height:72px;border-radius:22px;background:var(--pis);display:grid;place-items:center;font-size:38px;color:var(--navy)}
-.t b{display:block;font-size:33px;font-weight:700;letter-spacing:-.02em;margin-top:18px}
-.t span{display:block;font-size:19px;color:#4a5d6e;margin-top:4px}
-#bar{left:56px;right:56px;top:1150px;height:140px;border-radius:44px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 40px;
-  box-shadow:0 26px 50px rgba(13,27,42,.25)}
-#bar .cta{height:88px;padding:0 34px;border-radius:44px;background:linear-gradient(180deg,#FFC655,#F5A623);color:var(--navy);font-size:28px;font-weight:700;
-  display:flex;align-items:center;gap:10px;box-shadow:inset 0 2px 1px rgba(255,255,255,.7)}
+#grain{position:absolute;inset:0;opacity:.10;mix-blend-mode:overlay;pointer-events:none}
+/* the AI orb */
+#halo{position:absolute;left:520px;top:470px;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,166,35,.45) 0%,rgba(201,235,176,.18) 45%,rgba(0,0,0,0) 70%)}
+#orb{position:absolute;left:600px;top:550px;width:460px;height:460px;border-radius:50%;overflow:hidden;
+  background:radial-gradient(circle at 34% 28%,#FFF6DD 0%,#FFD580 16%,#F5A623 42%,#C47A12 70%,#7FBF6A 100%);
+  box-shadow:inset -30px -40px 80px rgba(23,58,42,.45),inset 20px 24px 60px rgba(255,255,255,.35)}
+#orb:before{content:'';position:absolute;left:12%;top:40%;width:80%;height:70%;border-radius:50%;filter:blur(40px);
+  background:radial-gradient(circle,rgba(201,235,176,.85),rgba(201,235,176,0) 70%)}
+#orb:after{content:'';position:absolute;left:18%;top:10%;width:38%;height:26%;border-radius:50%;filter:blur(14px);background:rgba(255,255,255,.55)}
+.ring{position:absolute;border-radius:50%;border:1.5px solid rgba(201,235,176,.25)}
+/* liquid glass dressing, dark-tinted so white text stays crisp */
+.g{position:absolute;isolation:isolate;
+  background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(8,28,20,.30));
+  box-shadow:0 24px 60px rgba(0,0,0,.35),inset 0 1.5px 1px rgba(255,255,255,.75),inset 0 -10px 24px rgba(255,255,255,.06),inset 0 0 0 1px rgba(255,255,255,.22)}
+.hl{left:62px;top:150px;letter-spacing:-.055em;line-height:.9}
+.hl .a{display:block;font-size:122px;font-weight:300}
+.hl .b{display:block;font-size:122px;font-weight:700}
+#free{left:56px;top:428px;height:98px;border-radius:49px;display:flex;align-items:center;gap:18px;padding:0 34px 0 14px}
+#free .f{height:74px;padding:0 26px;border-radius:37px;display:flex;align-items:center;font-size:44px;font-weight:800;letter-spacing:-.02em;color:#1a1206;
+  background:linear-gradient(180deg,#FFC655,#F5A623);box-shadow:inset 0 2px 1px rgba(255,255,255,.75),0 10px 24px rgba(160,90,0,.35)}
+#free .t{font-size:28px;font-weight:500;letter-spacing:-.01em}
+#voice{left:56px;top:574px;width:610px;border-radius:34px;padding:22px 26px;display:flex;gap:20px;align-items:center}
+#voice .mic{width:78px;height:78px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:38px;color:#1a1206;
+  background:radial-gradient(circle at 32% 28%,#FFE2A0,#F5A623 60%,#D98A00);box-shadow:0 0 0 9px rgba(245,166,35,.16)}
+#voice .k{font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:.14em;color:var(--pis)}
+#voice .q{font-size:29px;font-style:italic;line-height:1.22;letter-spacing:-.015em;margin-top:6px}
+.chip{height:80px;padding:0 30px 0 12px;border-radius:40px;display:flex;align-items:center;gap:16px;font-size:30px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.chip .ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:29px;color:var(--deep);
+  background:radial-gradient(circle at 32% 28%,#F1FBE8,#C9EBB0 60%,#9FCB7E);box-shadow:inset 0 2px 2px rgba(255,255,255,.8),0 6px 14px rgba(0,0,0,.2)}
+#bar{left:56px;right:56px;top:1190px;height:112px;border-radius:56px;display:flex;align-items:center;justify-content:space-between;padding:0 20px 0 40px}
+#bar .l{font-family:'JetBrains Mono',monospace;font-size:19px;letter-spacing:.12em;color:rgba(255,255,255,.85)}
+#bar .cta{height:80px;padding:0 32px;border-radius:40px;display:flex;align-items:center;gap:10px;font-size:27px;font-weight:700;color:#1a1206;
+  background:linear-gradient(180deg,#FFC655,#F5A623);box-shadow:inset 0 2px 1px rgba(255,255,255,.75),0 12px 26px rgba(160,90,0,.35)}
 </style></head><body>
 <div id="p">
-  <div class="blob" style="left:-160px;top:520px;width:380px;height:380px;background:rgba(255,255,255,.35)"></div>
-  <div class="blob" style="right:-120px;bottom:180px;width:300px;height:300px;background:rgba(159,203,126,.35)"></div>
+  <div class="ring" style="left:470px;top:420px;width:720px;height:720px"></div>
+  <div class="ring" style="left:390px;top:340px;width:880px;height:880px;border-color:rgba(201,235,176,.12)"></div>
+  <div id="halo"></div><div id="orb"></div>
+  <svg id="grain" width="1080" height="1350"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+  <img class="abs" src="img/wm_white.png" style="left:64px;top:60px;width:230px">
+  <div class="g abs chip" style="right:56px;top:52px;height:62px;font-size:21px;padding:0 22px;gap:10px" data-lg='{"scale":-70,"chroma":5,"blur":3}'>
+    <span style="width:11px;height:11px;border-radius:50%;background:#9FE07A;box-shadow:0 0 0 5px rgba(159,224,122,.2)"></span>Admin Copilot</div>
   <div class="abs hl"><span class="a">AI Admin Tool</span><span class="b">for Tradies.</span></div>
-  <div class="abs" id="free"><div><b>FREE</b><span>TO USE</span></div></div>
-  <div class="abs sub">Everything in one place, <b>all by your voice.</b></div>
-  <div class="abs" id="voice"><div class="mic"><i class="ph-fill ph-microphone"></i></div>
-    <div class="q"><small>JUST SAY IT</small>“Quote the Smith job and book Jake in for Friday.”</div><div id="wave"></div></div>
-  <div class="abs" id="grid">
-    <div class="t"><div class="ic"><i class="ph-fill ph-file-text"></i></div><b>Quotes</b><span>Your prices, your terms</span></div>
-    <div class="t"><div class="ic"><i class="ph-fill ph-receipt"></i></div><b>Invoices</b><span>With card pay links</span></div>
-    <div class="t"><div class="ic"><i class="ph-fill ph-toolbox"></i></div><b>Jobs</b><span>Find, update, add notes</span></div>
-    <div class="t"><div class="ic"><i class="ph-fill ph-clock-clockwise"></i></div><b>Schedule</b><span>Move it with one line</span></div>
-    <div class="t"><div class="ic"><i class="ph-fill ph-calendar-check"></i></div><b>Calendar</b><span>Book jobs straight in</span></div>
-    <div class="t"><div class="ic"><i class="ph-fill ph-users-three"></i></div><b>Staff & dispatch</b><span>Assign the right tradie</span></div>
-  </div>
-  <div class="abs" id="bar"><img src="img/wm_white.png" style="width:300px"><div class="cta">Free at lazytradie.com.au<i class="ph-fill ph-arrow-right"></i></div></div>
+  <div class="g abs" id="free" data-lg='{"scale":-90,"chroma":6,"blur":3}'><div class="f">FREE</div><div class="t">to use · all by your voice</div></div>
+
+  <div class="g abs" id="voice" data-lg='{"scale":-120,"chroma":7,"blur":5}'>
+    <div class="mic"><i class="ph-fill ph-microphone"></i></div>
+    <div><div class="k">JUST SAY IT</div><div class="q">“Quote the Smith job and book Jake in for Friday.”</div></div></div>
+
+  <div class="g abs chip" style="left:56px;top:770px" data-lg='{"scale":-90,"chroma":6,"blur":3}'><span class="ic"><i class="ph-fill ph-file-text"></i></span>Quotes</div>
+  <div class="g abs chip" style="left:56px;top:870px" data-lg='{"scale":-90,"chroma":6,"blur":3}'><span class="ic"><i class="ph-fill ph-receipt"></i></span>Invoices</div>
+  <div class="g abs chip" style="left:56px;top:970px" data-lg='{"scale":-90,"chroma":6,"blur":3}'><span class="ic"><i class="ph-fill ph-toolbox"></i></span>Jobs</div>
+  <div class="g abs chip" style="left:470px;top:800px" data-lg='{"scale":-100,"chroma":6,"blur":3}'><span class="ic"><i class="ph-fill ph-clock-clockwise"></i></span>Schedule</div>
+  <div class="g abs chip" style="left:500px;top:900px" data-lg='{"scale":-100,"chroma":6,"blur":3}'><span class="ic"><i class="ph-fill ph-calendar-check"></i></span>Calendar</div>
+  <div class="g abs chip" style="left:440px;top:1000px" data-lg='{"scale":-100,"chroma":6,"blur":3}'><span class="ic"><i class="ph-fill ph-users-three"></i></span>Staff &amp; dispatch</div>
+
+  <div class="g abs" id="bar" data-lg='{"scale":-110,"chroma":6,"blur":5}'>
+    <div class="l">ALL IN ONE · NO HIDDEN CHARGES</div>
+    <div class="cta">Free at lazytradie.com.au<i class="ph-fill ph-arrow-right"></i></div></div>
 </div>
+<script src="liquid-glass.js"></script>
 <script>
-document.getElementById('wave').innerHTML = [...Array(14)].map((_, i) => `<i style="height:${12 + Math.abs(Math.sin(i * 1.2) * Math.sin(i * .45 + 1)) * 46}px"></i>`).join('');
-document.fonts.ready.then(() => { document.body.dataset.ready = '1'; });
+(async () => {
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  document.querySelectorAll('.g').forEach(el => liquidGlass(el, JSON.parse(el.dataset.lg || '{}')));
+  document.body.dataset.ready = '1';
+})();
 </script></body></html>
