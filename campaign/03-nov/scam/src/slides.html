@@ -1,110 +1,103 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
-<!-- "A$49 AI Receptionist?" carousel, 4 slides, 1080×1350, pure graphics. slides.html?s=1..4 -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&display=block" rel="stylesheet">
+<!-- "A$49 AI Receptionist?" carousel, 4 slides, 1080×1350, pure graphics. slides.html?s=1..4
+     Readability first: solid white cards (sky-blue ink), solid amber pills (white text), white type on blue.
+     Liquid glass only on the slide-3 feature chips. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
 <style>
-:root{--sky:#1E9BE0;--sky2:#62C7F7;--am:#F5A623;--am2:#FFC24D}
+:root{--ink:#0A6FB0;--am:#F29A00}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
 .s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;color:#fff;
-  background:radial-gradient(120% 80% at 20% 0%,#8FDBFF 0%,rgba(143,219,255,0) 60%),linear-gradient(165deg,#3DB4F2 0%,#1E9BE0 55%,#1689CF 100%)}
+  background:radial-gradient(110% 70% at 15% 0%,#7FD3FF 0%,rgba(127,211,255,0) 60%),linear-gradient(165deg,#2AA8EE 0%,#1690DA 55%,#0F80C8 100%)}
 .s.on{display:block}
 .abs{position:absolute}
-/* graphics: amber spheres, white glows, rings */
 .sph{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFE3A3 0%,#FFC24D 22%,#F5A623 55%,#D98200 100%);
   box-shadow:inset -20px -30px 60px rgba(160,80,0,.35),0 40px 80px rgba(10,60,110,.25)}
 .wsp{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#EAF8FF 40%,#B9E6FF 100%);
   box-shadow:inset -14px -22px 40px rgba(30,155,224,.25),0 30px 60px rgba(10,60,110,.2)}
-.glow{position:absolute;border-radius:50%;filter:blur(70px)}
-.ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.45)}
-/* light liquid glass dressing */
-.g{position:absolute;isolation:isolate;
-  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.12));
-  box-shadow:0 30px 70px rgba(8,70,120,.25),0 2px 6px rgba(8,70,120,.1),
-    inset 0 2px 1px rgba(255,255,255,.95),inset 0 -12px 28px rgba(255,255,255,.22),inset 0 0 0 1.5px rgba(255,255,255,.65);
-  text-shadow:0 1px 10px rgba(8,70,120,.18)}
-.big{letter-spacing:-.055em;line-height:.88;text-shadow:0 4px 40px rgba(8,70,120,.18)}
-.am{color:var(--am2)}
-.pill{height:72px;padding:0 30px;border-radius:36px;display:flex;align-items:center;gap:12px;font-size:28px;font-weight:600;white-space:nowrap}
-.k{font-size:20px;font-weight:600;letter-spacing:.18em}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.35)}
+.big{letter-spacing:-.055em;line-height:.88}
+.card{position:absolute;background:#fff;color:var(--ink);box-shadow:0 30px 70px rgba(6,60,110,.28)}
+.amp{position:absolute;display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;white-space:nowrap;
+  background:linear-gradient(180deg,#FFB52E,#F29A00);box-shadow:0 16px 36px rgba(160,80,0,.35),inset 0 2px 1px rgba(255,255,255,.6);text-shadow:0 1px 3px rgba(150,70,0,.35)}
+.wp{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;color:var(--ink);font-weight:700;white-space:nowrap;box-shadow:0 14px 30px rgba(6,60,110,.25)}
+.a{color:var(--am)}
 .dots{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);display:flex;gap:10px}
-.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.45)}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5)}
 .dots i.on{width:30px;border-radius:5px;background:#fff}
-.chip{height:96px;padding:0 34px 0 14px;border-radius:48px;display:flex;align-items:center;gap:18px;font-size:36px;font-weight:600}
-.chip .ic{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;font-size:36px;color:#fff;
+/* liquid glass, slide 3 chips only */
+.g{position:absolute;isolation:isolate;height:104px;padding:0 40px 0 16px;border-radius:52px;display:flex;align-items:center;gap:20px;
+  font-size:40px;font-weight:700;letter-spacing:-.02em;color:#fff;white-space:nowrap;
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(10,90,160,.30));
+  box-shadow:0 26px 60px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.95),inset 0 -12px 26px rgba(255,255,255,.14),inset 0 0 0 1.5px rgba(255,255,255,.6);
+  text-shadow:0 2px 8px rgba(6,60,110,.35)}
+.g .ic{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;font-size:38px;color:#fff;text-shadow:none;
   background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 8px 18px rgba(160,80,0,.35)}
 </style></head><body>
 
 <!-- 1 · the hook -->
 <div class="s" id="s1">
-  <div class="glow" style="left:-120px;top:-60px;width:620px;height:520px;background:rgba(255,255,255,.55)"></div>
-  <div class="sph" style="right:-130px;top:120px;width:470px;height:470px"></div>
-  <div class="wsp" style="right:110px;bottom:330px;width:220px;height:220px"></div>
-  <div class="sph" style="left:330px;bottom:-120px;width:300px;height:300px"></div>
-  <div class="ring" style="right:-60px;top:50px;width:610px;height:610px"></div>
-  <div class="g pill" style="left:64px;top:84px" data-lg='{"scale":-80,"chroma":5,"blur":3}'><i class="ph-fill ph-sparkle am"></i>New</div>
-  <div class="abs big" style="left:60px;top:210px">
+  <div class="sph" style="right:-150px;top:-90px;width:430px;height:430px"></div>
+  <div class="ring" style="right:-90px;top:-40px;width:560px;height:560px"></div>
+  <div class="wsp" style="right:90px;top:1000px;width:170px;height:170px"></div>
+  <div class="sph" style="left:-110px;bottom:-110px;width:300px;height:300px"></div>
+  <div class="amp" style="left:64px;top:84px;height:64px;padding:0 26px;border-radius:32px;font-size:26px"><i class="ph-fill ph-sparkle"></i>New</div>
+  <div class="abs big" style="left:58px;top:200px;text-shadow:0 4px 30px rgba(6,60,110,.2)">
     <div style="font-size:150px;font-weight:300">AI</div>
-    <div style="font-size:150px;font-weight:700">Receptionist</div></div>
-  <div class="g abs" style="left:56px;top:560px;width:760px;height:300px;border-radius:60px;display:flex;align-items:center;padding:0 46px" data-lg='{"scale":-150,"chroma":8,"blur":6,"border":0.06}'>
-    <div><div style="font-size:42px;font-weight:500;letter-spacing:-.02em">just</div>
-    <div class="big" style="font-size:210px;font-weight:800;line-height:.85"><span style="font-size:110px;vertical-align:58px;margin-right:6px">A$</span>4<span class="am">9</span><span class="am" style="font-weight:700">??</span></div></div></div>
-  <div class="g pill" style="left:64px;top:920px;height:110px;border-radius:55px;font-size:60px;font-weight:700;padding:0 44px;letter-spacing:-.03em" data-lg='{"scale":-110,"chroma":6,"blur":4}'>For tradies<span class="am">???</span></div>
-  <div class="g pill" style="right:60px;bottom:110px;font-size:26px" data-lg='{"scale":-80,"chroma":5,"blur":3}'>Swipe<i class="ph-fill ph-arrow-right"></i></div>
+    <div style="font-size:150px;font-weight:800">Receptionist</div></div>
+  <div class="card" style="left:58px;top:560px;width:800px;height:300px;border-radius:60px;display:flex;flex-direction:column;justify-content:center;padding:0 50px">
+    <div style="font-size:44px;font-weight:600;letter-spacing:-.02em">just</div>
+    <div class="big" style="font-size:200px;font-weight:800;line-height:.85"><span style="font-size:104px;vertical-align:56px;margin-right:6px">A$</span>49<span class="a">??</span></div></div>
+  <div class="amp" style="left:58px;top:910px;height:120px;padding:0 48px;border-radius:60px;font-size:64px;letter-spacing:-.03em">For tradies???</div>
+  <div class="wp" style="right:60px;bottom:110px;height:68px;padding:0 28px;border-radius:34px;font-size:26px">Swipe<i class="ph-fill ph-arrow-right"></i></div>
   <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
 </div>
 
 <!-- 2 · is it a scam -->
 <div class="s" id="s2">
-  <div class="glow" style="right:-100px;top:-80px;width:600px;height:500px;background:rgba(255,255,255,.5)"></div>
-  <div class="abs" style="left:-40px;top:210px;font-size:860px;font-weight:800;line-height:.8;color:var(--am2);letter-spacing:-.08em;transform:rotate(-8deg)">?</div>
-  <div class="abs" style="right:-60px;top:900px;font-size:560px;font-weight:800;line-height:.8;color:#fff;opacity:.9;transform:rotate(12deg)">?</div>
-  <div class="sph" style="right:120px;top:90px;width:180px;height:180px"></div>
-  <div class="wsp" style="left:90px;bottom:120px;width:150px;height:150px"></div>
-  <div class="g abs" style="left:90px;top:390px;width:900px;height:520px;border-radius:70px;display:flex;flex-direction:column;justify-content:center;padding:0 64px" data-lg='{"scale":-170,"chroma":9,"blur":7,"border":0.06}'>
-    <div class="big" style="font-size:120px;font-weight:300">Is it a</div>
-    <div class="big" style="font-size:190px;font-weight:800">scam<span class="am">???</span></div></div>
-  <div class="g pill" style="left:50%;transform:translateX(-50%);top:980px" data-lg='{"scale":-80,"chroma":5,"blur":3}'>Fair question. Swipe<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="left:-60px;top:60px;font-size:640px;font-weight:800;line-height:.8;color:#F5A623;letter-spacing:-.08em;transform:rotate(-10deg)">?</div>
+  <div class="abs" style="right:-50px;top:900px;font-size:520px;font-weight:800;line-height:.8;color:#fff;opacity:.85;transform:rotate(12deg)">?</div>
+  <div class="sph" style="right:110px;top:110px;width:170px;height:170px"></div>
+  <div class="wsp" style="left:110px;bottom:130px;width:140px;height:140px"></div>
+  <div class="card" style="left:90px;top:420px;width:900px;height:480px;border-radius:70px;display:flex;flex-direction:column;justify-content:center;padding:0 64px">
+    <div class="big" style="font-size:120px;font-weight:400">Is it a</div>
+    <div class="big" style="font-size:190px;font-weight:800">scam<span class="a">???</span></div></div>
+  <div class="amp" style="left:50%;transform:translateX(-50%);top:960px;height:84px;padding:0 36px;border-radius:42px;font-size:32px">Fair question. Swipe<i class="ph-fill ph-arrow-right"></i></div>
   <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
 </div>
 
 <!-- 3 · meet LazyTradie -->
 <div class="s" id="s3">
-  <div class="glow" style="left:-100px;top:-80px;width:640px;height:520px;background:rgba(255,255,255,.55)"></div>
-  <div class="sph" style="right:-150px;top:300px;width:560px;height:560px"></div>
-  <div class="ring" style="right:-90px;top:240px;width:680px;height:680px"></div>
-  <div class="wsp" style="left:-80px;top:620px;width:260px;height:260px"></div>
-  <div class="sph" style="left:180px;bottom:-110px;width:260px;height:260px"></div>
-  <div class="abs big" style="left:64px;top:96px;font-size:120px;font-weight:300">Meet</div>
-  <div class="g abs" style="left:56px;top:240px;width:820px;height:200px;border-radius:52px;display:flex;align-items:center;justify-content:center" data-lg='{"scale":-140,"chroma":8,"blur":5}'>
-    <img src="img/wm_white.png" style="width:640px;filter:drop-shadow(0 4px 16px rgba(8,70,120,.25))"></div>
-  <div class="abs" style="left:66px;top:500px;font-size:40px;font-weight:500;letter-spacing:-.02em;line-height:1.15">The AI receptionist that handles</div>
-  <div class="g chip" style="left:56px;top:600px" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-phone-call"></i></span>Calls</div>
-  <div class="g chip" style="left:56px;top:720px" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-chat-circle-text"></i></span>SMS</div>
-  <div class="g chip" style="left:56px;top:840px" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-globe"></i></span>Website enquiries</div>
-  <div class="g abs" style="left:56px;top:990px;width:640px;height:150px;border-radius:75px;display:flex;align-items:center;gap:18px;padding:0 44px" data-lg='{"scale":-130,"chroma":7,"blur":5}'>
-    <span style="font-size:34px;font-weight:500">for just</span>
-    <span class="big" style="font-size:100px;font-weight:800">A$4<span class="am">9</span></span><span style="font-size:32px;font-weight:500">/month</span></div>
+  <div class="sph" style="right:-170px;top:560px;width:560px;height:560px"></div>
+  <div class="ring" style="right:-110px;top:500px;width:680px;height:680px"></div>
+  <div class="wsp" style="right:110px;top:110px;width:170px;height:170px"></div>
+  <div class="abs big" style="left:64px;top:96px;font-size:130px;font-weight:300;text-shadow:0 4px 30px rgba(6,60,110,.2)">Meet</div>
+  <img class="abs" src="img/wm_white.png" style="left:64px;top:260px;width:700px;filter:drop-shadow(0 6px 18px rgba(6,60,110,.35))">
+  <div class="abs" style="left:66px;top:470px;font-size:42px;font-weight:600;letter-spacing:-.02em;text-shadow:0 2px 12px rgba(6,60,110,.25)">The AI receptionist that handles</div>
+  <div class="g" style="left:58px;top:570px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-phone-call"></i></span>Calls</div>
+  <div class="g" style="left:58px;top:696px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-chat-circle-text"></i></span>SMS</div>
+  <div class="g" style="left:58px;top:822px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-globe"></i></span>Website enquiries</div>
+  <div class="card" style="left:58px;top:990px;width:660px;height:150px;border-radius:75px;display:flex;align-items:center;gap:18px;padding:0 46px">
+    <span style="font-size:34px;font-weight:600">for just</span>
+    <span class="big" style="font-size:104px;font-weight:800">A$4<span class="a">9</span></span><span style="font-size:32px;font-weight:600">/month</span></div>
   <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
 </div>
 
 <!-- 4 · the quote -->
 <div class="s" id="s4">
-  <div class="glow" style="right:-80px;top:-80px;width:620px;height:520px;background:rgba(255,255,255,.55)"></div>
-  <div class="sph" style="left:-140px;top:150px;width:420px;height:420px"></div>
-  <div class="wsp" style="right:-60px;top:760px;width:280px;height:280px"></div>
-  <div class="sph" style="right:220px;bottom:-130px;width:300px;height:300px"></div>
-  <div class="ring" style="left:-200px;top:90px;width:540px;height:540px"></div>
-  <div class="g abs" style="left:60px;top:150px;width:960px;height:860px;border-radius:70px;padding:0 64px;display:flex;flex-direction:column;justify-content:center" data-lg='{"scale":-170,"chroma":9,"blur":8,"border":0.05}'>
-    <div class="am" style="font-size:200px;font-weight:800;line-height:.6;height:100px;font-family:Georgia,serif">“</div>
-    <div style="font-size:60px;font-weight:500;line-height:1.14;letter-spacing:-.03em;margin-top:30px">AI receptionists were built for big businesses with big budgets.</div>
-    <div style="font-size:60px;font-weight:700;line-height:1.14;letter-spacing:-.03em;margin-top:30px">We think every tradie deserves one.</div>
-    <div style="font-size:60px;font-weight:500;line-height:1.14;letter-spacing:-.03em;margin-top:30px">That's why LazyTradie starts at <span class="am" style="font-weight:800">A$49.</span></div>
-    <div class="k" style="margin-top:44px;opacity:.9">— THE LAZYTRADIE TEAM</div></div>
-  <div class="g abs" style="left:60px;top:1060px;width:960px;height:140px;border-radius:70px;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 50px" data-lg='{"scale":-120,"chroma":7,"blur":5}'>
-    <img src="img/wm_white.png" style="width:330px;filter:drop-shadow(0 3px 12px rgba(8,70,120,.25))">
-    <div class="pill" style="background:linear-gradient(180deg,#FFC655,#F5A623);box-shadow:inset 0 2px 1px rgba(255,255,255,.8),0 12px 26px rgba(160,80,0,.35);color:#fff;height:84px;border-radius:42px;font-size:28px;text-shadow:0 1px 6px rgba(140,70,0,.35)">lazytradie.com.au<i class="ph-fill ph-arrow-right"></i></div></div>
+  <div class="sph" style="left:-150px;top:-120px;width:380px;height:380px"></div>
+  <div class="ring" style="left:-210px;top:-170px;width:500px;height:500px"></div>
+  <div class="wsp" style="right:-70px;bottom:120px;width:240px;height:240px"></div>
+  <div class="card" style="left:60px;top:170px;width:960px;height:830px;border-radius:70px;padding:0 66px;display:flex;flex-direction:column;justify-content:center">
+    <div class="a" style="font-size:200px;font-weight:800;line-height:.6;height:96px;font-family:Georgia,serif">“</div>
+    <div style="font-size:58px;font-weight:500;line-height:1.14;letter-spacing:-.03em;margin-top:28px">AI receptionists were built for big businesses with big budgets.</div>
+    <div style="font-size:58px;font-weight:800;line-height:1.14;letter-spacing:-.03em;margin-top:28px">We think every tradie deserves one.</div>
+    <div style="font-size:58px;font-weight:500;line-height:1.14;letter-spacing:-.03em;margin-top:28px">That's why LazyTradie starts at <span class="a" style="font-weight:800">A$49.</span></div>
+    <div style="font-size:20px;font-weight:700;letter-spacing:.18em;margin-top:42px;opacity:.75">— THE LAZYTRADIE TEAM</div></div>
+  <img class="abs" src="img/wm_white.png" style="left:64px;top:1080px;width:360px;filter:drop-shadow(0 4px 14px rgba(6,60,110,.35))">
+  <div class="amp" style="right:60px;top:1066px;height:96px;padding:0 38px;border-radius:48px;font-size:30px">lazytradie.com.au<i class="ph-fill ph-arrow-right"></i></div>
   <div class="dots"><i></i><i></i><i></i><i class="on"></i></div>
 </div>
 
