@@ -1,0 +1,119 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "A$1.61 a day" receptionist carousel, 4 pages, 1080×1350. slides.html?s=1..4
+     System from the A$49 carousel: sky blue / white / amber, solid white cards + amber pills, glass only on page-3 chips. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--ink:#0A6FB0;--am:#F29A00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;color:#fff;
+  background:radial-gradient(110% 70% at 15% 0%,#7FD3FF 0%,rgba(127,211,255,0) 60%),linear-gradient(165deg,#2AA8EE 0%,#1690DA 55%,#0F80C8 100%)}
+.s.on{display:block}
+.abs{position:absolute}
+.photo{position:absolute;left:0;top:0;width:1080px;height:1341px;background-size:cover;background-position:center top}
+.sph{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFE3A3 0%,#FFC24D 22%,#F5A623 55%,#D98200 100%);
+  box-shadow:inset -20px -30px 60px rgba(160,80,0,.35),0 40px 80px rgba(10,60,110,.25)}
+.wsp{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#EAF8FF 40%,#B9E6FF 100%);
+  box-shadow:inset -14px -22px 40px rgba(30,155,224,.25),0 30px 60px rgba(10,60,110,.2)}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.35)}
+.big{letter-spacing:-.055em;line-height:.88}
+.ts{text-shadow:0 4px 30px rgba(6,60,110,.22)}
+.card{position:absolute;background:#fff;color:var(--ink);box-shadow:0 30px 70px rgba(6,60,110,.28)}
+.amp{position:absolute;display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;white-space:nowrap;
+  background:linear-gradient(180deg,#FFB52E,#F29A00);box-shadow:0 16px 36px rgba(160,80,0,.35),inset 0 2px 1px rgba(255,255,255,.6);text-shadow:0 1px 3px rgba(150,70,0,.35)}
+.wp{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;color:var(--ink);font-weight:700;white-space:nowrap;box-shadow:0 14px 30px rgba(6,60,110,.25)}
+.a{color:var(--am)}
+.dots{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);display:flex;gap:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55)}
+.dots i.on{width:30px;border-radius:5px;background:#fff}
+.g{position:absolute;isolation:isolate;height:96px;padding:0 36px 0 14px;border-radius:48px;display:flex;align-items:center;gap:18px;
+  font-size:36px;font-weight:700;letter-spacing:-.02em;color:#fff;white-space:nowrap;
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(10,90,160,.30));
+  box-shadow:0 24px 56px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.95),inset 0 -12px 26px rgba(255,255,255,.14),inset 0 0 0 1.5px rgba(255,255,255,.6);
+  text-shadow:0 2px 8px rgba(6,60,110,.35)}
+.g .ic{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font-size:34px;color:#fff;text-shadow:none;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 8px 18px rgba(160,80,0,.35)}
+.tp{font-family:ui-monospace,monospace;font-weight:700;font-size:20px;padding:4px 12px;border-radius:99px;color:#fff;text-shadow:none}
+</style></head><body>
+
+<!-- 1 · the hook -->
+<div class="s" id="s1" style="background:#53B3D8">
+  <div class="photo" style="background-image:url(img/p1.jpg)"></div>
+  <img class="abs" src="img/wm_white.png" style="left:60px;top:58px;width:230px;filter:drop-shadow(0 3px 12px rgba(6,60,110,.3))">
+  <div class="abs big ts" style="left:52px;top:150px">
+    <div style="font-size:168px;font-weight:800"><span style="font-size:90px;vertical-align:62px;margin-right:4px">A$</span>1.6<span class="a">1</span></div>
+    <div style="font-size:104px;font-weight:300;margin-top:6px">a day.</div></div>
+  <div class="wp" style="left:58px;top:418px;height:70px;padding:0 26px;border-radius:35px;font-size:27px;letter-spacing:-.02em">That's your new receptionist.</div>
+  <div class="amp" style="right:56px;bottom:96px;height:72px;padding:0 30px;border-radius:36px;font-size:28px">Swipe<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- 2 · the maths -->
+<div class="s" id="s2">
+  <div class="sph" style="right:-150px;top:-190px;width:380px;height:380px"></div>
+  <div class="ring" style="right:-100px;top:-140px;width:500px;height:500px"></div>
+  <div class="wsp" style="left:-70px;bottom:40px;width:180px;height:180px"></div>
+  <div class="sph" style="right:120px;bottom:-110px;width:260px;height:260px"></div>
+  <div class="amp" style="left:64px;top:84px;height:62px;padding:0 26px;border-radius:31px;font-size:25px"><i class="ph-fill ph-calculator"></i>Do the maths</div>
+  <div class="abs big ts" style="left:58px;top:200px">
+    <div style="font-size:112px;font-weight:300">One booked job</div>
+    <div style="font-size:112px;font-weight:800">pays for the</div>
+    <div style="font-size:112px;font-weight:800">whole month.</div></div>
+  <div class="card" style="left:58px;top:580px;width:964px;height:440px;border-radius:60px;padding:46px 54px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:40px;font-weight:600;letter-spacing:-.02em"><span>AI Receptionist</span><span style="font-weight:800">A$49 / month</span></div>
+    <div style="font-size:30px;font-weight:500;margin-top:18px;opacity:.75">× 12 months ÷ 365 days</div>
+    <div style="height:2px;background:rgba(10,111,176,.15);margin:30px 0 26px"></div>
+    <div style="display:flex;align-items:baseline;gap:20px"><span style="font-size:44px;font-weight:600">=</span>
+      <span class="big" style="font-size:170px;font-weight:800">A$1.6<span class="a">1</span></span><span style="font-size:44px;font-weight:600">a day</span></div></div>
+  <div class="abs ts" style="left:62px;top:1076px;font-size:40px;font-weight:600;letter-spacing:-.02em;line-height:1.2">One missed call costs you more than that.</div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<!-- 3 · what you get -->
+<div class="s" id="s3">
+  <div class="sph" style="right:-170px;top:430px;width:560px;height:560px"></div>
+  <div class="ring" style="right:-110px;top:370px;width:680px;height:680px"></div>
+  <div class="wsp" style="right:110px;top:110px;width:160px;height:160px"></div>
+  <div class="abs big ts" style="left:58px;top:110px">
+    <div style="font-size:104px;font-weight:300">Here's what</div>
+    <div style="font-size:104px;font-weight:800">A$1.6<span class="a">1</span> a day</div>
+    <div style="font-size:104px;font-weight:800">gets you.</div></div>
+  <div class="g" style="left:56px;top:470px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-phone-call"></i></span>Every call answered</div>
+  <div class="g" style="left:56px;top:586px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-chat-circle-text"></i></span>SMS replied to</div>
+  <div class="g" style="left:56px;top:702px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-globe"></i></span>Website enquiries handled</div>
+  <div class="g" style="left:56px;top:818px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-calendar-check"></i></span>Jobs booked into your calendar</div>
+  <div class="g" style="left:56px;top:934px" data-lg='{"scale":-110,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-stack"></i></span>Job tiers
+    <span class="tp" style="background:#22B573">T1</span><span class="tp" style="background:#F29A00">T2</span><span class="tp" style="background:#E5484D">T3</span></div>
+  <div class="card" style="left:56px;top:1080px;height:112px;border-radius:56px;display:flex;align-items:center;gap:16px;padding:0 40px">
+    <span style="font-size:30px;font-weight:600">All for</span><span class="big" style="font-size:72px;font-weight:800">A$4<span class="a">9</span></span><span style="font-size:30px;font-weight:600">/month</span></div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<!-- 4 · the close -->
+<div class="s" id="s4" style="background:#7CC8E3">
+  <div class="photo" style="background-image:url(img/p4.jpg)"></div>
+  <div class="abs big ts" style="left:56px;top:70px">
+    <div style="font-size:120px;font-weight:300">Never miss</div>
+    <div style="font-size:120px;font-weight:800">a job again.</div></div>
+  <div class="wp" style="left:58px;top:330px;height:76px;padding:0 30px;border-radius:38px;font-size:31px;letter-spacing:-.02em"><i class="ph-fill ph-phone-call a"></i>Your AI receptionist's got it.</div>
+  <div class="card" style="left:56px;right:56px;top:1170px;height:124px;border-radius:62px;display:flex;align-items:center;justify-content:space-between;padding:0 18px 0 40px">
+    <img src="img/wm_navy.png" style="width:250px">
+    <span style="font-size:30px;font-weight:700;letter-spacing:-.02em">A$4<span class="a">9</span>/month</span>
+    <div class="amp" style="position:relative;height:88px;padding:0 32px;border-radius:44px;font-size:28px">lazytradie.com.au<i class="ph-fill ph-arrow-right"></i></div></div>
+  <div class="dots" style="bottom:24px"><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  const id = 's' + (new URLSearchParams(location.search).get('s') || '1'); const el = document.getElementById(id); el.classList.add('on');
+  await document.fonts.ready;
+  const urls = [...el.querySelectorAll('.photo')].map(p => getComputedStyle(p).backgroundImage.slice(5, -2));
+  await Promise.all([...el.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))
+    .concat(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; }))));
+  el.querySelectorAll('.g').forEach(g => liquidGlass(g, JSON.parse(g.dataset.lg || '{}')));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
