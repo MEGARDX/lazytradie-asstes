@@ -1,0 +1,77 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Vision film style frame (9:16): the drop moment. Palette, type, orb, dot map, glass. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
+#f{position:relative;width:1080px;height:1920px;overflow:hidden;color:#fff;
+  background:radial-gradient(70% 45% at 50% 40%,#13284A 0%,#0A1628 45%,#05090F 100%)}
+canvas{position:absolute;inset:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.g{position:absolute;isolation:isolate;display:flex;align-items:center;gap:14px;white-space:nowrap;font-weight:600;letter-spacing:-.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+  box-shadow:0 24px 60px rgba(0,0,0,.5),inset 0 1.5px 1px rgba(255,255,255,.7),inset 0 -10px 24px rgba(255,255,255,.05),inset 0 0 0 1px rgba(255,255,255,.2)}
+.chip{height:80px;padding:0 30px 0 14px;border-radius:40px;font-size:30px}
+.chip i.ck{color:#F5A623;font-size:30px}
+.chip .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:27px;color:#1a1206;background:radial-gradient(circle at 32% 28%,#FFE2A0,#F5A623 60%,#D98A00)}
+.sw{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:17px}
+.sw i{width:86px;height:86px;border-radius:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+</style></head><body>
+<div id="f">
+  <canvas id="c" width="1080" height="1920"></canvas>
+  <div class="mono" style="position:absolute;left:60px;top:70px;font-size:20px;letter-spacing:.18em;color:#F5A623">VISION FILM · 37.6 s · THE DROP</div>
+  <img src="wm_white.png" style="position:absolute;right:60px;top:56px;width:220px">
+  <div style="position:absolute;left:0;right:0;top:150px;text-align:center;letter-spacing:-.05em;line-height:.95">
+    <div style="font-size:76px;font-weight:300">That's why</div>
+    <div style="font-size:96px;font-weight:800">LazyTradie <span style="color:#F5A623">exists.</span></div></div>
+  <!-- chips around the orb -->
+  <div class="g chip" style="left:60px;top:560px" data-lg='{"scale":-100,"chroma":7,"blur":4}'><span class="ic"><i class="ph-fill ph-phone-call"></i></span>Calls<i class="ph-fill ph-check-circle ck"></i></div>
+  <div class="g chip" style="right:60px;top:640px" data-lg='{"scale":-100,"chroma":7,"blur":4}'><span class="ic"><i class="ph-fill ph-chat-circle-text"></i></span>SMS<i class="ph-fill ph-check-circle ck"></i></div>
+  <div class="g chip" style="left:40px;top:930px" data-lg='{"scale":-100,"chroma":7,"blur":4}'><span class="ic"><i class="ph-fill ph-globe"></i></span>Website<i class="ph-fill ph-check-circle ck"></i></div>
+  <div class="g chip" style="right:40px;top:1010px" data-lg='{"scale":-100,"chroma":7,"blur":4}'><span class="ic"><i class="ph-fill ph-calendar-check"></i></span>Booked in<i class="ph-fill ph-check-circle ck"></i></div>
+  <div class="g chip" style="left:50%;transform:translateX(-50%);top:1150px" data-lg='{"scale":-100,"chroma":7,"blur":4}'><span class="ic"><i class="ph-fill ph-microphone"></i></span>Admin by voice<i class="ph-fill ph-check-circle ck"></i></div>
+  <!-- price card -->
+  <div class="g" style="left:80px;right:80px;top:1290px;height:230px;border-radius:48px;flex-direction:column;justify-content:center;gap:8px" data-lg='{"scale":-140,"chroma":8,"blur":6}'>
+    <div style="font-size:120px;font-weight:800;letter-spacing:-.05em;line-height:.9">A$4<span style="color:#F5A623">9</span><span style="font-size:40px;font-weight:500;letter-spacing:-.02em"> /month</span></div>
+    <div class="mono" style="font-size:22px;letter-spacing:.08em;color:#C9D6E3">$0 SETUP · NO LOCK-IN · AUSTRALIAN OWNED</div></div>
+  <div class="mono" style="position:absolute;left:60px;right:60px;top:1560px;font-size:16px;line-height:1.5;color:#7E93AA;text-align:center">Every call answered. Every tradie growing.<br>Sources: Master Builders Australia (ABS, FY2024-25) · Invoca (2024)</div>
+  <!-- palette -->
+  <div style="position:absolute;left:0;right:0;bottom:70px;display:flex;justify-content:center;gap:26px" class="mono">
+    <div class="sw"><i style="background:#05090F"></i>#05090F</div>
+    <div class="sw"><i style="background:#0D1B2A"></i>#0D1B2A</div>
+    <div class="sw"><i style="background:#F5A623"></i>#F5A623</div>
+    <div class="sw"><i style="background:#FFD580"></i>#FFD580</div>
+    <div class="sw"><i style="background:#5DB9EC"></i>#5DB9EC</div>
+    <div class="sw"><i style="background:#FF5A4E"></i>#FF5A4E</div>
+  </div>
+</div>
+<script src="liquid-glass.js"></script>
+<script>
+const c=document.getElementById('c'),g=c.getContext('2d');
+// Australia outline (lon,lat), simplified
+const AU=[[113.4,-22],[113.8,-26.5],[115,-30],[115,-33.5],[116,-35],[118,-35],[121.5,-33.9],[124,-33],[126,-32.3],[129,-31.6],[131,-31.5],[133.5,-32.2],[135.5,-34.8],[137.5,-33.5],[137.8,-35.6],[139.5,-36],[140.5,-38],[143,-38.8],[144.5,-38.2],[146.3,-39.1],[147.8,-37.9],[150,-37.5],[150.3,-35.6],[151.3,-33.8],[152.6,-32],[153.6,-28.6],[153.2,-26],[152.4,-24.5],[150.8,-22.6],[149,-21],[146.3,-19],[145.4,-16.4],[145.3,-14.9],[143.5,-14],[142.5,-10.7],[141.6,-12.8],[141.5,-15.5],[140.5,-17.5],[139,-17.3],[137,-15.9],[135.5,-14.9],[136.8,-12.2],[136,-11.9],[132.6,-11.5],[131,-12.2],[130,-13],[129.4,-14.9],[127.8,-14.3],[126,-14],[124.4,-16.3],[122.2,-17.8],[121,-19.6],[118.8,-20.3],[116.7,-20.6],[114.6,-21.8]];
+const TAS=[[144.6,-40.7],[148.3,-40.9],[148,-43.2],[146.8,-43.6],[145.2,-42.2]];
+const inside=(p,poly)=>{let r=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const[xi,yi]=poly[i],[xj,yj]=poly[j];if(((yi>p[1])!=(yj>p[1]))&&(p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi))r=!r;}return r;};
+const X=lon=>90+(lon-112)/(154.5-112)*900, Y=lat=>520+(-10-lat)/(44-10)*820*0.98;
+// dots: amber wave sweeping west→east (answered), red ahead of the wave (missed)
+for(let lon=112.4;lon<154.5;lon+=0.62)for(let lat=-10.2;lat>-44;lat-=0.62){
+  if(!inside([lon,lat],AU)&&!inside([lon,lat],TAS))continue;
+  const x=X(lon),y=Y(lat),front=139+Math.sin(lat*.35)*2.2,ans=lon<front,edge=Math.abs(lon-front)<1.4;
+  const seed=Math.sin(lon*12.9898+lat*78.233)*43758.5453%1, red=!ans&&Math.abs(seed)<.12;
+  g.beginPath();g.arc(x,y,edge?4.2:2.6,0,7);
+  g.fillStyle=edge?'rgba(255,214,128,1)':ans?`rgba(245,166,35,${.55+Math.abs(seed)*.4})`:red?'rgba(255,90,78,.9)':'rgba(120,150,180,.28)';
+  if(edge||red){g.shadowColor=edge?'#F5A623':'#FF5A4E';g.shadowBlur=12}else g.shadowBlur=0;g.fill();}
+g.shadowBlur=0;
+// the orb
+const ox=540,oy=820,R=165;
+let gr=g.createRadialGradient(ox,oy,R*.5,ox,oy,R*2.6);gr.addColorStop(0,'rgba(245,166,35,.45)');gr.addColorStop(.5,'rgba(245,166,35,.10)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,1080,1920);
+g.save();g.beginPath();g.arc(ox,oy,R,0,7);g.clip();g.fillStyle='#FFF1D6';g.fillRect(ox-R,oy-R,2*R,2*R);g.filter='blur(34px)';
+[[[255,176,31],.75,-60,-30],[[255,120,40],.55,70,40],[[93,185,236],.45,40,-80],[[255,214,128],.6,-40,70]].forEach(([col,a,dx,dy])=>{const q=g.createRadialGradient(ox+dx,oy+dy,0,ox+dx,oy+dy,R*1.1);q.addColorStop(0,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);g.fillStyle=q;g.fillRect(ox-R,oy-R,2*R,2*R);});
+g.filter='none';gr=g.createRadialGradient(ox-R*.35,oy-R*.4,0,ox-R*.35,oy-R*.4,R*1.1);gr.addColorStop(0,'rgba(255,255,255,.6)');gr.addColorStop(.5,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(ox-R,oy-R,2*R,2*R);g.restore();
+// burst rings
+for(const r of [R*1.35,R*1.75,R*2.3]){g.beginPath();g.arc(ox,oy,r,0,7);g.strokeStyle=`rgba(255,214,128,${.5-r/R*.15})`;g.lineWidth=2;g.stroke();}
+(async()=>{await document.fonts.ready;await new Promise(r=>{const i=document.querySelector('img');i.complete?r():i.onload=r});
+document.querySelectorAll('.g').forEach(e=>liquidGlass(e,JSON.parse(e.dataset.lg)));document.body.dataset.ready='1';})();
+</script></body></html>
