@@ -27,7 +27,7 @@ full orchestra to 60 s. Hits used below: 1.14 · 2.25 · 3.34 · 5.53 · 8.8 · 
 
 | File | What it is |
 |---|---|
-| `lazytradie-vision-film-9x16.mp4` | **The film.** 1:27 (86.6 s), 1080×1920, 30 fps, H.264 (~9 Mbps) + AAC. Music + VO + SFX. |
+| `lazytradie-vision-film-9x16.mp4` | **The film.** 1:27 (86.6 s), 1080×1920, 30 fps, H.264 (CRF 21, 22 MB) + AAC 256k. Music + VO + SFX. |
 | `lazytradie-vision-film.vtt` | Captions, one cue per line. |
 
 **As built (slow, warm cut, 6 Nov):** jet black (#000, the grain is an overlay blend so it can't lift the blacks),
