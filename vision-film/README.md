@@ -29,6 +29,8 @@ full orchestra to 60 s. Hits used below: 1.14 · 2.25 · 3.34 · 5.53 · 8.8 · 
 |---|---|
 | `lazytradie-vision-film-9x16.mp4` | **The film.** 1:27 (86.6 s), 1080×1920, 30 fps, H.264 (CRF 21, 22 MB) + AAC 256k. Music + VO + SFX. |
 | `lazytradie-vision-film.vtt` | Captions, one cue per line. |
+| `cover-9x16.png` | Reel cover (1080×1920): the answered amber map, title, wordmark. Title and logo sit inside the grid-safe centre. |
+| `cover-4x5.png` | The same cover cropped to 1080×1350 for the feed and grid. `node src/cover.js final` rebuilds both. |
 
 **As built (slow, warm cut, 6 Nov):** jet black (#000, the grain is an overlay blend so it can't lift the blacks),
 a warm amber dot map of Australia that tells the story (city glows, ringing phones, 27% of dots turning red, the amber
