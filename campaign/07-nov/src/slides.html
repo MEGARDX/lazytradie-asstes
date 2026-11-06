@@ -1,0 +1,137 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Don't trust AI? Good." carousel, 4 pages, 1080×1350. slides.html?s=1..4
+     Navy brick + hi-vis orange + marigold amber. Curly-haired campaign girl on pages 1 and 4.
+     Liquid glass on chips and pills. Claims: Admin Copilot confirm-before-send, Job Tiers (Tiers/README.md). -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--navy:#0D1B2A;--am:#F5A623;--hv:#FF7A1A;--off:#FFF8EE;--sky:#7FD3FF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;color:#fff;background:var(--navy)}
+.s.on{display:block}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background-size:1088px auto;background-position:center top}
+.big{letter-spacing:-.05em;line-height:.92}
+.ts{text-shadow:0 4px 30px rgba(5,14,28,.45)}
+.a{color:var(--am)}
+/* painted navy brick for the graphic pages */
+.brick{position:absolute;inset:0;
+  background:
+    radial-gradient(70% 45% at 85% 0%,rgba(255,226,170,.16),rgba(255,226,170,0) 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='156'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='5'%3E%3Cpath d='M0 2.5H260M0 80.5H260M2.5 2.5V78M132.5 80.5V156'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(170deg,#173353 0%,#122841 45%,#0D1B2A 100%)}
+.aura{position:absolute;border-radius:50%;filter:blur(60px)}
+.lbl{position:absolute;display:flex;align-items:center;gap:12px;height:56px;padding:0 24px;border-radius:28px;font-size:20px;font-weight:700;letter-spacing:.12em;
+  color:var(--navy);background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 14px 30px rgba(0,0,0,.3),inset 0 2px 1px rgba(255,255,255,.6)}
+.amp{position:absolute;display:flex;align-items:center;justify-content:center;gap:14px;color:var(--navy);font-weight:800;white-space:nowrap;letter-spacing:-.01em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(0,0,0,.4),inset 0 2px 1px rgba(255,255,255,.65)}
+.g{position:absolute;isolation:isolate;display:flex;align-items:center;gap:14px;color:#fff;font-weight:700;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(13,27,42,.30));
+  box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 2px 1px rgba(255,255,255,.9),inset 0 -10px 24px rgba(255,255,255,.12),inset 0 0 0 1.5px rgba(255,255,255,.55);
+  text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.g .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:27px;color:var(--navy);text-shadow:none;flex:none;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(0,0,0,.3)}
+.card{position:absolute;background:var(--off);color:var(--navy);box-shadow:0 34px 80px rgba(0,0,0,.45)}
+.dots{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);display:flex;gap:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.45)}
+.dots i.on{width:30px;border-radius:5px;background:#fff}
+/* tier rows */
+.tier{position:absolute;left:58px;right:58px;border-radius:40px;padding:30px 36px;display:grid;grid-template-columns:250px 1fr;gap:26px;align-items:center;
+  background:var(--off);color:var(--navy);box-shadow:0 26px 60px rgba(0,0,0,.4)}
+.pill{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 22px;border-radius:27px;font-size:22px;font-weight:800;color:#fff;white-space:nowrap}
+.pill:before{content:'';width:12px;height:12px;border-radius:50%;background:#fff;opacity:.9}
+.t1{background:#22A85C}.t2{background:#F29A00}.t3{background:#E5484D}
+.tier .w{font-size:30px;font-weight:800;letter-spacing:-.025em;line-height:1.12}
+.tier .d{font-size:22px;font-weight:500;opacity:.68;margin-top:8px;line-height:1.3}
+</style></head><body>
+
+<!-- 1 · cover: Don't trust AI? Good. -->
+<div class="s" id="s1">
+  <div class="photo" style="background-image:url(img/cover.jpg)"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:520px;background:linear-gradient(180deg,rgba(13,27,42,0),rgba(13,27,42,.55) 55%,rgba(13,27,42,.85))"></div>
+  <div class="abs big ts" style="left:54px;top:44px">
+    <div style="font-size:96px;font-weight:300">Don't trust AI?</div>
+    <div style="font-size:176px;font-weight:800;margin-top:4px" class="a">Good.</div></div>
+  <div class="g" style="left:58px;top:1080px;height:80px;padding:0 30px 0 13px;border-radius:40px;font-size:30px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-hand-palm"></i></span>Neither should you.</div>
+  <div class="amp" style="left:58px;top:1184px;height:76px;padding:0 32px;border-radius:38px;font-size:28px">Here's how you stay in charge<i class="ph-fill ph-arrow-right"></i></div>
+  <img class="abs" src="img/wm_white.png" style="right:58px;top:1208px;width:150px;opacity:.95">
+  <div class="dots" style="bottom:30px"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- 2 · You're still the boss (Admin Copilot confirm) -->
+<div class="s" id="s2">
+  <div class="brick"></div>
+  <div class="aura" style="right:-120px;top:520px;width:560px;height:560px;background:rgba(255,122,26,.55)"></div>
+  <div class="aura" style="left:-160px;top:980px;width:520px;height:420px;background:rgba(127,211,255,.35)"></div>
+  <div class="lbl" style="left:58px;top:70px"><i class="ph-fill ph-microphone"></i>ADMIN COPILOT</div>
+  <div class="abs big ts" style="left:54px;top:166px">
+    <div style="font-size:108px;font-weight:300">You're still</div>
+    <div style="font-size:108px;font-weight:800">the <span class="a">boss.</span></div></div>
+  <div class="card" style="left:58px;right:58px;top:430px;border-radius:52px;padding:36px 42px 40px">
+    <div style="display:flex;align-items:center;gap:16px;font-size:22px;font-weight:700;opacity:.7;letter-spacing:.02em">
+      <span style="width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:0 0 22px rgba(245,166,35,.6)"></span>
+      Copilot · Quote ready to send</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:28px">
+      <div><div style="font-size:40px;font-weight:800;letter-spacing:-.03em">Switchboard upgrade</div>
+        <div style="font-size:24px;font-weight:500;opacity:.6;margin-top:6px">Sarah M. · Brunswick</div></div>
+      <div style="text-align:right"><div class="big" style="font-size:84px;font-weight:800">$2,450</div>
+        <div style="font-size:20px;font-weight:600;opacity:.55;margin-top:6px">incl. GST</div></div></div>
+    <div style="height:1.5px;background:rgba(13,27,42,.1);margin:30px 0 28px"></div>
+    <div style="display:flex;gap:16px">
+      <div style="flex:1;height:84px;border-radius:42px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:27px;font-weight:700;border:2px solid rgba(13,27,42,.18)"><i class="ph-fill ph-pencil-simple"></i>Edit</div>
+      <div style="flex:1.6;height:84px;border-radius:42px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:27px;font-weight:800;background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 12px 26px rgba(217,130,0,.35),inset 0 2px 1px rgba(255,255,255,.6)"><i class="ph-fill ph-hand-tap"></i>Tap to confirm</div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:22px;font-size:21px;font-weight:600;opacity:.6"><i class="ph-fill ph-lock-simple"></i>Not sent. Waiting for you.</div>
+  </div>
+  <div class="abs ts" style="left:58px;right:58px;top:1012px;font-size:38px;font-weight:600;letter-spacing:-.025em;line-height:1.18">Quotes and invoices never reach your customer <span class="a">until you tap confirm.</span></div>
+  <div class="g" style="left:58px;top:1170px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-file-text"></i></span>Quotes</div>
+  <div class="g" style="left:278px;top:1170px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-receipt"></i></span>Invoices</div>
+  <div class="g" style="left:510px;top:1170px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-check-circle"></i></span>Your OK first</div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<!-- 3 · Big jobs wait for your OK (Job Tiers) -->
+<div class="s" id="s3">
+  <div class="brick"></div>
+  <div class="aura" style="left:-140px;top:1030px;width:600px;height:420px;background:rgba(255,122,26,.5)"></div>
+  <div class="aura" style="right:-180px;top:-120px;width:520px;height:460px;background:rgba(127,211,255,.22)"></div>
+  <div class="lbl" style="left:58px;top:70px"><i class="ph-fill ph-phone-call"></i>AI RECEPTIONIST · JOB TIERS</div>
+  <div class="abs big ts" style="left:54px;top:166px">
+    <div style="font-size:108px;font-weight:300">Big jobs wait</div>
+    <div style="font-size:108px;font-weight:800">for your <span class="a">OK.</span></div></div>
+  <div class="tier" style="top:430px"><div><span class="pill t1">T1 · Auto-book</span></div>
+    <div><div class="w">Everyday jobs</div><div class="d">Like a smoke alarm swap. Booked straight into your calendar.</div></div></div>
+  <div class="tier" style="top:640px;box-shadow:0 0 0 5px #F5A623,0 30px 80px rgba(245,166,35,.35)"><div><span class="pill t2">T2 · Confirm</span></div>
+    <div><div class="w">$1,000+ jobs, or anything it's unsure about</div><div class="d">Sent to you to approve before it's locked in.</div></div></div>
+  <div class="tier" style="top:886px"><div><span class="pill t3">T3 · Emergency</span></div>
+    <div><div class="w">Sparking, burning smell, flooding</div><div class="d">You're alerted straight away.</div></div></div>
+  <div class="g" style="left:58px;top:1150px;height:80px;padding:0 30px 0 13px;border-radius:40px;font-size:28px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-sliders-horizontal"></i></span>You decide what goes in each tier.</div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<!-- 4 · close: Go on. Try to break it. -->
+<div class="s" id="s4">
+  <div class="photo" style="background-image:url(img/end.jpg)"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:340px;background:linear-gradient(180deg,rgba(13,27,42,0),rgba(13,27,42,.6) 60%,rgba(13,27,42,.85))"></div>
+  <div class="abs big ts" style="left:54px;top:44px">
+    <div style="font-size:96px;font-weight:300" class="a">Go on.</div>
+    <div style="font-size:96px;font-weight:800;margin-top:4px;text-shadow:0 4px 30px rgba(5,14,28,.7)">Try to break it.</div></div>
+  <div class="g" style="left:58px;top:290px;height:72px;padding:0 26px 0 11px;border-radius:36px;font-size:25px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic" style="width:50px;height:50px;font-size:24px"><i class="ph-fill ph-microphone"></i></span>Talk to it like your toughest customer</div>
+  <div class="amp" style="left:50%;transform:translateX(-50%);top:1170px;height:104px;padding:0 44px;border-radius:52px;font-size:36px;flex-direction:column;gap:2px;line-height:1">
+    <div>Comment “DEMO”</div><div style="font-size:21px;font-weight:700;opacity:.8">for your free demo</div></div>
+  <img class="abs" src="img/wm_white.png" style="left:50%;transform:translateX(-50%);top:1296px;width:140px;opacity:.9">
+</div>
+
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  const id = 's' + (new URLSearchParams(location.search).get('s') || '1'); const el = document.getElementById(id); el.classList.add('on');
+  await document.fonts.ready;
+  const urls = [...el.querySelectorAll('.photo')].map(p => getComputedStyle(p).backgroundImage.slice(5, -2));
+  await Promise.all([...el.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))
+    .concat(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; }))));
+  el.querySelectorAll('.g').forEach(g => liquidGlass(g, JSON.parse(g.dataset.lg || '{}')));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
