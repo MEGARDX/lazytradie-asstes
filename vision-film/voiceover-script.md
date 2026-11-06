@@ -1,58 +1,69 @@
-# LazyTradie Vision Film: Every Line
+# LazyTradie Vision Film: Every Line (60 s)
 
-**10 files**, one per line, exactly as written. Save to `vision-film/assets/vo/` as `V01` … `V10` (WAV or MP3).
-Timing and pauses are handled in the edit.
+**13 files**, one per line, exactly as written. Save to `vision-film/assets/vo/` as `V01` … `V13` (WAV or MP3).
+Pauses and timing are handled in the edit.
 
-**Voice:** the series narrator (same ElevenLabs voice and settings as the explainer). Delivery like the
-reference: calm, warm, confident, a little slower than conversation, a sense of purpose. This is a vision
-statement, not an ad read. **LazyTradie** = LAY-zee TRAY-dee.
+**Voice:** the series narrator (same ElevenLabs voice/settings as the explainer). Warm, proud, unhurried, like a
+short national-pride documentary, not an ad read. Australian accent. **LazyTradie** = LAY-zee TRAY-dee.
+**Takes:** 2–3 takes of V01, V09, V12 and V13.
 
-**Takes:** 2–3 takes of V01, V03 and V10.
+| File | Line | Window |
+|---|---|---|
+| `V01` | Australia was built by tradies. | 0.4–4.8 s |
+| `V02` | Building and construction is eleven point seven percent of our economy… and one point three million jobs. | 5.6–9.7 s |
+| `V03` | Nearly half a million businesses. Almost all of them small. | 10.0–14.0 s |
+| `V04` | And every one of them runs on a phone. | 14.5–17.6 s |
+| `V05` | But research shows more than one in four calls to home-service businesses goes unanswered. | 18.2–22.7 s |
+| `V06` | Fewer than three in a hundred callers leave a message. The job just… goes. | 23.0–27.0 s |
+| `V07` | The fix exists. But it's been priced for big business. | 27.4–31.5 s |
+| `V08` | So most tradies keep missing calls. | 32.0–35.6 s |
+| `V09` | That's why LazyTradie exists. | 38.0–40.2 s |
+| `V10` | Every call, every text, every website enquiry… answered, and booked in. | 40.6–45.4 s |
+| `V11` | For just forty-nine dollars a month. No setup fee. Australian owned. | 46.0–49.8 s |
+| `V12` | Because when every tradie answers… Australia grows. | 50.4–54.6 s |
+| `V13` | LazyTradie. Built for the people who build Australia. | 55.4–59.0 s |
 
-| File | Line | Plays over | Window |
-|---|---|---|---|
-| `V01` | Tradies… the hardest part of the job isn't on the tools. | Typed opening | 0.3–5.0 s |
-| `V02` | It's the missed calls, the quotes at nine p.m., and the admin that never ends. | Notifications pile up | 5.6–9.8 s |
-| `V03` | We believe every tradie deserves an office that runs itself. | Stack collapses into the orb | 10.0–14.0 s |
-| `V04` | So we're building one. | Orb + wordmark | 14.6–17.0 s |
-| `V05` | An AI receptionist that answers every call, text and website enquiry… and books the job straight into your calendar. | Light bar → calendar dial | 18.2–26.2 s |
-| `V06` | In your business name, while you're on the tools. | Chat bubbles | 27.4–30.4 s |
-| `V07` | And an Admin Copilot that handles your quotes, invoices and jobs, just by your voice. | Contour blob → riser | 30.8–36.0 s |
-| `V08` | Connected to the tools you already use. | Xero / ServiceM8 / Fergus / Stripe | 46.0–49.0 s |
-| `V09` | So you can stress about work… not bookings. | Photo flashes | 50.4–54.5 s |
-| `V10` | LazyTradie. The AI office for every Aussie tradie. | End card | 55.4–59.8 s |
-
-Copy-paste versions:
 ```
-Tradies… the hardest part of the job isn't on the tools.
+Australia was built by tradies.
 ```
 ```
-It's the missed calls, the quotes at nine p.m., and the admin that never ends.
+Building and construction is eleven point seven percent of our economy… and one point three million jobs.
 ```
 ```
-We believe every tradie deserves an office that runs itself.
+Nearly half a million businesses. Almost all of them small.
 ```
 ```
-So we're building one.
+And every one of them runs on a phone.
 ```
 ```
-An AI receptionist that answers every call, text and website enquiry… and books the job straight into your calendar.
+But research shows more than one in four calls to home-service businesses goes unanswered.
 ```
 ```
-In your business name, while you're on the tools.
+Fewer than three in a hundred callers leave a message. The job just… goes.
 ```
 ```
-And an Admin Copilot that handles your quotes, invoices and jobs, just by your voice.
+The fix exists. But it's been priced for big business.
 ```
 ```
-Connected to the tools you already use.
+So most tradies keep missing calls.
 ```
 ```
-So you can stress about work… not bookings.
+That's why LazyTradie exists.
 ```
 ```
-LazyTradie. The AI office for every Aussie tradie.
+Every call, every text, every website enquiry… answered, and booked in.
+```
+```
+For just forty-nine dollars a month. No setup fee. Australian owned.
+```
+```
+Because when every tradie answers… Australia grows.
+```
+```
+LazyTradie. Built for the people who build Australia.
 ```
 
-Between V07 and V08 (36–46 s) there's **no voice on purpose**: the music drops at 37.6 s and carries the
-product montage on its own, like a breath.
+**V11:** if "Australian owned" isn't confirmed, record this instead:
+`For just forty-nine dollars a month. No setup fee. Built in Melbourne.`
+
+**36–38 s has no voice on purpose:** the music drops at 37.6 s and hits first.
