@@ -63,7 +63,7 @@ or put soft brand-colour auras behind. Headless Playwright Chromium renders the 
 - `Tiers/`: 41 s Job Tiers tutorial.
 - `copilot/`: 1:43 Admin Copilot film (white/navy, voice + SFX).
 - `launch-film/`: parked.
-- `vision-film/`: storyboard for the 60 s "Built for the people who build Australia" vision film (ElevenLabs Agents reference), first 60 s of `assets/music.mp3` (drop at 37.6 s). Sourced numbers in DATA.md. Waiting on VO V01–V13.
+- `vision-film/`: 60 s 9:16 "Built for the people who build Australia" vision film. Pure black, dot map, real orb, pearls, liquid glass, waving flag; music + VO + synthesised SFX. Sourced numbers in DATA.md. Source in `src/`.
 - `receptionist-reel/`: 50 s AI Receptionist motion reel (ElevenLabs "Vocals" reference), 1:1 + 9:16, black + cyan/magenta/amber, heavy liquid glass, deep SFX, no music. Source in `src/` (timeline.json drives picture + sound).
 - `campaign/26-oct/`: 18 Instagram posts.
 - `campaign/29-oct/`: Admin Copilot carousel (cover + 4 slides) and a LinkedIn PDF.

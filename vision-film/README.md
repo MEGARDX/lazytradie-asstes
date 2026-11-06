@@ -23,6 +23,32 @@ full orchestra to 60 s. Hits used below: 1.14 · 2.25 · 3.34 · 5.53 · 8.8 · 
 
 ---
 
+## The finished film (`final/`)
+
+| File | What it is |
+|---|---|
+| `lazytradie-vision-film-9x16.mp4` | **The film.** 60 s, 1080×1920, 30 fps, H.264 (~9 Mbps) + AAC. Music + VO + SFX. |
+| `lazytradie-vision-film.vtt` | Captions, one cue per line. |
+
+**As built:** pure black, amber/gold dot map of Australia that tells the story (city glows, ringing phones,
+27% of dots turning red, the amber wave answering them west→east, then morphing into the waving flag), the real
+LazyTradie orb (`orb.js`, morning/amber personality) bursting on the drop, pearls and blue gems from the
+price-comparison poster, and liquid glass on every card, pill, tag, the phone mockup and the price card.
+Every number carries its source on screen.
+
+**Sound:** the first 60 s of `assets/music.mp3` (fade 57–60 s), ducked under the VO; synthesised SFX tucked
+under the music (keystrokes, counter ticks, distant Australian phone rings, missed-call blips, dust, price-tag
+thuds, riser, sub boom + pearl sparkle on the drop, booking chime, cloth flutter on the flag). −13.4 LUFS,
+−1.5 dBTP. Every VO line was checked for intelligibility on the final mix.
+
+**VO edit:** long pauses inside lines trimmed to 0.22 s (silence-detected) and a 7% pitch-preserving speed-up,
+so all 14 lines fit 60 s with the drop left clear (`src/vo_prep.py`).
+
+**Rebuild:** `python3 src/timeline.py <words.json>` → `node src/render.js <frames>` → `python3 src/audio.py <dir>` →
+`src/mix.sh <dir> mix.wav` → ffmpeg encode (crf 21, maxrate 9M).
+
+---
+
 ## Storyboard
 
 ### Act 1 · The backbone (quiet intro, 0–18 s)
