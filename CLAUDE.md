@@ -63,11 +63,11 @@ or put soft brand-colour auras behind. Headless Playwright Chromium renders the 
 - `Tiers/`: 41 s Job Tiers tutorial.
 - `copilot/`: 1:43 Admin Copilot film (white/navy, voice + SFX).
 - `launch-film/`: parked.
-- `vision-film/`: 60 s 9:16 "Built for the people who build Australia" vision film. Pure black, dot map, real orb, pearls, liquid glass, waving flag; music + VO + synthesised SFX. Sourced numbers in DATA.md. Source in `src/`.
+- `vision-film/`: 1:27 9:16 "Built for the people who build Australia" vision film, slow warm documentary cut (owner: no overlapping VO, no fast pacing, jet black, no pearls/gems). Dot map, real orb, liquid glass, waving flag; edited music + VO + synthesised SFX. Sourced numbers in DATA.md. Source in `src/` (timeline.json drives picture + sound).
 - `receptionist-reel/`: 50 s AI Receptionist motion reel (ElevenLabs "Vocals" reference), 1:1 + 9:16, black + cyan/magenta/amber, heavy liquid glass, deep SFX, no music. Source in `src/` (timeline.json drives picture + sound).
 - `campaign/26-oct/`: 18 Instagram posts.
 - `campaign/29-oct/`: Admin Copilot carousel (cover + 4 slides) and a LinkedIn PDF.
 - `campaign/31-oct/`: "A Tradie's Guide to Never Missing a Job" (cover, Receptionist, Job Tiers, Calendar, CTA),
   ElevenCreative "Marketer's Guide" layout with liquid glass. Source in `src/`: `node shoot.js` renders it.
-- All films are voice + SFX only, with no music. The music rule is in each README.
+- Films are voice + SFX only, with no music, except the Vision film (the owner's Tunetank track). The music rule is in each README.
 - Earlier work is in PR MEGARDX/lazytradie-asstes#1 (branch `claude/peaceful-newton-lf4aj0`).

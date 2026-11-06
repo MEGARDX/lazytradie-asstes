@@ -1,5 +1,5 @@
-"""Vision film sound: music (first 60 s) + VO + synthesised SFX, all timed from timeline.json.
-python3 audio.py <outdir>  → sfx.wav, vo.wav (48 kHz). mix.sh does the final ducked, loudness-normalised mix.
+"""Vision film sound: the music edit + VO + synthesised SFX, all timed from timeline.json.
+python3 audio.py <outdir>  → music.wav, sfx.wav, vo.wav (48 kHz). mix.sh does the final ducked, loudness-normalised mix.
 SFX are designed to sit UNDER the music: realistic, short, mostly felt rather than noticed."""
 import json, os, subprocess, sys
 import numpy as np
@@ -88,38 +88,45 @@ def put(x, t, g=1., pan=0.):
     e = min(len(L), s + len(x)); L[s:e] += x[:e - s] * gl; R[s:e] += x[:e - s] * gr
 
 V = TL['vo']
-# Act 1: typing on the opening line, map ticks, counters
+def bloom(d=4.0):                # warm major-chord swell under the orb burst (replaces the old pearl sparkle)
+    t = tt(d); x = np.zeros(len(t))
+    for f, g in [(110, 1), (164.8, .7), (220, .6), (277.2, .35), (329.6, .3), (440, .15)]:
+        x += g * np.sin(2 * np.pi * f * t * (1 + .002 * np.sin(t * 1.3 + f)))
+    return band(x, 60, 3000) * np.minimum(1, t / .5) ** 1.5 * np.exp(-t * .9) * .22
+# Act 1: typing on the opening line, counters, map ticks, distant phones
 txt = 'Australia was built\nby tradies.'
 for i, ch in enumerate(txt):
-    if ch.strip(): put(key(), V['V01'] + .05 + (K['typeEnd'] - .2 - V['V01']) * i / len(txt), .5, rng.uniform(-.25, .25))
-put(whoosh(1.2, 120, 1400, .7), .2, .25)
-for a, b in [(5.0, K['gdp'] + .2), (K['jobs'] - .8, K['jobs'] + .5), (K['biz'] - .5, K['biz'] + 1.6)]:
+    if ch.strip(): put(key(), V['V01'] + .05 + (K['typeEnd'] - .2 - V['V01']) * i / len(txt), .42, rng.uniform(-.25, .25))
+put(whoosh(1.6, 120, 1200, .7), .1, .22)
+for a, b in [(K['v02'], K['gdp'] + .3), (K['jobs'] - .7, K['jobs'] + .7), (K['biz'] - .6, K['biz'] + 1.9)]:
     tt0 = a
-    while tt0 < b: put(tick(), tt0, .5, rng.uniform(-.3, .3)); tt0 += .045 + (tt0 - a) * .05
-    put(tap(2100, .9), b, .55)
-put(tap(2400), 4.9, .4); put(tap(2200), K['jobs'] - .9, .4); put(tap(2600), K['small'] - .3, .4, .3)
-for i in range(5): put(ring_au(), K['v04'] - .1 + i * .42, .32 * (1 - i * .12), [-.7, .5, -.2, .8, -.5][i])
-# Act 2: missed notifications, the 27% hit, voicemail, the crumble, the price stack, the riser
-for i, a in enumerate([19.4, 20.4, 21.6]): put(blip_down(), a + .05, .7, .35 - i * .2); put(whoosh(.45, 600, 5000, .5), a - .1, .18, .4)
-put(thud(52, .9, .9), K['pct27'] - .2, .55); put(tap(1800, 1), K['pct27'] - .15, .3)
-put(thud(58, .7, .7), K['pct3'] - .25, .4)
-put(tap(2400, .8), K['msg'] - .1, .35); put(grains(2.2), K['goes'] + .55, .4, .2); put(whoosh(1.4, 900, 7000, .3), K['goes'] + .45, .2, .5)
-for i, a in enumerate([30.55, 31.6, K['priced'], K['big']]): put(thud(70 - i * 6, .5, .7 + i * .1), a + .3, .55); put(tap(1500 - i * 120, .7), a + .32, .3)
-put(riser(3.1), 34.25, .55)
-# the drop: boom + pearls sparkling out of the orb
-put(boom(), K['drop'], 1.0); put(sparkle(1.4, 34), K['drop'] + .05, .7); put(whoosh(1.0, 150, 2500, .15), K['drop'], .35)
+    while tt0 < b: put(tick(), tt0, .32, rng.uniform(-.3, .3)); tt0 += .06 + (tt0 - a) * .06
+    put(tap(2000, .8), b, .4)
+put(tap(2300), K['v02'] - .1, .3); put(tap(2100), K['jobs'] - .85, .3); put(tap(2500), K['small'] - .3, .3, .3)
+for i in range(5): put(ring_au(), K['v04'] - .1 + i * .55, .28 * (1 - i * .12), [-.7, .5, -.2, .8, -.5][i])
+# Act 2: missed notifications, the 27% hit, voicemail, the crumble, the price stack, the riser into the drop
+for i, a in enumerate([K['v05'] + .6, K['v05'] + 1.7, K['v05'] + 2.8]):
+    put(blip_down(), a + .15, .55, .35 - i * .2); put(whoosh(.6, 500, 4000, .5), a - .05, .14, .4)
+put(thud(50, 1.0, .9), K['pct27'] - .15, .45); put(tap(1700, 1), K['pct27'] - .1, .22)
+put(thud(56, .8, .7), K['pct3'] - .2, .32)
+put(tap(2300, .7), K['msg'] - .05, .26); put(grains(2.6), K['goes'] + .5, .34, .2); put(whoosh(2.0, 700, 5000, .3), K['goes'] + .4, .16, .5)
+for i, a in enumerate([K['v07'] + .5, K['v07'] + 1.5, K['priced'], K['big']]): put(thud(68 - i * 6, .55, .7 + i * .1), a + .4, .45); put(tap(1400 - i * 110, .6), a + .42, .22)
+put(riser(3.4), K['drop'] - 3.4, .42)
+# the drop: sub boom + a warm chord bloom as the orb opens
+put(boom(4.0), K['drop'], .9); put(bloom(4.5), K['drop'] + .05, .8); put(whoosh(1.4, 150, 2000, .12), K['drop'], .28)
 # Act 3: the phone, messages, booking chime, integrations, price card + stamps
-put(whoosh(.9, 200, 3000, .7), K['v10'] - .6, .4)
-for a, p in [(K['call'], -.2), (K['text'], .1), (K['web'], .3)]: put(tap(2900, .9), a - .1, .5, p)
-put(chime(), K['booked'] - .05, .6)
-for i in range(4): put(tap(2200 + i * 150, .8), K['tools'] + i * .3 + .25, .45, [-.6, .6, -.6, .6][i]); put(whoosh(.5, 500, 4000, .7), K['tools'] + i * .3 - .1, .14, [-.6, .6, -.6, .6][i])
-put(thud(48, 1.1, 1.), K['p49'] - .05, .6); put(sparkle(.8, 10), K['p49'], .35)
-for a, p, gn in [(K['setup'] - .1, -.5, .45), (K['setup'] + .7, 0, .45), (K['owned'] + .35, .5, .3)]: put(thud(90, .35, .6), a + .15, gn, p); put(tap(2000, .6), a + .17, gn * .55, p)
-# Act 4: the wave across the map (L→R), the flag, the url
-w = whoosh(2.8, 150, 2200, .55)
-for i in range(0, len(w), 4800): put(w[i:i + 4800], 52.45 + i / SR, .45, -0.8 + 1.6 * i / len(w))
-put(flutter(3.9), 56.2, .55); put(sparkle(1.0, 14), K['built'] - .1, .35)
-for i in range(17): put(key() * .5, K['buildAus'] - .2 + i * (1.0 / 17), .3)
+put(whoosh(1.2, 200, 2600, .7), K['v10'] - .8, .32)
+for a, p in [(K['call'], -.2), (K['text'], .1), (K['web'], .3)]: put(tap(2700, .8), a - .05, .38, p)
+put(chime(), K['booked'], .45)
+for i in range(4):
+    pn = [-.6, .6, -.6, .6][i]; put(tap(2100 + i * 150, .7), K['tools'] + i * .4 + .35, .34, pn); put(whoosh(.6, 400, 3200, .7), K['tools'] + i * .4 - .05, .1, pn)
+put(thud(46, 1.2, 1.), K['p49'] - .05, .5); put(bloom(2.5), K['p49'] - .05, .35)
+for a, p, gn in [(K['setup'] - .15, -.5, .38), (K['setup'] + .8, 0, .38), (K['owned'] - .15, .5, .3)]: put(thud(88, .4, .6), a + .4, gn, p); put(tap(1900, .5), a + .42, gn * .5, p)
+# Act 4: the amber wave across the map (L→R), the flag, the url
+wd = max(2.4, K['grows'] - K['v13'] + .4); w = whoosh(wd, 140, 1900, .55)
+for i in range(0, len(w), 4800): put(w[i:i + 4800], K['v13'] + .1 + i / SR, .36, -0.8 + 1.6 * i / len(w))
+fd = K['end'] - K['v14'] - .8; put(flutter(fd), K['v14'] + .8, .5); put(bloom(4.0), K['built'] - .2, .3)
+for i in range(17): put(key() * .5, K['buildAus'] + .3 + i * (1.3 / 17), .26)
 
 # room on the SFX bus
 irn = int(1.4 * SR); irt = np.arange(irn) / SR
@@ -136,8 +143,20 @@ for kk, t0 in V.items():
                                      capture_output=True).stdout, dtype=np.float32)
     s = int(t0 * SR); VOB[s:s + len(a)] += a
 
+# music edit: [film_start, music_start, music_end] segments, equal-power crossfades (short at the intro repeat, long into the outro)
+MUS = np.frombuffer(subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', os.path.join(HERE, '..', 'assets', 'music.mp3'), '-ac', '2', '-ar', str(SR), '-f', 'f32le', '-'],
+                                   capture_output=True).stdout, dtype=np.float32).reshape(-1, 2)
+ML = np.zeros((N + SR * 4, 2)); SEG = TL['music']
+XF = [0] + [2.0 if j == len(SEG) - 1 else .08 for j in range(1, len(SEG))]
+for j, (fs, ms, me) in enumerate(SEG):
+    pre, post = XF[j] / 2, (XF[j + 1] / 2 if j + 1 < len(SEG) else 0)
+    a = MUS[int((ms - pre) * SR):int((me + post) * SR)].copy(); n = len(a); g = np.ones(n)
+    if pre: m = int(XF[j] * SR); g[:m] = np.sin(np.linspace(0, np.pi / 2, m))
+    if post: m = int(XF[j + 1] * SR); g[n - m:] = np.cos(np.linspace(0, np.pi / 2, m))
+    s0 = int((fs - pre) * SR); e = min(len(ML), s0 + n); ML[s0:e] += a[:e - s0] * g[:e - s0, None]
+
 out = sys.argv[1] if len(sys.argv) > 1 else '.'
 def wav(path, ch):
     subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', str(len(ch)), '-i', '-', path], input=np.stack(ch, 1).astype(np.float32).tobytes())
-wav(os.path.join(out, 'sfx.wav'), [L2[:N], R2[:N]]); wav(os.path.join(out, 'vo.wav'), [VOB[:N]])
+wav(os.path.join(out, 'sfx.wav'), [L2[:N], R2[:N]]); wav(os.path.join(out, 'vo.wav'), [VOB[:N]]); wav(os.path.join(out, 'music.wav'), [ML[:N, 0], ML[:N, 1]])
 print('ok')

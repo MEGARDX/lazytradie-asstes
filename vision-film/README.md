@@ -1,4 +1,4 @@
-# LazyTradie Vision Film: "Built for the people who build Australia" (60 s, 9:16)
+# LazyTradie Vision Film: "Built for the people who build Australia" (1:27, 9:16)
 
 A narrated motion-graphics vision film. **Tone: grow the nation.** Tradies are the backbone of the Australian
 economy; missed calls quietly cost them jobs; the fix has been priced for big business; LazyTradie exists so
@@ -6,7 +6,7 @@ every tradie can answer every customer, and Australia grows with them.
 
 - **Style reference:** the ElevenLabs Agents reel (`../Refrences/6 nov/SaveClip.App_AQNIqn…mp4`): one continuous
   shot, no hard cuts, dark with glows, each idea landing on a musical hit. Analysis in section 4.
-- **Music:** `assets/music.mp3`, **first 60 s only**, fading out over 57–60 s.
+- **Music:** `assets/music.mp3`, edited to the slow cut (see *Music edit* below), fading out over the last 4 s.
 - **Voiceover:** [`voiceover-script.md`](voiceover-script.md) → `assets/vo/`
 - **Every number** is sourced in [`DATA.md`](DATA.md) and shown on screen with a small source line.
 - **Exports:** 9:16 1080×1920 (Reels/TikTok/Shorts) + 16:9 1920×1080 (website/YouTube), VTT captions.
@@ -15,7 +15,7 @@ every tradie can answer every customer, and Australia grows with them.
 **dot-grid map of Australia** threads through the whole film. Liquid glass on cards and pills. JetBrains Mono for typed
 lines and source tags, Inter Tight for everything else. Numbers **count up** and land on the beat.
 
-## Music map (first 60 s)
+## Music map (the original track, before the edit)
 Pulse ≈ 55 BPM (a beat every 1.09 s). Quiet piano intro 0–18 s → swell at 18 s → build to **the drop at 37.6 s** →
 full orchestra to 60 s. Hits used below: 1.14 · 2.25 · 3.34 · 5.53 · 8.8 · 9.89 · 12.07 · 14.26 · 17.53 · 19.69 ·
 21.87 · 22.96 · 26.24 · 27.33 · 28.42 · 30.6 · 31.7 · 36.06 · **37.6** · then every 1.09 s (38.24, 39.33, 40.43 …) ·
@@ -27,29 +27,36 @@ full orchestra to 60 s. Hits used below: 1.14 · 2.25 · 3.34 · 5.53 · 8.8 · 
 
 | File | What it is |
 |---|---|
-| `lazytradie-vision-film-9x16.mp4` | **The film.** 60 s, 1080×1920, 30 fps, H.264 (~9 Mbps) + AAC. Music + VO + SFX. |
+| `lazytradie-vision-film-9x16.mp4` | **The film.** 1:27 (86.6 s), 1080×1920, 30 fps, H.264 (~9 Mbps) + AAC. Music + VO + SFX. |
 | `lazytradie-vision-film.vtt` | Captions, one cue per line. |
 
-**As built:** pure black, amber/gold dot map of Australia that tells the story (city glows, ringing phones,
-27% of dots turning red, the amber wave answering them west→east, then morphing into the waving flag), the real
-LazyTradie orb (`orb.js`, morning/amber personality) bursting on the drop, pearls and blue gems from the
-price-comparison poster, and liquid glass on every card, pill, tag, the phone mockup and the price card.
-Every number carries its source on screen.
+**As built (slow, warm cut, 6 Nov):** jet black (#000, the grain is an overlay blend so it can't lift the blacks),
+a warm amber dot map of Australia that tells the story (city glows, ringing phones, 27% of dots turning red, the amber
+wave answering them west→east until the whole country glows, then morphing into the waving flag), the real LazyTradie
+orb (`orb.js`, morning/amber personality) opening on the drop in a true-black Act 3, and liquid glass on every card,
+pill, tag, the phone mockup and the price card. No pearls or gems. Every number carries its source on screen.
+Pacing is documentary-slow: every line is spoken at natural speed with 1–2 s of air between lines, and each card
+eases in over ~1.1 s and out over ~0.8 s. All picture and sound timings come from `src/timeline.json`.
 
-**Sound:** the first 60 s of `assets/music.mp3` (fade 57–60 s), ducked under the VO; synthesised SFX tucked
-under the music (keystrokes, counter ticks, distant Australian phone rings, missed-call blips, dust, price-tag
-thuds, riser, sub boom + pearl sparkle on the drop, booking chime, cloth flutter on the flag). −13.4 LUFS,
-−1.5 dBTP. Every VO line was checked for intelligibility on the final mix.
+**Music edit:** the piano intro is extended by repeating 12 beats (music 1.16–14.26 s, on the beat grid), so the
+track's drop (37.6 s) lands at 50.7 s, right before "That's why LazyTradie exists". At 72.1 s, on a beat just before
+V13, a 2 s crossfade takes it into the track's own outro (108.6 s), so the film ends on a resolving phrase.
 
-**VO edit:** long pauses inside lines trimmed to 0.22 s (silence-detected) and a 7% pitch-preserving speed-up,
-so all 14 lines fit 60 s with the drop left clear (`src/vo_prep.py`).
+**Sound:** the music edit, gently ducked under the VO (it breathes back up in the pauses); synthesised SFX tucked
+under the music (keystrokes, counter ticks, distant Australian phone rings, missed-call blips, dust, price-tag thuds,
+riser, sub boom + a warm chord bloom on the drop, booking chime, cloth flutter on the flag), all softer than the
+first cut. −13.5 LUFS, −1.5 dBTP. Every VO line was checked for intelligibility on the final mix (Whisper).
 
-**Rebuild:** `python3 src/timeline.py <words.json>` → `node src/render.js <frames>` → `python3 src/audio.py <dir>` →
-`src/mix.sh <dir> mix.wav` → ffmpeg encode (crf 21, maxrate 9M).
+**VO edit:** natural speed (no speed-up). Only silences longer than 0.75 s inside a line are shortened to 0.55 s
+(`src/vo_prep.py`). No two lines overlap; the gaps between them are set in `src/timeline.py`.
+
+**Rebuild:** `python3 src/vo_prep.py` → Whisper word times → `python3 src/timeline.py <words.json>` →
+`node src/render.js <frames>` → `python3 src/audio.py <dir>` (music.wav, sfx.wav, vo.wav) → `src/mix.sh <dir> mix.wav` →
+ffmpeg encode (crf 21, maxrate 9M).
 
 ---
 
-## Storyboard
+## Storyboard (original 60 s plan; the slow cut keeps every scene and retimes it to the VO)
 
 ### Act 1 · The backbone (quiet intro, 0–18 s)
 | # | Time | Picture | Lands on | VO |
