@@ -1,0 +1,385 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- LazyTradie Vision film, 1080×1920. window.renderAt(t) draws the frame at t seconds (TL injected by render.js). -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--am:#F5A623;--gold:#FFD580;--sky:#5DB9EC;--red:#FF5A4E}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow:hidden}
+body{font-family:'Inter Tight',sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+#world{position:absolute;inset:0;transform-origin:50% 45%}
+#bg{position:absolute;left:0;top:0}
+.c{position:absolute;left:50%;top:50%;visibility:hidden}
+.mono{font-family:'JetBrains Mono',monospace}
+.g{isolation:isolate;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.035));
+  box-shadow:0 30px 70px rgba(0,0,0,.6),inset 0 1.5px 1px rgba(255,255,255,.62),inset 0 -12px 26px rgba(255,255,255,.05),inset 0 0 0 1px rgba(255,255,255,.17)}
+.hl{white-space:nowrap;text-align:center;letter-spacing:-.045em;line-height:.98}
+.hl .a{display:block;font-weight:300}.hl .b{display:block;font-weight:700}
+.am{color:var(--am)}.gold{color:var(--gold)}.red{color:var(--red)}
+.card{width:880px;height:206px;border-radius:40px;padding:0 44px;display:flex;align-items:center;gap:30px}
+.card .n{font-size:132px;font-weight:800;letter-spacing:-.055em;line-height:1;white-space:nowrap}
+.card .l{font-size:31px;font-weight:500;line-height:1.18;letter-spacing:-.015em;color:#E8EDF2}
+.src{height:52px;padding:0 24px;border-radius:26px;display:flex;align-items:center;font-size:17px;letter-spacing:.12em;color:#AFC0D0;white-space:nowrap}
+.note{width:620px;height:104px;border-radius:30px;display:flex;align-items:center;gap:20px;padding:0 26px;font-size:27px;font-weight:600;white-space:nowrap}
+.note .ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:28px;flex:none}
+.note small{display:block;font-size:19px;font-weight:500;color:#9FB0C0;margin-top:2px}
+.tag{width:660px;height:108px;border-radius:30px;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+.tag .p{font-size:26px;font-weight:700;letter-spacing:-.01em}.tag .p small{display:block;font-size:18px;font-weight:500;color:#9FB0C0;margin-top:2px}
+.tag .v{font-size:42px;font-weight:800;letter-spacing:-.03em}
+.pill{height:92px;padding:0 34px 0 14px;border-radius:46px;display:flex;align-items:center;gap:16px;font-size:30px;font-weight:600;white-space:nowrap}
+.pill .ic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:31px;color:#1a1206;background:radial-gradient(circle at 32% 28%,#FFE2A0,#F5A623 60%,#D98A00)}
+.stamp{height:84px;padding:0 30px;border-radius:42px;display:flex;align-items:center;gap:12px;font-size:28px;font-weight:700;white-space:nowrap}
+.stamp i{color:var(--am);font-size:30px}
+#phone{width:600px;height:1020px;border-radius:72px;padding:34px 30px}
+.msg{position:absolute;left:30px;right:30px;border-radius:26px;padding:20px 24px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.msg .h{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:600;color:#C7D3DE;letter-spacing:.02em}
+.msg .h i{font-size:24px;color:var(--am)}
+.msg .b{font-size:27px;font-weight:500;margin-top:10px;line-height:1.25;letter-spacing:-.01em}
+.msg .s{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:19px;font-weight:700;padding:6px 14px;border-radius:99px;background:rgba(245,166,35,.16);color:var(--gold)}
+.pearl{position:absolute;left:0;top:0;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#fff 0%,#FFFDF7 22%,#F6EBDD 55%,#E3CFB4 85%,#C9AE8A 100%);
+  box-shadow:inset -6px -10px 18px rgba(150,110,60,.45),inset 4px 6px 10px rgba(255,255,255,.9),0 12px 30px rgba(0,0,0,.6)}
+.pearl:after{content:'';position:absolute;left:20%;top:14%;width:32%;height:22%;border-radius:50%;background:rgba(255,255,255,.85);filter:blur(2px)}
+.gem{position:absolute;left:0;top:0;filter:drop-shadow(0 12px 22px rgba(0,0,0,.6))}
+#grain{position:absolute;inset:-64px;pointer-events:none;mix-blend-mode:screen;opacity:.05}
+#flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,#FFF6E0 0%,#FFC861 28%,rgba(245,166,35,.25) 55%,rgba(0,0,0,0) 75%);visibility:hidden}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 85% at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="gemS" viewBox="0 0 100 90">
+  <polygon points="20,0 80,0 100,28 50,90 0,28" fill="#2AA8EE"/><polygon points="30,0 70,0 80,28 20,28" fill="#9BDFFF"/>
+  <polygon points="20,0 30,0 20,28 0,28" fill="#5CC6F7"/><polygon points="70,0 80,0 100,28 80,28" fill="#1A8FD6"/>
+  <polygon points="0,28 20,28 50,90" fill="#1B8DD3"/><polygon points="20,28 50,28 50,90" fill="#3DB3EF"/>
+  <polygon points="50,28 80,28 50,90" fill="#137CC2"/><polygon points="80,28 100,28 50,90" fill="#0B68A8"/>
+  <polygon points="33,3 52,3 44,22 28,22" fill="#fff" opacity=".55"/></symbol></defs></svg>
+<div id="stage">
+ <div id="world">
+  <canvas id="bg" width="1080" height="1920"></canvas>
+  <div id="pearlsBack"></div>
+  <div class="c" id="orbHost"></div>
+
+  <!-- Act 1 -->
+  <div class="c mono" id="type" style="width:760px;font-size:62px;font-weight:700;color:var(--am);line-height:1.2;white-space:pre"></div>
+  <div class="c g card" id="cGdp" data-lg='{"scale":-120,"chroma":7,"blur":6}'><div class="n"><span id="nGdp">0.0</span><span class="am">%</span></div><div class="l">of Australia's economy:<br>building &amp; construction</div></div>
+  <div class="c g card" id="cJobs" data-lg='{"scale":-120,"chroma":7,"blur":6}'><div class="n"><span id="nJobs">0.00</span><span class="am">M</span></div><div class="l">Australians employed<br>in the industry</div></div>
+  <div class="c g card" id="cBiz" data-lg='{"scale":-120,"chroma":7,"blur":6}'><div class="n" style="font-size:118px" id="nBiz">0</div><div class="l">construction<br>businesses</div></div>
+  <div class="c g stamp" id="chipSmall" data-lg='{"scale":-90,"chroma":6,"blur":3}'><i class="ph-fill ph-user"></i>98.6% employ fewer than 20 people</div>
+  <div class="c g src mono" id="src1" data-lg='{"scale":-60,"chroma":4,"blur":2}'>SOURCE · MASTER BUILDERS AUSTRALIA · ABS DATA · FY2024-25</div>
+  <div class="c hl" id="t4" style="font-size:74px"><span class="a">And every one of them</span><span class="b">runs on a phone.</span></div>
+
+  <!-- Act 2 -->
+  <div class="c g note" id="n1" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic" style="background:rgba(255,90,78,.18);color:var(--red)"><i class="ph-fill ph-phone-x"></i></span><div>Missed call<small>07:42 · no voicemail</small></div></div>
+  <div class="c g note" id="n2" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic" style="background:rgba(255,90,78,.18);color:var(--red)"><i class="ph-fill ph-chat-circle-dots"></i></span><div>SMS · unread<small>"Can you come Thursday?"</small></div></div>
+  <div class="c g note" id="n3" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic" style="background:rgba(255,90,78,.18);color:var(--red)"><i class="ph-fill ph-globe"></i></span><div>Website form · no reply<small>Ceiling fan install · 2 days ago</small></div></div>
+  <div class="c g card" id="c27" data-lg='{"scale":-120,"chroma":7,"blur":6}'><div class="n red">27%</div><div class="l">of calls to home-service<br>businesses go unanswered</div></div>
+  <div class="c g card" id="c3" data-lg='{"scale":-120,"chroma":7,"blur":6}'><div class="n" style="font-size:118px">&lt;<span class="red">3%</span></div><div class="l">of callers sent to voicemail<br>leave a message</div></div>
+  <div class="c g src mono" id="src2" data-lg='{"scale":-60,"chroma":4,"blur":2}'>SOURCE · INVOCA RESEARCH · 2024</div>
+  <div class="c g" id="job" data-lg='{"scale":-110,"chroma":7,"blur":5}' style="width:660px;height:160px;border-radius:34px;display:flex;align-items:center;gap:22px;padding:0 30px">
+    <span style="width:74px;height:74px;border-radius:22px;display:grid;place-items:center;background:rgba(245,166,35,.16);color:var(--am);font-size:36px;flex:none"><i class="ph-fill ph-lightning"></i></span>
+    <div style="flex:1"><div style="font-size:31px;font-weight:700;letter-spacing:-.02em">Switchboard upgrade</div><div style="font-size:21px;color:#9FB0C0;margin-top:4px">Sarah M. · Richmond · new enquiry</div></div>
+    <div style="font-size:38px;font-weight:800;letter-spacing:-.03em">$2,450</div></div>
+  <div class="c hl" id="t7" style="font-size:72px"><span class="a">The fix exists.</span><span class="b" id="t7b">But it's priced for big business.</span></div>
+  <div class="c g tag" id="pt1" data-lg='{"scale":-100,"chroma":6,"blur":4}'><div class="p">Goodcall<small>AI receptionist · Starter</small></div><div class="v">US$79<span style="font-size:22px;font-weight:600">/mo</span></div></div>
+  <div class="c g tag" id="pt2" data-lg='{"scale":-100,"chroma":6,"blur":4}'><div class="p">My AI Front Desk<small>AI receptionist · Business</small></div><div class="v">US$99<span style="font-size:22px;font-weight:600">/mo</span></div></div>
+  <div class="c g tag" id="pt3" data-lg='{"scale":-100,"chroma":6,"blur":4}'><div class="p">Rosie<small>AI receptionist · Scale</small></div><div class="v">US$149<span style="font-size:22px;font-weight:600">/mo</span></div></div>
+  <div class="c g tag" id="pt4" data-lg='{"scale":-100,"chroma":6,"blur":4}'><div class="p">Smith.ai<small>AI receptionist · AI Pro</small></div><div class="v">US$150<span style="font-size:22px;font-weight:600">/mo</span></div></div>
+  <div class="c g src mono" id="src3" data-lg='{"scale":-60,"chroma":4,"blur":2}'>PROVIDERS' PRICING PAGES · 6 NOV 2026 · USD</div>
+  <div class="c hl" id="t8" style="font-size:66px"><span class="a">So most tradies</span><span class="b">keep missing calls.</span></div>
+
+  <!-- Act 3 -->
+  <div class="c hl" id="t9" style="font-size:84px"><span class="a">That's why</span><span class="b">LazyTradie <span class="am">exists.</span></span></div>
+  <div class="c g" id="phone" data-lg='{"scale":-150,"chroma":8,"blur":7,"border":0.04}'>
+    <div style="position:absolute;left:30px;right:30px;top:268px;display:flex;align-items:center;gap:12px;font-size:21px;font-weight:600;color:#C7D3DE"><span style="width:12px;height:12px;border-radius:50%;background:#6BE39B;box-shadow:0 0 0 6px rgba(107,227,155,.18)"></span>LazyTradie · AI Receptionist<span class="mono" style="margin-left:auto;font-size:17px;color:#8FA2B4">LIVE</span></div>
+    <div class="msg" id="m1" style="top:322px"><div class="h"><i class="ph-fill ph-phone-call"></i>Incoming call · Sarah M.</div><div class="b">"Hi, I need a power point installed."</div><span class="s"><i class="ph-fill ph-check-circle"></i>Answered</span></div>
+    <div class="msg" id="m2" style="top:490px"><div class="h"><i class="ph-fill ph-chat-circle-text"></i>SMS · Mike C.</div><div class="b">"Can you come Thursday?"</div><span class="s"><i class="ph-fill ph-check-circle"></i>Replied</span></div>
+    <div class="msg" id="m3" style="top:658px"><div class="h"><i class="ph-fill ph-globe"></i>Website enquiry · Emma D.</div><div class="b">Ceiling fan install, Brunswick</div><span class="s"><i class="ph-fill ph-check-circle"></i>Replied</span></div>
+    <div class="msg" id="m4" style="top:838px;background:linear-gradient(180deg,rgba(245,166,35,.26),rgba(245,166,35,.12));box-shadow:inset 0 0 0 1.5px rgba(255,213,128,.55)"><div class="h" style="color:#FFE4AE"><i class="ph-fill ph-calendar-check" style="color:#FFD580"></i>BOOKED · THU 9:00 AM</div><div class="b" style="font-weight:700">Sarah Mitchell · Power point install</div></div>
+  </div>
+  <div class="c hl" id="t11" style="font-size:64px"><span class="a">Works with the tools</span><span class="b">you already use.</span></div>
+  <div class="c g pill" id="ig1" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-chart-line-up"></i></span>Xero</div>
+  <div class="c g pill" id="ig2" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-toolbox"></i></span>ServiceM8</div>
+  <div class="c g pill" id="ig3" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-wrench"></i></span>Fergus</div>
+  <div class="c g pill" id="ig4" data-lg='{"scale":-100,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-credit-card"></i></span>Stripe</div>
+  <div class="c g" id="price" data-lg='{"scale":-160,"chroma":9,"blur":7,"border":0.05}' style="width:840px;height:400px;border-radius:64px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+    <div class="mono" style="font-size:20px;letter-spacing:.2em;color:#C7D3DE">AI RECEPTIONIST · SOLO PLAN</div>
+    <div style="font-size:236px;font-weight:800;letter-spacing:-.06em;line-height:.9;margin-top:14px">A$4<span class="am">9</span></div>
+    <div style="font-size:34px;font-weight:500;color:#E8EDF2;margin-top:6px">a month, incl. GST</div></div>
+  <div class="c g stamp" id="st1" data-lg='{"scale":-90,"chroma":6,"blur":3}'><i class="ph-fill ph-check-circle"></i>$0 setup</div>
+  <div class="c g stamp" id="st2" data-lg='{"scale":-90,"chroma":6,"blur":3}'><i class="ph-fill ph-check-circle"></i>No lock-in</div>
+  <div class="c g stamp" id="st3" data-lg='{"scale":-90,"chroma":6,"blur":3}'><i class="ph-fill ph-check-circle"></i>Australian owned</div>
+  <div id="pearlsFront"></div>
+
+  <!-- Act 4 -->
+  <div class="c hl" id="t13" style="font-size:76px"><span class="a">Every call answered.</span><span class="b" id="t13b">Australia <span class="am">grows.</span></span></div>
+  <img class="c" id="wm" src="wm_white.png" style="width:520px">
+  <div class="c g" id="tagline" data-lg='{"scale":-110,"chroma":7,"blur":5}' style="width:880px;height:104px;border-radius:52px;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:600;letter-spacing:-.02em">Built for the people who build Australia.</div>
+  <div class="c mono" id="url" style="font-size:28px;font-weight:700;color:#E8EDF2;letter-spacing:.04em"></div>
+  <div class="c g src mono" id="src4" data-lg='{"scale":-60,"chroma":4,"blur":2}'>A$49/MO INCL. GST · 75 CALL MINUTES/MO · LAZYTRADIE.COM.AU/PRICING</div>
+ </div>
+ <div id="flash"></div>
+ <div id="vig"></div>
+ <div id="grain"></div>
+</div>
+
+<script src="orb.js"></script>
+<script src="liquid-glass.js"></script>
+<script>
+const TL = window.TL, K = TL.k, Wd = 1080, Ht = 1920, CX = 540, CY = 960;
+const $ = id => document.getElementById(id);
+// ---------- maths ----------
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, a, b) => cl((t - a) / (b - a));
+const eo = x => 1 - Math.pow(1 - x, 3), ex = x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x);
+const io = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const bk = x => { const c = 1.4, d = c + 1; return 1 + d * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, x) => a + (b - a) * x;
+const win = (t, a, b, fi = .4, fo = .4) => Math.min(P(t, a, a + fi), 1 - P(t, b - fo, b));
+const rnd = s => { const x = Math.sin(s * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+function tf(el, o = {}) {
+  const { x = 0, y = 0, s = 1, sx, sy, r = 0, a = 1, b = 0 } = o;
+  el.style.visibility = a <= .003 ? 'hidden' : 'visible';
+  el.style.opacity = a;
+  el.style.transform = `translate(-50%,-50%) translate(${x}px,${y}px) rotate(${r}deg) scale(${sx ?? s},${sy ?? s})`;
+  el.style.filter = b > .05 ? `blur(${b}px)` : '';
+}
+// rise-in: slide up + fade, settle; fade out
+const rise = (t, a, b, dy = 40) => { const i = ex(P(t, a, a + .7)), o = io(P(t, b - .45, b)); return { a: Math.min(i, 1 - o), dy: (1 - i) * dy - o * 20 }; };
+
+// ---------- map of Australia (dot grid) ----------
+const AU = [[113.4,-22],[113.8,-26.5],[115,-30],[115,-33.5],[116,-35],[118,-35],[121.5,-33.9],[124,-33],[126,-32.3],[129,-31.6],[131,-31.5],[133.5,-32.2],[135.5,-34.8],[137.5,-33.5],[137.8,-35.6],[139.5,-36],[140.5,-38],[143,-38.8],[144.5,-38.2],[146.3,-39.1],[147.8,-37.9],[150,-37.5],[150.3,-35.6],[151.3,-33.8],[152.6,-32],[153.6,-28.6],[153.2,-26],[152.4,-24.5],[150.8,-22.6],[149,-21],[146.3,-19],[145.4,-16.4],[145.3,-14.9],[143.5,-14],[142.5,-10.7],[141.6,-12.8],[141.5,-15.5],[140.5,-17.5],[139,-17.3],[137,-15.9],[135.5,-14.9],[136.8,-12.2],[136,-11.9],[132.6,-11.5],[131,-12.2],[130,-13],[129.4,-14.9],[127.8,-14.3],[126,-14],[124.4,-16.3],[122.2,-17.8],[121,-19.6],[118.8,-20.3],[116.7,-20.6],[114.6,-21.8]];
+const TAS = [[144.6,-40.7],[148.3,-40.9],[148,-43.2],[146.8,-43.6],[145.2,-42.2]];
+const CITIES = [[151.2,-33.87],[144.96,-37.81],[153.03,-27.47],[115.86,-31.95],[138.6,-34.93],[147.33,-42.88],[130.84,-12.46],[149.13,-35.28],[151.78,-32.93],[146.8,-19.26],[145.77,-16.92],[153.4,-28.0]];
+const inside = (p, poly) => { let r = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i], [xj, yj] = poly[j]; if (((yi > p[1]) != (yj > p[1])) && (p[0] < (xj - xi) * (p[1] - yi) / (yj - yi) + xi)) r = !r; } return r; };
+const MX = lon => 110 + (lon - 112.5) / 41.5 * 860, MY = lat => 400 + (-10.5 - lat) / 33.3 * 775;
+const DOTS = [];
+for (let lon = 112.6; lon < 154; lon += .62) for (let lat = -10.6; lat > -43.8; lat -= .62) {
+  if (!inside([lon, lat], AU) && !inside([lon, lat], TAS)) continue;
+  let city = 0; for (const [cx, cy] of CITIES) { const d2 = (lon - cx) ** 2 + (lat - cy) ** 2; city = Math.max(city, Math.exp(-d2 / (2 * 1.3 * 1.3))); }
+  DOTS.push({ lon, lat, x: MX(lon), y: MY(lat), city, s: rnd(lon * 3.1 + lat * 7.7), s2: rnd(lon * 5.3 - lat * 2.9) });
+}
+// flag (built once as SVG → offscreen canvas) + target grid for the dot flag
+const FW = 760, FH = 380, FX = CX - FW / 2, FY = 520;
+const flagC = document.createElement('canvas'); flagC.width = FW; flagC.height = FH; let flagPx = null;
+function star(cx, cy, R, n, inner) { let d = ''; for (let i = 0; i < n * 2; i++) { const r = i % 2 ? R * inner : R, a = -Math.PI / 2 + i * Math.PI / n; d += (i ? 'L' : 'M') + (cx + r * Math.cos(a)).toFixed(1) + ',' + (cy + r * Math.sin(a)).toFixed(1); } return d + 'Z'; }
+const FLAG_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10080 5040" width="${FW}" height="${FH}">
+<rect width="10080" height="5040" fill="#012169"/>
+<g transform="scale(84)"><clipPath id="t"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath>
+<path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0L60,30M60,0L0,30" clip-path="url(#t)" stroke="#E4002B" stroke-width="4"/>
+<path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#E4002B" stroke-width="6"/></g>
+<g fill="#fff"><path d="${star(2520, 3780, 1080, 7, 4 / 9)}"/><path d="${star(7560, 840, 480, 7, 4 / 9)}"/><path d="${star(6300, 2310, 480, 7, 4 / 9)}"/>
+<path d="${star(8680, 1925, 480, 7, 4 / 9)}"/><path d="${star(8064, 2730, 210, 5, .4)}"/><path d="${star(7560, 4200, 480, 7, 4 / 9)}"/></g></svg>`;
+const flagImg = new Image(); flagImg.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(FLAG_SVG);
+const FLAGPTS = []; for (let gy = 7; gy < FH; gy += 13) for (let gx = 7; gx < FW; gx += 13) FLAGPTS.push([gx, gy]);
+const wave = (fx, t) => Math.sin(fx * .0125 - t * 3.1) * 15 * Math.pow(fx / FW, .85) + Math.sin(fx * .021 - t * 4.3 + 1) * 5 * (fx / FW);
+// crumble particles (job card → dust)
+const PART = []; for (let i = 0; i < 520; i++) PART.push({ u: rnd(i * 1.7), v: rnd(i * 3.3), sp: rnd(i * 5.1), c: rnd(i * 7.9), sz: 1.2 + rnd(i * 9.7) * 2.6 });
+// pearls + gems
+const PEARLS = [], NP = 14, NG = 6;
+for (let i = 0; i < NP + NG; i++) {
+  const gem = i >= NP, el = gem ? document.createElementNS('http://www.w3.org/2000/svg', 'svg') : document.createElement('div');
+  el.setAttribute('class', gem ? 'gem' : 'pearl'); if (gem) { el.setAttribute('viewBox', '0 0 100 90'); el.innerHTML = '<use href="#gemS"/>'; }
+  const size = gem ? 70 + rnd(i * 4.4) * 60 : 34 + rnd(i * 2.2) * 58;
+  el.style.width = size + 'px'; el.style.height = (gem ? size * .9 : size) + 'px';
+  PEARLS.push({ el, gem, size, a0: i / (NP + NG) * Math.PI * 2 + rnd(i) * .5, r: .75 + rnd(i * 6.1) * .5, z: rnd(i * 8.3), spin: rnd(i * 9.1) * 60 - 30 });
+}
+// grain
+{ const g = document.createElement('canvas'); g.width = g.height = 256; const c = g.getContext('2d'), d = c.createImageData(256, 256);
+  for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } c.putImageData(d, 0, 0);
+  $('grain').style.backgroundImage = `url(${g.toDataURL()})`; }
+
+const bg = $('bg'), g = bg.getContext('2d');
+let orb = null, orbT = 0;
+const ORB_SIZE = 300; // canvas = 720 css px
+function orbState(t) {
+  if (t < K.drop) return ['idle', .0];
+  if (t < K.v10) return ['speaking', .45 + .4 * Math.abs(Math.sin(t * 7.3) * Math.sin(t * 2.9))];
+  if (t < K.booked - .4) return ['listening', .3 + .25 * Math.abs(Math.sin(t * 6.1) * Math.sin(t * 2.3))];
+  if (t < K.booked) return ['thinking', 0];
+  if (t < K.booked + 1.2) return ['speaking', .5 + .35 * Math.abs(Math.sin(t * 8.1))];
+  return ['idle', 0];
+}
+function advanceOrb(t) {
+  const dt = 1 / 30;
+  while (orbT + dt <= t + 1e-6) {
+    const [s, l] = orbState(orbT); orb.setState(s); orb.setLevel(l);
+    if (orbT < K.drop && orbT + dt >= K.drop) orb.ring(1);
+    if (orbT < K.booked && orbT + dt >= K.booked) orb.ring(.8);
+    orb.step(dt); orbT += dt;
+  }
+}
+
+// ---------- frame ----------
+function renderAt(t) {
+  // camera: slow documentary drift + the inhale before the drop
+  const inh = io(P(t, 36.7, 37.45)), back = ex(P(t, K.drop, K.drop + .6));
+  const sc = (1.015 + .012 * Math.sin(t * .23)) * (t < K.drop ? lerp(1, .86, inh) : lerp(1.08, 1, back));
+  $('world').style.transform = `translate(${4 * Math.sin(t * .17)}px,${6 * Math.sin(t * .13)}px) scale(${sc})`;
+  $('world').style.opacity = t < K.drop ? 1 - inh : 1;
+  $('grain').style.transform = `translate(${-(Math.floor(t * 24) * 37) % 64}px,${-(Math.floor(t * 24) * 53) % 64}px)`;
+
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = 'source-over'; g.fillStyle = '#000'; g.fillRect(0, 0, Wd, Ht);
+
+  // ===== map =====
+  const mapA = Math.min(P(t, .2, 2.2), 1 - .82 * P(t, 37.0, 37.5) * (1 - P(t, 52.1, 52.9))) * (1 - P(t, 56.4, 57.0));
+  const glow = Math.min(P(t, 4.6, K.gdp), 1 - P(t, 16.8, 18.6));
+  const twinkle = win(t, K.biz - .3, K.v04 + .5, .4, .5);
+  const redF = .27 * eo(P(t, 19.2, K.pct27 + .3)) + .2 * eo(P(t, K.missing - .4, 37.0));
+  const front = lerp(110, 156, io(P(t, 52.5, 55.1))), waveOn = t > 52.3;
+  const morph = io(P(t, 55.7, 56.9));
+  const fT = Math.max(0, t - 55.7);
+  if (mapA > .003 || morph > 0) {
+    for (let i = 0; i < DOTS.length; i++) {
+      const d = DOTS[i];
+      let col = [150, 172, 196], a = .3 + d.s2 * .12, r = 3.0;
+      const gl = glow * d.city; if (gl > .02) { col = [245, 166, 35]; a = Math.max(a, .3 + gl * .7); r = 3.0 + gl * 1.8; }
+      if (twinkle > 0 && d.s < .16) { const tw = .5 + .5 * Math.sin(t * 5 + d.s2 * 40); col = [255, 213, 128]; a = Math.max(a, twinkle * (.25 + tw * .6)); }
+      const isRed = d.s < redF && !(waveOn && d.lon < front);
+      if (isRed && t > 18.6) { col = [255, 90, 78]; a = .6 + .35 * Math.sin(t * 3 + d.s2 * 20) ** 2; r = 3.4; }
+      if (waveOn && d.lon < front) { const e = cl(1 - (front - d.lon) / 2.2); col = e > .05 ? [255, 213, 128] : [245, 166, 35]; a = .55 + .3 * d.s2 + e * .4; r = 3.0 + e * 2.2; }
+      let x = d.x, y = d.y;
+      if (morph > 0) { const [gx, gy] = FLAGPTS[i % FLAGPTS.length]; const tx = FX + gx, ty = FY + gy + wave(gx, fT);
+        x = lerp(d.x, tx, morph); y = lerp(d.y, ty, morph);
+        if (flagPx) { const k = (gy * FW + gx) * 4; col = [lerp(col[0], flagPx[k], morph), lerp(col[1], flagPx[k + 1], morph), lerp(col[2], flagPx[k + 2], morph)]; }
+        a = lerp(a, .95, morph); r = lerp(r, 3.4, morph); }
+      const A = (morph > 0 ? Math.max(mapA, morph) : mapA) * a * (1 - P(t, 57.0, 57.7));
+      if (A < .01) continue;
+      g.fillStyle = `rgba(${col[0] | 0},${col[1] | 0},${col[2] | 0},${A})`; g.fillRect(x - r / 2, y - r / 2, r, r);
+    }
+    // phones ringing (S4): expanding rings on a few dots
+    const ringA = win(t, K.v04 - .1, K.v05 + .6, .3, .5);
+    if (ringA > 0) { g.lineWidth = 2;
+      for (let i = 0; i < DOTS.length; i++) { const d = DOTS[i]; if (d.s > .035) continue;
+        const ph = ((t - K.v04) * .9 + d.s2) % 1; if (ph < 0) continue;
+        g.strokeStyle = `rgba(255,213,128,${ringA * (1 - ph) * .8})`; g.beginPath(); g.arc(d.x, d.y, 4 + ph * 34, 0, 7); g.stroke(); } }
+    // wave front glow line (S13)
+    if (waveOn && t < 55.6) { const fx = MX(front), fa = .3 * mapA * (1 - P(t, 54.8, 55.5));
+      g.save(); g.translate(fx, 790); g.scale(.22, 1); const gr = g.createRadialGradient(0, 0, 0, 0, 0, 430);
+      gr.addColorStop(0, `rgba(255,213,128,${fa})`); gr.addColorStop(.5, `rgba(245,166,35,${fa * .35})`); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = gr; g.fillRect(-430, -430, 860, 860); g.restore(); }
+  }
+  // ===== crumble =====
+  const cT = t - K.goes;
+  if (cT > 0 && cT < 2.6) {
+    for (const p of PART) { const delay = p.u * .7, lt = cT - delay; if (lt < 0) continue;
+      const x0 = CX - 330 + p.u * 660, y0 = CY - 100 - 80 + p.v * 160;
+      const x = x0 + lt * (140 + p.sp * 260) + Math.sin(lt * 3 + p.c * 9) * 14, y = y0 - lt * (50 + p.sp * 110) + lt * lt * 20;
+      const a = (1 - P(lt, .2, 1.8)) * .85; if (a <= 0) continue;
+      g.fillStyle = p.c < .55 ? `rgba(235,240,245,${a})` : p.c < .85 ? `rgba(245,166,35,${a})` : `rgba(160,175,190,${a})`; g.fillRect(x, y, p.sz, p.sz); } }
+  // ===== integration lines (S11) =====
+  const igOn = win(t, K.tools - .3, K.v12 + .2, .3, .4);
+  const IG = [[-290, -330], [300, -250], [-300, 180], [290, 250]];
+  if (igOn > 0) IG.forEach(([x, y], i) => { const p = ex(P(t, K.tools + i * .3, K.tools + i * .3 + .5)); if (p <= 0) return;
+    const ox = CX, oy = CY - 60, gr = g.createLinearGradient(ox, oy, CX + x, CY + y);
+    gr.addColorStop(0, `rgba(255,213,128,${.7 * igOn})`); gr.addColorStop(1, `rgba(245,166,35,${.15 * igOn})`);
+    g.strokeStyle = gr; g.lineWidth = 2.5; g.beginPath(); g.moveTo(ox, oy); g.lineTo(lerp(ox, CX + x, p), lerp(oy, CY + y, p)); g.stroke(); });
+  // ===== orb halo for the price card (S12) =====
+  const halo = win(t, K.v12 - .4, K.v13 + .6, .6, .6);
+  if (halo > 0) { const gr = g.createRadialGradient(CX, CY - 20, 60, CX, CY - 20, 620); gr.addColorStop(0, `rgba(245,166,35,${.42 * halo})`); gr.addColorStop(.5, `rgba(245,166,35,${.1 * halo})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, Wd, Ht); }
+  // ===== waving flag (S14) =====
+  const flA = P(t, 56.5, 57.3);
+  if (flA > 0 && flagImg.complete) {
+    const glw = g.createRadialGradient(CX, FY + FH / 2, 100, CX, FY + FH / 2, 640); glw.addColorStop(0, `rgba(1,33,105,${.55 * flA})`); glw.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = glw; g.fillRect(0, 0, Wd, Ht);
+    g.globalAlpha = flA;
+    for (let x = 0; x < FW; x += 3) { const dy = wave(x, fT), sl = Math.cos(x * .0125 - fT * 3.1) * Math.pow(x / FW, .85);
+      g.drawImage(flagC, x, 0, 3, FH, FX + x, FY + dy, 3.6, FH);
+      g.fillStyle = sl > 0 ? `rgba(255,255,255,${sl * .12})` : `rgba(0,0,0,${-sl * .28})`; g.fillRect(FX + x, FY + dy, 3.6, FH); }
+    g.globalAlpha = 1;
+  }
+
+  // ===== Act 1 =====
+  { const txt = 'Australia was built\nby tradies.', n = Math.round(cl(P(t, TL.vo.V01 + .05, K.typeEnd - .15)) * txt.length);
+    const o = 1 - io(P(t, 3.1, 3.7)), cur = t < 3.1 && Math.floor(t * 2.6) % 2 ? '▌' : '';
+    $('type').textContent = txt.slice(0, n) + cur; tf($('type'), { y: -700 - P(t, 3.1, 3.7) * 30, a: Math.min(P(t, .2, .5), o) }); }
+  { const r = rise(t, 4.9, K.v03 - .1), r2 = rise(t, K.jobs - .9, K.v03 - .1);
+    $('nGdp').textContent = (11.7 * eo(P(t, 5.0, K.gdp + .2))).toFixed(1);
+    $('nJobs').textContent = (1.32 * eo(P(t, K.jobs - .8, K.jobs + .5))).toFixed(2);
+    tf($('cGdp'), { y: 300 + r.dy, a: r.a }); tf($('cJobs'), { y: 530 + r2.dy, a: r2.a });
+    const r3 = rise(t, K.biz - .6, K.v04 + .2);
+    $('nBiz').textContent = Math.round(462939 * eo(P(t, K.biz - .5, K.biz + 1.6))).toLocaleString('en-AU');
+    tf($('cBiz'), { y: 300 + r3.dy, a: r3.a });
+    const r4 = rise(t, K.small - .3, K.v04 + .2); tf($('chipSmall'), { y: 500 + r4.dy, a: r4.a });
+    const s1 = rise(t, 5.2, K.v04 + .2); tf($('src1'), { y: 660 + s1.dy * .5, a: s1.a * .95 });
+    const r5 = rise(t, K.v04 - .1, K.v05 - .1); tf($('t4'), { y: -700 + r5.dy, a: r5.a }); }
+
+  // ===== Act 2 =====
+  { [['n1', 19.4], ['n2', 20.4], ['n3', 21.6]].forEach(([id, a], i) => { const r = rise(t, a, K.v06 - .1, 60);
+      tf($(id), { x: 120 - i * 40, y: -330 + i * 135 + r.dy, a: r.a }); });
+    const r27 = rise(t, K.pct27 - .25, K.v06 + .1); tf($('c27'), { y: 330 + r27.dy, a: r27.a, s: lerp(1.06, 1, ex(P(t, K.pct27 - .25, K.pct27 + .3))) });
+    const r3 = rise(t, K.pct3 - .3, K.v07 - .1); tf($('c3'), { y: 330 + r3.dy, a: r3.a });
+    const s2 = rise(t, K.pct27, K.v07 - .1); tf($('src2'), { y: 560 + s2.dy * .5, a: s2.a * .95 });
+    // job card: appears on "message", wipes to dust on "goes"
+    const jIn = ex(P(t, K.msg - .2, K.msg + .4)), jw = P(t, K.goes, K.goes + .75);
+    $('job').style.webkitMaskImage = jw > 0 ? `linear-gradient(90deg,transparent ${jw * 110 - 10}%,#000 ${jw * 110}%)` : '';
+    tf($('job'), { y: -100 + (1 - jIn) * 40, a: jw >= 1 ? 0 : jIn });
+    const r7 = rise(t, K.v07 - .1, K.v08 + .1); tf($('t7'), { y: -690 + r7.dy, a: r7.a });
+    $('t7b').style.opacity = ex(P(t, K.priced - .3, K.priced + .3));
+    [[30.55], [31.6], [K.priced], [K.big]].forEach(([a], i) => { const d = ex(P(t, a, a + .45)), o = io(P(t, 36.4, 37.1));
+      tf($('pt' + (i + 1)), { y: lerp(-500, 320 - i * 128, eo(d)) - o * 40, a: Math.min(cl(d * 3), 1 - o), r: (1 - d) * (i % 2 ? 6 : -6) + Math.sin(t * .8 + i) * .6 }); });
+    const s3 = rise(t, 30.7, 36.9); tf($('src3'), { y: 470 + s3.dy * .5, a: s3.a * .95 });
+    const r8 = rise(t, K.v08 - .05, 37.0); tf($('t8'), { y: -690 + r8.dy, a: r8.a }); }
+
+  // ===== Act 3 =====
+  const fl = 1 - P(t, K.drop, K.drop + .55); $('flash').style.visibility = t >= K.drop && fl > 0 ? 'visible' : 'hidden'; $('flash').style.opacity = fl * .8;
+  // orb: burst at the drop → into the phone → hub for integrations → fades behind the price
+  if (orb) {
+    const burst = bk(P(t, K.drop, K.drop + .8)), toPh = io(P(t, K.v10 - .5, K.v10 + .4)), outPh = io(P(t, K.v11 - .5, K.v11 + .2)), fade = 1 - P(t, K.v12 - .2, K.v12 + .5);
+    const ph = toPh * (1 - outPh);
+    const oy = lerp(-60, -260, ph), os = lerp(1.25, .5, ph) * lerp(.2, 1, burst) * (t > K.v11 ? lerp(1, .9, outPh) : 1);
+    const vis = t >= K.drop - .02 && fade > 0;
+    tf($('orbHost'), { y: oy, s: os, a: vis ? fade : 0 });
+    if (vis) { advanceOrb(t); orb.render(); }
+  }
+  { const r = rise(t, K.drop + .15, K.v10 - .1); tf($('t9'), { y: -720 + r.dy, a: r.a, s: lerp(1.1, 1, ex(P(t, K.drop, K.drop + .9))) });
+    $('t9').querySelector('.am').style.opacity = ex(P(t, K.exists - .25, K.exists + .3));
+    const pIn = ex(P(t, K.v10 - .4, K.v10 + .5)), pOut = io(P(t, K.v11 - .5, K.v11 + .2));
+    tf($('phone'), { y: lerp(900, 130, pIn) + pOut * 900, a: Math.min(cl(pIn * 2), 1 - pOut) });
+    [['m1', K.call], ['m2', K.text], ['m3', K.web], ['m4', K.booked - .1]].forEach(([id, a]) => { const e = ex(P(t, a - .15, a + .4)); const el = $(id);
+      el.style.opacity = e; el.style.transform = `translateY(${(1 - e) * 26}px) scale(${lerp(.96, 1, e)})`; });
+    const r11 = rise(t, K.v11 - .1, K.v12 - .1); tf($('t11'), { y: -720 + r11.dy, a: r11.a });
+    IG.forEach(([x, y], i) => { const r = rise(t, K.tools + i * .3, K.v12 + .1, 30); tf($('ig' + (i + 1)), { x, y: y + r.dy, a: r.a }); });
+    const pr = ex(P(t, K.v12 - .2, K.p49 + .2)), po = io(P(t, K.v13 - .4, K.v13 + .3));
+    tf($('price'), { y: lerp(80, -60, pr) - po * 60, a: Math.min(pr, 1 - po), s: lerp(.92, 1, pr) });
+    [[K.setup - .1, -300], [K.setup + .7, 0], [K.owned - .1, 300]].forEach(([a, x], i) => { const e = bk(P(t, a, a + .45)), o = io(P(t, K.v13 - .3, K.v13 + .3));
+      tf($('st' + (i + 1)), { x: i === 1 ? 0 : x * 1.02, y: 250 + (i === 1 ? 110 : 0), a: Math.min(cl(e * 2), 1 - o), s: lerp(1.35, 1, cl(e)) }); }); }
+  // pearls & gems: burst out of the orb, frame the phone, orbit the price card
+  { const burst = ex(P(t, K.drop, K.drop + 1.1)), vis = Math.min(P(t, K.drop, K.drop + .2), 1 - P(t, K.v13 - .2, K.v13 + .6));
+    const front = $('pearlsFront'), backL = $('pearlsBack');
+    PEARLS.forEach((p, i) => {
+      const ang = p.a0 + t * (.12 + p.z * .1);
+      const phoneF = win(t, K.v10 - .3, K.v11 + .2, .6, .6), priceF = win(t, K.v12 - .4, K.v13 + .4, .8, .6);
+      let rx = (300 + p.r * 260) * burst, ry = (300 + p.r * 260) * burst, cy = -60;
+      rx = lerp(rx, 470 + p.r * 40, phoneF); ry = lerp(ry, 700 + p.r * 60, phoneF);
+      rx = lerp(rx, 500 + p.r * 70, priceF); ry = lerp(ry, 290 + p.r * 60, priceF); cy = lerp(cy, -40, priceF);
+      const depth = Math.sin(ang), x = CX + Math.cos(ang) * rx, y = CY + cy + depth * ry * .55 + Math.sin(ang * 2 + i) * 16;
+      const sc = lerp(.6, 1.15, (depth + 1) / 2) * (.6 + p.z * .6), isFront = depth > 0;
+      if (p.el.parentNode !== (isFront ? front : backL)) (isFront ? front : backL).appendChild(p.el);
+      p.el.style.transform = `translate(${x - p.size / 2}px,${y - p.size / 2}px) scale(${sc}) rotate(${p.gem ? p.spin + t * 12 : 0}deg)`;
+      p.el.style.opacity = vis * (isFront ? 1 : .75) * (phoneF > .5 ? .6 : 1);
+      p.el.style.filter = (p.gem ? 'drop-shadow(0 12px 22px rgba(0,0,0,.6)) ' : '') + (isFront ? '' : `blur(${(1 - depth) * 2}px)`);
+      p.el.style.visibility = vis > .01 ? 'visible' : 'hidden';
+    }); }
+
+  // ===== Act 4 =====
+  { const r = rise(t, K.v13 - .1, 55.75); tf($('t13'), { y: -720 + r.dy, a: r.a }); $('t13b').style.opacity = ex(P(t, K.grows - .3, K.grows + .3));
+    const w = ex(P(t, K.v14 + .05, K.v14 + .8)); tf($('wm'), { y: 130 + (1 - w) * 30, a: w });
+    const tg = rise(t, K.built - .2, 61); tf($('tagline'), { y: 290 + tg.dy, a: tg.a });
+    const u = 'lazytradie.com.au', n = Math.round(cl(P(t, K.buildAus - .2, K.buildAus + .8)) * u.length);
+    $('url').textContent = u.slice(0, n) + (t > K.buildAus - .2 && Math.floor(t * 2.4) % 2 ? '▌' : ''); tf($('url'), { y: 420, a: t > K.buildAus - .25 ? 1 : 0 });
+    const s4 = rise(t, K.v12 + .3, K.v13 + .2); tf($('src4'), { y: 520 + s4.dy * .5, a: s4.a * .9 }); }
+}
+window.renderAt = renderAt;
+
+(async function () {
+  await document.fonts.ready;
+  await new Promise(r => { if (flagImg.complete) r(); else flagImg.onload = r; });
+  flagC.getContext('2d').drawImage(flagImg, 0, 0, FW, FH); flagPx = flagC.getContext('2d').getImageData(0, 0, FW, FH).data;
+  await new Promise(r => { const i = $('wm'); i.complete ? r() : i.onload = r; });
+  orb = LTOrb.create($('orbHost'), { manual: true, theme: 'black', time: 'morning', size: ORB_SIZE, preserve: true, magnetic: false, reducedMotion: false });
+  const res = []; document.querySelectorAll('.g').forEach(el => { el.style.visibility = 'visible'; res.push(liquidGlass(el, JSON.parse(el.dataset.lg || '{}')).supported); });
+  renderAt(0);
+  document.body.dataset.glass = res.join(','); document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
