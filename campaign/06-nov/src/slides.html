@@ -1,0 +1,178 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Why pay US$150?" price-comparison carousel, 4 pages, 1080×1350. slides.html?s=1..4
+     Amber / white / blue, pearls + blue gems, solid white cards for data, liquid glass on chips.
+     Competitor figures: each vendor's own pricing page, checked 6 Nov 2026 (see ../SOURCES.md). -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--ink:#0A6FB0;--blue:#1690DA;--am:#F29A00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;color:#fff;
+  background:radial-gradient(90% 60% at 12% 0%,#FFE3A8 0%,rgba(255,227,168,0) 60%),linear-gradient(165deg,#FFB430 0%,#F6A11B 50%,#E88A00 100%)}
+.s.on{display:block}
+.abs{position:absolute}
+.photo{position:absolute;left:0;top:0;width:1080px;height:1341px;background-size:cover;background-position:center top}
+.big{letter-spacing:-.055em;line-height:.9}
+.ts{text-shadow:0 3px 24px rgba(120,60,0,.28)}
+.tsb{text-shadow:0 3px 24px rgba(6,60,110,.28)}
+.card{position:absolute;background:#fff;color:var(--ink);box-shadow:0 30px 70px rgba(120,60,0,.28)}
+.bp{position:absolute;display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;white-space:nowrap;
+  background:linear-gradient(180deg,#2AA8EE,#1384CF);box-shadow:0 14px 30px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.5)}
+.amp{position:absolute;display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;white-space:nowrap;
+  background:linear-gradient(180deg,#FFB52E,#F29A00);box-shadow:0 16px 36px rgba(160,80,0,.35),inset 0 2px 1px rgba(255,255,255,.6);text-shadow:0 1px 3px rgba(150,70,0,.35)}
+.a{color:var(--am)}
+.pearl{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#fff 0%,#FFFDF7 22%,#F6EBDD 55%,#E3CFB4 85%,#CDB28E 100%);
+  box-shadow:inset -6px -10px 18px rgba(170,130,80,.35),inset 4px 6px 10px rgba(255,255,255,.9),0 14px 26px rgba(120,60,0,.25)}
+.pearl:after{content:'';position:absolute;left:20%;top:14%;width:32%;height:22%;border-radius:50%;background:rgba(255,255,255,.85);filter:blur(2px)}
+.bsph{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,#DDF4FF 0%,#7FD3FF 22%,#2AA8EE 55%,#0F80C8 100%);
+  box-shadow:inset -20px -30px 60px rgba(6,60,110,.35),0 40px 80px rgba(120,60,0,.25)}
+.gem{position:absolute;filter:drop-shadow(0 16px 22px rgba(6,60,110,.35))}
+.dots{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;gap:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.6)}
+.dots i.on{width:30px;border-radius:5px;background:#fff}
+.g{position:absolute;isolation:isolate;display:flex;align-items:center;gap:14px;color:#fff;font-weight:700;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(10,90,160,.32));
+  box-shadow:0 22px 50px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.95),inset 0 -10px 24px rgba(255,255,255,.14),inset 0 0 0 1.5px rgba(255,255,255,.6);
+  text-shadow:0 2px 8px rgba(6,60,110,.35)}
+.g .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:27px;text-shadow:none;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(160,80,0,.35)}
+/* page 2 bars */
+.row{display:grid;grid-template-columns:270px 1fr 150px;align-items:center;height:104px;border-top:1.5px solid rgba(10,111,176,.1)}
+.row:first-of-type{border-top:0}
+.row .n{font-size:27px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.row .n small{display:block;font-size:17px;font-weight:500;opacity:.65;margin-top:3px}
+.row .bar{height:40px;border-radius:20px;background:linear-gradient(90deg,#7FD3FF,#1690DA)}
+.row .p{text-align:right;font-size:36px;font-weight:800;letter-spacing:-.03em}
+.row.us{background:linear-gradient(90deg,rgba(242,154,0,.12),rgba(242,154,0,0));border-radius:26px;margin:0 -18px;padding:0 18px}
+.row.us .bar{background:linear-gradient(90deg,#FFC655,#F29A00)}
+.row.us .p{color:var(--am)}
+.fn{position:absolute;left:58px;right:58px;font-size:17px;line-height:1.35;color:rgba(255,255,255,.95);text-shadow:0 1px 6px rgba(120,60,0,.35)}
+/* page 3 table */
+table{width:100%;border-collapse:separate;border-spacing:0}
+th,td{height:84px;text-align:center;font-size:24px;font-weight:600;border-top:1.5px solid rgba(10,111,176,.1)}
+th{font-size:20px;font-weight:700;line-height:1.15;border-top:0;height:96px;vertical-align:bottom;padding-bottom:14px}
+th small{display:block;font-size:15px;font-weight:500;opacity:.65}
+td:first-child,th:first-child{text-align:left;font-size:23px}
+td i{font-size:34px}
+.y{color:#22A85C}.no{color:rgba(10,111,176,.35);font-size:30px;font-weight:700}
+.lt{background:rgba(242,154,0,.12)}
+th.lt{border-radius:24px 24px 0 0;color:var(--am)}
+tr:last-child td.lt{border-radius:0 0 24px 24px}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="gem" viewBox="0 0 100 90">
+  <polygon points="20,0 80,0 100,28 50,90 0,28" fill="#2AA8EE"/>
+  <polygon points="30,0 70,0 80,28 20,28" fill="#9BDFFF"/>
+  <polygon points="20,0 30,0 20,28 0,28" fill="#5CC6F7"/>
+  <polygon points="70,0 80,0 100,28 80,28" fill="#1A8FD6"/>
+  <polygon points="0,28 20,28 50,90" fill="#1B8DD3"/>
+  <polygon points="20,28 50,28 50,90" fill="#3DB3EF"/>
+  <polygon points="50,28 80,28 50,90" fill="#137CC2"/>
+  <polygon points="80,28 100,28 50,90" fill="#0B68A8"/>
+  <polygon points="33,3 52,3 44,22 28,22" fill="#fff" opacity=".55"/>
+</symbol></defs></svg>
+
+<!-- 1 · the hook (amber photo) -->
+<div class="s" id="s1" style="background:#E89F2B">
+  <div class="photo" style="background-image:url(img/cover.jpg)"></div>
+  <div class="abs big ts" style="left:54px;top:46px">
+    <div style="font-size:86px;font-weight:300">Why pay</div>
+    <div style="font-size:86px;font-weight:800">US$150 a month?</div></div>
+  <div class="bp" style="left:58px;top:282px;height:62px;padding:0 26px;border-radius:31px;font-size:25px">for an AI receptionist</div>
+  <div class="card" style="left:58px;top:384px;width:420px;border-radius:48px;padding:30px 36px 34px">
+    <div style="font-size:30px;font-weight:700;letter-spacing:-.02em">LazyTradie</div>
+    <div class="big" style="font-size:150px;font-weight:800;margin-top:6px">A$4<span class="a">9</span></div>
+    <div style="font-size:24px;font-weight:600;margin-top:6px;opacity:.8">a month, incl. GST</div></div>
+  <div class="g" style="left:58px;top:740px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:27px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-phone-call"></i></span>Calls</div>
+  <div class="g" style="left:58px;top:834px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:27px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-chat-circle-text"></i></span>SMS</div>
+  <div class="g" style="left:58px;top:928px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:27px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-globe"></i></span>Website chat</div>
+  <div class="bp" style="left:58px;top:1180px;height:72px;padding:0 30px;border-radius:36px;font-size:27px">Swipe to compare<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- 2 · receptionist price comparison -->
+<div class="s" id="s2">
+  <div class="bsph" style="right:-130px;top:-110px;width:380px;height:380px"></div>
+  <svg class="gem" style="right:240px;top:70px;width:120px;height:108px;transform:rotate(-14deg)"><use href="#gem"/></svg>
+  <div class="pearl" style="right:200px;top:220px;width:60px;height:60px"></div>
+  <div class="pearl" style="right:150px;top:262px;width:42px;height:42px"></div>
+  <div class="pearl" style="left:-40px;bottom:20px;width:110px;height:110px"></div>
+  <svg class="gem" style="left:110px;bottom:24px;width:90px;height:81px;transform:rotate(18deg)"><use href="#gem"/></svg>
+  <div class="bp" style="left:58px;top:80px;height:60px;padding:0 24px;border-radius:30px;font-size:22px;letter-spacing:.06em">AI RECEPTIONIST · MONTHLY PRICE</div>
+  <div class="abs big ts" style="left:54px;top:176px">
+    <div style="font-size:108px;font-weight:300">Same job.</div>
+    <div style="font-size:108px;font-weight:800">Different bill.</div></div>
+  <div class="card" style="left:56px;right:56px;top:420px;border-radius:52px;padding:22px 46px">
+    <div class="row"><div class="n">Smith.ai<small>AI Pro</small></div><div class="bar" style="width:100%"></div><div class="p">US$150</div></div>
+    <div class="row"><div class="n">Rosie<small>Scale*</small></div><div class="bar" style="width:99%"></div><div class="p">US$149</div></div>
+    <div class="row"><div class="n">My AI Front Desk<small>Business-in-a-Box</small></div><div class="bar" style="width:66%"></div><div class="p">US$99</div></div>
+    <div class="row"><div class="n">Goodcall<small>Starter</small></div><div class="bar" style="width:53%"></div><div class="p">US$79</div></div>
+    <div class="row us"><div class="n" style="color:#0A6FB0">LazyTradie<small>Solo · incl. GST</small></div><div class="bar" style="width:33%"></div><div class="p">A$49</div></div>
+  </div>
+  <div class="fn" style="top:1108px">Prices from each provider's own pricing page, checked 6 Nov 2026. Competitor prices are in USD as published (excl. tax) and are higher in AUD. *Rosie's lowest plan that books appointments. Plans differ in call minutes and features. LazyTradie Solo: A$49/mo incl. GST, includes 75 call minutes a month.</div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<!-- 3 · receptionist + admin copilot comparison -->
+<div class="s" id="s3">
+  <div class="bsph" style="left:-150px;top:-130px;width:360px;height:360px"></div>
+  <svg class="gem" style="right:70px;top:60px;width:130px;height:117px;transform:rotate(12deg)"><use href="#gem"/></svg>
+  <div class="pearl" style="right:230px;top:90px;width:54px;height:54px"></div>
+  <div class="pearl" style="right:40px;bottom:16px;width:100px;height:100px"></div>
+  <div class="pearl" style="right:150px;bottom:20px;width:52px;height:52px"></div>
+  <div class="bsph" style="left:420px;bottom:-190px;width:300px;height:300px"></div>
+  <div class="abs big ts" style="left:54px;top:150px">
+    <div style="font-size:70px;font-weight:300">They charge for a receptionist.</div>
+    <div style="font-size:70px;font-weight:800;margin-top:6px">We add an AI admin team.</div></div>
+  <div class="card" style="left:56px;right:56px;top:380px;border-radius:52px;padding:18px 34px 22px">
+    <table>
+      <tr><th></th><th>Rosie<small>Scale</small></th><th>Smith.ai<small>AI Pro</small></th><th>My AI<br>Front Desk</th><th class="lt">LazyTradie<small>Solo</small></th></tr>
+      <tr><td>Answers calls</td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="lt y"><i class="ph-fill ph-check-circle"></i></td></tr>
+      <tr><td>SMS</td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="no">—</td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="lt y"><i class="ph-fill ph-check-circle"></i></td></tr>
+      <tr><td>Website chat</td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="no">—</td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="lt y"><i class="ph-fill ph-check-circle"></i></td></tr>
+      <tr><td>Books your calendar</td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="y"><i class="ph-fill ph-check-circle"></i></td><td class="no">—</td><td class="lt y"><i class="ph-fill ph-check-circle"></i></td></tr>
+      <tr><td>AI admin by voice<br><small style="font-size:16px;opacity:.65;font-weight:500">quotes, invoices, jobs</small></td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="lt y"><i class="ph-fill ph-check-circle"></i></td></tr>
+      <tr><td style="font-weight:800">Per month</td><td style="font-weight:800">US$149</td><td style="font-weight:800">US$150</td><td style="font-weight:800">US$99</td><td class="lt" style="font-size:34px;font-weight:800;color:#F29A00">A$49</td></tr>
+    </table>
+  </div>
+  <div class="g" style="left:58px;top:1010px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-file-text"></i></span>Quotes</div>
+  <div class="g" style="left:272px;top:1010px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-receipt"></i></span>Invoices</div>
+  <div class="g" style="left:500px;top:1010px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-toolbox"></i></span>Jobs</div>
+  <div class="g" style="left:680px;top:1010px;height:76px;padding:0 26px 0 11px;border-radius:38px;font-size:26px" data-lg='{"scale":-90,"chroma":6,"blur":4}'><span class="ic"><i class="ph-fill ph-microphone"></i></span>All by voice</div>
+  <div class="fn" style="top:1118px">From each provider's own pricing page, checked 6 Nov 2026; competitor prices in USD as published (excl. tax). "—" = not listed on that plan's pricing page. LazyTradie Solo: A$49/mo incl. GST, 75 call minutes a month; the AI Admin Copilot runs on monthly AI credits.</div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<!-- 4 · the close (blue photo) -->
+<div class="s" id="s4" style="background:#4FB1E0">
+  <div class="photo" style="background-image:url(img/end.jpg)"></div>
+  <img class="abs" src="img/wm_white.png" style="left:58px;top:54px;width:230px;filter:drop-shadow(0 3px 12px rgba(6,60,110,.35))">
+  <div class="abs big tsb" style="left:54px;top:150px">
+    <div style="font-size:96px;font-weight:300">All of it.</div>
+    <div style="font-size:122px;font-weight:800;margin-top:4px">A$4<span class="a">9</span>.</div></div>
+  <div class="g" style="left:56px;top:470px;width:400px;flex-direction:column;align-items:flex-start;gap:14px;padding:28px 30px;border-radius:36px;font-size:24px;line-height:1.2;white-space:normal" data-lg='{"scale":-120,"chroma":7,"blur":6}'>
+    <div style="font-size:18px;letter-spacing:.14em;opacity:.9">SOLO PLAN INCLUDES</div>
+    <div style="display:flex;gap:12px;align-items:flex-start"><i class="ph-fill ph-check-circle" style="color:#FFC655;font-size:28px;flex:none"></i>AI receptionist: calls, SMS &amp; website chat</div>
+    <div style="display:flex;gap:12px;align-items:flex-start"><i class="ph-fill ph-check-circle" style="color:#FFC655;font-size:28px;flex:none"></i>Jobs booked into your calendar</div>
+    <div style="display:flex;gap:12px;align-items:flex-start"><i class="ph-fill ph-check-circle" style="color:#FFC655;font-size:28px;flex:none"></i>AI Admin Copilot: quotes, invoices &amp; jobs by voice</div>
+  </div>
+  <div class="amp" style="left:58px;top:1170px;height:88px;padding:0 34px;border-radius:44px;font-size:29px">lazytradie.com.au<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="left:62px;top:1272px;font-size:16px;font-weight:600;text-shadow:0 1px 6px rgba(6,60,110,.4)">A$49/mo incl. GST · 75 call minutes a month</div>
+  <div class="dots" style="left:auto;right:56px;transform:none;bottom:56px"><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  const id = 's' + (new URLSearchParams(location.search).get('s') || '1'); const el = document.getElementById(id); el.classList.add('on');
+  await document.fonts.ready;
+  const urls = [...el.querySelectorAll('.photo')].map(p => getComputedStyle(p).backgroundImage.slice(5, -2));
+  await Promise.all([...el.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))
+    .concat(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; }))));
+  el.querySelectorAll('.g').forEach(g => liquidGlass(g, JSON.parse(g.dataset.lg || '{}')));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
