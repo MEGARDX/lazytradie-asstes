@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Champions Stakes Day poster (Sat 7 Nov), 1080×1350. Curly-haired campaign girl at the races.
+     No betting, drinks or racecourse branding. Liquid glass on the card and chips. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--navy:#0D1B2A;--am:#F5A623}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:var(--navy);background:#cfe3f0}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/race.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.93}
+.lbl{position:absolute;display:flex;align-items:center;gap:12px;height:56px;padding:0 24px;border-radius:28px;font-size:20px;font-weight:800;letter-spacing:.14em;
+  color:#fff;background:linear-gradient(180deg,#1E3A5C,#0D1B2A);box-shadow:0 14px 30px rgba(13,27,42,.3),inset 0 2px 1px rgba(255,255,255,.25)}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:var(--navy);font-weight:800;white-space:nowrap;letter-spacing:-.01em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(13,27,42,.35),inset 0 2px 1px rgba(255,255,255,.65)}
+.g{position:absolute;isolation:isolate;display:flex;align-items:center;gap:14px;color:#fff;font-weight:700;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(13,27,42,.34));
+  box-shadow:0 22px 50px rgba(13,27,42,.3),inset 0 2px 1px rgba(255,255,255,.95),inset 0 -10px 24px rgba(255,255,255,.14),inset 0 0 0 1.5px rgba(255,255,255,.6);
+  text-shadow:0 2px 8px rgba(13,27,42,.45)}
+.ic{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-size:25px;color:var(--navy);text-shadow:none;flex:none;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(13,27,42,.3)}
+.row{display:flex;align-items:center;gap:12px;font-size:24px}
+.row i.ph-check-circle{color:#FFC655;font-size:30px;flex:none}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:330px;background:linear-gradient(180deg,rgba(13,27,42,0),rgba(13,27,42,.55) 60%,rgba(13,27,42,.8))"></div>
+
+  <div class="lbl" style="left:58px;top:54px"><i class="ph-fill ph-trophy" style="color:#F5A623;letter-spacing:0"></i>CHAMPIONS DAY · SAT 7 NOV</div>
+  <div class="abs big" style="left:54px;top:140px">
+    <div style="font-size:98px;font-weight:300">Back a winner.</div>
+    <div style="font-size:98px;font-weight:800;margin-top:4px">Not your <span style="color:#E58A00">voicemail.</span></div></div>
+
+  <div class="g" style="left:676px;top:396px;width:366px;flex-direction:column;align-items:flex-start;gap:16px;padding:26px 26px 28px;border-radius:34px;white-space:normal;line-height:1.15" data-lg='{"scale":-120,"chroma":7,"blur":6}'>
+    <div style="font-size:17px;letter-spacing:.14em;opacity:.95">WHILE YOU'RE TRACKSIDE</div>
+    <div class="row"><i class="ph-fill ph-check-circle"></i>Calls answered</div>
+    <div class="row"><i class="ph-fill ph-check-circle"></i>Texts &amp; chats replied</div>
+    <div class="row"><i class="ph-fill ph-check-circle"></i>Jobs booked in</div>
+  </div>
+
+  <div class="amp" style="left:58px;top:1176px;height:96px;padding:0 36px 0 14px;border-radius:48px;font-size:32px">
+    <span class="ic" style="width:68px;height:68px;font-size:32px;background:var(--navy);color:#F5A623;box-shadow:none"><i class="ph-fill ph-chat-circle-dots"></i></span>
+    <span style="display:flex;flex-direction:column;line-height:1.05">Comment “DEMO”<span style="font-size:19px;font-weight:700;opacity:.75">for your free demo</span></span></div>
+  <img class="abs" src="img/wm_white.png" style="right:58px;top:1206px;width:200px">
+</div>
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/race.jpg'; });
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  document.querySelectorAll('.g').forEach(g => liquidGlass(g, JSON.parse(g.dataset.lg || '{}')));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
