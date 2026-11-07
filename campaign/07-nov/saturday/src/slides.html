@@ -1,0 +1,81 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Day Off / Your Saturday, handled" carousel (Sat 7 Nov), cover + 3 pages, 1080×1350. slides.html?s=0..3
+     Rebuilds the 29 Oct Admin Copilot format: photo cover with corner words; white numbered pages with
+     logo, thin rule, two-tone title and a bleeding row of three photo tiles with white caption pills. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;background:#fff;color:#141E2B}
+.s.on{display:block}
+.abs{position:absolute}
+/* cover */
+.photo{position:absolute;inset:0;background-size:cover;background-position:center}
+.cw{position:absolute;top:70px;font-size:118px;font-weight:500;letter-spacing:-.055em;color:#fff;line-height:1;text-shadow:0 2px 30px rgba(20,30,43,.18)}
+/* pages */
+.logo{position:absolute;left:50%;top:100px;transform:translateX(-50%);display:flex;align-items:center;gap:18px}
+.logo .i{width:66px;height:66px}
+.logo .w{height:66px}
+.rule{position:absolute;left:539px;top:236px;width:3px;height:198px;background:#141E2B}
+.ttl{position:absolute;left:0;right:0;top:508px;text-align:center;font-size:100px;font-weight:600;letter-spacing:-.06em;line-height:.93}
+.ttl div:last-child{color:#6B6F74;font-weight:500}
+.tile{position:absolute;top:796px;width:378px;height:440px;border-radius:32px;overflow:hidden;background-size:cover;background-position:center}
+.tile.l{left:-79px}.tile.m{left:351px}.tile.r{left:781px}
+.cap{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);height:44px;padding:0 22px;border-radius:22px;background:#fff;color:#141E2B;
+  display:flex;align-items:center;font-size:19px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+</style></head><body>
+
+<!-- 0 · cover -->
+<div class="s" id="s0">
+  <div class="photo" style="background-image:url(img/cover.jpg)"></div>
+  <div class="abs" style="left:0;right:0;top:0;height:300px;background:linear-gradient(180deg,rgba(20,30,43,.22),rgba(20,30,43,0))"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:520px;background:linear-gradient(180deg,rgba(20,30,43,0),rgba(20,30,43,.45) 60%,rgba(20,30,43,.62))"></div>
+  <div class="cw" style="left:58px">Day</div>
+  <div class="cw" style="right:58px">Off</div>
+  <div class="abs" style="left:0;right:0;top:1004px;text-align:center;color:#fff;font-size:36px;font-weight:500;letter-spacing:-.03em">Handled by</div>
+  <div class="abs" style="left:50%;top:1058px;transform:translateX(-50%);display:flex;align-items:center;gap:12px">
+    <img src="img/icon.png" style="width:46px;height:46px"><img src="img/wm_white.png" style="height:46px"></div>
+  <div class="abs" style="left:0;right:0;top:1130px;text-align:center;color:#fff;font-size:124px;font-weight:500;letter-spacing:-.055em;line-height:1">Your Saturday</div>
+</div>
+
+<!-- 1 · Morning calls answered -->
+<div class="s" id="s1">
+  <div class="logo"><img class="i" src="img/icon.png"><img class="w" src="img/wm_navy.png"></div>
+  <div class="rule"></div>
+  <div class="ttl"><div>1. Morning Calls</div><div>Answered</div></div>
+  <div class="tile l" style="background-image:url(img/1a.jpg)"><div class="cap">You: sleeping in</div></div>
+  <div class="tile m" style="background-image:url(img/1b.jpg)"><div class="cap">Call answered</div></div>
+  <div class="tile r" style="background-image:url(img/1c.jpg)"><div class="cap">Booked · Tue 9am</div></div>
+</div>
+
+<!-- 2 · Texts & chats replied -->
+<div class="s" id="s2">
+  <div class="logo"><img class="i" src="img/icon.png"><img class="w" src="img/wm_navy.png"></div>
+  <div class="rule"></div>
+  <div class="ttl"><div>2. Texts &amp; Chats</div><div>Replied</div></div>
+  <div class="tile l" style="background-image:url(img/2a.jpg)"><div class="cap">You: out riding</div></div>
+  <div class="tile m" style="background-image:url(img/2b.jpg)"><div class="cap">Texts &amp; web chats</div></div>
+  <div class="tile r" style="background-image:url(img/2c.jpg)"><div class="cap">Booked · Thu 10am</div></div>
+</div>
+
+<!-- 3 · Big jobs wait for you -->
+<div class="s" id="s3">
+  <div class="logo"><img class="i" src="img/icon.png"><img class="w" src="img/wm_navy.png"></div>
+  <div class="rule"></div>
+  <div class="ttl"><div>3. Big Jobs</div><div>Wait For You</div></div>
+  <div class="tile l" style="background-image:url(img/3a.jpg)"><div class="cap">$1,000+ job</div></div>
+  <div class="tile m" style="background-image:url(img/3c.jpg)"><div class="cap">Your OK first</div></div>
+  <div class="tile r" style="background-image:url(img/3b.jpg)"><div class="cap">Monday, sorted</div></div>
+</div>
+
+<script>
+(async () => {
+  const id = 's' + (new URLSearchParams(location.search).get('s') || '0'); const el = document.getElementById(id); el.classList.add('on');
+  await document.fonts.ready;
+  const urls = [...el.querySelectorAll('.photo,.tile')].map(p => getComputedStyle(p).backgroundImage.slice(5, -2));
+  await Promise.all([...el.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))
+    .concat(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; }))));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
