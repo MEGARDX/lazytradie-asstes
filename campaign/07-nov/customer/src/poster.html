@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "She rang 3 tradies. Only one picked up." (Sat 7 Nov), 1080×1350. The blonde influencer plays the customer
+     (shirt logo painted out for that reason). Blue / white / amber, solid cards for legibility. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<style>
+:root{--blue:#0A6FB0;--am:#F29A00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;background:#6FC3EC}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/photo.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(6,60,110,.28)}
+.c{position:absolute;left:52px;width:344px;display:grid;grid-template-columns:58px 1fr;gap:16px;align-items:center;padding:18px 22px 18px 18px;border-radius:30px;
+  background:#fff;color:#1b2a3a;box-shadow:0 18px 40px rgba(6,60,110,.25)}
+.c .ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:30px;color:#fff}
+.c .t{font-size:29px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.c .s{font-size:21px;font-weight:600;opacity:.6;margin-top:6px}
+.no .ic{background:#E5484D}
+.no{opacity:.97}
+.no .t{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:rgba(229,72,77,.6)}
+.yes{background:linear-gradient(180deg,#FFC24D,#F5A623);color:#0D1B2A;width:372px;box-shadow:0 20px 44px rgba(160,80,0,.35),inset 0 2px 1px rgba(255,255,255,.6)}
+.yes .ic{background:#0D1B2A;color:#FFC24D}
+.yes .s{opacity:.8}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,rgba(15,124,196,0),rgba(15,124,196,.55) 60%,rgba(15,124,196,.8))"></div>
+
+  <div class="abs big" style="left:52px;top:52px">
+    <div style="font-size:86px;font-weight:300">She rang 3 tradies.</div>
+    <div style="font-size:86px;font-weight:800;margin-top:4px">Only <span style="color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">one</span> picked up.</div></div>
+
+  <div class="c no" style="top:300px"><span class="ic"><i class="ph-bold ph-x"></i></span><div><div class="t">Tradie #1</div><div class="s">Voicemail…</div></div></div>
+  <div class="c no" style="top:432px"><span class="ic"><i class="ph-bold ph-x"></i></span><div><div class="t">Tradie #2</div><div class="s">Voicemail…</div></div></div>
+  <div class="c yes" style="top:564px;padding:22px 24px 22px 20px"><span class="ic"><i class="ph-bold ph-check"></i></span><div><div class="t" style="font-size:32px">Tradie #3</div><div class="s" style="font-size:22px">Answered &amp; booked ✓</div></div></div>
+  <div class="abs" style="left:52px;top:712px;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px;border-radius:26px;background:#fff;color:#1b2a3a;font-size:19px;font-weight:700;box-shadow:0 10px 24px rgba(6,60,110,.2)">
+    with <img src="img/icon.png" style="width:30px;height:30px"><img src="img/wm_navy.png" style="height:30px"></div>
+
+  <div class="abs big" style="left:52px;top:1040px;font-size:108px;font-weight:800">Be tradie <span style="color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">#3.</span></div>
+  <div class="amp" style="left:58px;top:1178px;height:88px;padding:0 34px;border-radius:44px;font-size:31px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="right:52px;top:1166px;text-align:right;line-height:1;background:#fff;color:#0A6FB0;padding:16px 26px 18px;border-radius:28px;box-shadow:0 18px 40px rgba(6,60,110,.3)">
+    <div style="font-size:20px;font-weight:700;opacity:.75">Starts at</div>
+    <div style="font-size:60px;font-weight:800;letter-spacing:-.05em">A$<span style="color:#F29A00">49</span><span style="font-size:24px;font-weight:600;letter-spacing:-.02em">/month</span></div></div>
+</div>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/photo.jpg'; });
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
