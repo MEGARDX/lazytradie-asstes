@@ -9,13 +9,13 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
 #p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;
-  background:radial-gradient(60% 40% at 50% 62%,rgba(245,166,35,.45),rgba(245,166,35,0) 70%),radial-gradient(80% 50% at 100% 0%,rgba(127,211,255,.16),rgba(127,211,255,0) 70%),linear-gradient(180deg,#132842,#0D1B2A 60%,#0A1522)}
+  background:radial-gradient(60% 40% at 50% 62%,rgba(255,196,77,.55),rgba(255,196,77,0) 70%),radial-gradient(90% 45% at 50% 0%,rgba(255,255,255,.45),rgba(255,255,255,0) 70%),linear-gradient(180deg,#3DB3F2 0%,#1C93DD 50%,#0F7CC4 100%)}
 .story #p{height:1920px}
 .abs{position:absolute}
 .big{letter-spacing:-.05em;line-height:.95}
 /* phone */
 .phone{position:absolute;left:50%;transform:translateX(-50%);width:660px;height:1390px;border-radius:104px;padding:18px;
-  background:linear-gradient(145deg,#4a4f57,#1c1f24 40%,#2b2f35 70%,#5a5f67);box-shadow:0 60px 120px rgba(0,0,0,.6),0 0 0 2px rgba(255,255,255,.08) inset}
+  background:linear-gradient(145deg,#f4f6f8,#c9d0d8 40%,#e9edf1 70%,#ffffff);box-shadow:0 60px 120px rgba(6,60,110,.45),0 0 0 2px rgba(255,255,255,.08) inset}
 .screen{position:relative;width:100%;height:100%;border-radius:88px;overflow:hidden;background:#1a2a3a url(img/wall.jpg) center 30%/cover}
 .screen:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0) 30%,rgba(0,0,0,.15))}
 .island{position:absolute;left:50%;top:22px;transform:translateX(-50%);width:190px;height:54px;border-radius:27px;background:#000}
@@ -38,8 +38,8 @@ body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;bac
 </style></head><body>
 <div id="p">
   <div class="abs big hl1" style="left:0;right:0;top:64px;text-align:center">
-    <div style="font-size:92px;font-weight:300">You were at the beach.</div>
-    <div style="font-size:92px;font-weight:800;color:#F5A623;margin-top:6px">Your business wasn't.</div></div>
+    <div style="font-size:92px;font-weight:300;text-shadow:0 3px 24px rgba(6,60,110,.3)">You were at the beach.</div>
+    <div style="font-size:92px;font-weight:800;margin-top:6px;text-shadow:0 3px 24px rgba(6,60,110,.3)">Your business <span style="color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">wasn't.</span></div></div>
 
   <div class="phone" id="ph" style="top:296px">
     <div class="screen">
@@ -60,11 +60,11 @@ body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;bac
     </div>
   </div>
 
-  <div class="abs" id="foot" style="left:0;right:0;bottom:0;height:230px;background:linear-gradient(180deg,rgba(10,21,34,0),rgba(10,21,34,.95) 45%)"></div>
+  <div class="abs" id="foot" style="left:0;right:0;bottom:0;height:230px;background:linear-gradient(180deg,rgba(15,124,196,0),rgba(15,124,196,.96) 45%)"></div>
   <div class="chip" id="cta" style="left:58px;bottom:56px">Comment “DEMO”</div>
-  <div class="abs" id="pr" style="right:58px;bottom:58px;text-align:right;line-height:1">
-    <div style="font-size:22px;font-weight:600;opacity:.8">Starts at</div>
-    <div style="font-size:64px;font-weight:800;letter-spacing:-.05em">A$<span style="color:#F5A623">49</span><span style="font-size:26px;font-weight:600;letter-spacing:-.02em">/month</span></div></div>
+  <div class="abs" id="pr" style="right:58px;bottom:44px;text-align:right;line-height:1;background:#fff;color:#0A6FB0;padding:16px 26px 18px;border-radius:28px;box-shadow:0 18px 40px rgba(6,60,110,.3)">
+    <div style="font-size:20px;font-weight:700;opacity:.75">Starts at</div>
+    <div style="font-size:64px;font-weight:800;letter-spacing:-.05em">A$<span style="color:#F29A00">49</span><span style="font-size:26px;font-weight:600;letter-spacing:-.02em">/month</span></div></div>
   <img class="abs" id="wm" src="img/wm_white.png" style="left:50%;transform:translateX(-50%);bottom:76px;width:170px;display:none">
 </div>
 <script>
