@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Sundays are for you. Not the paperwork." (Sun 8 Nov), 1080×1350. Curly-haired campaign girl, Admin Copilot.
+     The generated photo's bottom (old table, grass, dog) fades into the sky-blue set under the price + CTA.
+     Gemini watermark removed in img/photo.jpg. Solid white cards for legibility. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;background:#7CC8EE}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/photo.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(6,60,110,.3)}
+.card{position:absolute;background:#fff;color:#0D1B2A;box-shadow:0 22px 50px rgba(6,60,110,.28)}
+.orb{width:40px;height:40px;border-radius:50%;flex:none;background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:0 0 18px rgba(245,166,35,.6)}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <!-- fade the leftover set (table, grass, dog) into the sky-blue studio floor -->
+  <div class="abs" style="left:0;right:0;bottom:0;height:420px;background:linear-gradient(180deg,rgba(124,200,238,0),rgba(110,190,234,.86) 42%,#64B6E6 70%)"></div>
+
+  <div class="abs big" style="left:50px;top:50px">
+    <div style="font-size:92px;font-weight:300">Sundays are for you.</div>
+    <div style="font-size:92px;font-weight:800;margin-top:4px">Not the <span style="color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">paperwork.</span></div></div>
+
+  <!-- voice command -->
+  <div class="card" style="left:612px;top:290px;width:420px;height:76px;border-radius:38px;display:flex;align-items:center;gap:14px;padding:0 22px 0 14px;font-size:24px;font-weight:700;letter-spacing:-.02em">
+    <span style="width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#0D1B2A;color:#FFC24D;font-size:24px;flex:none"><i class="ph-fill ph-microphone"></i></span>
+    “Quote the Smith job…”</div>
+  <!-- quote card -->
+  <div class="card" style="left:612px;top:384px;width:420px;border-radius:34px;padding:22px 24px 24px">
+    <div style="display:flex;align-items:center;gap:12px;font-size:19px;font-weight:700;opacity:.65"><span class="orb"></span>Admin Copilot · Quote ready</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px">
+      <div style="font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1">Switchboard<br>upgrade</div>
+      <div style="font-size:54px;font-weight:800;letter-spacing:-.05em;line-height:1">$2,450</div></div>
+    <div style="margin-top:18px;height:62px;border-radius:31px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:23px;font-weight:800;
+      background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:inset 0 2px 1px rgba(255,255,255,.6)"><i class="ph-fill ph-hand-tap"></i>Tap to confirm</div>
+  </div>
+
+  <div class="abs" style="left:0;right:0;top:1112px;text-align:center;font-size:24px;font-weight:600;letter-spacing:-.01em;text-shadow:0 1px 10px rgba(6,60,110,.35)">
+    Admin Copilot: quotes, invoices &amp; bookings by voice. Nothing's sent until you tap confirm.</div>
+  <div class="amp" style="left:52px;top:1182px;height:90px;padding:0 34px;border-radius:45px;font-size:31px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="right:52px;top:1172px;text-align:right;line-height:1;background:#fff;color:#0A6FB0;padding:16px 26px 18px;border-radius:28px;box-shadow:0 18px 40px rgba(6,60,110,.3)">
+    <div style="font-size:20px;font-weight:700;opacity:.75">Starts at</div>
+    <div style="font-size:60px;font-weight:800;letter-spacing:-.05em">A$<span style="color:#F29A00">49</span><span style="font-size:24px;font-weight:600;letter-spacing:-.02em">/month</span></div></div>
+</div>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/photo.jpg'; });
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
