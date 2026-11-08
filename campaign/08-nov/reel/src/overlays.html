@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Tradies at 8pm on a Sunday" meme-reel overlays, 1080×1920, transparent. overlays.html?o=<id>. Video hole at y 600–1208. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
+.o{position:relative;width:1080px;height:1920px;display:none;color:#fff}
+.o.on{display:block}
+.abs{position:absolute}
+.top{position:absolute;left:60px;right:60px;top:380px;font-size:66px;font-weight:700;letter-spacing:-.035em;line-height:1.08}
+.cap{position:absolute;left:60px;right:60px;top:1250px;font-size:50px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.chip{position:absolute;left:60px;top:1250px;height:96px;padding:0 34px 0 18px;border-radius:48px;display:flex;align-items:center;gap:18px;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);color:#0D1B2A;font-size:38px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.chip .t{width:62px;height:62px;border-radius:50%;background:#0D1B2A;color:#F5A623;display:grid;place-items:center;font-size:36px}
+.chip small{font-weight:600;opacity:.75}
+.logo{display:inline-flex;align-items:center;gap:12px;vertical-align:-14px}
+</style></head><body>
+
+<div class="o" id="head1"><div class="top">Tradies at 8pm on a Sunday:</div></div>
+<div class="o" id="cap_wait"><div class="cap" style="font-style:italic;color:#E5484D">…the paperwork is waiting.</div></div>
+<div class="o" id="wait"><div class="top" style="font-size:96px;top:420px">…hang on.</div></div>
+<div class="o" id="head2"><div class="top" style="top:330px">Tradies with <span class="logo"><img src="img/icon.png" style="width:70px;height:70px"><img src="img/wm_white.png" style="height:70px"></span><br>at 8pm on a Sunday:</div></div>
+<div class="o" id="cap_quote"><div class="cap">“Quote the Smith job, switchboard upgrade, $2,450.”</div></div>
+<div class="o" id="chip_draft"><div class="chip"><span class="t">✓</span>Quote drafted <small>· tap to confirm</small></div></div>
+<div class="o" id="chip_sent"><div class="chip"><span class="t">✓</span>Confirmed <small>· back to the footy</small></div></div>
+
+<div class="o" id="end" style="background:#000">
+  <div class="abs" style="left:0;right:0;top:560px;text-align:center;font-size:88px;font-weight:700;letter-spacing:-.05em;line-height:1">Sunday nights are</div>
+  <div class="abs" style="left:0;right:0;top:660px;text-align:center;font-size:88px;font-weight:700;letter-spacing:-.05em;line-height:1">for the footy.</div>
+  <div class="abs" style="left:0;right:0;top:760px;text-align:center;font-size:88px;font-weight:700;letter-spacing:-.05em;line-height:1;color:#F5A623">Not the paperwork.</div>
+  <div class="abs" style="left:0;right:0;top:930px;text-align:center;font-size:40px;font-weight:500;letter-spacing:-.02em;opacity:.85">Starts at</div>
+  <div class="abs" style="left:0;right:0;top:980px;text-align:center;font-size:170px;font-weight:700;letter-spacing:-.06em;line-height:1">A$<span style="color:#F5A623">49</span><span style="font-size:60px;font-weight:500;letter-spacing:-.03em">/month</span></div>
+  <div class="abs" style="left:50%;top:1210px;transform:translateX(-50%);height:104px;padding:0 44px;border-radius:52px;background:linear-gradient(180deg,#FFC24D,#F5A623);color:#0D1B2A;display:flex;align-items:center;font-size:44px;font-weight:800;letter-spacing:-.02em;white-space:nowrap">Comment “DEMO”</div>
+  <div class="abs" style="left:50%;top:1370px;transform:translateX(-50%);display:flex;align-items:center;gap:14px"><img src="img/icon.png" style="width:64px;height:64px"><img src="img/wm_white.png" style="height:64px"></div>
+  <div class="abs" style="left:0;right:0;top:1460px;text-align:center;font-size:24px;font-weight:500;opacity:.6">Admin Copilot: quotes, invoices &amp; jobs by voice · nothing's sent until you tap confirm</div>
+</div>
+
+<script>
+(async () => {
+  const id = new URLSearchParams(location.search).get('o'); document.getElementById(id).classList.add('on');
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
