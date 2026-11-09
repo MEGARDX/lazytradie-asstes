@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Text overlays in the reference's style (centred white sans, light over regular), 1080×1920 transparent. text.html?o=<id> -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
+.o{position:relative;width:1080px;height:1920px;display:none;color:#fff}
+.o.on{display:block}
+.c{position:absolute;left:0;right:0;text-align:center;text-shadow:0 2px 30px rgba(0,0,0,.45);letter-spacing:-.03em;line-height:1.05}
+</style></head><body>
+<div class="o" id="title"><div class="c" style="top:830px">
+  <div style="font-size:66px;font-weight:400">Admin Copilot in</div>
+  <div style="font-size:112px;font-weight:500;margin-top:8px;letter-spacing:-.04em">LazyTradie</div></div></div>
+<div class="o" id="quote"><div class="c" style="top:1420px;font-size:58px;font-weight:400;font-style:italic">“Quote the Smith job.”</div></div>
+<div class="o" id="sub1"><div class="c" style="top:1380px;font-size:74px;font-weight:500">You say it.</div></div>
+<div class="o" id="sub2"><div class="c" style="top:1340px;font-size:74px;font-weight:500">Copilot does<br>the paperwork.</div></div>
+<div class="o" id="end" style="background:#000">
+  <div class="c" style="top:820px;display:flex;justify-content:center;align-items:center;gap:18px"><img src="img/icon.png" style="width:84px;height:84px"><img src="img/wm_white.png" style="height:84px"></div>
+  <div class="c" style="top:960px;font-size:40px;font-weight:400;opacity:.85">Quotes, invoices &amp; jobs by voice.</div>
+  <div class="c" style="top:1030px;font-size:30px;font-weight:400;opacity:.6">Starts at A$49/month · Comment “DEMO”</div></div>
+<script>
+const id = new URLSearchParams(location.search).get('o'); document.getElementById(id).classList.add('on');
+document.fonts.ready.then(async () => { await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))); document.body.dataset.ready = '1'; });
+</script></body></html>
