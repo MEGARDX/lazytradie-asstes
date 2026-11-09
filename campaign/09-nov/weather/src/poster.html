@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Snow. Storms. A heatwave. In November." (Mon 9 Nov), 1080×1350. Curly-haired campaign girl dressed for every season.
+     Photo fixes in img/photo.jpg: Gemini watermark + half-printed vest text removed; upscaled from the 825px upload.
+     Light, general storm-season hook (no reference to specific disasters). Solid chips for legibility. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;background:#5EC3EC}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/photo.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(6,60,110,.3)}
+.ch{position:absolute;left:52px;display:flex;align-items:center;gap:14px;height:76px;padding:0 28px 0 12px;border-radius:38px;background:#fff;color:#0D1B2A;
+  font-size:28px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;box-shadow:0 14px 32px rgba(6,60,110,.25)}
+.ch .i{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:27px;color:#fff}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <div class="abs big" style="left:50px;top:48px">
+    <div style="font-size:78px;font-weight:300">Snow. Storms. A heatwave.</div>
+    <div style="font-size:112px;font-weight:800;margin-top:6px;color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">In November.</div></div>
+
+  <div class="ch" style="top:356px"><span class="i" style="background:#0A6FB0"><i class="ph-fill ph-cloud-lightning"></i></span>Storm damage</div>
+  <div class="ch" style="top:446px"><span class="i" style="background:#F29A00"><i class="ph-fill ph-thermometer-hot"></i></span>Aircon on the blink</div>
+  <div class="ch" style="top:536px"><span class="i" style="background:#E5484D"><i class="ph-fill ph-lightning-slash"></i></span>Power out</div>
+
+  <div class="abs big" style="left:52px;top:668px;width:440px">
+    <div style="font-size:60px;font-weight:800;letter-spacing:-.045em;line-height:1">Your phone's about to go off.</div>
+    <div style="font-size:27px;font-weight:600;letter-spacing:-.02em;line-height:1.25;margin-top:18px;opacity:.97">LazyTradie answers every call, flags emergencies first, books the rest.</div></div>
+
+  <div class="amp" style="left:52px;top:1192px;height:90px;padding:0 34px;border-radius:45px;font-size:31px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="right:44px;top:1180px;text-align:right;line-height:1;background:#fff;color:#0A6FB0;padding:16px 26px 18px;border-radius:28px;box-shadow:0 18px 40px rgba(6,60,110,.3)">
+    <div style="font-size:20px;font-weight:700;opacity:.75">Starts at</div>
+    <div style="font-size:60px;font-weight:800;letter-spacing:-.05em">A$<span style="color:#F29A00">49</span><span style="font-size:24px;font-weight:600;letter-spacing:-.02em">/month</span></div></div>
+</div>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/photo.jpg'; });
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
