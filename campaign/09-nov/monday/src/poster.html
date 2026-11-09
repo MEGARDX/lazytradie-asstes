@@ -1,0 +1,91 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Monday, 7:02am. Your weekend, already sorted." (Mon 9 Nov), 1080×1350 feed + 1080×1920 story. poster.html?f=feed|story
+     Phone shows an illustrative in-app weekend recap for the fictional demo account (Turner Electrical). Labelled as example data.
+     Every line maps to a real feature: calls answered, jobs booked (T1), quotes waiting for confirm, T2 approval, T3 emergency alert. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root{--navy:#0D1B2A;--am:#F5A623;--blue:#0A6FB0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;
+  background:radial-gradient(60% 40% at 50% 62%,rgba(255,196,77,.55),rgba(255,196,77,0) 70%),radial-gradient(90% 45% at 50% 0%,rgba(255,255,255,.45),rgba(255,255,255,0) 70%),linear-gradient(180deg,#3DB3F2 0%,#1C93DD 50%,#0F7CC4 100%)}
+.story #p{height:1920px}
+.abs{position:absolute}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(6,60,110,.3)}
+.phone{position:absolute;left:50%;transform:translateX(-50%) scale(.88);transform-origin:50% 0;width:640px;height:1340px;border-radius:100px;padding:17px;
+  background:linear-gradient(145deg,#f4f6f8,#c9d0d8 40%,#e9edf1 70%,#ffffff);box-shadow:0 60px 120px rgba(6,60,110,.45)}
+.screen{position:relative;width:100%;height:100%;border-radius:84px;overflow:hidden;background:#F4F7FB;color:var(--navy);font-family:Inter}
+.island{position:absolute;left:50%;top:20px;transform:translateX(-50%);width:180px;height:52px;border-radius:26px;background:#000}
+.sb{position:absolute;left:50px;right:42px;top:28px;display:flex;justify-content:space-between;font-weight:600;font-size:23px}
+.hd{position:absolute;left:34px;right:34px;top:100px;display:flex;align-items:center;gap:12px}
+.hd img{width:44px;height:44px;border-radius:11px}
+.hd .n{font-size:21px;font-weight:600;color:#6b7785}
+.hd .n b{display:block;font-size:24px;color:var(--navy);font-weight:800}
+.ttl{position:absolute;left:34px;right:34px;top:170px;font-family:'Inter Tight';font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.ttl small{display:block;font-family:Inter;font-size:20px;font-weight:600;letter-spacing:0;color:#6b7785;margin-top:8px}
+.grid{position:absolute;left:28px;right:28px;top:262px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.st{background:#fff;border-radius:26px;padding:18px 20px;box-shadow:0 4px 14px rgba(13,27,42,.06)}
+.st .v{font-family:'Inter Tight';font-size:54px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.st .l{font-size:18px;font-weight:600;color:#55606c;margin-top:6px;line-height:1.2}
+.st i{font-size:26px;float:right;margin-top:4px}
+.sec{position:absolute;left:34px;right:34px;font-size:19px;font-weight:800;letter-spacing:.08em;color:#6b7785}
+.it{position:absolute;left:28px;right:28px;background:#fff;border-radius:24px;padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 14px rgba(13,27,42,.06)}
+.it .tx{flex:1;min-width:0}
+.it .a{font-size:21px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .b{font-size:17px;font-weight:500;color:#6b7785;margin-top:3px;white-space:nowrap}
+.tier{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:13px;font-size:14px;font-weight:800;color:#fff;margin-right:6px;vertical-align:2px}
+.btn{flex:none;height:44px;padding:0 18px;border-radius:22px;display:flex;align-items:center;font-size:17px;font-weight:800;background:linear-gradient(180deg,#FFC24D,#F5A623);color:var(--navy)}
+.ic{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:var(--navy);font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="abs big hl1" style="left:0;right:0;top:56px;text-align:center">
+    <div style="font-size:96px;font-weight:300">Monday, 7:02am.</div>
+    <div style="font-size:72px;font-weight:800;margin-top:8px">Your weekend, <span style="color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">already sorted.</span></div></div>
+
+  <div class="phone" id="ph" style="top:286px"><div class="screen">
+    <div class="island"></div>
+    <div class="sb"><span>7:02</span><span>●●●● 5G ▮</span></div>
+    <div class="hd"><img src="img/icon.png"><div class="n">Good morning<b>Turner Electrical</b></div></div>
+    <div class="ttl">While you were off<small>Sat 7 – Sun 8 Nov</small></div>
+    <div class="grid">
+      <div class="st"><i class="ph-fill ph-phone-call" style="color:#0A6FB0"></i><div class="v">7</div><div class="l">calls answered</div></div>
+      <div class="st"><i class="ph-fill ph-calendar-check" style="color:#22A85C"></i><div class="v">4</div><div class="l">jobs booked in</div></div>
+      <div class="st"><i class="ph-fill ph-file-text" style="color:#F29A00"></i><div class="v">2</div><div class="l">waiting for your OK</div></div>
+      <div class="st"><i class="ph-fill ph-warning" style="color:#E5484D"></i><div class="v">1</div><div class="l">emergency flagged to you</div></div>
+    </div>
+    <div class="sec" style="top:556px">WAITING FOR YOUR OK</div>
+    <div class="it" style="top:590px;box-shadow:0 0 0 3px #F5A623"><div class="tx"><div class="a"><span class="tier" style="background:#F29A00">T2</span>Switchboard upgrade</div><div class="b">Dave R. · Coburg · ~$2,450</div></div><div class="btn">Review</div></div>
+    <div class="it" style="top:686px"><div class="tx"><div class="a">Quote · Ceiling fan install</div><div class="b">Priya K. · drafted by Copilot</div></div><div class="btn">Confirm</div></div>
+    <div class="sec" style="top:796px">BOOKED THIS WEEK</div>
+    <div class="it" style="top:830px"><span class="ic" style="background:#E7F6EE;color:#22A85C"><i class="ph-fill ph-calendar-check"></i></span><div class="tx"><div class="a">Smoke alarm swap</div><div class="b">Tue 9:00am · Sarah M.</div></div><span class="tier" style="background:#22A85C">T1</span></div>
+    <div class="it" style="top:922px"><span class="ic" style="background:#FDECEC;color:#E5484D"><i class="ph-fill ph-warning"></i></span><div class="tx"><div class="a">Emergency · sparking power point</div><div class="b">Sat 9:14pm · flagged to you straight away</div></div><span class="tier" style="background:#E5484D">T3</span></div>
+  </div></div>
+
+  <div class="abs" id="foot" style="left:0;right:0;bottom:0;height:250px;background:linear-gradient(180deg,rgba(15,124,196,0),rgba(15,124,196,.96) 48%)"></div>
+  <div class="amp" id="cta" style="left:52px;bottom:52px;height:88px;padding:0 34px;border-radius:44px;font-size:31px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" id="pr" style="right:52px;bottom:44px;text-align:right;line-height:1;background:#fff;color:#0A6FB0;padding:16px 26px 18px;border-radius:28px;box-shadow:0 18px 40px rgba(6,60,110,.3)">
+    <div style="font-size:20px;font-weight:700;opacity:.75">Starts at</div>
+    <div style="font-size:58px;font-weight:800;letter-spacing:-.05em">A$<span style="color:#F29A00">49</span><span style="font-size:24px;font-weight:600;letter-spacing:-.02em">/month</span></div></div>
+  <div class="abs" id="ex" style="left:0;right:0;bottom:16px;text-align:center;font-size:15px;font-weight:600;opacity:.7">Example data · demo account</div>
+</div>
+<script>
+(async () => {
+  const f = new URLSearchParams(location.search).get('f') || 'feed';
+  if (f === 'story') {
+    document.body.classList.add('story');
+    document.querySelector('.hl1').style.top = '210px';
+    document.getElementById('ph').style.top = '440px'; document.getElementById('ph').style.transform = 'translateX(-50%)';
+    document.getElementById('foot').style.height = '560px';
+    for (const id of ['cta', 'pr']) document.getElementById(id).style.bottom = '300px';
+    document.getElementById('ex').style.bottom = '260px';
+  }
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
