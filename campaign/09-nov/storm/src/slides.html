@@ -1,0 +1,112 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "The tradie's storm-season playbook" carousel (Mon 9 Nov), 4 pages, 1080×1350. slides.html?s=1..4
+     Blonde influencer on pages 1 and 4 (studio rain → storm passed). Pages 2–3 are graphic tier cards.
+     Tier rules from Tiers/README.md: T3 alerts the tradie straight away + safety advice + callback window;
+     T2 ($1,000+ or unsure) goes to the tradie to approve; T1 books straight into the calendar. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;color:#fff}
+.s.on{display:block}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background-size:1088px auto;background-position:center top}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(4,20,40,.35)}
+.am{color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)}
+.lbl{position:absolute;display:flex;align-items:center;gap:12px;height:56px;padding:0 24px 0 14px;border-radius:28px;background:#fff;color:#0A6FB0;
+  font-size:20px;font-weight:800;letter-spacing:.12em;box-shadow:0 12px 28px rgba(4,20,40,.25)}
+.lbl .f{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#0D1B2A;color:#FFC24D;font-size:19px;letter-spacing:0}
+.dots{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);display:flex;gap:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.45)}
+.dots i.on{width:30px;border-radius:5px;background:#fff}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(4,20,40,.35),inset 0 2px 1px rgba(255,255,255,.65)}
+/* graphic pages */
+.storm{position:absolute;inset:0;background:radial-gradient(70% 40% at 80% 0%,rgba(255,194,77,.18),rgba(255,194,77,0) 70%),linear-gradient(170deg,#173E63 0%,#102B47 55%,#0B1E33 100%)}
+.clear{position:absolute;inset:0;background:radial-gradient(60% 40% at 85% 5%,rgba(255,226,170,.5),rgba(255,226,170,0) 70%),linear-gradient(180deg,#3DB3F2 0%,#1C93DD 55%,#0F7CC4 100%)}
+.rain{position:absolute;inset:0;opacity:.22;background:repeating-linear-gradient(105deg,rgba(255,255,255,0) 0 22px,rgba(255,255,255,.5) 22px 23px,rgba(255,255,255,0) 23px 61px)}
+.num{font-size:26px;font-weight:800;letter-spacing:.14em;color:#FFC24D}
+.card{position:absolute;left:52px;right:52px;background:#fff;color:#0D1B2A;border-radius:44px;padding:38px 40px 40px;box-shadow:0 26px 60px rgba(4,20,40,.35)}
+.pill{display:inline-flex;align-items:center;gap:12px;height:62px;padding:0 26px;border-radius:31px;font-size:27px;font-weight:800;color:#fff;white-space:nowrap}
+.pill:before{content:'';width:12px;height:12px;border-radius:50%;background:#fff}
+.t1{background:#22A85C}.t2{background:#F29A00}.t3{background:#E5484D}
+.ex{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-top:24px}
+.ok{display:flex;align-items:flex-start;gap:16px;font-size:30px;font-weight:600;line-height:1.25;margin-top:20px}
+.ok i{flex:none;font-size:38px;margin-top:-3px}
+.note{font-size:22px;font-weight:500;opacity:.55;margin-top:24px;line-height:1.3}
+</style></head><body>
+
+<!-- 1 · cover -->
+<div class="s" id="s1">
+  <div class="photo" style="background-image:url(img/cover.jpg)"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,rgba(8,20,36,0),rgba(8,20,36,.7))"></div>
+  <div class="lbl" style="left:52px;top:52px"><span class="f"><i class="ph-fill ph-cloud-lightning"></i></span>THE TRADIE'S STORM-SEASON PLAYBOOK</div>
+  <div class="abs big" style="left:50px;top:140px">
+    <div style="font-size:92px;font-weight:300">Storm season's here.</div>
+    <div style="font-size:92px;font-weight:800;margin-top:6px" class="am">Is your phone ready?</div></div>
+  <div class="amp" style="left:52px;top:1184px;height:80px;padding:0 32px;border-radius:40px;font-size:28px">3 rules · swipe<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- 2 · emergencies first -->
+<div class="s" id="s2">
+  <div class="storm"></div><div class="rain"></div>
+  <div class="abs" style="left:52px;top:80px"><div class="num">RULE 1</div>
+    <div class="big" style="font-size:104px;font-weight:300;margin-top:16px">Emergencies</div>
+    <div class="big am" style="font-size:104px;font-weight:800">first.</div></div>
+  <div class="card" style="top:390px">
+    <span class="pill t3">T3 · Emergency</span>
+    <div class="ex">Sparking. A burning smell. Water through the ceiling.</div>
+    <div class="ok"><i class="ph-fill ph-bell-ringing" style="color:#E5484D"></i>You're alerted straight away</div>
+    <div class="ok"><i class="ph-fill ph-first-aid" style="color:#E5484D"></i>The customer gets your safety advice (call 000, switch off at the main if safe)</div>
+    <div class="ok"><i class="ph-fill ph-phone-call" style="color:#E5484D"></i>A callback within the window you set</div>
+    <div class="note">The emergency steps and callback window come from your own settings.</div>
+  </div>
+  <div class="abs" style="left:52px;right:52px;top:1010px;font-size:40px;font-weight:700;letter-spacing:-.025em;line-height:1.2">No filtering. No waiting in a queue. <span class="am">The urgent ones reach you first.</span></div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<!-- 3 · big jobs wait, the rest books in -->
+<div class="s" id="s3">
+  <div class="storm" style="background:radial-gradient(70% 40% at 80% 0%,rgba(255,194,77,.25),rgba(255,194,77,0) 70%),linear-gradient(170deg,#1E5A8C 0%,#164572 55%,#0F2E4E 100%)"></div>
+  <div class="abs" style="left:52px;top:80px"><div class="num">RULES 2 &amp; 3</div>
+    <div class="big" style="font-size:96px;font-weight:300;margin-top:16px">Big jobs wait.</div>
+    <div class="big am" style="font-size:96px;font-weight:800">The rest books in.</div></div>
+  <div class="card" style="top:372px;box-shadow:0 0 0 5px #F5A623,0 26px 60px rgba(4,20,40,.35)">
+    <span class="pill t2">T2 · Confirm</span>
+    <div class="ex">Switchboard upgrade, rewiring, anything $1,000+</div>
+    <div class="ok"><i class="ph-fill ph-hand-tap" style="color:#F29A00"></i>Sent to you to approve, plus anything it's unsure about. Nothing's locked in without your OK.</div>
+  </div>
+  <div class="card" style="top:796px">
+    <span class="pill t1">T1 · Auto-book</span>
+    <div class="ex">Power point, light fitting, ceiling fan</div>
+    <div class="ok"><i class="ph-fill ph-calendar-check" style="color:#22A85C"></i>Booked straight into a free slot in your calendar.</div>
+  </div>
+  <div class="abs" style="left:52px;right:52px;top:1166px;font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.2">You decide what goes in each tier. <span class="am">Ruby follows your rules.</span></div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<!-- 4 · close -->
+<div class="s" id="s4">
+  <div class="photo" style="background-image:url(img/end.jpg)"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,rgba(15,124,196,0),rgba(15,124,196,.75))"></div>
+  <div class="abs big" style="left:50px;top:52px">
+    <div style="font-size:84px;font-weight:300">Ready before</div>
+    <div style="font-size:84px;font-weight:800;margin-top:4px" class="am">the next one.</div></div>
+  <div class="amp" style="left:50%;transform:translateX(-50%);top:1150px;height:100px;padding:0 44px;border-radius:50px;font-size:36px">Comment “DEMO”</div>
+  <div class="abs" style="left:0;right:0;top:1268px;text-align:center;font-size:22px;font-weight:600;text-shadow:0 1px 8px rgba(4,20,40,.4)">Starts at A$49/month · lazytradie.com.au</div>
+  <div class="dots" style="left:auto;right:52px;transform:none;bottom:44px"><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<script>
+(async () => {
+  const id = 's' + (new URLSearchParams(location.search).get('s') || '1'); const el = document.getElementById(id); el.classList.add('on');
+  await document.fonts.ready;
+  const urls = [...el.querySelectorAll('.photo')].map(p => getComputedStyle(p).backgroundImage.slice(5, -2));
+  await Promise.all(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; })));
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
