@@ -1,0 +1,67 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Perfect innings." v2 (owner's call: real-world photo, not pure graphics). 1080×1350.
+     Hat influencer on an empty oval, shot like a sportswear campaign. Compact dot-matrix scoreboard card on the grass.
+     Figures illustrative (labelled). No team/competition logos; the background scoreboard is blank and out of focus. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Doto:wght@800;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;background:#7FB6E0}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/photo.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(6,40,80,.3)}
+.am{color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)}
+.lbl{position:absolute;display:flex;align-items:center;gap:12px;height:54px;padding:0 22px 0 12px;border-radius:27px;background:#fff;color:#0A6FB0;
+  font-size:19px;font-weight:800;letter-spacing:.12em;box-shadow:0 12px 28px rgba(6,40,80,.2)}
+.lbl .f{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#0D1B2A;color:#FFC24D;font-size:18px;letter-spacing:0}
+.board{position:absolute;left:46px;width:470px;border-radius:24px;padding:12px;background:linear-gradient(180deg,#2a3b50,#14212f);box-shadow:0 30px 60px rgba(0,20,10,.45),inset 0 2px 0 rgba(255,255,255,.12)}
+.inner{border-radius:15px;background:#0A1622;padding:18px 24px 20px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.06),inset 0 10px 30px rgba(0,0,0,.5)}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:2px dashed rgba(255,255,255,.12)}
+.top .t{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:.04em}
+.top .t img{width:34px;height:34px}
+.no{font-family:Doto,monospace;font-size:24px;font-weight:900;color:#FFC24D;letter-spacing:.06em;text-shadow:0 0 12px rgba(255,194,77,.6)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:2px dashed rgba(255,255,255,.08)}
+.row:last-child{border-bottom:0}
+.row .k{font-size:21px;font-weight:700;letter-spacing:.08em;color:#cfd8e2}
+.row .v{font-family:Doto,monospace;font-size:58px;font-weight:900;line-height:.9;color:#fff;letter-spacing:.04em;text-shadow:0 0 14px rgba(255,255,255,.45)}
+.gr{color:#4ade80!important;text-shadow:0 0 14px rgba(74,222,128,.5)!important}
+.rd{color:#ff6b6b!important;text-shadow:0 0 14px rgba(255,107,107,.55)!important}
+.a2{color:#FFC24D!important;text-shadow:0 0 14px rgba(255,194,77,.6)!important}
+.bolt{position:absolute;width:10px;height:10px;border-radius:50%;background:#56677a}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(0,20,10,.35),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:260px;background:linear-gradient(180deg,rgba(10,30,15,0),rgba(10,30,15,.45))"></div>
+
+  <div class="lbl" style="left:48px;top:52px"><span class="f"><i class="ph-fill ph-cricket"></i></span>ODI WEEKEND</div>
+  <div class="abs big" style="left:46px;top:134px">
+    <div style="font-size:100px;font-weight:800">Perfect innings.</div>
+    <div style="font-size:50px;font-weight:400;margin-top:12px;letter-spacing:-.035em">While you <span class="am" style="font-weight:700">watch the cricket.</span></div></div>
+
+  <div class="board" style="top:768px">
+    <span class="bolt" style="left:5px;top:5px"></span><span class="bolt" style="right:5px;top:5px"></span><span class="bolt" style="left:5px;bottom:5px"></span><span class="bolt" style="right:5px;bottom:5px"></span>
+    <div class="inner">
+      <div class="top"><span class="t"><img src="img/icon.png">LAZYTRADIE</span><span class="no">NOT OUT</span></div>
+      <div class="row"><span class="k">CALLS</span><span class="v">12</span></div>
+      <div class="row"><span class="k">ANSWERED</span><span class="v gr">12</span></div>
+      <div class="row"><span class="k">MISSED</span><span class="v rd">0</span></div>
+      <div class="row"><span class="k">JOBS BOOKED</span><span class="v a2">7</span></div>
+    </div>
+  </div>
+
+  <div class="amp" style="left:46px;top:1196px;height:86px;padding:0 32px;border-radius:43px;font-size:30px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="left:52px;top:1294px;font-size:19px;font-weight:600;text-shadow:0 1px 8px rgba(0,20,10,.5)">Starts at A$49/month · example figures</div>
+</div>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/photo.jpg'; });
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>

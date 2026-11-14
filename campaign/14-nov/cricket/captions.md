@@ -1,4 +1,5 @@
-# "Perfect innings." cricket scoreboard (Sat 14 Nov, ODI weekend)
+# "Perfect innings." cricket post (Sat 14 Nov, ODI weekend)
+**Use `cricket-photo-feed.png`** (v2, real-world campaign photo of the hat influencer on an empty oval + scoreboard card). The all-graphic version below is the earlier draft.
 Files: `cricket-feed.png` (1080×1350), `cricket-story.png` (1080×1920). Illustrative figures, labelled "Example figures · demo account". No team or competition logos.
 
 ## Instagram
@@ -52,7 +53,12 @@ lazytradie.com.au
 #SmallBusiness #Trades #AI #Australia
 ```
 
-## Alt text
+## Alt text (photo version)
+```
+A young woman in an amber fedora, a cream cable-knit cricket vest, a white shirt and wide cream trousers stands on an empty, sunlit cricket oval with a timber bat on her shoulder, a white picket fence and an old scoreboard behind her under a big blue sky. Headline: "Perfect innings. While you watch the cricket." Label: "ODI weekend". A navy scoreboard card on the grass reads "LazyTradie, not out": calls 12, answered 12, missed 0, jobs booked 7. Below: a "Comment DEMO" button and "Starts at A$49/month, example figures".
+```
+
+## Alt text (graphic version)
 ```
 An old-school cricket scoreboard in navy with glowing dot-matrix numbers on a bright blue background, next to a red cricket ball. The board reads "LazyTradie, not out": calls 12, answered 12, missed 0, jobs booked straight into your calendar 7, waiting for your OK (big jobs, $1,000+) 2. Headline: "Perfect innings. While you watch the cricket." Label: "ODI weekend, AUS v ENG". Footer: "Comment DEMO", "Starts at A$49/month", "Example figures, demo account".
 ```
