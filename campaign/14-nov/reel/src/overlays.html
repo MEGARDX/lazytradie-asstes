@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Every customer in November:" reel overlays, 1080×1920 transparent, full-bleed vertical clips. overlays.html?o=<id> -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
+.o{position:relative;width:1080px;height:1920px;display:none;color:#fff}
+.o.on{display:block}
+.abs{position:absolute}
+.hd{position:absolute;left:60px;right:60px;top:250px;text-align:center;font-size:70px;font-weight:900;letter-spacing:-.035em;line-height:1.05;
+  -webkit-text-stroke:2px rgba(0,0,0,.25);text-shadow:0 4px 0 rgba(0,0,0,.35),0 6px 30px rgba(0,0,0,.45)}
+.cap{position:absolute;left:50%;transform:translateX(-50%);top:1300px;max-width:940px;text-align:center;background:#fff;color:#111;border-radius:22px;
+  padding:16px 28px 20px;font-size:54px;font-weight:800;letter-spacing:-.025em;line-height:1.12;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.cap em{font-style:normal;color:#E5484D}
+.chip{position:absolute;left:60px;height:96px;padding:0 34px 0 18px;border-radius:48px;display:flex;align-items:center;gap:18px;
+  background:#fff;color:#0D1B2A;font-size:38px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.chip .t{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font-size:34px;font-weight:900;color:#fff}
+.chip small{font-weight:600;color:#55606c}
+</style></head><body>
+
+<div class="o" id="hd1"><div class="abs" style="left:0;right:0;top:0;height:640px;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.28) 55%,rgba(0,0,0,0))"></div><div class="hd">Every customer<br>in November:</div></div>
+<div class="o" id="c1"><div class="cap">“Can you do it <em>before Christmas?</em>”</div></div>
+<div class="o" id="c2"><div class="cap">“<em>Before Christmas</em>, mate!”</div></div>
+<div class="o" id="c3"><div class="cap">“Just a quick one…<br><em>before Christmas?</em>”</div></div>
+<div class="o" id="c4"><div class="cap">“Pool lights. <em>Before Christmas?</em>”</div></div>
+<div class="o" id="c5"><div class="cap">“<em>Before Christmas</em>, love?”</div></div>
+<div class="o" id="c6"><div class="cap">“<em>Before Christmas</em>, yeah?”</div></div>
+<div class="o" id="ring"><div class="cap" style="background:#E5484D;color:#fff">📞 *rings again*</div></div>
+<div class="o" id="wait"><div class="hd" style="top:820px;font-size:110px">…hang on.</div></div>
+<div class="o" id="hd2"><div class="abs" style="left:0;right:0;top:0;height:640px;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.28) 55%,rgba(0,0,0,0))"></div><div class="hd" style="top:230px">Tradies with<br><span style="display:inline-flex;align-items:center;gap:16px;vertical-align:middle"><img src="img/icon.png" style="width:84px;height:84px"><img src="img/wm_white.png" style="height:84px"></span>:</div></div>
+<div class="o" id="k1"><div class="chip" style="top:1180px"><span class="t" style="background:#22A85C">✓</span>Answered <small>· booked Tue 9am</small></div></div>
+<div class="o" id="k2"><div class="chip" style="top:1296px"><span class="t" style="background:#22A85C">✓</span>Answered <small>· booked Thu 2pm</small></div></div>
+<div class="o" id="k3"><div class="chip" style="top:1412px"><span class="t" style="background:#F29A00">!</span>Big job <small>· waiting for your OK</small></div></div>
+<div class="o" id="end" style="background:#000">
+  <div class="abs" style="left:0;right:0;top:600px;text-align:center;font-size:96px;font-weight:800;letter-spacing:-.05em;line-height:1.02">Every customer.<br>Every call.<br><span style="color:#F5A623">Starting now.</span></div>
+  <div class="abs" style="left:0;right:0;top:1000px;text-align:center;font-size:40px;font-weight:600;opacity:.85">Starts at</div>
+  <div class="abs" style="left:0;right:0;top:1050px;text-align:center;font-size:160px;font-weight:800;letter-spacing:-.06em;line-height:1">A$<span style="color:#F5A623">49</span><span style="font-size:56px;font-weight:600;letter-spacing:-.03em">/month</span></div>
+  <div class="abs" style="left:50%;top:1270px;transform:translateX(-50%);height:104px;padding:0 44px;border-radius:52px;background:linear-gradient(180deg,#FFC24D,#F5A623);color:#0D1B2A;display:flex;align-items:center;font-size:44px;font-weight:800;letter-spacing:-.02em;white-space:nowrap">Comment “DEMO”</div>
+  <div class="abs" style="left:50%;top:1430px;transform:translateX(-50%);display:flex;align-items:center;gap:14px"><img src="img/icon.png" style="width:64px;height:64px"><img src="img/wm_white.png" style="height:64px"></div>
+</div>
+<script>
+const id = new URLSearchParams(location.search).get('o'); document.getElementById(id).classList.add('on');
+document.fonts.ready.then(async () => { await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))); document.body.dataset.ready = '1'; });
+</script></body></html>
