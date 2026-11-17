@@ -1,0 +1,41 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Costs are up. Don't let missed calls cost you too." (Tue 17 Nov; rates/costs pressure in the news). 1080×1350.
+     Curly-haired campaign girl, studio crouch with a tape measure. Solid graphic chips (no glass). No price today. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;background:#74C6EE}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/photo.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(6,60,110,.3)}
+.ch{position:absolute;left:46px;display:flex;align-items:center;gap:14px;height:74px;padding:0 26px 0 12px;border-radius:37px;background:#fff;color:#0D1B2A;
+  font-size:26px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;box-shadow:0 14px 30px rgba(6,60,110,.22)}
+.ch .i{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;color:#fff}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 18px 40px rgba(6,60,110,.3),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <div class="abs big" style="left:46px;top:46px">
+    <div style="font-size:84px;font-weight:300">Costs are up.</div>
+    <div style="font-size:84px;font-weight:800;margin-top:6px">Don't let missed calls</div>
+    <div style="font-size:84px;font-weight:800;color:#FFC24D;text-shadow:0 3px 18px rgba(120,60,0,.35)">cost you too.</div></div>
+
+  <div class="ch" style="top:700px"><span class="i" style="background:#0A6FB0"><i class="ph-fill ph-phone-call"></i></span>Calls answered</div>
+  <div class="ch" style="top:788px"><span class="i" style="background:#22A85C"><i class="ph-fill ph-calendar-check"></i></span>Jobs booked in</div>
+  <div class="ch" style="top:876px"><span class="i" style="background:#F29A00"><i class="ph-fill ph-lightning"></i></span>Quotes out same day</div>
+
+  <div class="amp" style="left:46px;top:1190px;height:88px;padding:0 34px;border-radius:44px;font-size:31px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="left:52px;top:1294px;font-size:20px;font-weight:600;text-shadow:0 1px 8px rgba(6,60,110,.45)">Free to get started · no hidden charges</div>
+</div>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/photo.jpg'; });
+  await new Promise(r => setTimeout(r, 300));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
