@@ -1,0 +1,125 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Final mission before Christmas." carousel (Thu 19 Nov, GTA VI launch day + pre-Christmas rush). 4 pages, 1080×1350. slides.html?s=1..4
+     Hat influencer in a neon open-world street. Pages 1 & 4: photos + liquid glass chips (liquid-glass-web). Pages 2–3: original neon HUD
+     "objective" graphics (not the game's UI). Claims: Ruby answers calls/SMS/web chat; T1 books into free slots; T2 ($1,000+) waits for OK.
+     No price today; no "presents" line (owner's call). Photo fixes: Toyota badge removed, gibberish neon signs blurred. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Bungee&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;display:none;color:#fff}
+.s.on{display:block}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background-size:1088px auto;background-position:center top}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(30,0,50,.5)}
+.neon{color:#FFC24D;text-shadow:0 0 22px rgba(255,80,190,.75),0 3px 18px rgba(30,0,50,.5)}
+.bung{font-family:Bungee,sans-serif;letter-spacing:.02em}
+.g{position:absolute;isolation:isolate;display:flex;align-items:center;gap:14px;color:#fff;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(45,10,70,.5));
+  box-shadow:0 22px 50px rgba(20,0,40,.45),inset 0 2px 1px rgba(255,255,255,.85),inset 0 -10px 24px rgba(255,255,255,.08),inset 0 0 0 1.5px rgba(255,255,255,.5);
+  text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.g .ic{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-size:25px;color:#0D1B2A;text-shadow:none;flex:none;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(0,0,0,.3)}
+.dots{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);display:flex;gap:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.45)}
+.dots i.on{width:30px;border-radius:5px;background:#fff}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 0 30px rgba(255,80,190,.4),0 18px 40px rgba(20,0,40,.45),inset 0 2px 1px rgba(255,255,255,.65)}
+/* neon HUD pages */
+.city{position:absolute;inset:0;background:
+  radial-gradient(60% 35% at 50% 0%,rgba(255,80,190,.45),rgba(255,80,190,0) 70%),
+  radial-gradient(60% 40% at 100% 100%,rgba(40,220,220,.25),rgba(40,220,220,0) 70%),
+  linear-gradient(180deg,#5B2A86 0%,#3A1A63 45%,#1C0E36 100%)}
+.sun{position:absolute;left:260px;top:840px;width:560px;height:280px;overflow:hidden}
+.sun:before{content:'';position:absolute;left:0;top:0;width:560px;height:560px;border-radius:50%;
+  background:linear-gradient(180deg,#FFE27A 0%,#FFB347 35%,#FF5FA8 70%,#C2378F 100%);box-shadow:0 0 80px rgba(255,120,180,.6);
+  -webkit-mask-image:repeating-linear-gradient(180deg,#000 0 22px,transparent 22px 30px,#000 30px 44px,transparent 44px 56px)}
+.horizon{position:absolute;left:0;right:0;top:1118px;height:3px;background:#FF7AD0;box-shadow:0 0 18px 4px rgba(255,80,190,.8)}
+.floor{position:absolute;left:0;right:0;top:1120px;bottom:0;overflow:hidden;background:linear-gradient(180deg,#2a0f4a,#12061f)}
+.grid{position:absolute;left:-400px;right:-400px;top:0;height:600px;transform:perspective(300px) rotateX(62deg);transform-origin:50% 0;
+  background-image:linear-gradient(rgba(255,80,190,.7) 2px,transparent 2px),linear-gradient(90deg,rgba(255,80,190,.7) 2px,transparent 2px);background-size:80px 80px}
+.palm{position:absolute;bottom:420px;font-size:200px;color:#1a0b2e;opacity:.9}
+.hud{position:absolute;z-index:2;left:52px;right:52px;border-radius:22px;padding:30px 34px 32px;background:rgba(14,6,28,.78);
+  box-shadow:0 0 0 3px rgba(255,80,190,.85),0 0 40px rgba(255,80,190,.45),0 30px 60px rgba(0,0,0,.45)}
+.hud .tag{display:inline-flex;align-items:center;gap:10px;font-family:Bungee,sans-serif;font-size:26px;letter-spacing:.06em;color:#FFC24D;text-shadow:0 0 12px rgba(255,194,77,.6)}
+.hud .t{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1.08;margin-top:14px}
+.hud .row{display:flex;align-items:flex-start;gap:16px;margin-top:22px;font-size:33px;font-weight:600;line-height:1.25;color:#efe6ff}
+.hud .row i{flex:none;font-size:36px;margin-top:-2px}
+.bub{display:inline-block;background:#fff;color:#1c0e36;border-radius:26px 26px 26px 8px;padding:18px 26px;font-size:33px;font-weight:700;margin-top:20px}
+.pill{display:inline-flex;align-items:center;height:46px;padding:0 18px;border-radius:23px;font-size:23px;font-weight:800;color:#fff;margin-right:12px;vertical-align:4px}
+.done{position:absolute;z-index:2;right:52px;display:flex;align-items:center;gap:12px;font-family:Bungee,sans-serif;font-size:34px;letter-spacing:.04em;color:#4ade80;
+  text-shadow:0 0 16px rgba(74,222,128,.7)}
+</style></head><body>
+
+<!-- 1 · cover -->
+<div class="s" id="s1">
+  <div class="photo" style="background-image:url(img/cover.jpg)"></div>
+  <div class="abs" style="left:0;right:0;top:0;height:420px;background:linear-gradient(180deg,rgba(40,10,70,.55),rgba(40,10,70,0))"></div>
+  <div class="abs big" style="left:48px;top:52px">
+    <div style="font-size:96px;font-weight:300">Final mission</div>
+    <div style="font-size:104px;font-weight:800;margin-top:6px" class="neon">before Christmas.</div></div>
+  <div class="g" style="left:48px;top:1176px;height:82px;padding:0 30px 0 14px;border-radius:41px;font-size:28px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic"><i class="ph-fill ph-crosshair"></i></span>Mission briefing · swipe<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- 2 · objective 1 -->
+<div class="s" id="s2">
+  <div class="city"></div><div class="sun"></div><div class="floor"><div class="grid"></div></div><div class="horizon"></div>
+  <div class="abs" style="left:52px;top:96px"><div class="bung" style="font-size:30px;color:#FF7AD0;text-shadow:0 0 14px rgba(255,80,190,.8)">OBJECTIVE 1</div>
+    <div class="big" style="font-size:100px;font-weight:800;margin-top:14px">Answer</div>
+    <div class="big neon" style="font-size:100px;font-weight:800">every call.</div></div>
+  <div class="hud" style="top:450px">
+    <div class="tag"><i class="ph-fill ph-phone-incoming"></i>INCOMING CALL</div>
+    <div><span class="bub">“Can you do it before Christmas?”</span></div>
+    <div class="row" style="margin-top:28px"><i class="ph-fill ph-check-circle" style="color:#4ade80"></i>Ruby answers every call, text and website chat, even when you're up a ladder.</div>
+  </div>
+  <div class="done" style="top:780px"><i class="ph-bold ph-check-square"></i>COMPLETE</div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<!-- 3 · objective 2 -->
+<div class="s" id="s3">
+  <div class="city"></div><div class="sun"></div><div class="floor"><div class="grid"></div></div><div class="horizon"></div>
+  <div class="abs" style="left:52px;top:96px"><div class="bung" style="font-size:30px;color:#FF7AD0;text-shadow:0 0 14px rgba(255,80,190,.8)">OBJECTIVE 2</div>
+    <div class="big" style="font-size:92px;font-weight:800;margin-top:14px">Book the jobs.</div>
+    <div class="big neon" style="font-size:92px;font-weight:800">Hold the big ones.</div></div>
+  <div class="hud" style="top:440px">
+    <div class="tag"><i class="ph-fill ph-calendar-check"></i>JOB QUEUE</div>
+    <div class="row" style="margin-top:22px"><span><span class="pill" style="background:#22A85C">T1</span>Everyday jobs booked straight into your free slots</span></div>
+    <div class="row"><span><span class="pill" style="background:#F29A00">T2</span>Big jobs ($1,000+) wait for your OK</span></div>
+  </div>
+  <div class="done" style="top:740px"><i class="ph-bold ph-check-square"></i>COMPLETE</div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<!-- 4 · close -->
+<div class="s" id="s4">
+  <div class="photo" style="background-image:url(img/end.jpg)"></div>
+  <div class="abs" style="left:0;right:0;top:0;height:400px;background:linear-gradient(180deg,rgba(40,10,70,.55),rgba(40,10,70,0))"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:380px;background:linear-gradient(180deg,rgba(20,5,35,0),rgba(20,5,35,.7))"></div>
+  <div class="abs big" style="left:48px;top:52px">
+    <div style="font-size:100px;font-weight:800" class="neon">Mission complete.</div>
+    <div style="font-size:60px;font-weight:300;margin-top:12px;letter-spacing:-.04em">Now go enjoy Christmas.</div></div>
+  <div class="g" style="left:48px;top:1010px;height:70px;padding:0 24px 0 10px;border-radius:35px;font-size:24px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic" style="width:48px;height:48px;font-size:23px"><i class="ph-fill ph-phone-call"></i></span>Calls answered</div>
+  <div class="g" style="left:330px;top:1010px;height:70px;padding:0 24px 0 10px;border-radius:35px;font-size:24px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic" style="width:48px;height:48px;font-size:23px"><i class="ph-fill ph-calendar-check"></i></span>Jobs booked</div>
+  <div class="g" style="left:582px;top:1010px;height:70px;padding:0 24px 0 10px;border-radius:35px;font-size:24px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic" style="width:48px;height:48px;font-size:23px"><i class="ph-fill ph-hand-tap"></i></span>Big jobs waited for you</div>
+  <div class="amp" style="left:48px;top:1112px;height:96px;padding:0 40px;border-radius:48px;font-size:34px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="left:54px;top:1226px;font-size:21px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.6)">Free to get started · no hidden charges</div>
+  <div class="dots" style="left:auto;right:52px;transform:none;bottom:44px"><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  const id = 's' + (new URLSearchParams(location.search).get('s') || '1'); const el = document.getElementById(id); el.classList.add('on');
+  await document.fonts.ready;
+  const urls = [...el.querySelectorAll('.photo')].map(p => getComputedStyle(p).backgroundImage.slice(5, -2));
+  await Promise.all(urls.map(u => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = u; })));
+  el.querySelectorAll('.g').forEach(g => liquidGlass(g, JSON.parse(g.dataset.lg || '{}')));
+  await new Promise(r => setTimeout(r, 400));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>

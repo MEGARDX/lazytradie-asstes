@@ -1,0 +1,48 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "Big game out tonight? Your phone's covered." (Thu 19 Nov, GTA VI launch day; the game is named in captions/hashtags only).
+     1080×1350. Tradie on the couch with a controller, neon TV glow. Liquid glass chips. No price today. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;background:#141018}
+.abs{position:absolute}
+.photo{position:absolute;inset:0;background:url(img/photo.jpg) center top/1088px auto}
+.big{letter-spacing:-.05em;line-height:.95;text-shadow:0 3px 24px rgba(0,0,0,.5)}
+.neon{color:#FFC24D;text-shadow:0 0 18px rgba(255,90,200,.55),0 3px 18px rgba(0,0,0,.5)}
+.g{position:absolute;isolation:isolate;display:flex;align-items:center;gap:14px;color:#fff;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(30,10,45,.5));
+  box-shadow:0 22px 50px rgba(0,0,0,.45),inset 0 2px 1px rgba(255,255,255,.85),inset 0 -10px 24px rgba(255,255,255,.08),inset 0 0 0 1.5px rgba(255,255,255,.5);
+  text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.g .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:27px;color:#0D1B2A;text-shadow:none;flex:none;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(0,0,0,.3)}
+.amp{position:absolute;display:flex;align-items:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 0 30px rgba(255,90,200,.35),0 18px 40px rgba(0,0,0,.45),inset 0 2px 1px rgba(255,255,255,.65)}
+</style></head><body>
+<div id="p">
+  <div class="photo"></div>
+  <div class="abs" style="left:0;right:0;top:0;height:420px;background:linear-gradient(180deg,rgba(10,6,16,.75),rgba(10,6,16,0))"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:420px;background:linear-gradient(180deg,rgba(10,6,16,0),rgba(10,6,16,.8))"></div>
+  <div class="abs big" style="left:50px;top:56px">
+    <div style="font-size:92px;font-weight:300">Big game out tonight?</div>
+    <div style="font-size:90px;font-weight:800;margin-top:8px" class="neon">Your phone's covered.</div></div>
+
+  <div class="g" style="left:50px;top:952px;height:80px;padding:0 30px 0 13px;border-radius:40px;font-size:29px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic"><i class="ph-fill ph-phone-call"></i></span>Calls answered</div>
+  <div class="g" style="left:372px;top:952px;height:80px;padding:0 30px 0 13px;border-radius:40px;font-size:29px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic"><i class="ph-fill ph-calendar-check"></i></span>Jobs booked</div>
+  <div class="g" style="left:50px;top:1048px;height:80px;padding:0 30px 0 13px;border-radius:40px;font-size:29px" data-lg='{"scale":-80,"chroma":5,"blur":8}'><span class="ic"><i class="ph-fill ph-game-controller"></i></span>No need to pause</div>
+
+  <div class="amp" style="left:50px;top:1180px;height:88px;padding:0 34px;border-radius:44px;font-size:31px">Comment “DEMO”<i class="ph-fill ph-arrow-right"></i></div>
+  <div class="abs" style="left:56px;top:1284px;font-size:20px;font-weight:600;opacity:.92">Free to get started · no hidden charges</div>
+</div>
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  await document.fonts.ready;
+  await new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = 'img/photo.jpg'; });
+  document.querySelectorAll('.g').forEach(g => liquidGlass(g, JSON.parse(g.dataset.lg || '{}')));
+  await new Promise(r => setTimeout(r, 400));
+  document.body.dataset.ready = '1';
+})();
+</script></body></html>
