@@ -1,2 +1,3 @@
 frames/
 tmp/
+__pycache__/
