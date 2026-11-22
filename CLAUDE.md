@@ -69,5 +69,9 @@ or put soft brand-colour auras behind. Headless Playwright Chromium renders the 
 - `campaign/29-oct/`: Admin Copilot carousel (cover + 4 slides) and a LinkedIn PDF.
 - `campaign/31-oct/`: "A Tradie's Guide to Never Missing a Job" (cover, Receptionist, Job Tiers, Calendar, CTA),
   ElevenCreative "Marketer's Guide" layout with liquid glass. Source in `src/`: `node shoot.js` renders it.
+- `campaign/02-nov` … `campaign/22-nov/`: daily posts, carousels and reels (each folder has `captions.md` and `src/`).
+  `campaign/22-nov/problem-reel/`: 62.6 s problem → solution VO reel, beat-locked to the owner's track (drop on "Meet LazyTradie"),
+  real orb, liquid glass, wheelie-bin "money in the bin" motion graphics. Build: `src/prep.py` → `node src/render.js` → `src/encode.sh`.
+  No price on screen: say "$0 setup fee" and "Live in minutes" (owner, 22 Nov).
 - Films are voice + SFX only, with no music, except the Vision film (the owner's Tunetank track). The music rule is in each README.
 - Earlier work is in PR MEGARDX/lazytradie-asstes#1 (branch `claude/peaceful-newton-lf4aj0`).

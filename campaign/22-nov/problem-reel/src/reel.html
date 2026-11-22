@@ -1,0 +1,842 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 22 Nov · Problem → solution VO reel (9:16, 62.6 s). Every scene is a whole number of music beats (115 BPM) and the
+     drum drop lands on "Meet LazyTradie". Deterministic: render.js calls renderAt(t) per frame. No price on screen. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;color:#fff}
+#v{position:relative;width:1080px;height:1920px;overflow:hidden;background:#06101B}
+.abs{position:absolute}
+.L{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%}
+#dotsP{background-image:radial-gradient(rgba(255,255,255,.075) 1.7px,transparent 2.2px);background-size:40px 40px}
+#dotsS{background-image:radial-gradient(rgba(13,27,42,.09) 1.7px,transparent 2.2px);background-size:40px 40px}
+.scene{position:absolute;inset:0;visibility:hidden}
+.card{position:absolute;border-radius:46px;overflow:hidden;background:#111;
+  box-shadow:0 50px 110px rgba(0,0,0,.55),0 0 0 1.5px rgba(255,255,255,.16)}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.card.lite{box-shadow:0 50px 100px rgba(13,27,42,.28),0 0 0 1.5px rgba(255,255,255,.7)}
+.full{position:absolute;inset:0;overflow:hidden}
+.full img{position:absolute;inset:0;width:1080px;height:1920px;transform-origin:50% 60%}
+/* glass: dark tint for the problem half, light tint for the solution half (navy text) */
+.g{position:absolute;isolation:isolate;overflow:hidden}
+.gd{color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(8,30,55,.52));
+  box-shadow:0 30px 70px rgba(0,0,0,.45),inset 0 2px 1px rgba(255,255,255,.85),inset 0 -10px 24px rgba(255,255,255,.07),inset 0 0 0 1.5px rgba(255,255,255,.42);text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.gl{color:#0D1B2A;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.42));
+  box-shadow:0 30px 70px rgba(13,27,42,.16),0 6px 18px rgba(13,27,42,.06),inset 0 2px 1px #fff,inset 0 -10px 24px rgba(255,255,255,.45),inset 0 0 0 1.5px rgba(255,255,255,.85)}
+.ic{display:grid;place-items:center;border-radius:50%;flex:none;color:#0D1B2A;
+  background:radial-gradient(circle at 32% 28%,#FFE3A3,#F5A623 60%,#D98200);box-shadow:inset 0 2px 2px rgba(255,255,255,.7),0 6px 14px rgba(0,0,0,.25)}
+.ic.red{background:radial-gradient(circle at 32% 28%,#FF9C94,#E5484D 60%,#B4232A);color:#fff}
+.ic.grn{background:radial-gradient(circle at 32% 28%,#9CF0BC,#22B35E 60%,#13803F);color:#fff}
+.ic.sky{background:radial-gradient(circle at 32% 28%,#BDE7FF,#3DB3F2 60%,#1C7FC4);color:#fff}
+.ic.nav{background:radial-gradient(circle at 32% 28%,#3A5675,#0D1B2A 70%);color:#FFC24D}
+.row{display:flex;align-items:center}
+.col{display:flex;flex-direction:column}
+.b{font-weight:800;letter-spacing:-.025em}
+.m{font-weight:500;opacity:.78}
+.tab{font-variant-numeric:tabular-nums}
+/* captions */
+.cap{position:absolute;left:60px;right:60px;text-align:center;line-height:1.04;font-weight:650;letter-spacing:-.04em;visibility:hidden}
+.cap .w{display:inline-block;position:relative;white-space:pre}
+.cap.dk{color:#fff;text-shadow:0 4px 34px rgba(0,0,0,.55)}
+.cap.dk .w.ac{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.01em;font-size:1.2em;line-height:.9;color:#FFC24D}
+.cap.lt{color:#0D1B2A}
+.cap.lt .w.ac{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.01em;font-size:1.2em;line-height:.9}
+.cap.lt .w.ac::after{content:'';position:absolute;left:-.04em;right:-.04em;bottom:.08em;height:.3em;border-radius:.12em;background:#FFC24D;z-index:-1;transform-origin:0 50%;transform:scaleX(var(--m,0))}
+/* bin + flying items */
+#binL{position:absolute;inset:0;pointer-events:none}
+#bin{position:absolute;left:0;top:0;width:240px;height:300px;transform-origin:50% 100%;visibility:hidden}
+#bin svg{width:240px;height:300px;overflow:visible;filter:drop-shadow(0 26px 30px rgba(0,0,0,.45))}
+.fly{position:absolute;left:0;top:0;visibility:hidden;transform-origin:50% 50%}
+.tk{display:flex;align-items:center;gap:16px;width:420px;height:104px;padding:0 22px 0 16px;border-radius:26px;background:#fff;color:#0D1B2A;
+  box-shadow:0 20px 40px rgba(0,0,0,.35),inset 0 -3px 0 rgba(13,27,42,.06)}
+.tk .ic{width:64px;height:64px;font-size:32px}
+.tk .t1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.tk .t2{font-size:24px;font-weight:700;color:#D98200;margin-top:3px}
+.coin{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:40px;color:#8A5A00;
+  background:radial-gradient(circle at 35% 30%,#FFF1B8,#FFC24D 45%,#E09400 80%,#B87400);box-shadow:inset 0 0 0 6px rgba(255,255,255,.28),inset 0 -6px 10px rgba(120,70,0,.35),0 12px 22px rgba(0,0,0,.35)}
+.note{width:200px;height:100px;border-radius:12px;position:relative;overflow:hidden;font-weight:800;color:rgba(0,0,0,.55);box-shadow:0 14px 26px rgba(0,0,0,.35)}
+.note .win{position:absolute;right:14px;top:14px;width:46px;height:72px;border-radius:8px;background:rgba(255,255,255,.55)}
+.note .v{position:absolute;left:16px;top:6px;font-size:52px;letter-spacing:-.04em}
+.note .s{position:absolute;left:18px;bottom:10px;font-size:15px;letter-spacing:.12em;opacity:.7}
+/* fx */
+#flash{position:absolute;inset:0;background:#fff;visibility:hidden}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse 85% 70% at 50% 46%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+#grain{position:absolute;inset:-60px;opacity:.07;mix-blend-mode:overlay}
+.c{position:absolute;left:540px;top:0;visibility:hidden}
+.ring{position:absolute;border-radius:50%;border:3px solid rgba(255,255,255,.6);visibility:hidden}
+.part{position:absolute;border-radius:50%;visibility:hidden}
+/* misc UI */
+.bub{max-width:640px;padding:20px 28px;border-radius:34px;font-size:31px;font-weight:600;line-height:1.2;letter-spacing:-.02em}
+.bub.in{background:rgba(255,255,255,.92);color:#0D1B2A;border-bottom-left-radius:10px}
+.bub.out{background:linear-gradient(180deg,#3DB3F2,#1C8FDB);color:#fff;border-bottom-right-radius:10px}
+.lbl{font-size:22px;font-weight:600;opacity:.7;letter-spacing:.01em}
+.pill{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;border-radius:26px;font-size:24px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.t1c{background:#E3F7EA;color:#13803F}.t2c{background:#FFF1D6;color:#B86E00}.t3c{background:#FDE4E4;color:#C6282E}.bluc{background:#E2F2FD;color:#1C7FC4}
+.amp{display:flex;align-items:center;justify-content:center;gap:14px;color:#0D1B2A;font-weight:800;white-space:nowrap;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#FFC24D,#F5A623);box-shadow:0 22px 44px rgba(217,130,0,.35),inset 0 2px 1px rgba(255,255,255,.7)}
+.cal-grid{position:absolute;left:0;right:0;top:0;bottom:0}
+.blk{position:absolute;border-radius:18px;padding:12px 14px;font-size:21px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.blk.old{background:rgba(13,27,42,.07);color:rgba(13,27,42,.45);border:1.5px dashed rgba(13,27,42,.18)}
+.blk.new{background:linear-gradient(180deg,#2BC46C,#18A355);color:#fff;box-shadow:0 14px 30px rgba(24,163,85,.35),inset 0 2px 1px rgba(255,255,255,.5)}
+.blk.new small{display:block;font-size:16px;font-weight:700;opacity:.9;margin-top:6px;letter-spacing:.02em}
+.crow{position:absolute;left:28px;right:28px;height:104px;border-radius:26px;display:flex;align-items:center;gap:20px;padding:0 22px}
+.av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:24px;color:#fff;flex:none}
+.wave i{display:inline-block;width:6px;border-radius:3px;background:#F5A623;margin-right:5px;vertical-align:middle}
+</style></head><body>
+<div id="v">
+  <!-- backgrounds -->
+  <div class="L" id="bgP" style="background:linear-gradient(180deg,#081522 0%,#0B1B2C 45%,#050C15 100%)">
+    <div class="blob" id="pb1" style="width:1100px;height:1100px;left:-380px;top:-260px;background:radial-gradient(circle,rgba(28,147,221,.30),rgba(28,147,221,0) 68%)"></div>
+    <div class="blob" id="pb2" style="width:1000px;height:1000px;left:420px;top:900px;background:radial-gradient(circle,rgba(61,179,242,.20),rgba(61,179,242,0) 68%)"></div>
+    <div class="blob" id="pb3" style="width:900px;height:900px;left:240px;top:1300px;background:radial-gradient(circle,rgba(245,166,35,.13),rgba(245,166,35,0) 68%)"></div>
+    <div class="L" id="dotsP"></div>
+  </div>
+  <div class="L" id="bgS" style="background:linear-gradient(180deg,#FFF7EC 0%,#FFF1E2 55%,#FDEBDD 100%);visibility:hidden">
+    <div class="blob" id="sb1" style="width:1200px;height:1200px;left:-460px;top:-380px;background:radial-gradient(circle,rgba(255,194,77,.62),rgba(255,194,77,0) 66%)"></div>
+    <div class="blob" id="sb2" style="width:1100px;height:1100px;left:420px;top:240px;background:radial-gradient(circle,rgba(255,160,120,.40),rgba(255,160,120,0) 66%)"></div>
+    <div class="blob" id="sb3" style="width:1200px;height:1200px;left:-300px;top:1100px;background:radial-gradient(circle,rgba(110,196,248,.55),rgba(110,196,248,0) 66%)"></div>
+    <div class="blob" id="sb4" style="width:800px;height:800px;left:520px;top:1400px;background:radial-gradient(circle,rgba(255,194,77,.40),rgba(255,194,77,0) 66%)"></div>
+    <div class="L" id="dotsS"></div>
+  </div>
+
+  <div class="L" id="stage">
+  <!-- S1 phone ringing on the ute dash -->
+  <div class="scene" id="s1">
+    <div class="full"><img id="i1"></div>
+    <div class="abs" style="left:0;right:0;top:0;height:620px;background:linear-gradient(180deg,rgba(4,10,18,.78),rgba(4,10,18,0))"></div>
+    <div class="ring r1" style="left:0;top:0;width:300px;height:300px"></div><div class="ring r1" style="left:0;top:0;width:300px;height:300px"></div><div class="ring r1" style="left:0;top:0;width:300px;height:300px"></div>
+    <div class="g gd row" id="n1" style="left:70px;top:640px;width:940px;height:196px;border-radius:52px;padding:0 30px;gap:24px">
+      <div class="av" style="width:104px;height:104px;font-size:38px;background:linear-gradient(135deg,#F7B267,#E2725B)">SP</div>
+      <div class="col" style="flex:1;gap:4px"><div class="lbl" style="opacity:.8">Incoming call</div><div class="b" style="font-size:46px">Sarah · Brunswick</div><div class="m" style="font-size:26px">mobile · 0412 ••• 381</div></div>
+      <div class="ic red" style="width:92px;height:92px;font-size:42px"><i class="ph-fill ph-phone-x"></i></div>
+      <div class="ic grn" style="width:92px;height:92px;font-size:42px" id="n1acc"><i class="ph-fill ph-phone"></i></div>
+    </div>
+  </div>
+
+  <!-- S2 up a ladder -->
+  <div class="scene" id="s2">
+    <div class="card" id="k2" style="left:180px;top:580px;width:720px;height:900px"><img id="i2"></div>
+    <div class="g gd row" id="p2" style="left:96px;top:1388px;height:112px;padding:0 34px 0 16px;border-radius:56px;gap:18px">
+      <div class="ic" style="width:80px;height:80px;font-size:40px" id="p2ic"><i class="ph-fill ph-phone-call"></i></div>
+      <div class="col"><div class="b" style="font-size:36px">Sarah calling…</div><div class="m" style="font-size:22px">Ring 3 of 4</div></div>
+      <div style="width:18px;height:18px;border-radius:50%;background:#FF5A5F;margin-left:8px;box-shadow:0 0 0 6px rgba(255,90,95,.25)" id="p2dot"></div>
+    </div>
+  </div>
+
+  <!-- S3 she doesn't leave a message -->
+  <div class="scene" id="s3">
+    <div class="card" id="k3" style="left:180px;top:580px;width:720px;height:900px"><img id="i3"></div>
+    <div class="g gd row" id="c3" style="left:70px;top:1330px;width:700px;height:170px;border-radius:48px;padding:0 30px;gap:22px">
+      <div class="ic nav" style="width:96px;height:96px;font-size:30px;font-weight:800">TE</div>
+      <div class="col" style="gap:4px"><div class="b" style="font-size:36px">Turner Electrical</div>
+        <div class="row" style="gap:10px;font-size:27px;font-weight:700"><span id="c3st">Ringing</span><span class="tab m" id="c3tm">0:04</span></div></div>
+    </div>
+  </div>
+
+  <!-- S4 she calls the next tradie -->
+  <div class="scene" id="s4">
+    <div class="card" id="k4" style="left:180px;top:580px;width:720px;height:900px"><img id="i4"></div>
+    <div class="g gd row" id="c4" style="left:70px;top:1330px;width:640px;height:170px;border-radius:48px;padding:0 30px;gap:22px">
+      <div class="ic sky" style="width:96px;height:96px;font-size:44px"><i class="ph-fill ph-lightning"></i></div>
+      <div class="col" style="gap:4px"><div class="b" style="font-size:36px">Another sparky</div>
+        <div class="row" style="gap:10px;font-size:27px;font-weight:700"><span id="c4st">Calling…</span></div></div>
+    </div>
+  </div>
+
+  <!-- S5 he texts for a quote -->
+  <div class="scene" id="s5">
+    <div class="card" id="k5" style="left:180px;top:580px;width:720px;height:900px"><img id="i5"></div>
+    <div class="g gd" id="m5" style="left:70px;top:1180px;width:700px;height:330px;border-radius:48px;padding:26px 28px">
+      <div class="row" style="gap:16px"><div class="ic nav" style="width:58px;height:58px;font-size:20px;font-weight:800">TE</div><div class="b" style="font-size:28px">Turner Electrical</div><div class="m" style="font-size:22px;margin-left:auto">SMS</div></div>
+      <div id="m5sent" class="col" style="align-items:flex-end;margin-top:18px;visibility:hidden"><div class="bub out" style="font-size:28px;max-width:560px">Hey mate, how much for a switchboard upgrade?</div><div class="lbl" style="margin-top:8px">Delivered</div></div>
+      <div id="m5box" class="row" style="position:absolute;left:28px;right:28px;bottom:26px;min-height:96px;border-radius:36px;padding:14px 24px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3);font-size:28px;font-weight:600;line-height:1.2">
+        <span id="m5txt"></span><span id="m5car" style="display:inline-block;width:3px;height:34px;background:#FFC24D;margin-left:3px"></span>
+        <div class="ic" style="width:60px;height:60px;font-size:28px;margin-left:auto;align-self:center"><i class="ph-fill ph-paper-plane-right"></i></div></div>
+    </div>
+  </div>
+
+  <!-- S6 two hours later -->
+  <div class="scene" id="s6">
+    <div class="g gd" id="clk" style="left:240px;top:640px;width:600px;height:600px;border-radius:50%"></div>
+    <div class="abs" id="clkface" style="left:240px;top:640px;width:600px;height:600px"></div>
+    <div class="abs" style="left:0;right:0;top:1290px;text-align:center"><div class="b tab" id="clkd" style="font-size:118px;letter-spacing:-.05em">2:14 PM</div></div>
+    <div class="g gd row" id="clkp" style="left:300px;top:1450px;height:84px;padding:0 30px 0 12px;border-radius:42px;gap:14px;font-size:27px;font-weight:800">
+      <div class="ic" style="width:60px;height:60px;font-size:30px"><i class="ph-fill ph-chat-circle-dots"></i></div>1 unread message</div>
+  </div>
+
+  <!-- S7 already booked someone else -->
+  <div class="scene" id="s7">
+    <div class="card" id="k7" style="left:180px;top:580px;width:720px;height:900px"><img id="i7" src="frames/s05/0104.jpg" style="filter:brightness(.55) saturate(.8)"></div>
+    <div class="g gd col" id="th7" style="left:70px;top:760px;width:940px;height:640px;border-radius:52px;padding:34px 34px;gap:20px">
+      <div class="row" style="gap:16px;margin-bottom:6px"><div class="av" style="width:62px;height:62px;font-size:22px;background:linear-gradient(135deg,#7FB3D5,#3E6E9E)">DR</div><div class="b" style="font-size:30px">Dave R.</div></div>
+      <div class="col" id="b71" style="align-items:flex-start"><div class="bub in">Hey mate, how much for a switchboard upgrade?</div><div class="lbl" style="margin-top:6px">2:14 PM</div></div>
+      <div class="col" id="b72" style="align-items:flex-end"><div class="bub out">Sorry mate, just saw this! Can do Thursday?</div><div class="lbl" style="margin-top:6px">4:14 PM</div></div>
+      <div class="col" id="b73" style="align-items:flex-start"><div class="bub in">All good, already booked someone else <i class="ph-fill ph-thumbs-up" style="color:#F5A623"></i></div></div>
+    </div>
+  </div>
+
+  <!-- S8 she asks your website -->
+  <div class="scene" id="s8">
+    <div class="card" id="k8" style="left:180px;top:580px;width:720px;height:900px"><img id="i8"></div>
+    <div class="g gd" id="f8" style="left:70px;top:1100px;width:720px;height:410px;border-radius:48px;padding:30px 32px">
+      <div class="row" style="gap:14px"><i class="ph-fill ph-globe-simple" style="font-size:34px;color:#FFC24D"></i><div class="b" style="font-size:34px">Request a quote</div></div>
+      <div class="row" style="margin-top:20px;height:74px;border-radius:22px;padding:0 22px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);font-size:27px;gap:14px"><span class="m" style="width:70px">Name</span><span class="b" id="f8a"></span></div>
+      <div class="row" style="margin-top:14px;height:74px;border-radius:22px;padding:0 22px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);font-size:27px;gap:14px"><span class="m" style="width:70px">Job</span><span class="b" id="f8b"></span></div>
+      <div class="amp" id="f8btn" style="position:absolute;right:32px;bottom:28px;height:74px;padding:0 34px;border-radius:37px;font-size:28px">Send enquiry<i class="ph-bold ph-arrow-right"></i></div>
+    </div>
+  </div>
+
+  <!-- S9 we'll get back to you -->
+  <div class="scene" id="s9">
+    <div class="card" id="k9" style="left:180px;top:580px;width:720px;height:900px"><img id="i9"></div>
+    <div class="g gd" id="r9" style="left:70px;top:1150px;width:760px;height:340px;border-radius:48px;padding:32px 34px">
+      <div class="row" style="gap:18px"><div class="ic" style="width:76px;height:76px;font-size:36px"><i class="ph-fill ph-envelope-simple"></i></div>
+        <div class="col"><div class="lbl">Auto-reply · turnerelectrical.com.au</div><div class="b" style="font-size:36px">Thanks for your enquiry!</div></div></div>
+      <div style="font-size:31px;font-weight:600;line-height:1.25;margin-top:22px;letter-spacing:-.02em">We'll get back to you <span style="color:#FFC24D;font-weight:800">within 48 hours.</span></div>
+      <div class="row" style="gap:14px;margin-top:20px;font-size:24px;font-weight:700;opacity:.8"><div id="r9sp" style="width:30px;height:30px;border-radius:50%;border:4px solid rgba(255,255,255,.25);border-top-color:#FFC24D"></div>Waiting…</div>
+    </div>
+  </div>
+
+  <!-- S10 money in the bin (bin is global) -->
+  <div class="scene" id="s10">
+    <div class="abs" style="left:0;right:0;top:560px;text-align:center">
+      <div class="lbl" style="font-size:28px;letter-spacing:.18em;opacity:.75">MISSED WORK THIS WEEK</div>
+      <div class="b tab" id="cnt" style="font-size:150px;letter-spacing:-.05em;color:#FFC24D;margin-top:6px;text-shadow:0 0 60px rgba(245,166,35,.35)">$0</div>
+    </div>
+  </div>
+
+  <!-- S11 customers don't wait -->
+  <div class="scene" id="s11">
+    <div class="card" id="k11a" style="left:330px;top:1000px;width:420px;height:525px"><img src="frames/still_w.jpg"></div>
+    <div class="card" id="k11b" style="left:330px;top:1000px;width:420px;height:525px"><img src="frames/still_d.jpg"></div>
+    <div class="card" id="k11c" style="left:330px;top:1000px;width:420px;height:525px"><img src="frames/still_l.jpg"></div>
+  </div>
+
+  <!-- S12 tradie in the ute, notifications pile up -->
+  <div class="scene" id="s12">
+    <div class="full"><img id="i12"></div>
+    <div class="abs" style="left:0;right:0;top:0;height:760px;background:linear-gradient(180deg,rgba(4,10,18,.85),rgba(4,10,18,0))"></div>
+    <div class="abs" style="left:0;right:0;bottom:0;height:700px;background:linear-gradient(180deg,rgba(4,10,18,0),rgba(4,10,18,.6))"></div>
+    <div class="g gd row" id="q1" style="left:60px;top:1150px;width:720px;height:118px;border-radius:38px;padding:0 24px;gap:18px">
+      <div class="ic red" style="width:70px;height:70px;font-size:34px"><i class="ph-fill ph-phone-x"></i></div><div class="col"><div class="b" style="font-size:30px">3 missed calls</div><div class="m" style="font-size:22px">Sarah, Mark, unknown</div></div><div class="m" style="margin-left:auto;font-size:22px">now</div></div>
+    <div class="g gd row" id="q2" style="left:60px;top:1284px;width:720px;height:118px;border-radius:38px;padding:0 24px;gap:18px">
+      <div class="ic sky" style="width:70px;height:70px;font-size:34px"><i class="ph-fill ph-chat-circle-dots"></i></div><div class="col"><div class="b" style="font-size:30px">Dave R.</div><div class="m" style="font-size:22px">How much for a switchboard…</div></div><div class="m" style="margin-left:auto;font-size:22px">2h</div></div>
+    <div class="g gd row" id="q3" style="left:60px;top:1418px;width:720px;height:118px;border-radius:38px;padding:0 24px;gap:18px">
+      <div class="ic" style="width:70px;height:70px;font-size:34px"><i class="ph-fill ph-globe-simple"></i></div><div class="col"><div class="b" style="font-size:30px">Website enquiry</div><div class="m" style="font-size:22px">Ceiling fan install</div></div><div class="m" style="margin-left:auto;font-size:22px">2d</div></div>
+  </div>
+
+  <!-- S13 that's where we come in -->
+  <div class="scene" id="s13">
+    <div class="abs" id="glow" style="left:-160px;top:1100px;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(255,194,77,.95),rgba(245,166,35,.45) 35%,rgba(245,166,35,0) 68%)"></div>
+    <div class="abs" id="rays" style="left:-460px;top:1340px;width:2000px;height:2000px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,214,140,.16) 0deg 4deg,rgba(255,214,140,0) 4deg 16deg);-webkit-mask:radial-gradient(circle,#000 0%,rgba(0,0,0,0) 62%)"></div>
+    <div id="pts13"></div>
+  </div>
+
+  <!-- S14 meet LazyTradie -->
+  <div class="scene" id="s14">
+    <div class="ring r14" style="width:400px;height:400px;border-color:rgba(245,166,35,.8)"></div><div class="ring r14" style="width:400px;height:400px;border-color:rgba(61,179,242,.7)"></div><div class="ring r14" style="width:400px;height:400px;border-color:rgba(245,166,35,.6)"></div>
+    <div id="pts14"></div>
+    <div class="abs" id="meet" style="left:0;right:0;top:1150px;text-align:center;font-family:'Instrument Serif',serif;font-style:italic;font-size:92px;color:#0D1B2A;letter-spacing:-.01em">Meet</div>
+    <div class="abs" id="wm14w" style="left:110px;top:1270px;width:860px;height:168px;overflow:hidden"><img src="img/wm_navy.png" style="width:860px;height:168px;display:block"></div>
+  </div>
+
+  <!-- S15 every call, text and chat answered -->
+  <div class="scene" id="s15">
+    <div class="g gl row" id="rb" style="left:300px;top:930px;height:76px;padding:0 28px 0 22px;border-radius:38px;gap:12px;font-size:27px;font-weight:800">
+      <span id="rbdot" style="width:16px;height:16px;border-radius:50%;background:#22B35E;box-shadow:0 0 0 6px rgba(34,179,94,.2)"></span>Ruby · AI Receptionist</div>
+    <div class="g gl row ch" id="h1" style="left:90px;top:1050px;width:900px;height:128px;border-radius:44px;padding:0 26px;gap:22px">
+      <div class="ic" style="width:80px;height:80px;font-size:38px"><i class="ph-fill ph-phone-call"></i></div>
+      <div class="col"><div class="b" style="font-size:36px">Call</div><div class="m" style="font-size:24px">0412 ••• 381 · Sarah</div></div>
+      <div class="pill t1c ok" style="margin-left:auto"><i class="ph-fill ph-check-circle"></i>Answered</div></div>
+    <div class="g gl row ch" id="h2" style="left:90px;top:1196px;width:900px;height:128px;border-radius:44px;padding:0 26px;gap:22px">
+      <div class="ic sky" style="width:80px;height:80px;font-size:38px"><i class="ph-fill ph-chat-circle-text"></i></div>
+      <div class="col"><div class="b" style="font-size:36px">Text</div><div class="m" style="font-size:24px">“How much for a switchboard…”</div></div>
+      <div class="pill t1c ok" style="margin-left:auto"><i class="ph-fill ph-check-circle"></i>Answered</div></div>
+    <div class="g gl row ch" id="h3" style="left:90px;top:1342px;width:900px;height:128px;border-radius:44px;padding:0 26px;gap:22px">
+      <div class="ic nav" style="width:80px;height:80px;font-size:38px"><i class="ph-fill ph-globe-simple"></i></div>
+      <div class="col"><div class="b" style="font-size:36px">Website chat</div><div class="m" style="font-size:24px">“Ceiling fan install?”</div></div>
+      <div class="pill t1c ok" style="margin-left:auto"><i class="ph-fill ph-check-circle"></i>Answered</div></div>
+  </div>
+
+  <!-- S16 calendar -->
+  <div class="scene" id="s16">
+    <div class="g gl" id="cal" style="left:70px;top:560px;width:940px;height:900px;border-radius:52px">
+      <div class="row" style="position:absolute;left:36px;right:36px;top:30px;justify-content:space-between">
+        <div class="col"><div class="b" style="font-size:40px">This week</div><div class="m" style="font-size:22px">Turner Electrical · Melbourne</div></div>
+        <div class="pill t1c" style="height:56px"><i class="ph-fill ph-calendar-check"></i>Live calendar</div></div>
+      <div id="calg" class="cal-grid"></div>
+    </div>
+    <div class="g gl row" id="toast16" style="left:240px;top:1404px;height:96px;padding:0 34px 0 14px;border-radius:48px;gap:16px;font-size:30px;font-weight:800">
+      <div class="ic grn" style="width:68px;height:68px;font-size:34px"><i class="ph-bold ph-check"></i></div>Ruby booked 3 jobs</div>
+  </div>
+
+  <!-- S17 big jobs wait for your OK -->
+  <div class="scene" id="s17">
+    <div class="g gl" id="t2" style="left:90px;top:640px;width:900px;height:720px;border-radius:56px;padding:44px 46px">
+      <div class="row" style="justify-content:space-between"><div class="pill t2c" style="height:58px;font-size:26px" id="t2chip"><i class="ph-fill ph-hand-palm"></i>T2 · Confirm</div><div class="m" style="font-size:24px">Ruby · just now</div></div>
+      <div class="b" style="font-size:66px;margin-top:34px;letter-spacing:-.04em">Switchboard upgrade</div>
+      <div class="m" style="font-size:30px;margin-top:10px">Dave R. · Brunswick · est. ~$2,450</div>
+      <div class="row" style="gap:12px;margin-top:22px;font-size:28px;font-weight:700"><i class="ph-fill ph-calendar-blank" style="color:#F5A623;font-size:32px"></i>Fri 27 Nov · 7:30 am</div>
+      <div class="row" style="gap:14px;margin-top:34px;font-size:28px;font-weight:800;height:50px" id="t2st"></div>
+      <div class="row" style="position:absolute;left:46px;right:46px;bottom:44px;gap:20px">
+        <div class="row" style="flex:1;height:104px;border-radius:52px;justify-content:center;font-size:32px;font-weight:800;background:rgba(13,27,42,.06);box-shadow:inset 0 0 0 2px rgba(13,27,42,.12)">Decline</div>
+        <div class="amp" id="t2ok" style="flex:1.4;height:104px;border-radius:52px;font-size:34px"><i class="ph-bold ph-check"></i>Approve</div></div>
+    </div>
+    <div class="abs" id="tap" style="left:0;top:0;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 0 0 3px rgba(13,27,42,.25),0 10px 30px rgba(13,27,42,.25);visibility:hidden"></div>
+  </div>
+
+  <!-- S18 call logs + transcript -->
+  <div class="scene" id="s18">
+    <div class="g gl" id="db" style="left:50px;top:520px;width:980px;height:1010px;border-radius:52px">
+      <div class="row" style="position:absolute;left:30px;right:30px;top:28px;gap:10px">
+        <div class="pill" style="background:#0D1B2A;color:#fff;height:58px"><i class="ph-fill ph-phone"></i>Calls</div>
+        <div class="pill" style="background:rgba(13,27,42,.06);color:rgba(13,27,42,.6);height:58px">Messages</div>
+        <div class="pill" style="background:rgba(13,27,42,.06);color:rgba(13,27,42,.6);height:58px">Jobs</div>
+        <div class="m" style="margin-left:auto;font-size:24px">Today</div></div>
+      <div id="rows"></div>
+      <div id="trx" style="position:absolute;left:28px;right:28px;top:590px;bottom:26px;border-radius:34px;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px rgba(13,27,42,.08);padding:22px 26px">
+        <div class="row" style="gap:14px"><i class="ph-fill ph-file-text" style="font-size:30px;color:#F5A623"></i><div class="b" style="font-size:28px">Transcript · Sarah · 1:42</div>
+          <div class="wave" style="margin-left:auto" id="wave"></div></div>
+        <div class="col" id="tb1" style="align-items:flex-start;margin-top:16px"><div class="bub" style="background:#0D1B2A;color:#fff;font-size:25px;max-width:720px;padding:16px 24px;border-bottom-left-radius:10px"><b style="color:#FFC24D">Ruby</b> &nbsp;G'day, Turner Electrical, Ruby speaking. How can I help?</div></div>
+        <div class="col" id="tb2" style="align-items:flex-end;margin-top:12px"><div class="bub" style="background:#fff;color:#0D1B2A;font-size:25px;max-width:720px;padding:16px 24px;border-bottom-right-radius:10px;box-shadow:0 6px 16px rgba(13,27,42,.08)"><b style="color:#1C7FC4">Sarah</b> &nbsp;Hi, my smoke alarm keeps beeping.</div></div>
+        <div class="col" id="tb3" style="align-items:flex-start;margin-top:12px"><div class="bub" style="background:#0D1B2A;color:#fff;font-size:25px;max-width:760px;padding:16px 24px;border-bottom-left-radius:10px"><b style="color:#FFC24D">Ruby</b> &nbsp;No worries. I've got Tuesday at 9am free. Want that?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S19 you stay on the tools -->
+  <div class="scene" id="s19">
+    <div class="card lite" id="k19a" style="left:0;top:0;width:400px;height:500px"><img src="frames/camp1.jpg"></div>
+    <div class="card lite" id="k19b" style="left:0;top:0;width:400px;height:500px"><img src="frames/camp3.jpg"></div>
+    <div class="card lite" id="k19" style="left:240px;top:600px;width:600px;height:750px"><img id="i19"></div>
+    <div class="card lite" id="k19c" style="left:0;top:0;width:330px;height:412px"><img src="frames/camp2.jpg"></div>
+    <div class="g gl row" id="p19" style="left:70px;top:1420px;height:96px;padding:0 34px 0 14px;border-radius:48px;gap:16px;font-size:30px;font-weight:800">
+      <div class="ic" style="width:68px;height:68px;font-size:32px"><i class="ph-fill ph-headset"></i></div>Ruby's got the phone</div>
+  </div>
+
+  <!-- S20 end lockup -->
+  <div class="scene" id="s20">
+    <div class="ring r20" style="width:400px;height:400px;border-color:rgba(245,166,35,.7)"></div><div class="ring r20" style="width:400px;height:400px;border-color:rgba(61,179,242,.6)"></div>
+    <div class="abs" id="wm20w" style="left:170px;top:930px;width:740px;height:145px;overflow:hidden"><img src="img/wm_navy.png" style="width:740px;height:145px;display:block"></div>
+    <div class="abs" id="tag20" style="left:40px;right:40px;top:1110px;text-align:center;color:#0D1B2A;font-size:76px;font-weight:650;letter-spacing:-.045em;line-height:1.06"></div>
+    <div class="g gl row" id="e1" style="left:96px;top:1336px;height:88px;padding:0 30px 0 12px;border-radius:44px;gap:14px;font-size:30px;font-weight:800">
+      <div class="ic grn" style="width:64px;height:64px;font-size:32px"><i class="ph-fill ph-seal-check"></i></div>$0 setup fee</div>
+    <div class="g gl row" id="e2" style="left:556px;top:1336px;height:88px;padding:0 30px 0 12px;border-radius:44px;gap:14px;font-size:30px;font-weight:800">
+      <div class="ic" style="width:64px;height:64px;font-size:32px"><i class="ph-fill ph-lightning"></i></div>Live in minutes</div>
+    <div class="amp" id="cta" style="position:absolute;left:250px;top:1452px;width:580px;height:104px;border-radius:52px;font-size:38px">Comment “DEMO”<i class="ph-bold ph-arrow-right"></i></div>
+    <div class="abs" id="url" style="left:0;right:0;top:1580px;text-align:center;color:#0D1B2A;font-size:30px;font-weight:700;letter-spacing:-.01em;opacity:.8">lazytradie.com.au</div>
+  </div>
+  </div><!-- /stage -->
+
+  <!-- orb (the real LazyTradie orb, light theme) -->
+  <div class="c" id="orbHost"></div>
+
+  <!-- bin + flying items (above scenes) -->
+  <div id="binL">
+    <div id="flies"></div>
+    <div id="bin">
+      <svg viewBox="0 0 240 300">
+        <defs>
+          <linearGradient id="gb" x1="0" x2="1"><stop offset="0" stop-color="#1E6B34"/><stop offset=".35" stop-color="#33A050"/><stop offset=".7" stop-color="#2A8A44"/><stop offset="1" stop-color="#175A2B"/></linearGradient>
+          <linearGradient id="gr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FF5A54"/><stop offset="1" stop-color="#B71C1C"/></linearGradient>
+        </defs>
+        <circle cx="48" cy="282" r="17" fill="#1b1f24"/><circle cx="48" cy="282" r="7" fill="#555"/>
+        <circle cx="192" cy="282" r="17" fill="#1b1f24"/><circle cx="192" cy="282" r="7" fill="#555"/>
+        <path d="M24 74 H216 L201 268 Q200 278 189 278 H51 Q40 278 39 268 Z" fill="url(#gb)"/>
+        <path d="M24 74 H216 L214 96 H26 Z" fill="rgba(0,0,0,.22)"/>
+        <g fill="rgba(255,255,255,.10)"><rect x="66" y="110" width="10" height="150" rx="5"/><rect x="115" y="110" width="10" height="150" rx="5"/><rect x="164" y="110" width="10" height="150" rx="5"/></g>
+        <rect x="88" y="200" width="64" height="40" rx="8" fill="rgba(255,255,255,.16)"/>
+        <g id="lid"><rect x="10" y="52" width="220" height="28" rx="10" fill="url(#gr)"/><rect x="18" y="55" width="204" height="6" rx="3" fill="rgba(255,255,255,.35)"/>
+          <rect x="88" y="40" width="64" height="16" rx="6" fill="#8E1414"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="L" id="vig"></div>
+  <div id="cap"></div>
+  <div id="flash"></div>
+  <div id="grain"></div>
+</div>
+
+<script src="timeline.js"></script>
+<script src="liquid-glass.js"></script>
+<script src="orb.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, a, b) => cl((t - a) / (b - a));
+const lerp = (a, b, p) => a + (b - a) * p;
+const eo = p => 1 - Math.pow(1 - p, 3), eo5 = p => 1 - Math.pow(1 - p, 5);
+const io = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const bk = p => { const c = 1.7; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+const spr = (dt, f = 1.9, z = 7) => dt <= 0 ? 0 : 1 - Math.exp(-z * dt) * Math.cos(2 * Math.PI * f * dt);
+const shake = (dt, amp = 10, f = 26, d = 9) => dt < 0 ? 0 : Math.sin(2 * Math.PI * f * dt) * amp * Math.exp(-dt * d);
+function tf(el, o = {}) {
+  const { x = 0, y = 0, s = 1, sx, sy, r = 0, a = 1, ry = 0, rx = 0 } = o;
+  el.style.visibility = a <= .003 ? 'hidden' : 'inherit';
+  el.style.opacity = a >= .999 ? '1' : a.toFixed(3);
+  el.style.transform = (rx || ry ? 'perspective(1800px) ' : '') + `translate(${x.toFixed(2)}px,${y.toFixed(2)}px)` + (rx ? ` rotateX(${rx.toFixed(2)}deg)` : '') + (ry ? ` rotateY(${ry.toFixed(2)}deg)` : '') + ` rotate(${r.toFixed(3)}deg) scale(${(sx ?? s).toFixed(4)},${(sy ?? s).toFixed(4)})`;
+  if ('b' in o) el.style.filter = o.b > .05 ? `blur(${o.b.toFixed(2)}px)` : 'none';
+}
+
+const B = TL.beat, DROP = TL.drop, FPS = TL.fps;
+const SC = {}; TL.scenes.forEach(s => SC[s.n] = Object.assign({}, s, { end: s.start + s.dur }));
+const bt = (n, k) => SC[n].start + k * B;                       // scene-relative beat → seconds
+const since = (t, n, k) => t - bt(n, k);
+// time since the most recent of a list of beats (for shakes / pulses)
+function lastHit(t, n, ks) { let d = -1; for (const k of ks) { const x = t - bt(n, k); if (x >= 0 && (d < 0 || x < d)) d = x; } return d; }
+
+// ---------- clip frames ----------
+const CLIP = { 1: 'i1', 2: 'i2', 3: 'i3', 4: 'i4', 5: 'i5', 8: 'i8', 9: 'i9', 12: 'i12', 19: 'i19' };
+const pending = [];
+function frameOf(n, t) {
+  const key = 's' + String(n).padStart(2, '0'), cnt = TL.frames[key];
+  const idx = cl(Math.floor((t - SC[n].start) * FPS) + 1, 1, cnt);
+  const img = $(CLIP[n]), src = `frames/${key}/${String(idx).padStart(4, '0')}.jpg`;
+  if (img.getAttribute('src') !== src) { img.setAttribute('src', src); pending.push(img.decode().catch(() => {})); }
+}
+
+// ---------- captions ----------
+const CAPCFG = { 10: { top: 230, size: 74 }, 11: { top: 560, size: 118 }, 12: { top: 236, size: 70 }, 13: { top: 700, size: 112 },
+                 14: { hide: 1 }, 15: { top: 236, size: 72 }, 18: { top: 236, size: 72 }, 20: { hide: 1 } };
+const CAP = {};
+function buildCaps() {
+  for (const s of TL.scenes) {
+    const cfg = Object.assign({ top: 250, size: 80 }, CAPCFG[s.n] || {}); if (cfg.hide) continue;
+    const d = document.createElement('div'); d.className = 'cap ' + (s.n >= 14 ? 'lt' : 'dk');
+    d.style.top = cfg.top + 'px'; d.style.fontSize = cfg.size + 'px';
+    const words = []; let inAc = false;
+    s.words.forEach((w, i) => {
+      let txt = w.w, ac = inAc, end = false;
+      if (txt.startsWith('*')) { ac = inAc = true; txt = txt.slice(1); }
+      if (txt.endsWith('*')) { end = true; txt = txt.slice(0, -1); }
+      const sp = document.createElement('span'); sp.className = 'w' + (ac ? ' ac' : ''); sp.textContent = txt;
+      d.appendChild(sp); if (i < s.words.length - 1) d.appendChild(document.createTextNode(' '));
+      words.push({ el: sp, t: w.t, ac }); if (end) inAc = false;
+    });
+    $('cap').appendChild(d); CAP[s.n] = { el: d, words };
+  }
+}
+function renderCaps(t) {
+  for (const n in CAP) {
+    const c = CAP[n], S = SC[n];
+    const on = t >= S.start - .1 && t <= S.end + .1;
+    if (!on) { c.el.style.visibility = 'hidden'; continue; }
+    const out = io(P(t, S.end - .2, S.end + .06));
+    const big = (CAPCFG[n] || {}).size >= 100;
+    tf(c.el, { y: -out * 26, a: 1 - out, s: 1 + (big ? .04 * P(t, S.start, S.end) : 0), b: out * 8 });
+    c.words.forEach(w => {
+      const p = eo(P(t, w.t - .06, w.t + .3));
+      tf(w.el, { y: (1 - p) * 38, a: p, s: w.ac ? lerp(1.18, 1, eo5(P(t, w.t - .06, w.t + .36))) : 1, b: (1 - p) * 9 });
+      if (w.ac) w.el.style.setProperty('--m', eo(P(t, w.t + .1, w.t + .55)).toFixed(3));
+    });
+  }
+}
+
+// ---------- particles ----------
+function mkParts(host, n, cls, seed) {
+  const out = []; let r = seed;
+  const rnd = () => (r = (r * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < n; i++) { const d = document.createElement('div'); d.className = 'part ' + cls; host.appendChild(d); out.push({ el: d, a: rnd(), b: rnd(), c: rnd(), d: rnd() }); }
+  return out;
+}
+
+// ---------- bin + flights ----------
+const FL = [];
+function mkFly(html, spec) { const d = document.createElement('div'); d.className = 'fly'; d.innerHTML = html; $('flies').appendChild(d); FL.push(Object.assign({ el: d }, spec)); }
+const tk = (icon, name, amt, cls = '') => `<div class="tk"><div class="ic ${cls}"><i class="ph-fill ${icon}"></i></div><div class="col"><div class="t1">${name}</div>${amt ? `<div class="t2">${amt}</div>` : ''}</div></div>`;
+const note = (v, c1, c2) => `<div class="note" style="background:linear-gradient(120deg,${c1},${c2})"><div class="win"></div><div class="v">${v}</div><div class="s">AUSTRALIA</div></div>`;
+const coin = `<div class="coin">$</div>`;
+function binState(t) {      // bottom-centre anchor + scale + visibility
+  const a = P(t, SC[4].start - .05, SC[4].start + .55), toHero = io(P(t, SC[10].start - .25, SC[10].start + .45)), out = io(P(t, SC[11].start - .1, SC[11].start + .45));
+  const cx = lerp(880, 540, toHero), by = lerp(1560, 1570, toHero) + (1 - spr(t - SC[4].start + .05, 1.6, 6)) * 420 * (t < SC[4].start + 1.5 ? 1 : 0) + out * 700;
+  const s = lerp(.8, 1.6, toHero);
+  return { cx, by, s, vis: t >= SC[4].start - .05 && t < SC[11].start + .5 && a > 0 };
+}
+function lidAngle(t) {
+  // open just before each landing, slam shut after; S10 stays open until the slam at beat 8.6
+  const opens = [[bt(4, 2.2), bt(4, 3.15)], [bt(7, 2.8), bt(7, 3.75)], [bt(10, 0) - .45, bt(10, 8.6)]];
+  let a = 0;
+  for (const [o, c] of opens) { if (t >= o - .3 && t < c + .4) { const pin = eo(P(t, o - .25, o)), pout = P(t, c - .06, c); a = Math.max(a, pin * (1 - pout)); } }
+  return -38 * a;
+}
+let binSquash = [];
+function renderBin(t) {
+  const st = binState(t), bin = $('bin');
+  if (!st.vis) { bin.style.visibility = 'hidden'; FL.forEach(f => f.el.style.visibility = 'hidden'); return; }
+  let sq = 0; for (const h of binSquash) { const d = t - h; if (d >= 0 && d < .6) sq += shake(d, .07, 5, 7); }
+  bin.style.visibility = 'visible';
+  bin.style.transform = `translate(${(st.cx - 120).toFixed(1)}px,${(st.by - 300).toFixed(1)}px) scale(${(st.s * (1 + sq)).toFixed(4)},${(st.s * (1 - sq)).toFixed(4)})`;
+  $('lid').setAttribute('transform', `rotate(${lidAngle(t).toFixed(2)} 12 66)`);
+  const mx = st.cx, my = st.by - 300 * st.s + 96 * st.s;   // mouth (just under the rim → item disappears behind the body)
+  FL.forEach(f => {
+    if (t < f.t0 || t > f.t1 + .05) { f.el.style.visibility = 'hidden'; return; }
+    const p = P(t, f.t0, f.t1), pe = p;                      // linear x, parabolic y
+    const x = lerp(f.x0, mx, pe), y = lerp(f.y0, my + 40 * st.s, pe) - f.arc * 4 * pe * (1 - pe);
+    const s = lerp(f.s0, f.s1 * st.s, eo(p));
+    tf(f.el, { x: x - f.w / 2, y: y - f.h / 2, r: lerp(f.r0, f.r1, p), s: s * (f.pop ? lerp(1.25, 1, eo(P(p, 0, .15))) : 1), a: p > .97 ? 0 : (f.pop ? cl(p / .06) : 1) });
+  });
+}
+
+// ---------- orb ----------
+let orb = null, orbT = 0;
+function orbState(t) {
+  if (t < DROP) return ['idle', 0];
+  if (t < SC[15].start) return ['idle', 0];
+  if (t < SC[16].start) return ['speaking', .3 + .3 * Math.abs(Math.sin(t * 5.1) * Math.sin(t * 2.3))];
+  return ['idle', 0];
+}
+function advanceOrb(t) {
+  const dt = 1 / 30;
+  while (orbT + dt <= t + 1e-6) {
+    const [s, l] = orbState(orbT); orb.setState(s); orb.setLevel(l);
+    for (const k of [DROP, bt(14, 1), bt(15, 1), bt(15, 2.5), bt(15, 4), bt(15, 7), bt(20, 0)]) if (orbT < k && orbT + dt >= k) orb.ring(.9);
+    orb.step(dt); orbT += dt;
+  }
+}
+
+// ---------- static builds ----------
+function buildCalendar() {
+  const g = $('calg'), x0 = 120, y0 = 190, cw = 158, rh = 112, days = ['Mon 23', 'Tue 24', 'Wed 25', 'Thu 26', 'Fri 27'], hrs = ['8 am', '9', '10', '11', '12 pm', '1', '2'];
+  let h = '';
+  days.forEach((d, i) => h += `<div class="abs b" style="left:${x0 + i * cw}px;top:${y0 - 50}px;width:${cw}px;text-align:center;font-size:23px;opacity:.75">${d}</div>`);
+  hrs.forEach((d, i) => h += `<div class="abs m" style="left:30px;top:${y0 + i * rh - 12}px;font-size:20px">${d}</div><div class="abs" style="left:${x0}px;right:30px;top:${y0 + i * rh}px;height:1.5px;background:rgba(13,27,42,.08)"></div>`);
+  const blk = (cls, day, h0, h1, html, id) => `<div class="blk ${cls}" ${id ? `id="${id}"` : ''} style="left:${x0 + day * cw + 6}px;top:${y0 + h0 * rh + 6}px;width:${cw - 12}px;height:${(h1 - h0) * rh - 12}px">${html}</div>`;
+  h += blk('old', 0, 0, 2, 'Rewire<br>Coburg') + blk('old', 4, 3, 5, 'Fit-off<br>Preston') + blk('old', 2, 4, 6, 'Quote<br>visit');
+  h += blk('new', 1, 1, 2.5, 'Smoke alarm swap<small>T1 · AUTO-BOOK</small>', 'cb1') + blk('new', 2, 0, 1.6, 'Power point<small>T1 · AUTO-BOOK</small>', 'cb2') + blk('new', 3, 2, 3.6, 'Ceiling fan<small>T1 · AUTO-BOOK</small>', 'cb3');
+  g.innerHTML = h;
+}
+function buildRows() {
+  const R = [['SP', 'Sarah P.', 'Smoke alarm swap', 't1c', 'T1 · Booked', '1:42', '#F7B267,#E2725B'],
+             ['DR', 'Dave R.', 'Switchboard upgrade', 't2c', 'T2 · Needs OK', '3:05', '#7FB3D5,#3E6E9E'],
+             ['ML', 'Mark L.', 'Power out, whole house', 't3c', 'T3 · Emergency', '0:58', '#C39BD3,#7D3C98'],
+             ['EK', 'Emma K.', 'Ceiling fan install', 't1c', 'T1 · Booked', '2:10', '#82E0AA,#1E8449']];
+  $('rows').innerHTML = R.map((r, i) => `<div class="crow" id="cr${i}" style="top:${110 + i * 116}px;background:rgba(255,255,255,.6);box-shadow:0 8px 22px rgba(13,27,42,.06)">
+    <div class="av" style="background:linear-gradient(135deg,${r[6]})">${r[0]}</div>
+    <div class="col" style="flex:1"><div class="b" style="font-size:30px">${r[1]}</div><div class="m" style="font-size:22px">${r[2]}</div></div>
+    <div class="pill ${r[3]}" style="height:48px;font-size:21px">${r[4]}</div><div class="m tab" style="font-size:23px;width:62px;text-align:right">${r[5]}</div></div>`).join('');
+  $('wave').innerHTML = Array.from({ length: 16 }, () => '<i></i>').join('');
+}
+function buildClock() {
+  let h = '';
+  for (let i = 0; i < 60; i++) { const big = i % 5 === 0; h += `<div class="abs" style="left:298px;top:${big ? 26 : 30}px;width:${big ? 6 : 3}px;height:${big ? 34 : 16}px;margin-left:${big ? -2 : 0}px;border-radius:3px;background:rgba(255,255,255,${big ? .85 : .3});transform-origin:50% ${big ? 274 : 270}px;transform:rotate(${i * 6}deg)"></div>`; }
+  h += `<div class="abs" id="hh" style="left:292px;top:150px;width:16px;height:162px;border-radius:8px;background:#fff;transform-origin:50% 150px;box-shadow:0 4px 14px rgba(0,0,0,.4)"></div>`;
+  h += `<div class="abs" id="mh" style="left:295px;top:70px;width:10px;height:242px;border-radius:5px;background:#FFC24D;transform-origin:50% 230px;box-shadow:0 0 18px rgba(245,166,35,.6)"></div>`;
+  h += `<div class="abs" style="left:280px;top:280px;width:40px;height:40px;border-radius:50%;background:#FFC24D;box-shadow:0 0 0 8px rgba(255,255,255,.2)"></div>`;
+  $('clkface').innerHTML = h;
+}
+function buildTag() {
+  const ws = SC[20].words.slice(1); const el = $('tag20'); let inAc = false;
+  el.innerHTML = ''; window.TAGW = [];
+  ws.forEach((w, i) => { let txt = w.w, ac = inAc, end = false;
+    if (txt.startsWith('*')) { ac = inAc = true; txt = txt.slice(1); } if (txt.endsWith('*')) { end = true; txt = txt.slice(0, -1); }
+    const sp = document.createElement('span'); sp.className = 'w' + (ac ? ' ac' : ''); sp.textContent = txt; sp.style.display = 'inline-block'; sp.style.position = 'relative';
+    if (ac) { sp.style.fontFamily = "'Instrument Serif',serif"; sp.style.fontStyle = 'italic'; sp.style.fontWeight = 400; sp.style.fontSize = '1.2em'; sp.style.letterSpacing = '-.01em'; sp.style.lineHeight = '.9'; }
+    el.appendChild(sp); if (i === 2) el.appendChild(document.createElement('br')); else if (i < ws.length - 1) el.appendChild(document.createTextNode(' '));
+    TAGW.push({ el: sp, t: w.t, ac }); if (end) inAc = false; });
+  el.classList.add('cap', 'lt'); el.style.visibility = 'inherit'; el.style.position = 'absolute';
+}
+
+// ---------- per-scene renderers ----------
+const R = {};
+// slow 3D drift on the clip cards so no two problem scenes sit the same way
+const tilt = (n, id, dir, t) => { const p = P(t, SC[n].start - .1, SC[n].end + .1); tf($(id), { ry: dir * lerp(8, -4, p), rx: lerp(4, -2, p), y: lerp(14, -14, p), x: dir * lerp(-10, 10, p) }); };
+R[1] = (t, e) => {
+  frameOf(1, t); tf($('i1'), { s: lerp(1.0, 1.08, P(t, 0, SC[2].start)) });
+  const hit = lastHit(t, 1, [1, 2, 3, 4, 5]);
+  const inP = spr(t - bt(1, 1) + .12, 1.6, 6.5);
+  tf($('n1'), { y: (1 - inP) * -120 + (hit >= 0 ? Math.abs(shake(hit, 6, 30, 10)) * -1 : 0), x: hit >= 0 ? shake(hit, 9, 31, 10) : 0, a: cl((t - bt(1, 1) + .12) / .18), s: lerp(.92, 1, inP) });
+  tf($('n1acc'), { s: 1 + (hit >= 0 ? .12 * Math.exp(-hit * 8) : 0) });
+  document.querySelectorAll('#s1 .r1').forEach((r, i) => {
+    const d = lastHit(t, 1, [0, 1, 2, 3, 4, 5].map(k => k + i * .22)); const p = d < 0 ? 1 : P(d, 0, 1.1);
+    r.style.left = '200px'; r.style.top = '1180px';
+    tf(r, { s: lerp(.25, 1.9, eo(p)), a: d < 0 ? 0 : (1 - p) * .75 });
+  });
+};
+R[2] = (t, e) => {
+  frameOf(2, t); tilt(2, 'k2', 1, t); tf($('i2'), { s: lerp(1.04, 1.12, P(t, SC[2].start, SC[2].end)) });
+  const hit = lastHit(t, 2, [0, 1, 2, 3]), inP = spr(t - bt(2, .4), 1.6, 6.5);
+  tf($('p2'), { x: (1 - inP) * -260 + (hit >= 0 ? shake(hit, 7, 30, 11) : 0), a: cl((t - bt(2, .4)) / .2), s: 1 });
+  tf($('p2ic'), { r: hit >= 0 ? shake(hit, 14, 24, 9) : 0 });
+  tf($('p2dot'), { s: 1 + .4 * Math.exp(-Math.max(0, hit) * 6) });
+};
+R[3] = (t, e) => {
+  frameOf(3, t); tilt(3, 'k3', -1, t); tf($('i3'), { s: lerp(1.02, 1.1, P(t, SC[3].start, SC[3].end)) });
+  const inP = spr(t - bt(3, .3), 1.6, 6.5), no = t >= bt(3, 3.3), d = t - bt(3, 3.3);
+  tf($('c3'), { y: (1 - inP) * 200 + (no ? shake(d, 8, 22, 9) : 0), x: no ? shake(d, 10, 27, 9) : 0, a: cl((t - bt(3, .3)) / .2) });
+  const dots = '.'.repeat(1 + Math.floor((t * 2.5) % 3));
+  $('c3st').innerHTML = no ? '<span style="color:#FF6B6B"><i class="ph-fill ph-phone-x"></i> No answer</span>' : 'Ringing' + dots;
+  $('c3tm').textContent = '0:' + String(Math.min(59, Math.floor(4 + (t - SC[3].start) * 4.5))).padStart(2, '0');
+  $('c3').style.boxShadow = no ? `0 30px 70px rgba(0,0,0,.45),inset 0 2px 1px rgba(255,255,255,.85),inset 0 0 0 2.5px rgba(255,90,95,${(.9 * Math.exp(-d * 1.2) + .3).toFixed(2)})` : '';
+};
+R[4] = (t, e) => {
+  frameOf(4, t); tilt(4, 'k4', 1, t); tf($('i4'), { s: lerp(1.1, 1.16, P(t, SC[4].start, SC[4].end)) });
+  const inP = spr(t - bt(4, .2), 1.6, 6.5), con = t >= bt(4, 1.9);
+  tf($('c4'), { y: (1 - inP) * 200, a: cl((t - bt(4, .2)) / .2), s: con ? 1 + .05 * Math.exp(-(t - bt(4, 1.9)) * 6) : 1 });
+  $('c4st').innerHTML = con ? '<span style="color:#5BE38F"><i class="ph-fill ph-check-circle"></i> Connected · 0:0' + Math.min(9, Math.floor((t - bt(4, 1.9)) * 2)) + '</span>' : 'Calling' + '.'.repeat(1 + Math.floor((t * 2.5) % 3));
+};
+R[5] = (t, e) => {
+  frameOf(5, t); tilt(5, 'k5', -1, t); tf($('i5'), { s: lerp(1.02, 1.1, P(t, SC[5].start, SC[5].end)) });
+  const inP = spr(t - bt(5, .5), 1.5, 6.5); tf($('m5'), { y: (1 - inP) * 240, a: cl((t - bt(5, .5)) / .2) });
+  const msg = 'Hey mate, how much for a switchboard upgrade?', sent = t >= bt(5, 5);
+  const n = Math.round(cl((t - bt(5, 2)) / (13 * .11 + .08)) * msg.length);
+  $('m5txt').textContent = sent ? '' : msg.slice(0, n);
+  $('m5car').style.visibility = !sent && Math.floor(t * 3) % 2 === 0 ? 'inherit' : 'hidden';
+  const sp = eo5(P(t, bt(5, 5), bt(5, 5) + .35));
+  const sb = $('m5sent'); sb.style.visibility = sent ? 'inherit' : 'hidden'; sb.style.transform = `translateY(${((1 - sp) * 90).toFixed(1)}px) scale(${lerp(.85, 1, sp).toFixed(3)})`; sb.style.opacity = sp;
+  sb.style.transformOrigin = '100% 100%';
+};
+R[6] = (t, e) => {
+  const lt = t - SC[6].start, q = B / 4, i = Math.min(23, Math.floor(lt / q)), f = lt < 0 ? 0 : (lt >= 24 * q ? 1 : eo5(cl((lt - i * q) / q * 3)));
+  const ticks = lt < 0 ? 0 : Math.min(24, i + f);
+  $('mh').style.transform = `rotate(${(84 + 30 * ticks).toFixed(2)}deg)`;
+  $('hh').style.transform = `rotate(${(67 + 60 * ticks / 24).toFixed(2)}deg)`;
+  const mins = 14 + Math.round(5 * Math.floor(ticks)), hh = 2 + Math.floor(mins / 60), mm = mins % 60;
+  $('clkd').textContent = `${hh}:${String(mm).padStart(2, '0')} PM`;
+  const inP = spr(lt + .1, 1.4, 6);
+  tf($('clk'), { s: lerp(.6, 1, inP), a: cl((lt + .1) / .2), r: lerp(-30, 0, inP) }); tf($('clkface'), { s: lerp(.6, 1, inP), a: cl((lt + .1) / .2), r: lerp(-30, 0, inP) });
+  tf($('clkp'), { y: (1 - spr(lt - B, 1.5, 6.5)) * 120, a: cl((lt - B) / .2) });
+};
+R[7] = (t, e) => {
+  tilt(7, 'k7', 1, t); tf($('i7'), { s: lerp(1.05, 1.1, P(t, SC[7].start, SC[7].end)) });
+  const inP = spr(t - bt(7, 0) + .05, 1.5, 6.5); tf($('th7'), { y: (1 - inP) * 260, a: cl((t - bt(7, 0) + .05) / .2) });
+  tf($('b71'), { a: 1 });
+  const p2 = spr(t - bt(7, .5), 1.8, 7); tf($('b72'), { x: (1 - p2) * 120, a: cl((t - bt(7, .5)) / .15) });
+  const p3 = spr(t - bt(7, 1.6), 2.2, 6.5); tf($('b73'), { s: lerp(.4, 1, p3), a: cl((t - bt(7, 1.6)) / .08) });
+  $('b73').style.transformOrigin = '0% 100%';
+};
+R[8] = (t, e) => {
+  frameOf(8, t); tilt(8, 'k8', -1, t); tf($('i8'), { s: lerp(1.02, 1.08, P(t, SC[8].start, SC[8].end)) });
+  const inP = spr(t - bt(8, 0) + .05, 1.5, 6.5); tf($('f8'), { y: (1 - inP) * 260, a: cl((t - bt(8, 0) + .05) / .2) });
+  const a = 'Emma', b = 'Ceiling fan install', all = a.length + b.length, n = Math.round(cl((t - bt(8, .5)) / 1.0) * all);
+  $('f8a').textContent = a.slice(0, n); $('f8b').textContent = b.slice(0, Math.max(0, n - a.length)) + (n > a.length && n < all && Math.floor(t * 4) % 2 ? '|' : '');
+  const pr = t - bt(8, 3); tf($('f8btn'), { s: pr < 0 ? 1 : 1 - .08 * Math.exp(-pr * 9) * Math.cos(pr * 30) });
+  $('f8btn').innerHTML = pr >= .15 ? 'Sent<i class="ph-bold ph-check"></i>' : 'Send enquiry<i class="ph-bold ph-arrow-right"></i>';
+};
+R[9] = (t, e) => {
+  frameOf(9, t); tilt(9, 'k9', 1, t); tf($('i9'), { s: lerp(1.0, 1.06, P(t, SC[9].start, SC[9].end)) });
+  const inP = spr(t - bt(9, 1), 1.7, 6.5); tf($('r9'), { y: (1 - inP) * 160, s: lerp(.9, 1, inP), a: cl((t - bt(9, 1)) / .12) });
+  $('r9sp').style.transform = `rotate(${(t * 360 * 1.1).toFixed(1)}deg)`;
+};
+const S10V = [320, 0, 2450, 0, 1890, 960, 0, 480, 3200];
+R[10] = (t, e) => {
+  let sum = 0, last = -9;
+  S10V.forEach((v, k) => { const l = bt(10, k) + .05; if (t >= l) { sum += v; if (v) last = l; } });
+  let prev = 0; S10V.forEach((v, k) => { if (bt(10, k) + .05 <= last - .001) prev += v; });
+  const shown = Math.round(lerp(prev, sum, eo(P(t, last, last + .3))));
+  $('cnt').textContent = '$' + shown.toLocaleString('en-AU');
+  tf($('cnt'), { s: 1 + .08 * Math.exp(-Math.max(0, t - last) * 7) * (t >= last ? 1 : 0) });
+};
+R[11] = (t, e) => {
+  const lt = t - SC[11].start, p = io(P(t, SC[11].start + .3, SC[11].end + .2)), slam = spr(lt + .02, 1.6, 7);
+  const cfg = [['k11a', -300, -9, -60], ['k11c', 300, 9, -40], ['k11b', 0, 0, 0]];
+  cfg.forEach(([id, dx, r, dy], i) => {
+    const el = $(id); tf(el, { x: dx * lerp(.62, 1.25, p) * slam, y: dy + lerp(60, -30, p) + (1 - slam) * 300, r: r * lerp(.6, 1.4, p), s: lerp(1, .72, p) * lerp(1.25, 1, slam), a: cl((lt + .05) / .15) * lerp(1, .35, p) });
+    el.style.filter = `grayscale(${p.toFixed(3)}) brightness(${lerp(1, .6, p).toFixed(3)})`;
+  });
+};
+R[12] = (t, e) => {
+  frameOf(12, t); tf($('i12'), { s: lerp(1.0, 1.07, P(t, SC[12].start, SC[12].end)) });
+  ['q1', 'q2', 'q3'].forEach((id, i) => { const p = spr(t - bt(12, 1 + i), 1.7, 6.5); tf($(id), { y: (1 - p) * -70, s: lerp(.85, 1, p), a: cl((t - bt(12, 1 + i)) / .12) }); });
+};
+let P13 = null, P14 = null;
+R[13] = (t, e) => {
+  const lt = t - SC[13].start, p = P(t, SC[13].start - .1, SC[14].start);
+  tf($('glow'), { y: lerp(380, -260, eo(p)), s: lerp(.5, 1.6, p * p), a: lerp(.2, 1, p) });
+  tf($('rays'), { y: lerp(300, -420, eo(p)), r: lt * 22, s: lerp(.6, 1.3, p), a: lerp(0, .9, p) });
+  P13.forEach(q => {
+    const life = (q.a + lt * (0.5 + 1.6 * p) * (0.5 + q.b)) % 1;
+    q.el.style.width = q.el.style.height = (4 + 8 * q.c) + 'px'; q.el.style.background = q.d > .5 ? '#FFC24D' : '#FFE3A3';
+    tf(q.el, { x: 40 + q.c * 1000 + Math.sin(lt * 2 + q.d * 6) * 30, y: lerp(1900, 500, life), a: Math.sin(Math.PI * life) * lerp(.3, 1, p) });
+  });
+};
+R[14] = (t, e) => {
+  const lt = t - SC[14].start;
+  document.querySelectorAll('#s14 .r14').forEach((r, i) => {
+    const d = t - bt(14, [0, .12, 1][i]); const p = P(d, 0, 1.4);
+    r.style.left = '340px'; r.style.top = '600px'; tf(r, { s: lerp(.6, 2.6, eo(p)), a: d < 0 ? 0 : (1 - p) * .9 });
+  });
+  P14.forEach(q => {
+    const ang = q.a * Math.PI * 2, d = eo(P(lt, 0, 1.6)) * (240 + 380 * q.b), life = P(lt, 0, 1.6 + q.c);
+    q.el.style.width = q.el.style.height = (8 + 12 * q.c) + 'px'; q.el.style.background = q.d > .6 ? '#3DB3F2' : '#F5A623';
+    tf(q.el, { x: 540 + Math.cos(ang) * d - 8, y: 800 + Math.sin(ang) * d - 8, a: lt < 0 ? 0 : (1 - life) * .9 });
+  });
+  const wMeet = SC[14].words[0].t, wLT = SC[14].words[1].t;
+  const pm = eo(P(t, wMeet - .05, wMeet + .35)); tf($('meet'), { y: (1 - pm) * 40, a: pm * (1 - P(t, SC[14].end - .2, SC[14].end + .05)) });
+  const pw = eo5(P(t, wLT - .1, wLT + .45));
+  $('wm14w').style.clipPath = `inset(0 ${((1 - pw) * 100).toFixed(2)}% 0 0)`;
+  tf($('wm14w'), { s: lerp(.94, 1, pw) * (1 + .015 * P(t, wLT, SC[14].end)), a: 1 });
+};
+R[15] = (t, e) => {
+  const lt = t - SC[15].start;
+  tf($('rb'), { y: (1 - spr(lt + .05, 1.5, 6.5)) * 60, a: cl((lt + .05) / .2) });
+  $('rbdot').style.boxShadow = `0 0 0 ${(6 + 6 * Math.abs(Math.sin(t * 4))).toFixed(1)}px rgba(34,179,94,.22)`;
+  [[1, -1], [2.5, 1], [4, -1]].forEach(([k, side], i) => {
+    const el = $('h' + (i + 1)), p = spr(t - bt(15, k) + .12, 1.5, 6.2);
+    tf(el, { x: (1 - p) * 1100 * side, r: (1 - p) * 6 * side, a: cl((t - bt(15, k) + .12) / .1) });
+    const ok = el.querySelector('.ok'), pk = spr(t - bt(15, k + .5), 2.2, 7);
+    tf(ok, { s: t < bt(15, k + .5) ? 0.001 : lerp(.3, 1, pk) * (1 + .12 * Math.exp(-Math.max(0, t - bt(15, 7)) * 6) * (t >= bt(15, 7) ? 1 : 0)), a: t < bt(15, k + .5) ? 0 : 1 });
+    const gl = t >= bt(15, 7) ? Math.exp(-(t - bt(15, 7)) * 2.5) : 0;
+    ok.style.boxShadow = `0 0 ${(30 * gl).toFixed(1)}px rgba(34,179,94,${(.8 * gl).toFixed(2)})`;
+  });
+};
+R[16] = (t, e) => {
+  const lt = t - SC[16].start;
+  tf($('cal'), { y: (1 - spr(lt + .1, 1.4, 6.5)) * 160, a: cl((lt + .1) / .2) });
+  [2, 3, 4].forEach((k, i) => { const el = $('cb' + (i + 1)), d = t - bt(16, k) + .14, p = spr(d, 1.9, 6.5);
+    tf(el, { y: (1 - p) * -200, s: lerp(1.3, 1, p), a: cl(d / .1) });
+    el.style.boxShadow = `0 14px 30px rgba(24,163,85,.35),0 0 ${(40 * Math.exp(-Math.max(0, d - .14) * 4)).toFixed(1)}px rgba(43,196,108,${d > .1 ? .9 : 0})`; });
+  const pt = spr(t - bt(16, 4.6), 1.6, 6.5); tf($('toast16'), { y: (1 - pt) * 140, a: cl((t - bt(16, 4.6)) / .15) });
+};
+R[17] = (t, e) => {
+  const lt = t - SC[17].start, ok = t >= bt(17, 3), d = t - bt(17, 3);
+  tf($('t2'), { y: (1 - spr(lt + .1, 1.4, 6.5)) * 180, a: cl((lt + .1) / .2), s: ok ? 1 + .025 * Math.exp(-d * 5) * Math.cos(d * 20) : 1 });
+  const pulse = ok ? 0 : .5 + .5 * Math.cos(2 * Math.PI * ((t - SC[17].start) / B));
+  $('t2').style.boxShadow = ok ? `0 30px 70px rgba(13,27,42,.16),inset 0 2px 1px #fff,inset 0 0 0 4px rgba(34,179,94,${(.5 + .5 * Math.exp(-d * 2)).toFixed(2)}),0 0 ${(70 * Math.exp(-d * 2)).toFixed(0)}px rgba(34,179,94,.5)`
+    : `0 30px 70px rgba(13,27,42,.16),inset 0 2px 1px #fff,inset 0 0 0 ${(3 + 2 * pulse).toFixed(1)}px rgba(245,166,35,${(.55 + .4 * pulse).toFixed(2)})`;
+  $('t2st').innerHTML = ok ? '<span style="color:#13803F"><i class="ph-fill ph-check-circle"></i> Approved · booked Fri 7:30 am</span>'
+    : `<span style="width:16px;height:16px;border-radius:50%;background:#F5A623;box-shadow:0 0 0 ${(4 + 6 * pulse).toFixed(1)}px rgba(245,166,35,.25)"></span><span style="color:#B86E00">Waiting for your OK</span>`;
+  $('t2chip').className = 'pill ' + (ok ? 't1c' : 't2c'); $('t2chip').innerHTML = ok ? '<i class="ph-fill ph-check-circle"></i>Approved' : '<i class="ph-fill ph-hand-palm"></i>T2 · Confirm';
+  const tp = t - bt(17, 2.7); const tapIn = P(tp, -.35, 0), tapOut = P(tp, .25, .6);
+  tf($('tap'), { x: 760 - 55 + (1 - eo(tapIn)) * 120, y: 1255 - 55 + (1 - eo(tapIn)) * 160, s: tp >= 0 && tp < .2 ? .82 : 1, a: tapIn * (1 - tapOut) });
+  tf($('t2ok'), { s: tp >= 0 && tp < .18 ? .95 : 1 });
+};
+R[18] = (t, e) => {
+  const lt = t - SC[18].start;
+  tf($('db'), { y: (1 - spr(lt + .1, 1.4, 6.5)) * 180, a: cl((lt + .1) / .2) });
+  [1, 2, 3, 4].forEach((k, i) => { const d = t - bt(18, k) + .1, p = spr(d, 1.8, 6.5); tf($('cr' + i), { x: (1 - p) * 700, a: cl(d / .12) }); });
+  const sel = P(t, bt(18, 4.2), bt(18, 4.5)); $('cr0').style.background = `rgba(255,${Math.round(lerp(255, 241, sel))},${Math.round(lerp(255, 214, sel))},.85)`;
+  $('cr0').style.boxShadow = `0 8px 22px rgba(13,27,42,.06),inset 0 0 0 ${(2.5 * sel).toFixed(1)}px rgba(245,166,35,.9)`;
+  const px = eo(P(t, bt(18, 4.1), bt(18, 4.5))); tf($('trx'), { y: (1 - px) * 60, a: px });
+  [4.5, 5.5, 6.5].forEach((k, i) => { const d = t - bt(18, k) + .06, p = spr(d, 2, 7); const el = $('tb' + (i + 1)); el.style.transformOrigin = i === 1 ? '100% 100%' : '0% 100%'; tf(el, { s: lerp(.5, 1, p), y: (1 - p) * 20, a: cl(d / .08) }); });
+  $('wave').querySelectorAll('i').forEach((b, i) => { b.style.height = (8 + 30 * Math.abs(Math.sin(t * 7.3 + i * .9) * Math.sin(t * 3.1 + i * .4))).toFixed(1) + 'px'; });
+};
+R[19] = (t, e) => {
+  frameOf(19, t); tf($('i19'), { s: lerp(1.02, 1.08, P(t, SC[19].start, SC[19].end)) });
+  const shrink = io(P(t, bt(19, .8), bt(19, 1.4)));
+  tf($('k19'), { s: lerp(1, .86, shrink), y: lerp(0, -40, shrink) });
+  const C = [['k19a', 1, -1, 190, 990, -11], ['k19b', 2, 1, 885, 960, 10], ['k19c', 3, 0, 830, 1250, 7]];
+  C.forEach(([id, k, side, cx, cy, r]) => { const el = $(id), d = t - bt(19, k) + .16, p = spr(d, 1.5, 6.2), w = el.offsetWidth, h = el.offsetHeight;
+    const sx = side ? cx + side * 900 : cx + 300, sy = side ? cy + 200 : cy + 900;
+    tf(el, { x: lerp(sx, cx, p) - w / 2, y: lerp(sy, cy, p) - h / 2, r: lerp(r * 3, r, p), a: cl(d / .1) }); });
+  const pp = spr(t - bt(19, 3.6), 1.6, 6.5); tf($('p19'), { y: (1 - pp) * 120, a: cl((t - bt(19, 3.6)) / .15) });
+};
+R[20] = (t, e) => {
+  const lt = t - SC[20].start;
+  document.querySelectorAll('#s20 .r20').forEach((r, i) => { const d = t - bt(20, i * .15), p = P(d, 0, 1.5); r.style.left = '340px'; r.style.top = '480px'; tf(r, { s: lerp(.6, 2.4, eo(p)), a: d < 0 ? 0 : (1 - p) * .8 }); });
+  const wLT = SC[20].words[0].t, pw = eo5(P(t, wLT - .15, wLT + .4));
+  $('wm20w').style.clipPath = `inset(0 ${((1 - pw) * 100).toFixed(2)}% 0 0)`; tf($('wm20w'), { s: lerp(.94, 1, pw) });
+  TAGW.forEach(w => { const p = eo(P(t, w.t - .06, w.t + .3)); tf(w.el, { y: (1 - p) * 36, a: p, b: (1 - p) * 8, s: w.ac ? lerp(1.18, 1, eo5(P(t, w.t - .06, w.t + .36))) : 1 }); if (w.ac) w.el.style.setProperty('--m', eo(P(t, w.t + .1, w.t + .55)).toFixed(3)); });
+  [['e1', 8, -1], ['e2', 8.12, 1]].forEach(([id, k, side]) => { const d = t - bt(20, k) + .05, p = spr(d, 1.8, 6.5); tf($(id), { y: (1 - p) * 90, s: lerp(.7, 1, p), a: cl(d / .1) }); });
+  const dc = t - bt(20, 8.5) + .05, pc = spr(dc, 1.8, 6); tf($('cta'), { y: (1 - pc) * 120, s: lerp(.7, 1, pc) * (1 + .03 * Math.max(0, Math.sin(2 * Math.PI * (t - bt(20, 8.5)) / B)) * (dc > .4 ? 1 : 0)), a: cl(dc / .1) });
+  const du = t - bt(20, 9.5); tf($('url'), { y: (1 - eo(P(du, 0, .4))) * 20, a: eo(P(du, 0, .4)) * .85 });
+};
+
+// scene transitions: push-zoom with blur; S14 is a hard cut under the white flash
+const TR = { 14: 'cut', 20: 'soft' };
+function renderScenes(t) {
+  for (let n = 1; n <= 20; n++) {
+    const S = SC[n], root = $('s' + n), next = SC[n + 1];
+    const tIn = S.start - .1, tOut = S.end + .14;
+    if (t < tIn || t > tOut || (n === 13 && t >= DROP) || (n === 14 && t < DROP)) { root.style.visibility = 'hidden'; continue; }
+    let ein = eo(P(t, S.start - .1, S.start + .3)), eout = io(P(t, S.end - .16, S.end + .14));
+    if (n === 14 && t >= DROP) ein = 1;
+    if (n === 13) eout = 0;                                              // S13 burns out into the flash
+    if (n === 20) eout = 0;
+    const s = lerp(.9, 1, ein) * lerp(1, 1.14, eout), a = Math.min(ein, 1 - eout), bl = (1 - ein) * 16 + eout * 16;
+    root.style.visibility = 'visible';
+    root.style.opacity = a >= .999 ? '1' : a.toFixed(3);
+    root.style.transform = `scale(${s.toFixed(4)})`;
+    root.style.filter = bl > .1 ? `blur(${bl.toFixed(2)}px)` : 'none';
+    R[n](t, { ein, eout });
+  }
+}
+
+// ---------- backgrounds / fx ----------
+function renderBG(t) {
+  const sol = t >= DROP;
+  $('bgP').style.visibility = sol ? 'hidden' : 'visible'; $('bgS').style.visibility = sol ? 'visible' : 'hidden';
+  if (!sol) {
+    tf($('pb1'), { x: Math.sin(t * .23) * 90, y: Math.cos(t * .19) * 70 });
+    tf($('pb2'), { x: Math.cos(t * .17) * 110, y: Math.sin(t * .21) * 80 });
+    const warm = P(t, SC[13].start - .5, DROP);
+    tf($('pb3'), { x: Math.sin(t * .3) * 60, y: lerp(0, -500, warm), s: lerp(1, 1.8, warm), a: lerp(1, 3, warm) > 1 ? 1 : 1 });
+    $('dotsP').style.backgroundPosition = `0 ${(-t * 6).toFixed(1)}px`;
+  } else {
+    const ph = (t - DROP) / B, fr = ph - Math.floor(ph), pulse = Math.exp(-fr * B / .12);
+    tf($('sb1'), { x: Math.sin(t * .31) * 120, y: Math.cos(t * .27) * 90, s: 1 + .03 * pulse });
+    tf($('sb2'), { x: Math.cos(t * .23) * 140, y: Math.sin(t * .29) * 110 });
+    tf($('sb3'), { x: Math.sin(t * .21 + 1) * 130, y: Math.cos(t * .25) * 100, s: 1 + .03 * pulse });
+    tf($('sb4'), { x: Math.cos(t * .33) * 90, y: Math.sin(t * .2) * 120 });
+    $('dotsS').style.backgroundPosition = `0 ${(-t * 6).toFixed(1)}px`;
+  }
+  $('vig').style.opacity = sol ? .1 : 1;
+  // stage beat pulse after the drop
+  const ph = (t - DROP) / B, fr = ph - Math.floor(ph), pulse = t >= DROP ? Math.exp(-fr * B / .1) : 0;
+  $('stage').style.transform = `scale(${(1 + .006 * pulse).toFixed(4)})`;
+  // flash: builds through the riser, explodes on the drop
+  const up = Math.pow(P(t, DROP - .35, DROP), 2), down = 1 - eo(P(t, DROP, DROP + .75));
+  const fa = t < DROP ? up * .95 : down;
+  $('flash').style.visibility = fa > .003 ? 'visible' : 'hidden'; $('flash').style.opacity = fa.toFixed(3);
+  // grain jitter
+  const f = Math.round(t * FPS); $('grain').style.transform = `translate(${((f * 37) % 60) - 30}px,${((f * 53) % 60) - 30}px)`;
+  $('grain').style.opacity = sol ? .045 : .08;
+}
+function renderOrb(t) {
+  if (!orb) return;
+  const host = $('orbHost');
+  // S14: hero (centre, y≈800) · S15: shrinks up as Ruby (y≈720) · S20: lockup (y≈700)
+  let vis = false, x = 0, y = 0, s = 1, a = 1;
+  if (t >= DROP && t < SC[16].start + .15) {
+    vis = true; const pop = spr(t - DROP, 1.5, 5.5), toR = io(P(t, SC[15].start - .2, SC[15].start + .35)), out = io(P(t, SC[16].start - .16, SC[16].start + .14));
+    y = lerp(800, 680, toR); s = lerp(lerp(.2, 1.05, pop), .68, toR) * lerp(1, 1.12, out); a = 1 - out;
+  } else if (t >= SC[20].start - .1) {
+    vis = true; const pop = spr(t - SC[20].start + .1, 1.5, 6); y = 680; s = lerp(.3, .78, pop); a = cl((t - SC[20].start + .1) / .2);
+  }
+  if (!vis) { host.style.visibility = 'hidden'; return; }
+  host.style.visibility = 'visible'; host.style.opacity = a.toFixed(3);
+  host.style.transform = `translate(-50%,-50%) translate(0px,${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+  advanceOrb(t); orb.render();
+}
+
+async function renderAt(t) {
+  pending.length = 0;
+  renderBG(t); renderScenes(t); renderBin(t); renderCaps(t); renderOrb(t);
+  await Promise.all(pending);
+}
+window.renderAt = renderAt;
+
+// ---------- init ----------
+(async function () {
+  await Promise.all(["400 80px 'Instrument Serif'", "italic 400 80px 'Instrument Serif'", "500 40px 'Inter Tight'", "600 40px 'Inter Tight'", "700 40px 'Inter Tight'", "800 40px 'Inter Tight'", '40px Phosphor-Fill', '40px Phosphor-Bold'].map(f => document.fonts.load(f, 'Ag$1').catch(() => {})));
+  await document.fonts.ready;
+  buildCaps(); buildCalendar(); buildRows(); buildClock(); buildTag();
+  { const a = $('e1'), b = $('e2'), gap = 20, tot = a.offsetWidth + gap + b.offsetWidth; a.style.left = ((1080 - tot) / 2) + 'px'; b.style.left = ((1080 - tot) / 2 + a.offsetWidth + gap) + 'px'; }
+  P13 = mkParts($('pts13'), 46, 'p13', 13); P14 = mkParts($('pts14'), 36, 'p14', 77);
+  // grain tile
+  { const g = document.createElement('canvas'); g.width = g.height = 256; const c = g.getContext('2d'), d = c.createImageData(256, 256);
+    let r = 7; for (let i = 0; i < d.data.length; i += 4) { r = (r * 16807) % 2147483647; const v = (r / 2147483647) * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    c.putImageData(d, 0, 0); $('grain').style.backgroundImage = `url(${g.toDataURL()})`; }
+  // flights: S4 her job, S7 his quote, S10 rain (main items on each beat, a coin on each off-beat)
+  const W = 420, H = 104;
+  mkFly(tk('ph-bell-ringing', 'Smoke alarm swap', 'Sarah · Brunswick'), { pop: 1, t0: bt(4, 2), t1: bt(4, 3), x0: 760, y0: 640, arc: 260, r0: -6, r1: 40, s0: .9, s1: .3, w: W, h: H });
+  mkFly(tk('ph-lightning', 'Switchboard upgrade', '$2,450'), { pop: 1, t0: bt(7, 2.6), t1: bt(7, 3.6), x0: 560, y0: 1240, arc: 320, r0: 4, r1: -50, s0: 1, s1: .3, w: W, h: H });
+  const rain = [tk('ph-fan', 'Ceiling fan install', '$320'), note('50', '#F6D365', '#E9B949'), tk('ph-lightning', 'Switchboard upgrade', '$2,450'), note('100', '#7FD6A4', '#3FA95B'),
+                tk('ph-thermometer-hot', 'Hot water service', '$1,890'), tk('ph-lightbulb', 'Downlights ×12', '$960'), note('50', '#F6D365', '#E9B949'), tk('ph-shield-check', 'Safety switch', '$480'), tk('ph-snowflake', 'Aircon install', '$3,200')];
+  rain.forEach((h, k) => { const isT = h.includes('class="tk"'), side = k % 2 ? 1 : -1;
+    mkFly(h, { t0: bt(10, k) - .62, t1: bt(10, k) + .05, x0: 540 + side * (760 + (k % 3) * 40), y0: 880 + (k % 3) * 60, arc: 210, r0: side * -18, r1: side * 60, s0: isT ? .95 : 1.1, s1: .3, w: isT ? W : 200, h: isT ? H : 100 });
+    mkFly(coin, { t0: bt(10, k) + B / 2 - .55, t1: bt(10, k) + B / 2, x0: 540 - side * (640 + (k % 4) * 30), y0: 980 + (k % 4) * 40, arc: 190, r0: 0, r1: side * 300, s0: 1, s1: .5, w: 84, h: 84 });
+  });
+  binSquash = [bt(4, 3.1), bt(7, 3.7), ...rain.map((_, k) => bt(10, k) + .05), bt(10, 8.6)];
+  orb = LTOrb.create($('orbHost'), { manual: true, theme: 'light', time: 'morning', size: 300, preserve: true, magnetic: false, reducedMotion: false });
+  const res = []; document.querySelectorAll('.g').forEach(el => res.push(liquidGlass(el, el.classList.contains('gl') ? { scale: -70, chroma: 4, blur: 6 } : { scale: -80, chroma: 5, blur: 8 }).supported));
+  await renderAt(0);
+  document.body.dataset.glass = res.join(','); document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
