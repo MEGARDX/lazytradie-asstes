@@ -8,7 +8,8 @@ const { chromium } = require('playwright'); const path = require('path');
   await page.evaluate(async () => {
     await window.renderAt(27.88);
     CAP[10].el.style.top = '360px';
-    document.querySelector('#s10 > .abs').style.top = '640px';
+    document.querySelector('#s10 > .lbl').style.top = '660px';
+    document.querySelector('#s10 > .abs').style.top = '700px';
     document.getElementById('cnt').textContent = '$9,300';
     document.getElementById('cnt').style.transform = 'none';
   });

@@ -5,7 +5,7 @@
  2. Clip frames (30 fps JPEG) cropped so the Gemini/Flow ✦ watermark (bottom-right, ~x600 y1160 of 720×1280) is cut out:
     card clips use a 4:5 window above it; full-bleed clips crop the bottom edge. Lanczos upscale + light sharpen.
  3. VO word timings (faster-whisper) → kinetic captions in timeline.js.
- 4. Audio: music (ducked under VO) + the 20 VO lines + synthesised SFX on the beat → tmp/mix.wav.
+ 4. Audio: music (ducked under VO) + the 20 VO lines + designed SFX (sfx.py) on each animation event → tmp/mix.wav.
 """
 import os, json, glob, subprocess, wave
 import numpy as np
@@ -101,90 +101,106 @@ else:
     open(os.path.join(H, 'timeline.js'), 'w').write('window.TL = ' + json.dumps(meta, ensure_ascii=False) + ';\n')
 
 # ---- audio ----
-n = int(SR * (TOTAL + 0.6)); rng = np.random.default_rng(22)
-def tt(d): return np.arange(int(SR * d)) / SR
-def add(buf, x, at, g=1.0):
-    i = int(SR * at); j = min(len(buf), i + len(x)); buf[i:j] += g * x[:j - i]
-def load(f):
-    a = np.frombuffer(subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', f, '-ac', '1', '-ar', str(SR), '-f', 's16le', '-'],
-                                     capture_output=True).stdout, dtype=np.int16).astype(np.float32) / 32768
-    return a
-def buzz(d=0.32):
-    x = tt(d); return 0.22 * np.sign(np.sin(2 * np.pi * 150 * x)) * (0.6 + 0.4 * np.sin(2 * np.pi * 23 * x)) * np.minimum(1, x / .01) * np.minimum(1, (d - x) / .03)
-def whoosh(d=0.45):
-    x = tt(d); nz = np.convolve(rng.normal(0, 1, x.size), np.ones(18) / 18, 'same')
-    env = np.sin(np.pi * x / d) ** 2; return 0.10 * nz * env
-def pop():
-    x = tt(0.12); return 0.16 * np.sin(2 * np.pi * (900 - 2500 * x) * x) * np.exp(-x * 35)
-def chime(f=1568):
-    x = tt(0.7); return 0.12 * (np.sin(2 * np.pi * f * x) + .5 * np.sin(2 * np.pi * f * 1.5 * x)) * np.exp(-x * 6) * np.minimum(1, x / .004)
-def tick():
-    x = tt(0.05); return 0.09 * np.sin(2 * np.pi * 2600 * x) * np.exp(-x * 90)
-def clink():
-    x = tt(0.35); return 0.13 * sum(np.sin(2 * np.pi * f * x) * np.exp(-x * k) for f, k in ((2350, 14), (3720, 18), (5100, 24))) * np.minimum(1, x / .002)
-def thud():
-    x = tt(0.4); return 0.35 * np.sin(2 * np.pi * (70 - 30 * x) * x) * np.exp(-x * 9)
-def key():
-    x = tt(0.04); return 0.07 * rng.normal(0, 1, x.size) * np.exp(-x * 120)
-def ringback():
-    x = tt(1.0); g = ((x < 0.4) | ((x > 0.6) & (x < 1.0))).astype(float)
-    return 0.05 * (np.sin(2 * np.pi * 400 * x) + np.sin(2 * np.pi * 450 * x)) * g
-def riser(d):
-    x = tt(d); f = 200 + 1600 * (x / d) ** 2; ph = 2 * np.pi * np.cumsum(f) / SR
-    nz = np.convolve(rng.normal(0, 1, x.size), np.ones(8) / 8, 'same')
-    return (0.05 * np.sin(ph) + 0.10 * nz) * (x / d) ** 2
-def impact():
-    x = tt(1.6); return 0.5 * np.sin(2 * np.pi * (55 - 20 * x) * x) * np.exp(-x * 3.5) + 0.08 * rng.normal(0, 1, x.size) * np.exp(-x * 7)
-
-sfx = np.zeros(n); vo = np.zeros(n); wl = np.zeros(n); wr = np.zeros(n)
+# Sound design v2: every cue is placed on the animation event it belongs to (same beat maths as reel.html: bt(n, k)).
+# Cues come from sfx.py (designed, band-limited, through a short stereo room) and sit ~10 dB under the voice.
+import sfx as X
+n = int(SR * (TOTAL + 0.6))
 S = {s['n']: s for s in scenes}
-for s in scenes:
-    add(vo, load(os.path.join(ASSET, f"{s['n']:02d}.wav")), s['voStart'], 1.0)
-    if s['n'] not in (1, 14):
-        w_ = whoosh(); pan = np.linspace(0.15, 0.85, w_.size)
-        if s['n'] % 2: pan = pan[::-1]
-        add(wl, w_ * np.sqrt(1 - pan), s['start'] - 0.18, 1.1); add(wr, w_ * np.sqrt(pan), s['start'] - 0.18, 1.1)
 b = lambda sn, k: S[sn]['start'] + k * BEAT
-for k in range(6): add(sfx, buzz(), b(1, k))
-for k in range(4): add(sfx, buzz(), b(2, k), 0.6)
-add(sfx, ringback(), b(3, 0.4)); add(sfx, thud(), b(3, 3.3), 0.6)
-add(sfx, whoosh(0.35), b(4, 2), 0.9); add(sfx, clink(), b(4, 3)); add(sfx, thud(), b(4, 3.1), 0.5)
-for k in range(14): add(sfx, key(), b(5, 2) + k * 0.11)
-add(sfx, whoosh(0.3), b(5, 5), 0.8)
-for k in range(24): add(sfx, tick(), b(6, 0) + k * BEAT / 4)
-add(sfx, pop(), b(7, 1.6)); add(sfx, clink(), b(7, 3.6)); add(sfx, thud(), b(7, 3.7), 0.5)
-for k in range(10): add(sfx, key(), b(8, 0.5) + k * 0.1)
-add(sfx, pop(), b(8, 3)); add(sfx, chime(990), b(9, 1), 0.7)
-for k in range(9):
-    add(sfx, clink(), b(10, k) + 0.05); add(sfx, clink(), b(10, k) + BEAT / 2, 0.6)
-add(sfx, thud(), b(10, 8.6), 0.9)
-add(sfx, thud(), b(11, 0), 0.8)
-for k in (1, 2, 3): add(sfx, pop(), b(12, k), 0.4)   # notifications stack up
-add(sfx, riser(S[13]['dur'] + 0.05), S[13]['start'])
-add(sfx, impact(), S[14]['start']); add(sfx, chime(1318), b(14, 1), 0.8)
-for k in (1, 2.5, 4):  # chips land with the words call / text / website; ✓ half a beat later; chime on "instantly"
-    add(sfx, pop(), b(15, k)); add(sfx, tick(), b(15, k + 0.5), 1.2)
-add(sfx, chime(1568), b(15, 7), 0.8)
-for k in (2, 3, 4): add(sfx, pop(), b(16, k), 0.8)
-add(sfx, tick(), b(17, 2.7)); add(sfx, chime(1760), b(17, 3), 0.9)
-for k in (1, 2, 3, 4): add(sfx, tick(), b(18, k))
-for k in (4.5, 5.5, 6.5): add(sfx, pop(), b(18, k), 0.45)   # transcript bubbles
-for k in (1, 2, 3): add(sfx, whoosh(0.3), b(19, k), 0.7)
-add(sfx, chime(1318), b(20, 0)); add(sfx, pop(), b(20, 8), 0.8); add(sfx, chime(1975), b(20, 8.5), 0.7)   # CTA after the last line
+DROP = S[14]['start']
+L = np.zeros(n); Rr = np.zeros(n); vo = np.zeros(n)
+def put(x, at, g=1.0, pan=0.0):
+    i = int(SR * at)
+    if i < 0: x = x[-i:]; i = 0
+    j = min(n, i + len(x)); seg = x[:j - i] * g
+    L[i:j] += seg * np.sqrt((1 - pan) / 2) * 1.414; Rr[i:j] += seg * np.sqrt((1 + pan) / 2) * 1.414
+def load(f):
+    return np.frombuffer(subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', f, '-ac', '1', '-ar', str(SR), '-f', 's16le', '-'],
+                                        capture_output=True).stdout, dtype=np.int16).astype(np.float32) / 32768
+for s in scenes:
+    a = load(os.path.join(ASSET, f"{s['n']:02d}.wav")); i = int(SR * s['voStart']); vo[i:i + len(a)] += a[:n - i]
 
+# S1 phone buzzing on the dash; mono labels tick on
+for k in range(1, 6): put(X.vibrate(), b(1, k), .6, -0.15)
+for k in (2, 3, 4): put(X.click(.5, 1.3), b(1, k), 1, 0.3)
+put(X.swish(.5, False), S[2]['start'] - .34, .8)                       # pull-back into the card
+# S2 still buzzing, further away
+for k in range(4): put(X.lp(X.vibrate(), 1800), b(2, k), .35, -0.1)
+# S3 her side of the line: ringback, then the line drops and the marker circles it
+put(X.click(.6), b(3, .2)); put(X.ringback(3.0 * BEAT), b(3, .3), 1.0, 0.1)
+put(X.hangup(), b(3, 3.3), 1.0); put(X.scribble(.5), b(3, 3.35), 1.0, 0.1)
+# S4 call 1 → call 2, the bin rolls in, her job goes in the bin
+put(X.pop(.55, 520), b(4, .4), 1, -0.4); put(X.swish(.3), b(4, 1.0), .35); put(X.pop(.8, 700), b(4, 1.9), 1, 0.3)
+put(X.low_hit(.35), b(4, 1.5), 1, 0.5); put(X.swish(.42), b(4, 2), .55, 0.4)
+put(X.thunk(), b(4, 3), 1, 0.6); put(X.slam(.45), b(4, 3.12), 1, 0.6)
+# S5 he types (a chip per word), the words drop into the field, sent
+for i in range(8):
+    t0 = b(5, 2) + i * (2.9 * BEAT / 8)
+    for j in range(2 + (i % 2)): put(X.key(), t0 + j * .055, 1, -0.1 + .05 * j)
+put(X.swish(.3), b(5, 4.95), .4); put(X.swoosh_send(), b(5, 5.1), 1, 0.2); put(X.pop(.6, 760), b(5, 5.35), 1, 0.1)
+put(X.swish(.55, True), S[6]['start'] - .32, .9); put(X.low_hit(.4), S[6]['start'], 1)  # zoom-through
+# S6 the clock runs two hours in 24 ticks
+for k in range(24): put(X.tock(1.0, 1900 if k % 2 else 1600), b(6, 0) + k * BEAT / 4, .9, -0.2 + .4 * (k % 2))
+put(X.pop(.6, 640), b(6, 4), 1)
+# S7 his reply; the quote goes in the bin
+put(X.pop(.5, 560), b(7, .1)); put(X.swish(.42), b(7, 2.6), .55, 0.4); put(X.thunk(), b(7, 3.6), 1, 0.6); put(X.slam(.4), b(7, 3.72), 1, 0.6)
+# S8 the website form: typing, cursor, annotation arrow, click
+for k in range(12): put(X.key(.8), b(8, .5) + k * .085, 1, -0.2)
+put(X.swish(.25, True), b(8, 1.8), .3, 0.4); put(X.pop(.5, 580), b(8, 2.2), 1, -0.3); put(X.click(1.0, .9), b(8, 3), 1, 0.3)
+# S9 the auto-reply, then the marker circles "48 hours"
+put(X.chime(.55, 880), b(9, 1), 1); put(X.scribble(.55), b(9, 3), 1, -0.1)
+put(X.swish(.45, False), S[10]['start'] - .25, .7)
+# S10 the bin eats the week: an item lands on every beat, a coin on every off-beat, lid slams shut
+for k in range(9):
+    put(X.thunk(.9), b(10, k) + .05, 1, -0.3 + .6 * (k % 2)); put(X.coin(.8), b(10, k) + BEAT / 2, 1, 0.3 - .6 * (k % 2))
+put(X.slam(1.0), b(10, 8.6), 1)
+# S11 statement + text cloud
+put(X.low_hit(1.0), b(11, 0)); put(X.swish(1.2, True), b(11, .5), .25)
+# S12 notifications stack up
+for k in (1, 2, 3): put(X.pop(.55, 600 + 60 * k), b(12, k), 1, -0.3)
+# S13 → drop: riser, reverse swell, iris opens on the sub boom
+put(X.riser(S[13]['dur'] + .05), S[13]['start'], .9); put(X.reverse_swell(1.2), DROP - 1.2, .8)
+put(X.sub_boom(1.0), DROP); put(X.shimmer(.9, .6), DROP + .05)
+# S14 labels tick on, the wordmark reveals with the VO
+for k in (.3, .6, .9, 1.2): put(X.click(.4, 1.4), b(14, k), 1, (-1) ** int(k * 10) * .4)
+put(X.swish(.45, True), b(14, 1.6), .5); put(X.bell(1318, 1.6, .6), S[14]['words'][1]['t'] if 'words' in S[14] else b(14, 1.75))
+# S15 slot carousel spins onto Calls / Texts / Web chats; pills pop; "instantly"
+put(X.swish(.4), S[15]['start'] - .15, .5)
+for k in (1, 2.5, 4): put(X.ratchet(.36), b(15, k) - .36, 1); put(X.click(.9, 1.1), b(15, k), 1)
+for k in (1.5, 3, 4.5): put(X.pop(.6, 700), b(15, k), 1, 0.2)
+put(X.chime(.8, 1047), b(15, 7), 1)
+# S16 the sky tilts down into the sunset; checks tick; jobs drop into the calendar
+put(X.swish(.6, False), S[16]['start'] - .3, .7)
+for k in (1.5, 2.5, 3.5): put(X.click(.6, 1.2), b(16, k), 1, -0.4)
+for k in (2, 3, 4): put(X.pop(.7, 660), b(16, k), 1, 0.3)
+# S17 arrow, tap, approved, toast
+put(X.pop(.5, 560), b(17, 1.5), 1, -0.3); put(X.click(1.0, .9), b(17, 2.7), 1, 0.3); put(X.chime(.9, 1175), b(17, 3), 1); put(X.pop(.6, 760), b(17, 3.3))
+# S18 rows tick in, transcript bubbles pop, marker circles the booking
+for k in (1, 2, 3, 4): put(X.click(.5, 1.2), b(18, k), 1, 0.3)
+for k in (4.5, 5.5, 6.5): put(X.pop(.5, 620), b(18, k), 1, -0.2 if k != 5.5 else 0.3)
+put(X.scribble(.5), b(18, 5), 1, 0.3)
+# S19 the deck fans out; S20 collapse into the lockup
+for k, pn in ((1, -0.5), (2, 0.5), (3, 0)): put(X.swish(.4), b(19, k) - .12, .55, pn)
+put(X.swish(.45, False), S[20]['start'] - .35, .6)
+put(X.chime(.8, 1047), b(20, 0)); put(X.pop(.7, 640), b(20, 8), 1, -0.3); put(X.pop(.6, 700), b(20, 8.12), 1, 0.3)
+put(X.chime(.6, 1318), b(20, 8.5)); put(X.click(.4, 1.3), b(20, 9.5))
+
+L, Rr = X.room(L * .8, Rr * .8, .2, .9)   # SFX bus sits ~2 dB lower
 mus2 = np.frombuffer(subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', MUSIC, '-ac', '2', '-ar', str(SR), '-f', 's16le', '-'],
                                     capture_output=True).stdout, dtype=np.int16).astype(np.float32).reshape(-1, 2) / 32768
 mus2 = mus2[int(SR * M_IN):int(SR * M_IN) + n]; mus2 = np.pad(mus2, ((0, max(0, n - len(mus2))), (0, 0)))
 mus2 = mus2 / (np.sqrt((mus2[int(SR * 40):int(SR * 55)] ** 2).mean()) + 1e-9) * 0.10    # level the drop section
 g = np.full(n, 1.0)
-for s in scenes:  # duck under VO with 120 ms ramps
+for s in scenes:  # duck under VO
     a, z = int(SR * (s['voStart'] - 0.12)), int(SR * (s['voEnd'] + 0.15))
     g[max(0, a):z] = np.minimum(g[max(0, a):z], 0.55)
 g = np.convolve(g, np.ones(int(SR * 0.12)) / int(SR * 0.12), 'same')
 fade = np.ones(n); fo = int(SR * 2.2); fade[-fo:] = np.linspace(1, 0, fo); fade[:int(SR * .4)] = np.linspace(0, 1, int(SR * .4))
-c = vo * 1.0 + sfx * 0.9
-mix = np.stack([c + mus2[:, 0] * g * fade + wl * 0.9, c + mus2[:, 1] * g * fade + wr * 0.9], 1)
+rms = lambda x: 20 * np.log10(np.sqrt((x ** 2).mean()) + 1e-9)
+act = lambda x: x[np.abs(x) > 1e-3] if (np.abs(x) > 1e-3).any() else x
+print('active RMS  vo %.1f dB  sfx %.1f dB' % (rms(act(vo)), rms(act((L + Rr) / 2))))
+mix = np.stack([vo + mus2[:, 0] * g * fade + L, vo + mus2[:, 1] * g * fade + Rr], 1)
 mix = mix / max(1e-9, np.abs(mix).max()) * 0.95
 with wave.open(os.path.join(TMP, 'mix.wav'), 'wb') as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-print('total', TOTAL, 'drop at', scenes[13]['start'], 'frames', meta['frames'], 'stereo mix written')
+print('total', TOTAL, 'drop at', DROP, 'stereo mix written')
