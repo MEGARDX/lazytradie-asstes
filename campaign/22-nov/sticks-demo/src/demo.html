@@ -1,0 +1,170 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 10 s demo of the owner's "explainer stick-figure" reference format, for LazyTradie:
+     a faceless tradie mascot who never animates, he just swaps between pose drawings (with a hand-drawn line boil),
+     a sketch infographic panel on top that cuts per sentence, and word-by-word black caption box. VO = lines 01-05. -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Instrument+Serif&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#fff}
+#v{position:relative;width:1080px;height:1920px;overflow:hidden;background:#FBFBFB;font-family:Poppins,sans-serif}
+.panel{position:absolute;left:40px;top:240px;width:1000px;height:520px;visibility:hidden}
+.panel svg{width:1000px;height:520px;overflow:visible}
+#cap{position:absolute;left:0;top:800px;width:1080px;display:flex;justify-content:center}
+#capbox{min-width:360px;height:84px;padding:0 26px;border-radius:8px;background:#0A0A0A;display:flex;align-items:center;gap:12px;font-weight:700;font-size:40px;letter-spacing:-.01em;white-space:nowrap}
+#capbox span{color:#3C3C3C}#capbox span.on{color:#fff}
+#chr{position:absolute;left:220px;top:880px;width:640px;height:1000px;overflow:visible}
+#wm{position:absolute;left:0;right:0;top:1868px;text-align:center;font-family:'Instrument Serif',serif;font-size:32px;color:#222}
+</style></head><body>
+<div id="v">
+  <div class="panel" id="p1"></div><div class="panel" id="p2"></div><div class="panel" id="p3"></div><div class="panel" id="p4"></div><div class="panel" id="p5"></div>
+  <div id="cap"><div id="capbox"></div></div>
+  <svg id="chr" viewBox="-20 0 640 1000"></svg>
+  <div id="wm">@lazytradie</div>
+</div>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="boil" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence id="bt" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="1"/><feDisplacementMap in="SourceGraphic" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil2" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence id="bt2" type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="5"/><feDisplacementMap in="SourceGraphic" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+</svg>
+<script src="timeline.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const INK = '#1B1F27', NAVY = '#22416B', NAVY2 = '#1B355A', AMB = '#F5A623', SKIN = '#FFFFFF';
+const S = 'stroke="' + INK + '" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"';
+
+// ---------------- the mascot (one drawing, arms swapped per pose) ----------------
+const BODY = `
+<ellipse cx="300" cy="972" rx="210" ry="16" fill="rgba(0,0,0,.07)"/>
+<path d="M208 600 L300 600 L296 905 L222 905 Z" fill="#2A2E35" ${S}/>
+<path d="M300 600 L392 600 L378 905 L304 905 Z" fill="#2A2E35" ${S}/>
+<rect x="194" y="690" width="40" height="78" rx="7" fill="#343943" ${S} stroke-width="5"/><rect x="366" y="690" width="40" height="78" rx="7" fill="#343943" ${S} stroke-width="5"/>
+<rect x="216" y="878" width="84" height="28" rx="6" fill="#22262C" ${S} stroke-width="5"/><rect x="300" y="878" width="84" height="28" rx="6" fill="#22262C" ${S} stroke-width="5"/>
+<path d="M216 905 L300 905 L302 948 L170 952 Q158 950 162 936 Q168 918 216 912 Z" fill="#C68A3E" ${S}/>
+<path d="M300 905 L384 905 Q432 918 438 936 Q442 950 430 952 L298 948 Z" fill="#C68A3E" ${S}/>
+<rect x="158" y="944" width="148" height="18" rx="7" fill="#4A3420" ${S} stroke-width="5"/><rect x="294" y="944" width="148" height="18" rx="7" fill="#4A3420" ${S} stroke-width="5"/>
+<path d="M232 920 l26 -6 M236 932 l26 -6 M342 914 l26 6 M338 926 l26 6" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+<path d="M210 330 Q300 306 390 330 L402 600 L198 600 Z" fill="${NAVY}" ${S}/>
+<path d="M216 338 L282 328 L286 598 L200 598 Z" fill="${AMB}" ${S}/>
+<path d="M384 338 L318 328 L314 598 L400 598 Z" fill="${AMB}" ${S}/>
+<rect x="202" y="470" width="82" height="20" fill="#E8EAEE" ${S} stroke-width="5"/><rect x="201" y="522" width="83" height="20" fill="#E8EAEE" ${S} stroke-width="5"/>
+<rect x="316" y="470" width="82" height="20" fill="#E8EAEE" ${S} stroke-width="5"/><rect x="316" y="522" width="83" height="20" fill="#E8EAEE" ${S} stroke-width="5"/>
+<rect x="330" y="372" width="46" height="34" rx="8" fill="${NAVY}" ${S} stroke-width="5"/><path d="M356 378 l-12 14 h9 l-5 10 l14 -16 h-9 z" fill="${AMB}"/>
+<rect x="196" y="584" width="208" height="32" rx="9" fill="#8A5A2B" ${S}/><rect x="284" y="587" width="32" height="26" rx="5" fill="#D9DDE3" ${S} stroke-width="5"/>
+<g transform="rotate(14 405 640)"><rect x="398" y="604" width="15" height="94" rx="5" fill="#A0662F" ${S} stroke-width="5"/><rect x="380" y="596" width="52" height="20" rx="5" fill="#6B7280" ${S} stroke-width="5"/></g>
+<path d="M240 320 Q300 362 360 320 Q352 300 340 296 Q300 336 260 296 Q248 300 240 320 Z" fill="${NAVY2}" ${S}/>
+<path d="M266 306 Q300 330 334 306" fill="none" ${S} stroke-width="5"/>`;
+const HEAD = `
+<ellipse cx="300" cy="212" rx="98" ry="104" fill="${SKIN}" ${S}/>
+<ellipse cx="262" cy="254" rx="12" ry="17" fill="${INK}"/><ellipse cx="334" cy="254" rx="12" ry="17" fill="${INK}"/>
+<path d="M204 200 Q206 98 300 92 Q394 98 396 200 Q300 178 204 200 Z" fill="#1E3A5F" ${S}/>
+<path d="M300 190 Q392 166 474 194 Q486 214 458 220 Q380 208 300 214 Z" fill="#17304F" ${S}/>
+<circle cx="300" cy="94" r="7" fill="#1E3A5F" ${S} stroke-width="5"/>
+<rect x="268" y="124" width="64" height="48" rx="11" fill="${AMB}" ${S} stroke-width="5"/><path d="M306 132 l-16 18 h12 l-6 14 l18 -21 h-12 z" fill="${NAVY}"/>`;
+// arm = shoulder → elbow → wrist as a thick outlined sleeve, then a hand
+function arm(pts, hand) {
+  const d = 'M' + pts.map(p => p.join(' ')).join(' L');
+  return `<path d="${d}" fill="none" stroke="${INK}" stroke-width="66" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="${d}" fill="none" stroke="${NAVY}" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>` + hand;
+}
+const lines3 = (x, y, a) => { let s = ''; for (const k of [-1, 0, 1]) { const r = (a + k * 32) * Math.PI / 180; s += `<path d="M${(x + Math.cos(r) * 46).toFixed(1)} ${(y + Math.sin(r) * 46).toFixed(1)} L${(x + Math.cos(r) * 72).toFixed(1)} ${(y + Math.sin(r) * 72).toFixed(1)}" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>`; } return s; };
+const palm = (x, y, a, flip = 1) => `<g transform="translate(${x} ${y}) rotate(${a}) scale(${flip} 1)">
+  <path d="M-30 4 Q-32 -18 -6 -22 L30 -24 Q42 -22 40 -12 L22 -8 L38 -4 Q46 4 34 10 L-18 18 Q-30 16 -30 4 Z" fill="${SKIN}" ${S} stroke-width="6"/>
+  <path d="M8 -9 L30 -9 M6 3 L30 3" stroke="${INK}" stroke-width="4" stroke-linecap="round"/></g>`;
+const index = (x, y, a) => `<g transform="translate(${x} ${y}) rotate(${a})">
+  <rect x="-8" y="-70" width="18" height="52" rx="9" fill="${SKIN}" ${S} stroke-width="6"/>
+  <path d="M-26 -10 Q-28 -30 -6 -30 L18 -28 Q30 -24 28 -6 Q28 16 4 18 L-14 18 Q-28 16 -26 -10 Z" fill="${SKIN}" ${S} stroke-width="6"/>
+  <path d="M-14 -4 L12 -4" stroke="${INK}" stroke-width="4" stroke-linecap="round"/></g>`;
+const fist = (x, y) => `<path d="M${x - 28} ${y + 4} Q${x - 30} ${y - 26} ${x} ${y - 28} Q${x + 30} ${y - 26} ${x + 28} ${y + 2} Q${x + 26} ${y + 30} ${x} ${y + 30} Q${x - 26} ${y + 30} ${x - 28} ${y + 4} Z" fill="${SKIN}" ${S} stroke-width="6"/><path d="M${x + 6} ${y - 26} Q${x + 14} ${y - 8} ${x + 4} ${y + 4}" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>`;
+const flat = (x, y, a) => `<g transform="translate(${x} ${y}) rotate(${a})">
+  <path d="M-24 22 Q-30 -10 -22 -34 Q-18 -44 -10 -40 L-8 -18 L-6 -52 Q-2 -62 6 -56 L8 -20 L12 -50 Q18 -58 24 -50 L22 -14 L30 -34 Q38 -38 38 -28 L26 20 Q14 34 -6 32 Q-20 30 -24 22 Z" fill="${SKIN}" ${S} stroke-width="6"/></g>`;
+const POSES = {
+  point: [arm([[226, 352], [156, 300], [104, 246]], `<path d="M104 246 L-160 -10" stroke="${INK}" stroke-width="18" stroke-linecap="round"/><path d="M104 246 L-160 -10" stroke="#9A6A3A" stroke-width="9" stroke-linecap="round"/>` + fist(104, 246)),
+          arm([[376, 354], [416, 452], [396, 540]], fist(396, 540))],
+  shrug: [arm([[226, 354], [160, 470], [102, 430]], palm(102, 430, -150, 1) + lines3(84, 410, -110)),
+          arm([[374, 354], [440, 470], [498, 430]], palm(498, 430, -30, -1) + lines3(516, 410, -70))],
+  finger: [arm([[226, 354], [166, 450], [168, 340]], index(168, 340, -8) + lines3(150, 250, -150)),
+           arm([[374, 354], [440, 470], [504, 432]], palm(504, 432, -30, -1) + lines3(520, 412, -60))],
+  explain: [arm([[226, 354], [186, 486], [232, 410]], flat(232, 404, -10)),
+            arm([[374, 354], [414, 486], [368, 410]], flat(368, 404, 10))]
+};
+function drawPose(name, mirror) {
+  const [l, r] = POSES[name];
+  $('chr').innerHTML = `<g filter="url(#boil)" transform="${mirror ? 'translate(600 0) scale(-1 1)' : ''}">${BODY}${l}${r}${HEAD}</g>`;
+}
+
+// ---------------- sketch panels (one per sentence) ----------------
+const pill = (x, y, txt, icon = '') => `<g><rect x="${x}" y="${y}" width="${txt.length * 21 + (icon ? 64 : 40)}" height="64" rx="32" fill="#fff" ${S} stroke-width="6"/>${icon}<text x="${x + (icon ? 52 : 20)}" y="${y + 44}" font-family="Poppins" font-weight="800" font-size="32" fill="${INK}">${txt}</text></g>`;
+const burst = (x, y, a, c = '#3DA5F4') => { let s = ''; for (const k of [-1, 0, 1]) { const r = (a + k * 26) * Math.PI / 180; s += `<path d="M${(x + Math.cos(r) * 10).toFixed(1)} ${(y + Math.sin(r) * 10).toFixed(1)} L${(x + Math.cos(r) * 38).toFixed(1)} ${(y + Math.sin(r) * 38).toFixed(1)}" stroke="${c}" stroke-width="7" stroke-linecap="round"/>`; } return s; };
+const phone = (x, y, w, h, r, inner) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="34" fill="#2B3340" ${S}/><rect x="${-w / 2 + 14}" y="${-h / 2 + 16}" width="${w - 28}" height="${h - 32}" rx="22" fill="#fff" ${S} stroke-width="5"/>${inner}</g>`;
+const PANELS = {
+  p1: `<ellipse cx="500" cy="280" rx="420" ry="220" fill="#E3F1FD"/>
+    ${phone(500, 280, 250, 440, -8, `<text x="0" y="-130" text-anchor="middle" font-family="Poppins" font-weight="700" font-size="24" fill="#888">Incoming call</text>
+      <circle cx="0" cy="-50" r="46" fill="#FFD9A8" ${S} stroke-width="5"/><text x="0" y="-36" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="34" fill="${INK}">S</text>
+      <text x="0" y="40" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="34" fill="${INK}">Sarah</text>
+      <circle cx="-50" cy="140" r="30" fill="#FF5A5F" ${S} stroke-width="5"/><circle cx="50" cy="140" r="30" fill="#2BC46C" ${S} stroke-width="5"/>`)}
+    ${burst(300, 150, -150)}${burst(700, 150, -30)}${burst(290, 420, 160, AMB)}${burst(716, 420, 20, AMB)}
+    ${pill(60, 40, 'Ring ring!')}`,
+  p2: `<ellipse cx="500" cy="300" rx="420" ry="210" fill="#FFF1DC"/>
+    <path d="M410 500 L470 80 M590 500 L530 80" stroke="${INK}" stroke-width="30" stroke-linecap="round"/><path d="M410 500 L470 80 M590 500 L530 80" stroke="#D9A066" stroke-width="18" stroke-linecap="round"/>
+    ${[150, 230, 310, 390, 460].map(y => `<path d="M${450 - (y - 80) * .14 + 10} ${y} L${550 + (y - 80) * .14 - 10} ${y}" stroke="${INK}" stroke-width="20" stroke-linecap="round"/><path d="M${450 - (y - 80) * .14 + 10} ${y} L${550 + (y - 80) * .14 - 10} ${y}" stroke="#E8B47D" stroke-width="10" stroke-linecap="round"/>`).join('')}
+    <path d="M420 74 Q500 10 580 74 Z" fill="${AMB}" ${S}/><rect x="408" y="70" width="184" height="18" rx="9" fill="${AMB}" ${S} stroke-width="5"/>
+    ${phone(770, 330, 130, 230, 14, `<text x="0" y="8" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="44" fill="#FF5A5F">!</text>`)}
+    ${burst(840, 210, -40, '#FF5A5F')}${burst(700, 220, -140, '#FF5A5F')}
+    ${pill(60, 40, 'On the tools')}`,
+  p3: `<ellipse cx="500" cy="290" rx="420" ry="210" fill="#F3EDFF"/>
+    <rect x="250" y="110" width="500" height="330" rx="34" fill="#fff" ${S}/>
+    <circle cx="420" cy="230" r="44" fill="none" ${S} stroke-width="12"/><circle cx="580" cy="230" r="44" fill="none" ${S} stroke-width="12"/><path d="M420 274 L580 274" ${S} stroke-width="12"/>
+    <text x="500" y="370" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="40" fill="${INK}">0 new messages</text>
+    <circle cx="740" cy="120" r="44" fill="#FF5A5F" ${S}/><path d="M722 102 L758 138 M758 102 L722 138" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+    ${burst(800, 70, -40, '#FF5A5F')}
+    ${pill(60, 40, 'Voicemail')}`,
+  p4: `<rect x="30" y="90" width="430" height="400" rx="34" fill="#E6F2FD" ${S}/><rect x="540" y="90" width="430" height="400" rx="34" fill="#FFEBDD" ${S}/>
+    ${phone(245, 300, 150, 260, -6, `<path d="M-30 -10 L30 50 M30 -10 L-30 50" stroke="#FF5A5F" stroke-width="12" stroke-linecap="round"/><text x="0" y="-50" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="22" fill="#888">no answer</text>`)}
+    ${phone(755, 300, 150, 260, 6, `<path d="M-32 14 L-8 40 L34 -14" fill="none" stroke="#2BC46C" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><text x="0" y="-50" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="22" fill="#888">answered</text>`)}
+    <circle cx="500" cy="290" r="52" fill="#FFC24D" ${S}/><text x="500" y="306" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="40" fill="${INK}">VS</text>
+    ${pill(60, 50, 'Turner Elec.')}${pill(584, 50, 'Next sparky')}
+    ${burst(950, 120, -40, AMB)}${burst(60, 120, -140, '#3DA5F4')}`,
+  p5: `<ellipse cx="500" cy="290" rx="430" ry="215" fill="#E5F8EC"/>
+    ${phone(330, 290, 220, 400, -6, `<rect x="-86" y="-120" width="170" height="104" rx="22" fill="#3DA5F4" ${S} stroke-width="5"/><text x="-72" y="-78" font-family="Poppins" font-weight="700" font-size="22" fill="#fff">How much for</text><text x="-72" y="-48" font-family="Poppins" font-weight="700" font-size="22" fill="#fff">a switchboard?</text>
+      <text x="0" y="40" text-anchor="middle" font-family="Poppins" font-weight="700" font-size="20" fill="#999">Delivered</text>`)}
+    <circle cx="690" cy="260" r="118" fill="#fff" ${S}/><path d="M690 260 L690 186 M690 260 L744 290" ${S} stroke-width="10"/>
+    <text x="690" y="440" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="38" fill="${INK}">2 hrs later…</text>
+    ${burst(820, 140, -40, AMB)}${burst(560, 140, -140, AMB)}
+    ${pill(60, 40, 'Quote request')}`
+};
+function buildPanels() { for (const k in PANELS) $(k).innerHTML = `<svg viewBox="0 0 1000 520"><g filter="url(#boil2)">${PANELS[k]}</g></svg>`; }
+
+// ---------------- timeline: a pose per sentence, a flip on a stressed word, captions in 2-3 word chunks ----------------
+const L = TL.lines;
+const PLAN = [ // pose, mirrored?, flip-to pose on the n-th word
+  { pose: 'point', alt: ['finger', 2] }, { pose: 'shrug', alt: ['explain', 3] }, { pose: 'finger', alt: ['shrug', 4] },
+  { pose: 'point', alt: ['explain', 3] }, { pose: 'explain', alt: ['finger', 3] }];
+const CHUNKS = []; L.forEach((l, li) => { for (let i = 0; i < l.words.length; i += 3) { let c = l.words.slice(i, i + 3); if (l.words.length - i === 4 && i === 0) c = l.words.slice(0, 2); CHUNKS.push({ li, words: c }); if (c.length === 2 && l.words.length === 4 && i === 0) { CHUNKS.push({ li, words: l.words.slice(2) }); break; } } });
+let lastPose = '', lastPanel = '', lastChunk = -1;
+function renderAt(t) {
+  let li = 0; L.forEach((l, i) => { if (t >= l.start - .12) li = i; });
+  const pl = PLAN[li], l = L[li];
+  // pose: base pose, flips to the alt drawing on the stressed word (no tweening, a hard swap like the reference)
+  const altT = l.words[Math.min(pl.alt[1], l.words.length - 1)].t;
+  const pose = t >= altT - .03 && t < l.end + .1 ? pl.alt[0] : pl.pose;
+  if (pose !== lastPose) { drawPose(pose, false); lastPose = pose; }
+  // hand-drawn line boil: new noise every 3 frames
+  const step = Math.floor(t * 10); $('bt').setAttribute('seed', 1 + (step % 4)); $('bt2').setAttribute('seed', 5 + (Math.floor(t * 8) % 3));
+  const pid = 'p' + (li + 1);
+  if (pid !== lastPanel) { document.querySelectorAll('.panel').forEach(p => p.style.visibility = 'hidden'); $(pid).style.visibility = 'visible'; lastPanel = pid; }
+  const pp = Math.min(1, (t - (l.start - .12)) / .12); $(pid).style.transform = `scale(${(.97 + .03 * pp).toFixed(4)})`;
+  // caption chunk
+  let ci = -1; CHUNKS.forEach((c, i) => { if (t >= c.words[0].t - .05) ci = i; });
+  const box = $('capbox');
+  if (ci < 0) { box.style.visibility = 'hidden'; return; }
+  box.style.visibility = 'visible';
+  if (ci !== lastChunk) { box.innerHTML = CHUNKS[ci].words.map(w => `<span>${w.w}</span>`).join(''); lastChunk = ci; }
+  [...box.children].forEach((s, i) => s.className = t >= CHUNKS[ci].words[i].t - .05 ? 'on' : '');
+}
+window.renderAt = renderAt; window.END = TL.total;
+(async () => {
+  await document.fonts.load("800 32px Poppins"); await document.fonts.load("700 40px Poppins"); await document.fonts.load("32px 'Instrument Serif'"); await document.fonts.ready;
+  buildPanels(); renderAt(0); document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
