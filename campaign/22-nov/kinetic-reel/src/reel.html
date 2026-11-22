@@ -15,8 +15,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #txt{position:absolute;left:0;top:0;width:1080px;text-align:center;white-space:nowrap;letter-spacing:-.025em}
 #txt .l{display:block}
 #logo{position:absolute;left:0;top:0;visibility:hidden}
-#tag{position:absolute;left:0;right:0;top:1060px;text-align:center;font-weight:500;font-size:50px;letter-spacing:-.02em;color:#10131A;visibility:hidden}
-#cta{position:absolute;top:1190px;left:0;height:104px;padding:0 48px;border-radius:52px;background:#0D1B2A;color:#F0EDE5;font-size:40px;font-weight:600;display:flex;align-items:center;gap:14px;visibility:hidden;letter-spacing:-.01em}
+#tag{position:absolute;left:0;right:0;top:1030px;text-align:center;font-weight:500;font-size:50px;letter-spacing:-.02em;color:#10131A;visibility:hidden}
+#cta{position:absolute;top:1170px;left:0;height:104px;padding:0 48px;border-radius:52px;background:#0D1B2A;color:#F0EDE5;font-size:40px;font-weight:600;display:flex;align-items:center;gap:14px;visibility:hidden;letter-spacing:-.01em}
+#url{position:absolute;left:0;right:0;top:1340px;text-align:center;font-weight:500;font-size:36px;letter-spacing:.01em;color:#10131A;visibility:hidden}
 #dot{position:absolute;border-radius:50%;background:#F5A623;visibility:hidden}
 </style></head><body>
 <div id="v">
@@ -26,6 +27,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <div id="dot"></div>
   <div id="tag">stress about work, not bookings.</div>
   <div id="cta">comment “DEMO” <span style="color:#F5A623">→</span></div>
+  <div id="url">lazytradie.com.au</div>
 </div>
 <svg width="0" height="0" style="position:absolute">
   <filter id="warp" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
@@ -34,26 +36,25 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   </filter>
   <filter id="mb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur id="mbg" stdDeviation="0 0"/></filter>
 </svg>
-<script src="cuts.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), P = (t, a, b) => cl((t - a) / (b - a)), lerp = (a, b, p) => a + (b - a) * p;
 const eo = p => 1 - Math.pow(1 - p, 3), spr = (d, f = 2, z = 9) => d <= 0 ? 0 : 1 - Math.exp(-z * d) * Math.cos(2 * Math.PI * f * d);
-const END = CUTS.end;
+const V = +(new URLSearchParams(location.search).get('v') || 1), END = 12.37;
 const INK = '#10131A', CRM = '#F0EDE5', AMB = '#F5A623';
-// one continuous build (cuts.js): the reference's cut times up to its fast section, then a cut on every hit of the
-// looped fast section, then the track's own ending into the only logo. Cream/navy flips on every cut.
-// [words, fx]; words: string, or [small, big, bigColor] for the stacked two-size slots
-const WORDS = [
-  ['we', 'fade'], [['we,', 'don’t'], 'none'], ['just', 'slide'], [['just', 'answer', AMB], 'none'], ['we', 'grow'], ['handle', 'warp'], ['bookıngs', 'dot'],
-  ['quotes', 'none'], ['invoices', 'none'], ['trust', 'blur'], ['speed', 'none'], ['schedules', 'blur'], ['growth', 'mblur'], ['cashflow', 'blur'], ['calendars', 'none'],
-  ['customers', 'none'], ['job notes', 'mblur'], ['results', 'blur'], ['and', 'none'], ['you', 'grow'],
-  [['you,', 'don’t'], 'none'], ['just', 'slide'], [['just', 'work', AMB], 'none'], ['you', 'grow'], ['get', 'warp'], ['tıme', 'dot'],
-  ['back', 'none'], ['weekends', 'none'], ['footy', 'blur'], ['family', 'none'], ['headspace', 'blur'], ['sleep', 'mblur'], ['profit', 'blur'], ['holidays', 'none'],
-  ['sanity', 'mblur'], ['control', 'blur'], ['re', 'none'], ['rel.', 'none'], ['rela', 'none'], ['relax.', 'none']];
-if (WORDS.length !== CUTS.cuts.length) throw new Error('words ' + WORDS.length + ' vs cuts ' + CUTS.cuts.length);
-const SLOTS = WORDS.map(([w, fx], i) => ({ t: CUTS.cuts[i], w, fx, i, len: (CUTS.cuts[i + 1] ?? CUTS.logo) - CUTS.cuts[i] }));
-SLOTS.push({ t: CUTS.logo, w: 'LOGO', fx: 'end', i: WORDS.length, len: 9 });
+// the reference's own cut times: the cream/navy flips land on the track's hits and speed up into the logo (8.9 s)
+const T = [0, .733, 1.4, 2.0, 2.533, 3.033, 3.5, 3.967, 4.367, 4.733, 5.167, 5.533, 5.9, 6.233, 6.567, 6.9, 7.2, 7.5, 7.8, 8.033, 8.333, 8.6];
+const LOGO_T = 8.9, TAG_T = 9.214, CTA_T = 9.6, URL_T = 9.9;
+// two separate parts; [words, fx]; words: string, or [small, big, bigColor] for the stacked two-size slots
+const PARTS = {
+  1: [['we', 'fade'], [['we,', 'don’t'], 'none'], ['just', 'slide'], [['just', 'answer', AMB], 'none'], ['we', 'grow'], ['handle', 'warp'], ['bookıngs', 'dot'],
+      ['quotes', 'none'], ['invoices', 'none'], ['trust', 'blur'], ['speed', 'none'], ['schedules', 'blur'], ['growth', 'mblur'], ['cashflow', 'blur'], ['calendars', 'none'],
+      ['customers', 'none'], ['job notes', 'mblur'], ['results', 'blur'], ['la', 'none'], ['laz.', 'none'], ['lazy', 'none'], ['lazy.', 'none']],
+  2: [['you', 'fade'], [['you,', 'don’t'], 'none'], ['just', 'slide'], [['just', 'work', AMB], 'none'], ['you', 'grow'], ['get', 'warp'], ['tıme', 'dot'],
+      ['back', 'none'], ['weekends', 'none'], ['footy', 'blur'], ['family', 'none'], ['headspace', 'blur'], ['sleep', 'mblur'], ['profit', 'blur'], ['holidays', 'none'],
+      ['your evenings', 'none'], ['sanity', 'mblur'], ['control', 'blur'], ['re', 'none'], ['rel.', 'none'], ['rela', 'none'], ['relax.', 'none']] };
+const SLOTS = PARTS[V].map(([w, fx], i) => ({ t: T[i], w, fx, i, len: (T[i + 1] ?? LOGO_T) - T[i] }));
+SLOTS.push({ t: LOGO_T, w: 'LOGO', fx: 'end', i: SLOTS.length, len: 9 });
 const BASE = 220, MAXW = 900;
 let measure = null;
 function widthOf(text, size) { measure.style.fontSize = size + 'px'; measure.textContent = text; return measure.offsetWidth; }
@@ -75,16 +76,18 @@ function renderAt(t) {
   if (k !== cur) { cur = k; if (s.w !== 'LOGO') setText(s, t); }
   // reset per-frame state
   txt.style.filter = 'none'; txt.style.transform = 'none'; txt.style.opacity = 1; txt.style.visibility = 'visible';
-  logo.style.visibility = 'hidden'; logo.style.filter = 'none'; dot.style.visibility = 'hidden'; $('tag').style.visibility = 'hidden'; $('cta').style.visibility = 'hidden';
+  logo.style.visibility = 'hidden'; logo.style.filter = 'none'; dot.style.visibility = 'hidden'; $('tag').style.visibility = 'hidden'; $('cta').style.visibility = 'hidden'; $('url').style.visibility = 'hidden';
   $('wd').setAttribute('scale', 0); $('mbg').setAttribute('stdDeviation', '0 0');
   if (s.w === 'LOGO') {
     txt.style.visibility = 'hidden';
     const W = 860, H = W * 196 / 1004; logo.style.width = W + 'px'; logo.style.visibility = 'visible';
     let y = 960 - H / 2;
     if (s.fx === 'end') {
-      y = 880 - H / 2; const tg = $('tag'), pt = eo(P(lt, .12, .5)); tg.style.visibility = 'visible'; tg.style.opacity = pt; tg.style.transform = `translateY(${(1 - pt) * 24}px)`;
-      const c = $('cta'), dc = t - CUTS.cta; if (dc >= 0) { c.style.visibility = 'visible'; const p = spr(dc, 1.8, 8); c.style.left = (540 - c.offsetWidth / 2) + 'px'; c.style.transform = `scale(${lerp(.6, 1, p).toFixed(3)})`; c.style.opacity = cl(dc / .08); }
-      logo.style.transform = `translate(${540 - W / 2}px,${y}px) scale(${lerp(1.04, 1, eo(P(lt, 0, .4)))})`;
+      // end card held for ~3.5 s: logo lands on the hit, tagline on the next hit, then the CTA and the URL
+      y = 860 - H / 2; const tg = $('tag'), pt = eo(P(t, TAG_T, TAG_T + .4)); tg.style.visibility = pt > 0 ? 'visible' : 'hidden'; tg.style.opacity = pt; tg.style.transform = `translateY(${(1 - pt) * 24}px)`;
+      const c = $('cta'), dc = t - CTA_T; if (dc >= 0) { c.style.visibility = 'visible'; const p = spr(dc, 1.8, 8); c.style.left = (540 - c.offsetWidth / 2) + 'px'; c.style.transform = `scale(${lerp(.6, 1, p).toFixed(3)})`; c.style.opacity = cl(dc / .08); }
+      const u = $('url'), pu = eo(P(t, URL_T, URL_T + .4)); u.style.visibility = pu > 0 ? 'visible' : 'hidden'; u.style.opacity = pu * .7; u.style.transform = `translateY(${(1 - pu) * 16}px)`;
+      logo.style.transform = `translate(${540 - W / 2}px,${y}px) scale(${lerp(1.04, 1, eo(P(lt, 0, .4))) * (1 + .012 * P(t, LOGO_T, END))})`;
     } else {
       // reference: the logo warps away at +0.2 s and the frame goes empty at +0.3 s
       const wo = P(lt, .2, .3); if (lt >= .3) logo.style.visibility = 'hidden';
