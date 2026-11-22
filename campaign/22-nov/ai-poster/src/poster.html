@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- "AI that books jobs while you work." Same layout as the owner's reference post (logo, sleepy emoji, two-line headline,
+     sub line, four channel tiles on concentric rings around a glossy AI sphere) in LazyTradie's own brand and copy.
+     ?h=1080 (square, like the reference) or ?h=1350 (4:5 feed). No "24/7" claim. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
+#p{position:relative;width:1080px;overflow:hidden;
+  background:linear-gradient(180deg,#F6FEFF 0%,#E4FAFD 24%,#BDF1F8 46%,#D9D2F7 60%,#F4B7EE 72%,#D7B4FA 86%,#B3C2FF 100%)}
+.abs{position:absolute}
+/* frosted vertical panels on the right, as in the reference */
+.pan{position:absolute;top:0;bottom:0}
+.tile{position:absolute;width:98px;height:98px;border-radius:24px;display:grid;place-items:center;color:#fff;font-size:50px;
+  box-shadow:0 14px 30px rgba(40,60,120,.18),inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -6px 14px rgba(0,0,0,.08)}
+.lab{position:absolute;width:300px;text-align:center;color:#fff;font-size:22px;font-weight:500;letter-spacing:-.01em;text-shadow:0 1px 10px rgba(60,40,120,.18)}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.55)}
+</style></head><body>
+<div id="p">
+  <div class="pan" style="left:640px;width:286px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.08) 40%,rgba(255,255,255,.18) 70%,rgba(255,255,255,.05));box-shadow:inset 1px 0 0 rgba(255,255,255,.5)"></div>
+  <div class="pan" style="left:926px;width:154px;background:linear-gradient(180deg,rgba(150,225,240,.35),rgba(120,220,240,.25) 45%,rgba(255,150,235,.35) 70%,rgba(170,160,255,.3));box-shadow:inset 1px 0 0 rgba(255,255,255,.55)"></div>
+
+  <!-- logo -->
+  <div class="abs tb" style="left:72px;top:56px;display:flex;align-items:center;gap:12px">
+    <img src="img/icon.png" style="width:44px;height:44px;border-radius:11px">
+    <img src="img/wm_navy.png" style="height:36px">
+  </div>
+  <!-- sleepy emoji in a soft disc -->
+  <div class="abs tb" style="left:72px;top:142px;width:106px;height:106px;border-radius:50%;background:rgba(200,244,252,.75);display:grid;place-items:center;font-family:'Noto Color Emoji';font-size:58px;line-height:1">😴</div>
+
+  <div class="abs tb" style="left:72px;top:276px;font-size:72px;font-weight:500;letter-spacing:-.035em;line-height:1.08;color:#0D1B2A">AI that books jobs<br>while you work.</div>
+  <div class="abs tb" style="left:74px;top:452px;width:760px;font-size:23px;font-weight:400;line-height:1.42;letter-spacing:-.005em;color:#1673AE">Answer calls, texts and web enquiries, book jobs straight into your calendar and send quotes, across calls, SMS, web chat and voice.</div>
+
+  <!-- orbit -->
+  <div class="abs" id="orbit" style="left:0;top:0;width:1080px;height:1080px">
+    <div class="ring" style="left:85px;top:578px;width:910px;height:910px"></div>
+    <div class="ring" style="left:225px;top:718px;width:630px;height:630px;border-color:rgba(255,255,255,.45)"></div>
+
+    <div class="tile" style="left:330px;top:570px;background:linear-gradient(135deg,#FFC24D 0%,#F5A623 30%,#F0567A 70%,#A54BD8 100%)"><i class="ph-fill ph-chat-circle-dots"></i></div>
+    <div class="lab" style="left:229px;top:684px">SMS</div>
+    <div class="tile" style="left:666px;top:570px;background:linear-gradient(160deg,#1E3A57,#0D1B2A)">
+      <svg width="54" height="46" viewBox="0 0 54 46"><g fill="#fff"><rect x="0" y="15" width="6" height="16" rx="3"/><rect x="12" y="6" width="6" height="34" rx="3"/><rect x="24" y="0" width="6" height="46" rx="3"/><rect x="36" y="6" width="6" height="34" rx="3"/><rect x="48" y="15" width="6" height="16" rx="3"/></g></svg></div>
+    <div class="lab" style="left:565px;top:684px">AI Voice receptionist</div>
+    <div class="tile" style="left:104px;top:818px;background:linear-gradient(160deg,#3DB3F2,#1C7FC4)"><i class="ph-fill ph-globe-simple"></i></div>
+    <div class="lab" style="left:3px;top:932px">AI Web chat</div>
+    <div class="tile" style="left:878px;top:818px;background:linear-gradient(160deg,#3DD47A,#1FA65A)"><i class="ph-fill ph-calendar-check"></i></div>
+    <div class="lab" style="left:777px;top:932px">Job bookings</div>
+
+    <!-- glossy AI sphere -->
+    <div class="abs" style="left:308px;top:770px;width:464px;height:464px;border-radius:50%;
+      background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.75) 0,rgba(255,255,255,0) 22%),
+                 radial-gradient(circle at 78% 70%,#3FE0F5 0,rgba(63,224,245,0) 45%),
+                 radial-gradient(circle at 20% 70%,#B054F5 0,rgba(176,84,245,0) 50%),
+                 linear-gradient(160deg,#7C7CF8 0%,#4F63F0 45%,#3A8CF2 100%);
+      box-shadow:0 0 0 10px rgba(255,255,255,.28),0 0 80px rgba(110,120,255,.45),inset 0 -20px 60px rgba(40,30,160,.35),inset 0 10px 30px rgba(255,255,255,.35)"></div>
+    <svg class="abs" style="left:395px;top:878px" width="300" height="300" viewBox="0 0 300 300">
+      <path d="M150 20 C160 110 190 140 280 150 C190 160 160 190 150 280 C140 190 110 160 20 150 C110 140 140 110 150 20 Z" fill="#fff"/>
+    </svg>
+    <svg class="abs" style="left:612px;top:822px" width="84" height="84" viewBox="0 0 300 300">
+      <path d="M150 20 C160 110 190 140 280 150 C190 160 160 190 150 280 C140 190 110 160 20 150 C110 140 140 110 150 20 Z" fill="#fff"/>
+    </svg>
+  </div>
+</div>
+<script>
+const H = +(new URLSearchParams(location.search).get('h') || 1080);
+document.getElementById('p').style.height = H + 'px';
+document.getElementById('orbit').style.top = (H - 1080) + 'px';
+document.querySelectorAll('.tb').forEach((e, i) => e.style.transform = `translateY(${Math.round((H - 1080) * (i ? .4 : .22))}px)`);
+(async () => {
+  await document.fonts.load("500 72px 'Inter Tight'"); await document.fonts.load("400 23px 'Inter Tight'"); await document.fonts.load('50px Phosphor-Fill');
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = i.onerror = r)));
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
