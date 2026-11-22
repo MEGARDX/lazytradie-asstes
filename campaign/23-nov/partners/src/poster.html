@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Partner program ad (23 Nov). Blonde campaign face in a tuxedo suit in a boardroom at golden hour.
+     Copy taken from lazytradie.com.au/partners (free to join, no targets; earn every month; we do setup and support;
+     resell under your own brand; AU + UK). Liquid-glass chips with white icons (no amber tiles). -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;background:#0D1B2A;color:#fff}
+.abs{position:absolute}
+.g{position:absolute;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:14px;white-space:nowrap;color:#fff;font-weight:600;letter-spacing:-.01em;
+  border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(8,18,30,.5));
+  box-shadow:0 18px 40px rgba(0,0,0,.4),inset 0 1.5px 0 rgba(255,255,255,.75),inset 0 0 0 1.2px rgba(255,255,255,.38);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.g i{font-size:30px;color:#fff;width:34px;text-align:center}
+.mono{font-family:'DM Mono',monospace;letter-spacing:.26em;text-transform:uppercase}
+</style></head><body>
+<div id="p">
+  <img class="abs" src="img/photo.png" style="left:0;top:0;width:1080px;height:1350px;object-fit:cover;object-position:50% 0">
+  <div class="abs" style="left:0;top:0;bottom:0;width:760px;background:linear-gradient(90deg,rgba(9,18,30,.86) 0,rgba(9,18,30,.7) 38%,rgba(9,18,30,.25) 64%,rgba(9,18,30,0) 82%)"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,rgba(9,18,30,0),rgba(9,18,30,.6))"></div>
+
+  <img class="abs" src="img/wm_white.png" style="left:56px;top:60px;height:32px">
+  <div class="abs mono" style="left:58px;top:138px;font-size:18px;color:rgba(255,255,255,.75)">Partner program · AU &amp; UK</div>
+  <div class="abs" style="left:54px;top:178px;line-height:1">
+    <div style="font-size:88px;font-weight:700;letter-spacing:-.045em">Grow with</div>
+    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:116px;letter-spacing:-.015em;color:#F1DDB0;margin-top:-4px">LazyTradie.</div>
+  </div>
+  <div class="abs" style="left:58px;top:398px;font-size:29px;font-weight:500;line-height:1.35;letter-spacing:-.01em;color:rgba(255,255,255,.92)">You bring the relationship.<br>We bring the platform and the support.</div>
+
+  <div class="g" style="left:56px;top:520px;height:72px;padding:0 26px 0 18px;font-size:26px" data-lg><i class="ph ph-wrench"></i>We do the setup &amp; support</div>
+  <div class="g" style="left:56px;top:608px;height:72px;padding:0 26px 0 18px;font-size:26px" data-lg><i class="ph ph-coins"></i>Earn every month</div>
+  <div class="g" style="left:56px;top:696px;height:72px;padding:0 26px 0 18px;font-size:26px" data-lg><i class="ph ph-seal-check"></i>Free to join · no targets</div>
+  <div class="g" style="left:56px;top:784px;height:72px;padding:0 26px 0 18px;font-size:26px" data-lg><i class="ph ph-storefront"></i>Resell under your own brand</div>
+
+  <div class="g" style="left:56px;top:1176px;height:82px;padding:0 30px;font-size:30px;font-weight:700;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.1))" data-lg>Apply now <i class="ph ph-arrow-right" style="font-size:28px"></i></div>
+  <div class="abs mono" style="left:60px;top:1280px;font-size:18px;color:rgba(255,255,255,.85);letter-spacing:.14em">lazytradie.com.au/partners</div>
+</div>
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  await document.fonts.load("700 88px 'Inter Tight'"); await document.fonts.load("italic 116px 'Instrument Serif'"); await document.fonts.load("18px 'DM Mono'"); await document.fonts.load('30px Phosphor');
+  await document.fonts.ready; await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = i.onerror = r)));
+  document.querySelectorAll('.g').forEach(g => liquidGlass(g, { scale: -70, chroma: 4, blur: 7 }));
+  await new Promise(r => setTimeout(r, 400));
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
