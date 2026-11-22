@@ -77,7 +77,7 @@ body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;col
 .ring{position:absolute;border-radius:50%;visibility:hidden}
 .lbl{position:absolute;font-family:'DM Mono',monospace;font-weight:500;font-size:22px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:12px}
 .lbl i.sq{display:block;width:10px;height:10px;flex:none}
-.cw{position:absolute;font-family:'DM Mono',monospace;font-size:17px;letter-spacing:.06em;white-space:nowrap;left:0;top:0}
+.cw{position:absolute;font-family:'DM Mono',monospace;font-size:19px;letter-spacing:.06em;white-space:nowrap;left:0;top:0}
 svg.hand{position:absolute;overflow:visible;pointer-events:none}
 .kb{display:inline-block}
 </style></head><body>
@@ -660,7 +660,7 @@ function buildCloud(host, words, n, tint, seed) {
   for (let i = 0; i < n; i++) {
     const d = document.createElement('div'); d.className = 'cw'; d.textContent = words[i % words.length];
     const ring = .74 + .26 * rnd(), ang = (i / n) * Math.PI * 2 + rnd() * .35; const c = tint(i, rnd());
-    d.style.color = c; host.appendChild(d); out.push({ el: d, ring, ang, sp: (rnd() - .5) * .04, w: 0, ph: rnd(), op: .32 + .4 * rnd() });
+    d.style.color = c; host.appendChild(d); out.push({ el: d, ring, ang, sp: (rnd() - .5) * .04, w: 0, ph: rnd(), op: .5 + .45 * rnd() });
   }
   return out;
 }
@@ -851,7 +851,7 @@ R[20] = t => {
   const wLT = SC[20].words[0].t, pw = ex(P(t, wLT - .2, wLT + .45));
   $('wm20').style.clipPath = `inset(0 ${((1 - pw) * 100).toFixed(2)}% 0 0)`; tf($('wm20'), { x: LOCK.wmX + (1 - pw) * -30, y: 600, a: pw > 0 ? 1 : 0 });
   animWords(TAGW, t, 999, false);
-  renderCloud(CL20, t, bt(20, 1.2), bt(20, 7.6), 540, 1050, 520, 290, 1.1);
+  renderCloud(CL20, t, bt(20, 1.2), bt(20, 7.6), 540, 1070, 600, 330, 1.06);
   [['e1', 8], ['e2', 8.12]].forEach(([id, k]) => { const el = $(id), p = pop(t, bt(20, k)); tf(el, { x: el.__x, s: p.s, a: p.a }); });
   const c = $('cta'), pc = pop(t, bt(20, 8.5)); tf(c, { x: 540 - c.offsetWidth / 2, s: pc.s, a: pc.a });
   tf($('url'), rise(t, bt(20, 9.5), 14));
@@ -912,7 +912,7 @@ window.renderAt = renderAt;
   TAGW = wordsInto($('tag20'), SC[20].words.slice(1), null);
   { const br = document.createElement('br'); $('tag20').insertBefore(br, TAGW[3].el); }
   CL11 = buildCloud($('cloud11'), CLOUD11, 80, (i, r) => r < .12 ? '#FF2E93' : r < .22 ? '#1FD1F9' : r < .28 ? '#F5A623' : '#E8E8E8', 11);
-  CL20 = buildCloud($('cloud20'), CLOUD20, 64, (i, r) => r < .15 ? '#7B6CF6' : r < .22 ? '#C27A00' : '#3a3a40', 20);
+  CL20 = buildCloud($('cloud20'), CLOUD20, 54, (i, r) => r < .15 ? 'rgba(123,108,246,.8)' : r < .22 ? 'rgba(194,122,0,.8)' : 'rgba(58,58,64,.55)', 20);
   paintSky($('sky'), 'sky'); paintSky($('sunset'), 'sunset');
   { const g = document.createElement('canvas'); g.width = g.height = 256; const c = g.getContext('2d'), d = c.createImageData(256, 256);
     let r = 7; for (let i = 0; i < d.data.length; i += 4) { r = (r * 16807) % 2147483647; const v = (r / 2147483647) * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }

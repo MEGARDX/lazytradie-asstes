@@ -1,5 +1,5 @@
 # "You're losing them. Here's the fix." problem → solution reel (Sun 22 Nov)
-File: `lazytradie-problem-solution-reel-9x16.mp4` (62.6 s, 1080×1920, 30 fps, stereo, -14 LUFS, 76 MB). Cover: `cover-9x16.png` ("money in the bin", safe for the 4:5 grid crop).
+File: `lazytradie-problem-solution-reel-9x16.mp4` (62.6 s, 1080×1920, 30 fps, stereo, -14 LUFS, 70 MB). Cover: `cover-9x16.png` ("money in the bin", safe for the 4:5 grid crop).
 
 How it's built (v2, the owner's notes from 22 Nov applied):
 - The owner's 20 VO lines, all kept in full, in order. Built in `src/` (`prep.py` → `node render.js` → `encode.sh`; `node cover.js` for the cover).
