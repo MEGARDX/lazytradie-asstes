@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Movember, last week (Mon 23 Nov). "Movember's last week. Check in on your mates." Warm and genuine, no hard sell,
+     no glass (owner). Two tradies with their mos on the ute tailgate at golden hour. Support lines: MATES in Construction
+     1300 642 111 · Lifeline 13 11 14. No price. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;background:#3B2A1C;color:#fff}
+.abs{position:absolute}
+</style></head><body>
+<div id="p">
+  <img class="abs" src="img/photo.png" style="left:0;top:0;width:1080px">
+  <div class="abs" style="left:0;right:0;top:0;height:470px;background:linear-gradient(180deg,rgba(255,238,220,.82) 0,rgba(255,238,220,.55) 45%,rgba(255,238,220,0) 100%)"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:420px;background:linear-gradient(180deg,rgba(13,27,42,0) 0,rgba(13,27,42,.72) 45%,rgba(13,27,42,.92) 100%)"></div>
+
+  <div class="abs" style="left:0;right:0;top:62px;text-align:center;font-family:'DM Mono',monospace;font-size:19px;letter-spacing:.3em;color:#B3651A">MOVEMBER · LAST WEEK</div>
+  <div class="abs" style="left:40px;right:40px;top:100px;text-align:center;color:#0D1B2A;letter-spacing:-.04em;line-height:1.02">
+    <div style="font-size:76px;font-weight:700">Movember's last week.</div>
+    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:92px;letter-spacing:-.015em;margin-top:2px">Check in on your mates.</div>
+  </div>
+
+  <div class="abs" style="left:0;right:0;top:1096px;text-align:center">
+    <div style="font-size:40px;font-weight:700;letter-spacing:-.03em">One less thing on your mind.</div>
+    <div style="font-size:27px;font-weight:500;opacity:.86;margin-top:6px;letter-spacing:-.01em">LazyTradie handles the calls and bookings.</div>
+  </div>
+  <div class="abs" style="left:0;right:0;top:1214px;display:flex;justify-content:center">
+    <div style="display:flex;align-items:center;gap:14px;height:58px;padding:0 22px 0 10px;border-radius:10px;background:#0D1B2A;box-shadow:inset 0 0 0 1.5px rgba(245,166,35,.55);font-size:20px;font-weight:600;white-space:nowrap">
+      <span style="width:40px;height:40px;border-radius:7px;background:#F5A623;color:#0D1B2A;display:grid;place-items:center;font-size:21px"><i class="ph-fill ph-phone-call"></i></span>
+      Doing it tough? MATES in Construction <b style="color:#FFC24D">1300 642 111</b> · Lifeline <b style="color:#FFC24D">13 11 14</b></div>
+  </div>
+  <img class="abs" src="img/wm_white.png" style="left:50%;top:1298px;height:30px;transform:translateX(-50%);opacity:.95">
+</div>
+<script>
+(async () => {
+  await document.fonts.load("700 76px 'Inter Tight'"); await document.fonts.load("italic 92px 'Instrument Serif'"); await document.fonts.load("19px 'DM Mono'"); await document.fonts.load('21px Phosphor-Fill');
+  await document.fonts.ready; await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = i.onerror = r)));
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
