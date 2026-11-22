@@ -1,8 +1,8 @@
 # "You're losing them. Here's the fix." problem → solution reel (Sun 22 Nov)
-File: `lazytradie-problem-solution-reel-9x16.mp4` (62.6 s, 1080×1920, 30 fps, stereo, -14 LUFS). Cover: `cover-9x16.png`.
+File: `lazytradie-problem-solution-reel-9x16.mp4` (62.6 s, 1080×1920, 30 fps, stereo, -14 LUFS, 76 MB). Cover: `cover-9x16.png` ("money in the bin", safe for the 4:5 grid crop).
 
 How it's built:
-- The owner's 20 VO lines, all kept in full, in order. Built in `src/` (`prep.py` → `node render.js` → `encode.sh`).
+- The owner's 20 VO lines, all kept in full, in order. Built in `src/` (`prep.py` → `node render.js` → `encode.sh`; `node cover.js` for the cover).
 - The owner's chosen track (`atlasaudio-sci-fi-ambient`) is cut so the beat grid (115 BPM) drives the edit. Every scene lasts a whole number of beats, and the drum drop lands on "Meet LazyTradie". It's ducked under the voice.
 - The owner's clips (phone on the dash, woman on the phone, dad texting, laptop, tradie in the ute, ladder) play at full quality. They're cropped and reframed so the Gemini ✦ watermark is cut out of every shot.
 - The motion graphics are built in code: liquid-glass call cards, SMS thread, website form, auto-reply, a two-hour clock, an Aussie wheelie bin that eats the jobs (tickets, $50/$100 notes, coins) with a missed-work counter, the real LazyTradie orb, Ruby answering a call, a text and a web chat, live calendar bookings (T1), the T2 approval, and the dashboard with call logs and a transcript. The 3 campaign photos are included too.
