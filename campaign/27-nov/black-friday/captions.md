@@ -8,7 +8,7 @@ Happy Black Friday. 🛍️
 
 To every tradie out there: enjoy the day. You've earned it.
 
-Treat yourself and take the day.
+Treat yourself, take the day, knock off early.
 
 From all of us at LazyTradie 🧡
 ```
@@ -18,5 +18,5 @@ From all of us at LazyTradie 🧡
 
 ## Alt text
 ```
-Three smiling young women in long black coats, one blonde, one with curly brown hair and one with sleek black hair, stand close together holding black shopping bags on a sunlit sandstone city street. On the left: "Happy Black Friday." and "Enjoy the day. You've earned it.", glass chips reading "Treat yourself" and "Take the day", and "From all of us at LazyTradie" with the LazyTradie logo.
+Three smiling young women in long black coats, one blonde, one with curly brown hair and one with sleek black hair, stand close together holding black shopping bags on a sunlit sandstone city street. On the left: "Happy Black Friday." and "Enjoy the day. You've earned it.", glass chips reading "Treat yourself", "Take the day" and "Knock off early", and "From all of us at LazyTradie" with the LazyTradie logo.
 ```
