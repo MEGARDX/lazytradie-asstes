@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Black Friday (26/27 Nov). Asian model in black on jet black, hand on a black hard hat.
+     Headline: "Missed calls: 100% off." Fine print: "No expiry. Doesn't end Monday." No price. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:#000}
+#p{position:relative;width:1080px;height:1350px;overflow:hidden;background:#020302;color:#fff}
+.abs{position:absolute}
+.mono{font-family:'DM Mono',monospace;letter-spacing:.26em;text-transform:uppercase}
+.g{position:absolute;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;color:#fff;font-weight:600;font-size:25px;
+  height:68px;padding:0 26px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(10,10,10,.45));
+  box-shadow:0 18px 40px rgba(0,0,0,.5),inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 0 0 1.2px rgba(255,255,255,.32)}
+.g i{font-size:28px}
+</style></head><body>
+<div id="p">
+  <!-- photo shrunk and bottom-anchored so the headline sits above her head; edges fade into black -->
+  <div class="abs" style="left:50%;bottom:0;width:870px;height:1080px;transform:translateX(-50%);
+    -webkit-mask-image:radial-gradient(ellipse 72% 80% at 50% 58%,#000 62%,transparent 100%)">
+    <img src="img/photo.png" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <!-- warm amber aura behind the chips so the glass has something to bend -->
+  <div class="abs" style="left:140px;right:140px;bottom:40px;height:170px;border-radius:50%;background:radial-gradient(closest-side,rgba(245,166,35,.42),rgba(245,166,35,0));filter:blur(20px)"></div>
+
+  <img class="abs" src="img/wm_white.png" style="left:50%;transform:translateX(-50%);top:52px;height:30px">
+  <div class="abs mono" style="left:0;right:0;top:112px;text-align:center;font-size:17px;color:rgba(255,255,255,.7)">Black Friday · Fri 27 Nov</div>
+
+  <div class="abs" style="left:0;right:0;top:150px;text-align:center;line-height:1">
+    <div style="font-size:92px;font-weight:700;letter-spacing:-.045em">Missed calls:</div>
+    <div style="margin-top:2px"><span style="font-size:150px;font-weight:800;letter-spacing:-.055em;color:#F5A623">100%</span><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:132px;letter-spacing:-.01em;margin-left:22px">off.</span></div>
+  </div>
+  <div class="abs mono" style="left:0;right:0;top:395px;text-align:center;font-size:16px;color:rgba(255,255,255,.55);letter-spacing:.2em">*No expiry. Doesn't end Monday.</div>
+
+  <div class="abs" style="left:0;right:0;bottom:196px;text-align:center;font-size:26px;font-weight:500;line-height:1.35;color:rgba(255,255,255,.9);text-shadow:0 2px 16px #000">
+    Ruby answers your calls, texts and web enquiries<br>and books the job into your calendar.</div>
+
+  <div class="g" style="left:96px;bottom:92px" data-lg><i class="ph ph-seal-check"></i>$0 setup fee</div>
+  <div class="g" style="left:383px;bottom:92px" data-lg><i class="ph ph-lightning"></i>Live in minutes</div>
+  <div class="g" style="left:688px;bottom:92px" data-lg><i class="ph ph-chat-circle-dots"></i>Comment "DEMO"</div>
+  <div class="abs mono" style="left:0;right:0;bottom:40px;text-align:center;font-size:16px;color:rgba(255,255,255,.6);letter-spacing:.16em">lazytradie.com.au</div>
+</div>
+<script src="liquid-glass.js"></script>
+<script>
+(async () => {
+  await document.fonts.load("800 150px 'Inter Tight'"); await document.fonts.load("italic 132px 'Instrument Serif'"); await document.fonts.load("16px 'DM Mono'"); await document.fonts.load('28px Phosphor');
+  await document.fonts.ready; await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = i.onerror = r)));
+  // centre the three chips as a row
+  const gs=[...document.querySelectorAll('.g')], gap=18, tot=gs.reduce((s,g)=>s+g.offsetWidth,0)+gap*(gs.length-1); let x=(1080-tot)/2;
+  gs.forEach(g=>{g.style.left=x+'px'; x+=g.offsetWidth+gap;});
+  gs.forEach(g => liquidGlass(g, { scale: -70, chroma: 4, blur: 7 }));
+  await new Promise(r => setTimeout(r, 400));
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body></html>
